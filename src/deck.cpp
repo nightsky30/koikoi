@@ -54,8 +54,9 @@ void Deck::printDeck()
     for (i = 0; i < m_numCards; i++)
     {
         //Print
-        std::cout << "The current card info is: " << std::endl;
-        std::cout << "==========================" << std::endl;
+        std::cout << "=========================" << std::endl;
+        std::cout << "Information for card " << (i + 1) << ":" << std::endl;
+        std::cout << "=========================" << std::endl;
         m_cardDeck[i].printMonth();
         m_cardDeck[i].printFlower();
         m_cardDeck[i].printCardType();
@@ -64,7 +65,7 @@ void Deck::printDeck()
         m_cardDeck[i].printPointVal2();
         m_cardDeck[i].printName();
         m_cardDeck[i].printWild();
-        std::cout << "==========================" << std::endl;
+        std::cout << "=========================" << std::endl;
     }
 }
 

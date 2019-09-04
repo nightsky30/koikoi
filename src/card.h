@@ -48,35 +48,35 @@ enum CardFlower
 /*
 * General Card Types
 * ==================
-* Light     =       0
-* Animal    =       1
-* Ribbon    =       2
-* Plain     =       3
-* Nil       =       4
+* Light     =       0-5
+* Animal    =       6-15
+* Ribbon    =       16-18
+* Plain     =       19
+* Nil       =       20
 */
 enum CardType
 {
-    LIGHT = 0,
-    CRANE = 0,
-    CURTAIN = 0,
-    RAIN = 0,
-    MOON = 0,
-    PHEONIX = 0,
-    ANIMAL = 1,
-    NIGHTINGALE = 1,
-    CUCKOO = 1,
-    BRIDGE = 1,
-    BUTTERFLIES = 1,
-    BOAR = 1,
-    GEESE = 1,
-    SAKE_CUP = 1, // Can also be plain for 10 Kasu Yaku
-    DEER = 1,
-    SWALLOW = 1,
-    RED_RIBBON = 2,
-    RED_POEM = 2,
-    BLUE_RIBBON = 2,
-    PLAIN = 3,
-    NIL = 4
+    LIGHT,
+    CRANE,
+    CURTAIN,
+    RAIN,
+    MOON,
+    PHEONIX,
+    ANIMAL,
+    NIGHTINGALE,
+    CUCKOO,
+    BRIDGE,
+    BUTTERFLIES,
+    BOAR,
+    GEESE,
+    SAKE_CUP, //Wild, can also be plain for 10 Kasu Yaku
+    DEER,
+    SWALLOW,
+    RED_RIBBON,
+    RED_POEM,
+    BLUE_RIBBON,
+    PLAIN,
+    NIL
 };
 
 /*
@@ -126,6 +126,7 @@ public:
     */
     void printMonth();
     void printFlower();
+    std::string determineCardType(CardType cType);
     void printCardType();
     void printCardType2();
     void printPointVal();
