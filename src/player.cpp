@@ -14,6 +14,11 @@ int Player::getScore()
     return m_score;
 }
 
+void Player::setScore(int score)
+{
+    m_score = score;
+}
+
 std::vector<Yaku>::size_type Player::getYaku()
 {
     return m_obtainedYaku;

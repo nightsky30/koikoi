@@ -26,6 +26,7 @@ public:
     ~Player();
 
     int getScore();
+    void setScore(int score);
     std::vector<Yaku>::size_type getYaku();
     bool getOya();
     bool getKoikoi();

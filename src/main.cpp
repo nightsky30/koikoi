@@ -1,7 +1,5 @@
-#include "card.h"
-#include "deck.h"
 #include "game.h"
-#include "koikoi.h"
+#include "Test.h"
 #include <iostream>
 
 /*
@@ -33,6 +31,10 @@ int main()
         std::cout << "2) Quit" << std::endl;
         std::cout << std::endl;
         std::cout << "===========" << std::endl;
+        std::cout << std::endl;
+        std::cout << "0) Debug" << std::endl;
+        std::cout << std::endl;
+        std::cout << "===========" << std::endl;
         std::cout << "Enter a selection: " << std::endl;
         std::cin >> selection;
 
@@ -48,6 +50,12 @@ int main()
         case '2':
             quitApp = true;
             break;
+        case '0':
+        {
+            Test newTest {Test()};
+            newTest.startDebug();
+        }
+        break;
         default:
             break;
         }
