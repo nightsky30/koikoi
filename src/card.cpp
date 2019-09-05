@@ -79,6 +79,23 @@ bool Card::getWild()
 /*
 * Print Functions
 */
+void Card::printCard()
+{
+    std::cout << "=========================" << std::endl;
+    std::cout << "Information for card:" << std::endl;
+    std::cout << "=========================" << std::endl;
+    printMonth();
+    printFlower();
+    printCardType();
+    printCardType2();
+    printPointVal();
+    printPointVal2();
+    printName();
+    printWild();
+    std::cout << "=========================" << std::endl;
+    std::cout << std::endl;
+}
+
 void Card::printMonth()
 {
     std::string niceMonth {""};

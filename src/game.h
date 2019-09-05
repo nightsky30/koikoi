@@ -55,9 +55,12 @@ public:
 
     Game();
     ~Game();
+    void clearScreen();
     void startGame();
+    void determineOya();
     void startRound();
     void takeTurn(); //??  Player nextPlayer
+    bool compareCards(Card card1, Card card2);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
     Deck getDeck();

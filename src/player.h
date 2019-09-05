@@ -28,8 +28,11 @@ public:
     int getScore();
     void setScore(int score);
     std::vector<Yaku>::size_type getYaku();
+    void setYaku();
     bool getOya();
+    void setOya(bool oya);
     bool getKoikoi();
+    void setKoikoi();
     Hand getHand();
 
     void printScore();

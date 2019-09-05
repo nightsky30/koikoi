@@ -86,9 +86,10 @@ public:
     * General Functions
     */
     void shuffleDeck();
-    //TODO
     void printDeck();
     Card getCard(std::vector<Card>::size_type cardNum);
+    Card getRandCard();
+    //TODO
     Card dealCard(std::vector<Card>::size_type cardNum);
 
 };

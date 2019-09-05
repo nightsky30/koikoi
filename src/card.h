@@ -124,6 +124,7 @@ public:
     /*
     * Print Functions
     */
+    void printCard();
     void printMonth();
     void printFlower();
     std::string determineCardType(CardType cType);

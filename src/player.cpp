@@ -24,14 +24,29 @@ std::vector<Yaku>::size_type Player::getYaku()
     return m_obtainedYaku;
 }
 
+void Player::setYaku()
+{
+
+}
+
 bool Player::getOya()
 {
     return m_oya;
 }
 
+void Player::setOya(bool oya)
+{
+    m_oya = oya;
+}
+
 bool Player::getKoikoi()
 {
     return m_koikoi;
+}
+
+void Player::setKoikoi()
+{
+
 }
 
 Hand Player::getHand()

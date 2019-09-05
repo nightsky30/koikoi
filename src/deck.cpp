@@ -6,6 +6,8 @@
 #include <cstdlib>     /* srand, rand */
 #include <ctime>       /* time */
 
+using index_t = std::vector<Card>::size_type;
+
 //Default Constructor
 Deck::Deck()
 {
@@ -25,7 +27,6 @@ Deck::~Deck()
 */
 void Deck::shuffleDeck()
 {
-    using index_t = std::vector<Card>::size_type;
 
     index_t i {0};
     index_t r {0};
@@ -74,8 +75,20 @@ Card Deck::getCard(std::vector<Card>::size_type cardNum)
     return m_cardDeck[cardNum];
 }
 
+Card Deck::getRandCard()
+{
+    index_t randNum {0};
+    srand(time(NULL));
+    randNum = ((index_t)std::rand() % (m_numCards-1));
+    return m_cardDeck[randNum];
+}
+
 Card Deck::dealCard(std::vector<Card>::size_type cardNum)
 {
+//when a card is dealt, it should go into the player's hand or the gamehand.
+//should be removed from the deck and either cardNum decremented, or just use vector.size.
+//when cards are matched they should go to an alternate "match hand" to be tallied later.
+//Implement this system...
     std::cout << "A card has been dealt" << std::endl;
     m_numCards = m_numCards - 1;
     std::cout << "The number of cards remaining in deck are: " << m_numCards << std::endl;
