@@ -162,10 +162,39 @@ void Game::determineOya()
     std::this_thread::sleep_for(std::chrono::milliseconds(7000));
 }
 
+void Game::deal()
+{
+    index_t maxDealt {m_gameDeck.getNumCards() / 2};
+    index_t fourCount {0};
+
+    Hand playHand1 {m_player1.getHand()};
+    Hand playHand2 {m_player2.getHand()};
+
+    for (fourCount = 0; fourCount < maxDealt - 1; fourCount = fourCount + 4)
+    {
+        for (int i {0}; i < 3; i++)
+        {
+
+        }
+    }
+
+
+
+
+
+//m_gameDeck
+//m_player1
+//m_player2
+//m_gameHand
+
+
+}
+
 void Game::startRound()
 {
 //Do stuff
 //Deal cards
+    deal();
     takeTurn();
     takeTurn();
     takeTurn();

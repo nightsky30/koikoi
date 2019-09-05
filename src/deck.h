@@ -88,9 +88,9 @@ public:
     void shuffleDeck();
     void printDeck();
     Card getCard(std::vector<Card>::size_type cardNum);
+    std::vector<Card>::size_type getNumCards();
     Card getRandCard();
-    //TODO
-    Card dealCard(std::vector<Card>::size_type cardNum);
+    Card dealCard();
 
 };
 

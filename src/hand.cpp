@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+using index_t = std::vector<Card>::size_type;
+
 Hand::Hand()
 {
 
@@ -13,13 +15,63 @@ Hand::~Hand()
 
 }
 
-std::vector<Card> Hand::getHand()
+void Hand::printHand()
 {
-    return m_playerHand;
+    using index_t = std::vector<Card>::size_type;
+
+    index_t i {0};
+
+    for (i = 0; i < m_numCards; i++)
+    {
+        //Print
+        std::cout << "=========================" << std::endl;
+        std::cout << "Information for card " << (i + 1) << ":" << std::endl;
+        std::cout << "=========================" << std::endl;
+        m_playerHand[i].printMonth();
+        m_playerHand[i].printFlower();
+        m_playerHand[i].printCardType();
+        m_playerHand[i].printCardType2();
+        m_playerHand[i].printPointVal();
+        m_playerHand[i].printPointVal2();
+        m_playerHand[i].printName();
+        m_playerHand[i].printWild();
+        std::cout << "=========================" << std::endl;
+    }
 }
 
-void Hand::viewHand()
+Card Hand::getCard(std::vector<Card>::size_type cardNum)
 {
-    //For loop to print out hand info...
-    std::cout << "The player's hand is: " << "" << std::endl;
+    return m_playerHand[cardNum];
+}
+
+std::vector<Card>::size_type Hand::getNumCards()
+{
+    return m_numCards;
+}
+
+Card Hand::getRandCard()
+{
+    index_t randNum {0};
+    srand(time(NULL));
+    randNum = ((index_t)std::rand() % (m_numCards-1));
+    return m_playerHand[randNum];
+}
+
+void Hand::acceptCard(Card newCard)
+{
+    m_playerHand.push_back(newCard);
+    m_numCards++;
+}
+
+Card Hand::disCard(std::vector<Card>::size_type cardNum)
+{
+//create a temp card object that holds the card selected for discard
+//remove the card from the hand's vector or cards
+//decrement numCards
+//return temp card to be placed on the game hand or in the players played cards
+
+    std::cout << "A card has been dealt" << std::endl;
+    m_numCards = m_numCards - 1;
+    std::cout << "The number of cards remaining in hand are: " << m_numCards << std::endl;
+    return m_playerHand[cardNum];
 }

@@ -75,6 +75,11 @@ Card Deck::getCard(std::vector<Card>::size_type cardNum)
     return m_cardDeck[cardNum];
 }
 
+std::vector<Card>::size_type Deck::getNumCards()
+{
+    return m_numCards;
+}
+
 Card Deck::getRandCard()
 {
     index_t randNum {0};
@@ -83,14 +88,16 @@ Card Deck::getRandCard()
     return m_cardDeck[randNum];
 }
 
-Card Deck::dealCard(std::vector<Card>::size_type cardNum)
+Card Deck::dealCard()
 {
-//when a card is dealt, it should go into the player's hand or the gamehand.
-//should be removed from the deck and either cardNum decremented, or just use vector.size.
+//when a card is dealt, create a temp card object
+//remove it from the deck
+//it should go into the player's hand or the gamehand.
+//when removed from the deck and either cardNum decremented, or just use vector.size.
 //when cards are matched they should go to an alternate "match hand" to be tallied later.
 //Implement this system...
     std::cout << "A card has been dealt" << std::endl;
     m_numCards = m_numCards - 1;
     std::cout << "The number of cards remaining in deck are: " << m_numCards << std::endl;
-    return m_cardDeck[cardNum];
+    return m_cardDeck[0];
 }

@@ -10,7 +10,7 @@ class Hand
 
 private:
 
-    int numCards {8};
+    std::vector<Card>::size_type m_numCards {0};
     std::vector<Card> m_playerHand
     {
         Card()
@@ -20,8 +20,12 @@ public:
 
     Hand();
     ~Hand();
-    std::vector<Card> getHand();
-    void viewHand();
+    void printHand();
+    Card getCard(std::vector<Card>::size_type cardNum);
+    std::vector<Card>::size_type getNumCards();
+    Card getRandCard();
+    void acceptCard(Card newCard);
+    Card disCard(std::vector<Card>::size_type cardNum);
 
 };
 
