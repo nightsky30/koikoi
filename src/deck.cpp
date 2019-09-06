@@ -96,8 +96,9 @@ Card Deck::dealCard()
 //when removed from the deck and either cardNum decremented, or just use vector.size.
 //when cards are matched they should go to an alternate "match hand" to be tallied later.
 //Implement this system...
-    std::cout << "A card has been dealt" << std::endl;
+
+    Card tempCard {m_cardDeck[m_numCards-1]};
+    m_cardDeck.pop_back();
     m_numCards = m_numCards - 1;
-    std::cout << "The number of cards remaining in deck are: " << m_numCards << std::endl;
-    return m_cardDeck[0];
+    return tempCard;
 }

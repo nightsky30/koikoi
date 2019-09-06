@@ -164,37 +164,52 @@ void Game::determineOya()
 
 void Game::deal()
 {
-    index_t maxDealt {m_gameDeck.getNumCards() / 2};
     index_t fourCount {0};
 
     Hand playHand1 {m_player1.getHand()};
     Hand playHand2 {m_player2.getHand()};
+    //Already have access to game hand
 
-    for (fourCount = 0; fourCount < maxDealt - 1; fourCount = fourCount + 4)
+    //2 rounds of dealing 4 cards to each hand in sequential order
+    for (fourCount = 0; fourCount < 2; fourCount++)
     {
         for (int i {0}; i < 3; i++)
         {
-
+            for(int j {0}; j < 4; j++)
+            {
+                switch (i)
+                {
+                case 0:
+                    playHand1.acceptCard(m_gameDeck.dealCard());
+                    break;
+                case 1:
+                    playHand2.acceptCard(m_gameDeck.dealCard());
+                    break;
+                case 2:
+                    m_gameHand.acceptCard(m_gameDeck.dealCard());
+                    break;
+                }
+            }
         }
     }
 
-
-
-
-
-//m_gameDeck
-//m_player1
-//m_player2
-//m_gameHand
-
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Dealing Complete." << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
 }
 
 void Game::startRound()
 {
-//Do stuff
-//Deal cards
     deal();
+    //maybe have a bool to determine if it is the first turn...
+    //if is then the oya goes
+    //determine oya
+    //start turns
+    //continue until no calling koikoi or out of cards
     takeTurn();
     takeTurn();
     takeTurn();

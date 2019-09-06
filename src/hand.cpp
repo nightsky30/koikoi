@@ -7,7 +7,8 @@ using index_t = std::vector<Card>::size_type;
 
 Hand::Hand()
 {
-
+    this->m_numCards = 0;
+    this->m_playerHand.resize(0);
 }
 
 Hand::~Hand()
