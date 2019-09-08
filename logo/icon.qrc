@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>koi-1.svg</file>
+    <file>koi-2.svg</file>
+    <file>tengu-demon-1.svg</file>
+    <file>tengu-demon-2.svg</file>
+  </qresource>
+</RCC>
