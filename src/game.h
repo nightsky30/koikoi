@@ -60,7 +60,7 @@ public:
     void determineOya();
     void deal();
     void startRound();
-    void takeTurn(); //??  Player nextPlayer
+    void takeTurn(Player &currentPlayer, int &currentTurn);
     bool compareCards(Card card1, Card card2);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 

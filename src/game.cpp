@@ -204,42 +204,107 @@ void Game::deal()
 
 void Game::startRound()
 {
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Starting Round: " << m_currentRound << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
     deal();
-    //maybe have a bool to determine if it is the first turn...
-    //if is then the oya goes
-    //determine oya
-    //start turns
-    //continue until no calling koikoi or out of cards
-    takeTurn();
-    takeTurn();
-    takeTurn();
-    takeTurn();
-//Do stuff
+    bool firstTurn {true};
+    bool roundOver {false};
+    int playerTurn {0};
+
+    while(roundOver == false)
+    {
+        if (firstTurn == true)
+        {
+            if (m_player1.getOya() == true)
+            {
+                //Player 1's turn
+                playerTurn = 1;
+                takeTurn(m_player1, playerTurn);
+            }
+            else
+            {
+                //CPU's turn
+                playerTurn = 2;
+                takeTurn(m_player2, playerTurn);
+            }
+            firstTurn = false;
+        }
+        else
+        {
+            switch (playerTurn)
+            {
+            case 1:
+                takeTurn(m_player1, playerTurn);
+                break;
+            case 2:
+                takeTurn(m_player2, playerTurn);
+                break;
+            case 0:
+                roundOver = true;
+                break;
+            default:
+                std::cout << "There was an issue with the turn system..." << std::endl;
+                break;
+            }
+        }
+    }
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
     tallyPoints();
-//Do stuff
+    m_currentRound++;
 }
 
-void Game::takeTurn() //??  Player nextPlayer
+void Game::takeTurn(Player &currentPlayer, int &currentTurn) //pass by ref, no need to return values
 {
-    bool match {false};
-    Card card1 {Card()};
-    Card card2 {Card()};
-//Do stuff
-    match = compareCards(card1, card2);
-    std::cout << "Match: " << match << std::endl;
+//    bool match {false};
+//    Card card1 {Card()};
+//    Card card2 {Card()};
+//    //Do stuff
+//    match = compareCards(card1, card2);
+//    std::cout << "Match: " << match << std::endl;
+bool turnComplete {false};
+    //Do Stuff
+    while (turnComplete == false)
+    {
+    currentPlayer.printHand();  //Not printing anything...
+        std::this_thread::sleep_for(std::chrono::milliseconds(7000));
+    turnComplete = true;
+    }
+    switch (currentTurn)
+    {
+    case 1:
+        //do stuff
+        currentTurn = 2;
+        break;
+    case 2:
+        //do stuff
+        currentTurn = 1;
+        break;
+    case 0:
+        std::cout << "There was an issue with the turn system..." << std::endl;
+        break;
+    default:
+        std::cout << "There was an issue with the turn system..." << std::endl;
+        break;
+    }
 }
 
 bool Game::compareCards(Card card1, Card card2)
 {
-    std::cout << "Match: " << card1.getCardType() << std::endl;
-    std::cout << "Match: " << card2.getCardType() << std::endl;
+    std::cout << "Match: " << card1.getMonth() << std::endl;
+    std::cout << "Match: " << card2.getMonth() << std::endl;
     return true;
 }
 
 void Game::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 {
 //Do stuff
-//Increment round
 }
 
 Deck Game::getDeck()

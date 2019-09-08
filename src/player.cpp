@@ -76,5 +76,6 @@ void Player::printKoikoi()
 
 void Player::printHand()
 {
-    std::cout << "The player's hand is: " << "" << std::endl;
+    std::cout << "The player's hand is: " << std::endl;
+    m_playerHand.printHand();
 }
