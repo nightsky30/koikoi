@@ -70,9 +70,11 @@ void Deck::printDeck()
     }
 }
 
-Card Deck::getCard(std::vector<Card>::size_type cardNum)
+Card* Deck::getCard(std::vector<Card>::size_type cardNum)
 {
-    return m_cardDeck[cardNum];
+Card *requestedCard;
+requestedCard = &m_cardDeck[cardNum];
+    return requestedCard;
 }
 
 std::vector<Card>::size_type Deck::getNumCards()
@@ -80,15 +82,17 @@ std::vector<Card>::size_type Deck::getNumCards()
     return m_numCards;
 }
 
-Card Deck::getRandCard()
+Card* Deck::getRandCard() // Caution: Does not remove card from deck...
 {
     index_t randNum {0};
     srand(time(NULL));
     randNum = ((index_t)std::rand() % (m_numCards-1));
-    return m_cardDeck[randNum];
+    Card *requestedCard;
+    requestedCard = &m_cardDeck[randNum];
+    return requestedCard;
 }
 
-Card Deck::dealCard()
+Card* Deck::dealCard()
 {
 //when a card is dealt, create a temp card object
 //remove it from the deck
@@ -97,7 +101,8 @@ Card Deck::dealCard()
 //when cards are matched they should go to an alternate "match hand" to be tallied later.
 //Implement this system...
 
-    Card tempCard {m_cardDeck[m_numCards-1]};
+    Card *tempCard;
+    tempCard = &m_cardDeck[m_numCards-1];
     m_cardDeck.pop_back();
     m_numCards = m_numCards - 1;
     return tempCard;

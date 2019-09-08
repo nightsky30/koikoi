@@ -83,20 +83,22 @@ void Game::determineOya()
 //Earliest card is the Oya and has advantage of going first
 
     int oyaCard {0};
-    Card c1 = m_gameDeck.getRandCard();
-    Card c2 = m_gameDeck.getRandCard();
+    Card *c1;
+    Card *c2;
+    c1 = m_gameDeck.getRandCard();
+    c2 = m_gameDeck.getRandCard();
 
     //Ensure months are different to avoid issues
-    if (c1.getMonth() == c2.getMonth())
+    if (c1->getMonth() == c2->getMonth())
     {
-        while ((c1.getMonth() == c2.getMonth()))
+        while ((c1->getMonth() == c2->getMonth()))
         {
             c2 = m_gameDeck.getRandCard();
         }
     }
 
     //Determine Oya card
-    if (c1.getMonth() < c2.getMonth())
+    if (c1->getMonth() < c2->getMonth())
     {
         oyaCard = 1;
     }
@@ -137,8 +139,8 @@ void Game::determineOya()
     std::cout << "Player has chosen: " << selection << std::endl;
     std::cout << std::endl;
 
-    c1.printCard();
-    c2.printCard();
+    c1->printCard();
+    c2->printCard();
 
     //Dirty trick to get the proper difference (int value) by using the ascii table
     if (((int)selection - '0') == oyaCard)
@@ -166,8 +168,8 @@ void Game::deal()
 {
     index_t fourCount {0};
 
-    Hand playHand1 {m_player1.getHand()};
-    Hand playHand2 {m_player2.getHand()};
+    Hand *playHand1 = m_player1.getHand();  // Had to use pointers
+    Hand *playHand2 = m_player2.getHand();
     //Already have access to game hand
 
     //2 rounds of dealing 4 cards to each hand in sequential order
@@ -180,13 +182,13 @@ void Game::deal()
                 switch (i)
                 {
                 case 0:
-                    playHand1.acceptCard(m_gameDeck.dealCard());
+                    playHand1->acceptCard(*m_gameDeck.dealCard());  // -> used when accessing members with a pointer (playerHand1), but use . with m_gameDeck
                     break;
                 case 1:
-                    playHand2.acceptCard(m_gameDeck.dealCard());
+                    playHand2->acceptCard(*m_gameDeck.dealCard());
                     break;
                 case 2:
-                    m_gameHand.acceptCard(m_gameDeck.dealCard());
+                    m_gameHand.acceptCard(*m_gameDeck.dealCard());
                     break;
                 }
             }
@@ -196,6 +198,12 @@ void Game::deal()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Dealing Complete." << std::endl;
+//    std::cout << "Player1" << std::endl;
+//    playHand1->printHand();
+//    std::cout << "Player2" << std::endl;
+//    playHand2->printHand();
+//    std::cout << "GameHand" << std::endl;
+//    m_gameHand.printHand();
     std::cout << std::endl;
     std::cout << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
@@ -214,21 +222,26 @@ void Game::startRound()
     bool roundOver {false};
     int playerTurn {0};
 
+    Player *player1;
+    player1 = &m_player1;
+    Player *player2;
+    player2 = &m_player2;
+
     while(roundOver == false)
     {
         if (firstTurn == true)
         {
-            if (m_player1.getOya() == true)
+            if (player1->getOya() == true)
             {
                 //Player 1's turn
                 playerTurn = 1;
-                takeTurn(m_player1, playerTurn);
+                takeTurn(*player1, playerTurn);
             }
             else
             {
                 //CPU's turn
                 playerTurn = 2;
-                takeTurn(m_player2, playerTurn);
+                takeTurn(*player2, playerTurn);
             }
             firstTurn = false;
         }
@@ -237,10 +250,10 @@ void Game::startRound()
             switch (playerTurn)
             {
             case 1:
-                takeTurn(m_player1, playerTurn);
+                takeTurn(*player1, playerTurn);
                 break;
             case 2:
-                takeTurn(m_player2, playerTurn);
+                takeTurn(*player2, playerTurn);
                 break;
             case 0:
                 roundOver = true;
@@ -260,21 +273,20 @@ void Game::startRound()
     m_currentRound++;
 }
 
-void Game::takeTurn(Player &currentPlayer, int &currentTurn) //pass by ref, no need to return values
+void Game::takeTurn(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
 {
-//    bool match {false};
-//    Card card1 {Card()};
-//    Card card2 {Card()};
-//    //Do stuff
-//    match = compareCards(card1, card2);
-//    std::cout << "Match: " << match << std::endl;
-bool turnComplete {false};
+    bool turnComplete {false};
     //Do Stuff
     while (turnComplete == false)
     {
-    currentPlayer.printHand();  //Not printing anything...
+        currentPlayer.printHand();
+        //m_gameHand.printHand();
         std::this_thread::sleep_for(std::chrono::milliseconds(7000));
-    turnComplete = true;
+        //Call select card from hand
+        //Call select card in game hand
+        //compare cards
+        //if they match, store in player's wonCards
+        turnComplete = true;
     }
     switch (currentTurn)
     {
@@ -307,31 +319,39 @@ void Game::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 //Do stuff
 }
 
-Deck Game::getDeck()
+Deck* Game::getDeck()
 {
-    return m_gameDeck;
+    Deck *gameDeck;
+    gameDeck = &m_gameDeck;
+    return gameDeck;
 }
 
-Player Game::getPlayer(int playerNum)
+Player* Game::getPlayer(int playerNum)
 {
+    Player *requestedPlayer;
     switch (playerNum)
     {
     case 1:
-        return m_player1;
+        requestedPlayer = &m_player1;
+        return requestedPlayer;
         break;
     case 2:
-        return m_player2;
+        requestedPlayer = &m_player2;
+        return requestedPlayer;
         break;
     default:
         std::cout << "Invalid player number. You must specify a value of 1 or 2. Returning player 1 by default." << std::endl;
-        return m_player1;
+        requestedPlayer = &m_player1;
+        return requestedPlayer;
         break;
     }
 }
 
-Hand Game::getGameHand()
+Hand* Game::getGameHand()
 {
-    return m_gameHand;
+    Hand *gameHand;
+    gameHand = &m_gameHand;
+    return gameHand;
 }
 
 int Game::getNumRounds()

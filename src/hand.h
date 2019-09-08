@@ -21,11 +21,11 @@ public:
     Hand();
     ~Hand();
     void printHand();
-    Card getCard(std::vector<Card>::size_type cardNum);
+    Card* getCard(std::vector<Card>::size_type cardNum);
     std::vector<Card>::size_type getNumCards();
-    Card getRandCard();
-    void acceptCard(Card newCard);
-    Card disCard(std::vector<Card>::size_type cardNum);
+    Card* getRandCard();
+    void acceptCard(Card &newCard);
+    Card* disCard(std::vector<Card>::size_type cardNum);
 
 };
 

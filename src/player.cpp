@@ -49,9 +49,11 @@ void Player::setKoikoi()
 
 }
 
-Hand Player::getHand()
+Hand* Player::getHand()
 {
-    return m_playerHand;
+    Hand *playerHand;
+    playerHand = &m_playerHand;
+    return playerHand;
 }
 
 void Player::printScore()

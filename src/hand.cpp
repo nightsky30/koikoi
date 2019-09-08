@@ -40,9 +40,11 @@ void Hand::printHand()
     }
 }
 
-Card Hand::getCard(std::vector<Card>::size_type cardNum)
+Card* Hand::getCard(std::vector<Card>::size_type cardNum)
 {
-    return m_playerHand[cardNum];
+    Card *requestedCard;
+    requestedCard = &m_playerHand[cardNum];
+    return requestedCard;
 }
 
 std::vector<Card>::size_type Hand::getNumCards()
@@ -50,29 +52,33 @@ std::vector<Card>::size_type Hand::getNumCards()
     return m_numCards;
 }
 
-Card Hand::getRandCard()
+Card* Hand::getRandCard()
 {
     index_t randNum {0};
     srand(time(NULL));
     randNum = ((index_t)std::rand() % (m_numCards-1));
-    return m_playerHand[randNum];
+    Card *requestedCard;
+    requestedCard = &m_playerHand[randNum];
+    return requestedCard;
 }
 
-void Hand::acceptCard(Card newCard)
+void Hand::acceptCard(Card &newCard)
 {
     m_playerHand.push_back(newCard);
     m_numCards++;
 }
 
-Card Hand::disCard(std::vector<Card>::size_type cardNum)
+Card* Hand::disCard(std::vector<Card>::size_type cardNum)
 {
-//create a temp card object that holds the card selected for discard
+//create a card pointer
 //remove the card from the hand's vector or cards
 //decrement numCards
-//return temp card to be placed on the game hand or in the players played cards
+//return card pointer to be placed on the game hand or in the players played cards
 
     std::cout << "A card has been dealt" << std::endl;
     m_numCards = m_numCards - 1;
     std::cout << "The number of cards remaining in hand are: " << m_numCards << std::endl;
-    return m_playerHand[cardNum];
+    Card *requestedCard;
+    requestedCard = &m_playerHand[cardNum];
+    return requestedCard;
 }

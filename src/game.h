@@ -64,9 +64,9 @@ public:
     bool compareCards(Card card1, Card card2);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
-    Deck getDeck();
-    Player getPlayer(int playerNum);
-    Hand getGameHand();
+    Deck* getDeck();
+    Player* getPlayer(int playerNum);
+    Hand* getGameHand();
     int getNumRounds();
     int getCurrentRound();
     bool getGameStatus();

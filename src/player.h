@@ -33,7 +33,7 @@ public:
     void setOya(bool oya);
     bool getKoikoi();
     void setKoikoi();
-    Hand getHand();
+    Hand* getHand();
 
     void printScore();
     void printYaku();
