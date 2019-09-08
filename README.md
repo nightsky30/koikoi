@@ -1,5 +1,5 @@
-# koikoi
+# Koi-Koi
 
-## Koi Koi Hanafuda
+## Koi-Koi Hanafuda
 
 A Japanese traditional card game.
