@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>KoiKoi</class>
+ <widget class="QMainWindow" name="KoiKoi">
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -9,13 +9,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1278</width>
+    <width>1280</width>
     <height>1024</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1278</width>
+    <width>1280</width>
     <height>1024</height>
    </size>
   </property>
@@ -33,20 +33,121 @@
     <normaloff>:/icon/koi-2.svg</normaloff>:/icon/koi-2.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame">
+   <property name="minimumSize">
+    <size>
+     <width>1280</width>
+     <height>1024</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1280</width>
+     <height>1024</height>
+    </size>
+   </property>
+   <widget class="QFrame" name="titleFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>1024</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>200</y>
+       <width>967</width>
+       <height>589</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="titleLabel">
+        <property name="font">
+         <font>
+          <pointsize>48</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Koi-Koi Hanafuda</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="titleImage">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="gameFrame">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>-1</x>
       <y>-1</y>
-      <width>1281</width>
-      <height>971</height>
+      <width>1280</width>
+      <height>1024</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+     <enum>QFrame::Plain</enum>
     </property>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
@@ -57,7 +158,7 @@
        <height>170</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="gridLayoutPlayer">
       <item row="0" column="0">
        <widget class="QLabel" name="label_19">
         <property name="sizePolicy">
@@ -317,7 +418,7 @@
        <height>374</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gridLayoutGameHand">
       <item row="0" column="3">
        <widget class="QLabel" name="label_8">
         <property name="sizePolicy">
@@ -577,7 +678,7 @@
        <height>170</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_3">
+     <layout class="QGridLayout" name="gridLayoutCPU">
       <item row="0" column="0">
        <widget class="QLabel" name="label_10">
         <property name="sizePolicy">
@@ -828,7 +929,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="deckLabel">
      <property name="geometry">
       <rect>
        <x>200</x>
@@ -865,6 +966,74 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>1010</x>
+       <y>410</y>
+       <width>104</width>
+       <height>180</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutDebug">
+      <item>
+       <widget class="QLabel" name="dbgCardMonth">
+        <property name="text">
+         <string>dbgCardMonth</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardFlower">
+        <property name="text">
+         <string>dbgCardFlower</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardPointVal">
+        <property name="text">
+         <string>dbgCardPointVal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardType">
+        <property name="text">
+         <string>dbgCardType</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardPointVal2">
+        <property name="text">
+         <string>dbgCardPointVal2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardName">
+        <property name="text">
+         <string>dbgCardName</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardType2">
+        <property name="text">
+         <string>dbgCardType2</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="dbgCardWild">
+        <property name="text">
+         <string>dbgCardWild</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -872,7 +1041,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1278</width>
+     <width>1280</width>
      <height>27</height>
     </rect>
    </property>
@@ -906,25 +1075,40 @@
    <property name="text">
     <string>New Game</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
   </action>
   <action name="actionQuit_Game">
    <property name="text">
     <string>Quit Game</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
   </action>
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>
@@ -932,5 +1116,86 @@
   <include location="../logo/icon.qrc"/>
   <include location="../data/resources/deck.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>KoiKoi</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>511</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNew_Game</sender>
+   <signal>triggered()</signal>
+   <receiver>gameFrame</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>638</x>
+     <y>537</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionNew_Game</sender>
+   <signal>triggered()</signal>
+   <receiver>titleFrame</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionQuit_Game</sender>
+   <signal>triggered()</signal>
+   <receiver>gameFrame</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>638</x>
+     <y>537</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionQuit_Game</sender>
+   <signal>triggered()</signal>
+   <receiver>titleFrame</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>639</x>
+     <y>538</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
