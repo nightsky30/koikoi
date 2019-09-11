@@ -7,6 +7,7 @@ Card::Card()
 {
     this->m_month = JANUARY;
     this->m_flower = PINE;
+    this->m_imageStr = "Blank";
     this->m_cardType = PLAIN;
     this->m_cardType2 = PLAIN;
     this->m_pointVal = 5;
@@ -16,10 +17,11 @@ Card::Card()
 }
 
 //Constructor
-Card::Card(CardMonth month, CardFlower flower, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild)
+Card::Card(CardMonth month, CardFlower flower, std::string imageStr, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild)
 {
     this->m_month = month;
     this->m_flower = flower;
+    this->m_imageStr = imageStr;
     this->m_cardType = cardType;
     this->m_cardType2 = cardType2;
     this->m_pointVal = pointVal;
@@ -44,6 +46,11 @@ CardMonth Card::getMonth()
 CardFlower Card::getFlower()
 {
     return m_flower;
+}
+
+std::string Card::getImageStr()
+{
+    return m_imageStr;
 }
 
 CardType Card::getCardType()
@@ -192,6 +199,11 @@ void Card::printFlower()
         break;
     }
     std::cout << "The flower is: " << niceFlower << std::endl;
+}
+
+void Card::printImageStr()
+{
+    std::cout << "The card image value is: " << m_imageStr << std::endl;
 }
 
 std::string Card::determineCardType(CardType cType)

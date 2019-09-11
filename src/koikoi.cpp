@@ -1,4 +1,6 @@
 #include "koikoi.h"
+#include "preferences.h"
+#include "about.h"
 #include "card.h"
 #include "deck.h"
 #include "hand.h"
@@ -8,16 +10,18 @@
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
 
+// Using a type alias
 using index_t = std::vector<Card>::size_type;
 
 KoiKoi::KoiKoi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::KoiKoi)
 {
-
     //Set up deck
     Deck m_gameDeck {Deck()};
-    this->m_gameDeck.shuffleDeck();
+    this->m_oyaCard = 0;
+    Card *oyaCard1 = new Card();
+    Card *oyaCard2 = new Card();
 
     //Set up players and gameboard
     //Human
@@ -33,9 +37,20 @@ KoiKoi::KoiKoi(QWidget *parent) :
     this->m_gameStatus = false;
 
     ui->setupUi(this);
-    ui->gameFrame->setHidden(true);
+
+    //Title and Application Icon
+    this->setWindowTitle("Koi-Koi Hanafuda");
+    this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
+
+
+   //Set up menus so they are connected with SIGNALS and SLOTS
    connect(ui->actionNew_Game, &QAction::triggered, this, &KoiKoi::onNewGameClicked);
    connect(ui->actionQuit_Game, &QAction::triggered, this, &KoiKoi::onQuitGameClicked);
+   connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
+   connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
+   connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
+
+   showTitleScreen();
 }
 
 KoiKoi::~KoiKoi()
@@ -63,68 +78,97 @@ void KoiKoi::onNewGameClicked()
 void KoiKoi::onQuitGameClicked()
 {
     //Quit Game
-
+    showTitleScreen();
 }
 
-void KoiKoi::clearScreen()
+void KoiKoi::onPreferencesClicked()
 {
-    //***************************************
-    //maybe hide everything in ui
-    //add this to koikoi??
-    //***************************************
+    //Open preferences dialog
+    Preferences *prefs = new Preferences();
+    prefs->setAttribute(Qt::WA_DeleteOnClose);
+    prefs->show();
+}
+
+void KoiKoi::onAboutClicked()
+{
+    //Open about dialog
+    About *about = new About();
+    about->setAttribute(Qt::WA_DeleteOnClose);
+    about->show();
+}
+
+void KoiKoi::showTitleScreen()
+{
+    ui->titleFrame->show();
+    ui->gameFrame->setHidden(true);
+    ui->oyaFrame->setHidden(true);
+}
+
+void KoiKoi::showGameScreen()
+{
+    ui->titleFrame->setHidden(true);
+    ui->gameFrame->show();
+    ui->oyaFrame->setHidden(true);
+}
+
+void KoiKoi::showOyaScreen()
+{
+    ui->titleFrame->setHidden(true);
+    ui->gameFrame->setHidden(true);
+    ui->oyaFrame->show();
 }
 
 void KoiKoi::startGame()
 {
-
-    determineOya();
-    startRound();
+    this->m_gameDeck.resetDeck();
+    this->m_gameDeck.shuffleDeck();
+    generateOya();
+    //startRound();
 }
 
-void KoiKoi::determineOya()
+void KoiKoi::generateOya()
 {
     //Ask human player to select 1 of 2 random cards
     //Compare cards
     //Earliest card is the Oya and has advantage of going first
 
-    int oyaCard {0};
-    Card *c1;
-    Card *c2;
-    c1 = m_gameDeck.getRandCard();
-    c2 = m_gameDeck.getRandCard();
+    oyaCard1 = m_gameDeck.getRandCard();
+    oyaCard2 = m_gameDeck.getRandCard();
 
     //Ensure months are different to avoid issues
-    if (c1->getMonth() == c2->getMonth())
+    if (oyaCard1->getMonth() == oyaCard2->getMonth())
     {
-        while ((c1->getMonth() == c2->getMonth()))
+        while ((oyaCard1->getMonth() == oyaCard2->getMonth()))
         {
-            c2 = m_gameDeck.getRandCard();
+            oyaCard2 = m_gameDeck.getRandCard();
         }
     }
 
     //Determine Oya card
-    if (c1->getMonth() < c2->getMonth())
+    if (oyaCard1->getMonth() < oyaCard2->getMonth())
     {
-        oyaCard = 1;
+        m_oyaCard = 1;
     }
     else
     {
-        oyaCard = 2;
+        m_oyaCard = 2;
     }
-
-    //Start Player card selection
 
     //***************************************
     //Display cards here
     //Wait for player to select cards??
     //***************************************
 
+    showOyaScreen();
+}
+
+void KoiKoi::determineOya()
+{
     bool madeSelection {false};
     char selection {'0'};
 
     while (madeSelection == false)
     {
-        clearScreen();
         std::cout << "Determine Oya" << std::endl;
         std::cout << "=============" << std::endl;
         std::cout << "Player:  Please select a card, (1) or (2)" << std::endl;
@@ -146,15 +190,14 @@ void KoiKoi::determineOya()
         }
     }
 
-    clearScreen();
     std::cout << "Player has chosen: " << selection << std::endl;
     std::cout << std::endl;
 
-    c1->printCard();
-    c2->printCard();
+    oyaCard1->printCard();
+    oyaCard2->printCard();
 
     //Dirty trick to get the proper difference (int value) by using the ascii table
-    if (((int)selection - '0') == oyaCard)
+    if (((int)selection - '0') == m_oyaCard)
     {
         //Human has Oya
         m_player1.setOya(true);
@@ -170,9 +213,6 @@ void KoiKoi::determineOya()
         std::cout << "CPU is Oya!!!" << std::endl;
         std::cout << std::endl;
     }
-
-    //Sleep
-    std::this_thread::sleep_for(std::chrono::milliseconds(7000));
 }
 
 void KoiKoi::deal()

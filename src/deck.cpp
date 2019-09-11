@@ -22,6 +22,14 @@ Deck::~Deck()
 {
 }
 
+void Deck::resetDeck()
+{
+    //Ensure deck starts with proper number of cards (48)
+    this->m_numCards = fullDeck;
+    //Assign standard game deck
+    this->m_cardDeck = koikoiDeck;
+}
+
 /*
 * General Functions
 */

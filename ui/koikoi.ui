@@ -45,6 +45,126 @@
      <height>1024</height>
     </size>
    </property>
+   <widget class="QFrame" name="oyaFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1280</width>
+      <height>1024</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1280</width>
+      <height>1024</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>0</y>
+       <width>961</width>
+       <height>991</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="oyaLabel2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="oyaLabel1">
+        <property name="font">
+         <font>
+          <pointsize>48</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Select a card!</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="oyaLabel3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
    <widget class="QFrame" name="titleFrame">
     <property name="geometry">
      <rect>
@@ -966,7 +1086,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>1010</x>
@@ -1035,6 +1155,9 @@
      </layout>
     </widget>
    </widget>
+   <zorder>titleFrame</zorder>
+   <zorder>gameFrame</zorder>
+   <zorder>oyaFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1116,86 +1239,5 @@
   <include location="../logo/icon.qrc"/>
   <include location="../data/resources/deck.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>actionExit</sender>
-   <signal>triggered()</signal>
-   <receiver>KoiKoi</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>511</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionNew_Game</sender>
-   <signal>triggered()</signal>
-   <receiver>gameFrame</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>638</x>
-     <y>537</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionNew_Game</sender>
-   <signal>triggered()</signal>
-   <receiver>titleFrame</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>538</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionQuit_Game</sender>
-   <signal>triggered()</signal>
-   <receiver>gameFrame</receiver>
-   <slot>hide()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>638</x>
-     <y>537</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actionQuit_Game</sender>
-   <signal>triggered()</signal>
-   <receiver>titleFrame</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>639</x>
-     <y>538</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -53,6 +53,7 @@ public:
     ~KoiKoi();
     void clearScreen();
     void startGame();
+    void generateOya();
     void determineOya();
     void deal();
     void startRound();
@@ -71,15 +72,23 @@ public:
     void printCurrentRound();
     void printGameStatus();
 
-public slots:
+    void showTitleScreen();
+    void showGameScreen();
+    void showOyaScreen();
 
+public slots:
     void onLabelClicked();
     void onNewGameClicked();
     void onQuitGameClicked();
+    void onPreferencesClicked();
+    void onAboutClicked();
 
 private:
     Ui::KoiKoi *ui;
     Deck m_gameDeck {Deck()};
+    int m_oyaCard {0};
+    Card* oyaCard1;
+    Card* oyaCard2;
     Player m_player1 {Player()};
     Player m_player2 {Player()};
     Hand m_gameHand {Hand()};
