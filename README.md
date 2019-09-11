@@ -1,5 +1,6 @@
-# Koi-Koi
+# Koi-Koi Hanafuda
 
-## Koi-Koi Hanafuda
+## Qt / C++ implementation of Koi-Koi
 
-A Japanese traditional card game.
+Koi-Koi (Japanese: こいこい) is a popular card game in Japan played with Hanafuda cards. The phrase "koi-koi" means "come on" in Japanese which is said when the player wants to continue the hand.
+
