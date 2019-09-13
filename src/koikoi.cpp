@@ -49,6 +49,11 @@ KoiKoi::KoiKoi(QWidget *parent) :
    connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
    connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
 
+   //QLABELS DO NOT HAVE A CLICKED FUNCTION
+   //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
+   //connect(ui->oyaLabel2, &QAction::);
+   //connect(ui->oyaLabel3);
+
    showTitleScreen();
 }
 
@@ -184,37 +189,8 @@ void KoiKoi::generateOyaCard()
 
 void KoiKoi::determineOyaPlayer()
 {
-    bool madeSelection {false};
-    char selection {'0'};
 
-    while (madeSelection == false)
-    {
-        std::cout << "Determine Oya" << std::endl;
-        std::cout << "=============" << std::endl;
-        std::cout << "Player:  Please select a card, (1) or (2)" << std::endl;
-        std::cout << std::endl;
-        std::cin >> selection;
-
-        switch (selection)
-        {
-        case '1':
-            /* FALL THROUGH */
-        case '2':
-            madeSelection = true;
-            break;
-        default:
-            std::cout << "Enter a proper selection..." << std::endl;
-            //Sleep
-            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-            break;
-        }
-    }
-
-    std::cout << "Player has chosen: " << selection << std::endl;
-    std::cout << std::endl;
-
-    //oyaCard1->printCard();
-    //oyaCard2->printCard();
+    int selection {0};
 
     index_t oyaCard = m_oyaHand.getOyaCard();
 
