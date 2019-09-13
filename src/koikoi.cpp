@@ -431,6 +431,8 @@ void KoiKoi::showGameScreen()
 
 void KoiKoi::showOyaScreen()
 {
+    ui->oyaLabel2->setPixmap(QPixmap(QString(m_oyaHand.getCard(0)->getImageStr())));
+    ui->oyaLabel3->setPixmap(QPixmap(QString(m_oyaHand.getCard(1)->getImageStr())));
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();

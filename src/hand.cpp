@@ -106,6 +106,7 @@ void Hand::printHand()
         std::cout << "=========================" << std::endl;
         m_playerHand[i].printMonth();
         m_playerHand[i].printFlower();
+        m_playerHand[i].printImageStr();
         m_playerHand[i].printCardType();
         m_playerHand[i].printCardType2();
         m_playerHand[i].printPointVal();

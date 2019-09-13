@@ -2,6 +2,7 @@
 #define CARD_H
 
 #include <string>
+#include <QString>
 #include <QLabel>
 
 /*
@@ -92,7 +93,7 @@ private:
     */
     CardMonth m_month {JANUARY};
     CardFlower m_flower {PINE};
-    std::string m_imageStr {":/deck/"};
+    QString m_imageStr {":/deck/Hanafuda_koi-2.svg"};
     CardType m_cardType {PLAIN};
     CardType m_cardType2 {NIL};
     int m_pointVal {5};
@@ -105,7 +106,7 @@ public:
     * Constructors / Destructors
     */
     Card();
-    Card(CardMonth month, CardFlower flower, std::string imageStr, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild);
+    Card(CardMonth month, CardFlower flower, QString imageStr, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild);
     ~Card();
 
     /*
@@ -113,7 +114,7 @@ public:
     */
     CardMonth getMonth();
     CardFlower getFlower();
-    std::string getImageStr();
+    QString getImageStr();
     CardType getCardType();
     CardType getCardType2();
     int getPointVal();

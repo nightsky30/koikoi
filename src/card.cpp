@@ -1,6 +1,8 @@
 #include "card.h"
 #include <iostream>
 #include <string>
+#include <QString>
+#include <QDebug>
 
 //Default Constructor
 Card::Card()
@@ -17,7 +19,7 @@ Card::Card()
 }
 
 //Constructor
-Card::Card(CardMonth month, CardFlower flower, std::string imageStr, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild)
+Card::Card(CardMonth month, CardFlower flower, QString imageStr, CardType cardType, CardType cardType2, int pointVal, int pointVal2, std::string name, bool wild)
 {
     this->m_month = month;
     this->m_flower = flower;
@@ -48,7 +50,7 @@ CardFlower Card::getFlower()
     return m_flower;
 }
 
-std::string Card::getImageStr()
+QString Card::getImageStr()
 {
     return m_imageStr;
 }
@@ -169,6 +171,7 @@ void Card::printCard()
     std::cout << "=========================" << std::endl;
     printMonth();
     printFlower();
+    printImageStr();
     printCardType();
     printCardType2();
     printPointVal();
@@ -279,7 +282,7 @@ void Card::printFlower()
 
 void Card::printImageStr()
 {
-    std::cout << "The card image value is: " << m_imageStr << std::endl;
+    std::cout << "The card image value is: " << m_imageStr.toStdString() << std::endl;
 }
 
 void Card::printCardType()
