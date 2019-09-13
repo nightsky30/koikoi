@@ -87,7 +87,6 @@ class Card
 {
 
 private:
-
     /*
     * Member Initialization List
     */
@@ -102,7 +101,6 @@ private:
     bool m_wild {false};
 
 public:
-
     /*
     * Constructors / Destructors
     */
@@ -115,13 +113,14 @@ public:
     */
     CardMonth getMonth();
     CardFlower getFlower();
-    std::string getImageStr ();
+    std::string getImageStr();
     CardType getCardType();
     CardType getCardType2();
     int getPointVal();
     int getPointVal2();
     std::string getName();
     bool getWild();
+    std::string determineCardType(CardType cType);
 
     /*
     * Print Functions
@@ -130,7 +129,6 @@ public:
     void printMonth();
     void printFlower();
     void printImageStr();
-    std::string determineCardType(CardType cType);
     void printCardType();
     void printCardType2();
     void printPointVal();

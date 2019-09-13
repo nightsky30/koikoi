@@ -83,6 +83,82 @@ bool Card::getWild()
     return m_wild;
 }
 
+std::string Card::determineCardType(CardType cType)
+{
+    std::string niceType {""};
+
+    switch (cType)
+    {
+    case LIGHT:
+        niceType = "LIGHT";
+        break;
+    case CRANE:
+        niceType = "CRANE";
+        break;
+    case CURTAIN:
+        niceType = "CURTAIN";
+        break;
+    case RAIN:
+        niceType = "RAIN";
+        break;
+    case MOON:
+        niceType = "MOON";
+        break;
+    case PHEONIX:
+        niceType = "PHEONIX";
+        break;
+    case ANIMAL:
+        niceType = "ANIMAL";
+        break;
+    case NIGHTINGALE:
+        niceType = "NIGHTINGALE";
+        break;
+    case CUCKOO:
+        niceType = "CUCKOO";
+        break;
+    case BRIDGE:
+        niceType = "BRIDGE";
+        break;
+    case BUTTERFLIES:
+        niceType = "BUTTERFLIES";
+        break;
+    case BOAR:
+        niceType = "BOAR";
+        break;
+    case GEESE:
+        niceType = "GEESE";
+        break;
+    case SAKE_CUP:
+        niceType = "SAKE CUP";
+        break;
+    case DEER:
+        niceType = "DEER";
+        break;
+    case SWALLOW:
+        niceType = "SWALLOW";
+        break;
+    case RED_RIBBON:
+        niceType = "RED RIBBON";
+        break;
+    case RED_POEM:
+        niceType = "RED POEM";
+        break;
+    case BLUE_RIBBON:
+        niceType = "BLUE RIBBON";
+        break;
+    case PLAIN:
+        niceType = "PLAIN";
+        break;
+    case NIL:
+        niceType = "NIL";
+        break;
+    default:
+        std::cout << "The card type could not be determined." << std::endl;
+        break;
+    }
+    return niceType;
+}
+
 /*
 * Print Functions
 */
@@ -204,82 +280,6 @@ void Card::printFlower()
 void Card::printImageStr()
 {
     std::cout << "The card image value is: " << m_imageStr << std::endl;
-}
-
-std::string Card::determineCardType(CardType cType)
-{
-    std::string niceType {""};
-
-    switch (cType)
-    {
-    case LIGHT:
-        niceType = "LIGHT";
-        break;
-    case CRANE:
-        niceType = "CRANE";
-        break;
-    case CURTAIN:
-        niceType = "CURTAIN";
-        break;
-    case RAIN:
-        niceType = "RAIN";
-        break;
-    case MOON:
-        niceType = "MOON";
-        break;
-    case PHEONIX:
-        niceType = "PHEONIX";
-        break;
-    case ANIMAL:
-        niceType = "ANIMAL";
-        break;
-    case NIGHTINGALE:
-        niceType = "NIGHTINGALE";
-        break;
-    case CUCKOO:
-        niceType = "CUCKOO";
-        break;
-    case BRIDGE:
-        niceType = "BRIDGE";
-        break;
-    case BUTTERFLIES:
-        niceType = "BUTTERFLIES";
-        break;
-    case BOAR:
-        niceType = "BOAR";
-        break;
-    case GEESE:
-        niceType = "GEESE";
-        break;
-    case SAKE_CUP:
-        niceType = "SAKE CUP";
-        break;
-    case DEER:
-        niceType = "DEER";
-        break;
-    case SWALLOW:
-        niceType = "SWALLOW";
-        break;
-    case RED_RIBBON:
-        niceType = "RED RIBBON";
-        break;
-    case RED_POEM:
-        niceType = "RED POEM";
-        break;
-    case BLUE_RIBBON:
-        niceType = "BLUE RIBBON";
-        break;
-    case PLAIN:
-        niceType = "PLAIN";
-        break;
-    case NIL:
-        niceType = "NIL";
-        break;
-    default:
-        std::cout << "The card type could not be determined." << std::endl;
-        break;
-    }
-    return niceType;
 }
 
 void Card::printCardType()

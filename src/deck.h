@@ -67,7 +67,6 @@ class Deck
 {
 
 private:
-
     /*
     * Member Initialization List
     */
@@ -75,7 +74,6 @@ private:
     std::vector<Card> m_cardDeck {koikoiDeck};
 
 public:
-
     /*
     * Constructors / Destructors
     */
@@ -83,16 +81,23 @@ public:
     ~Deck();
 
     /*
-    * General Functions
+    * Get Functions
     */
-    void resetDeck();
-    void shuffleDeck();
-    void printDeck();
     Card* getCard(std::vector<Card>::size_type cardNum);
     std::vector<Card>::size_type getNumCards();
     Card* getRandCard();
+
+    /*
+    * Set Functions
+    */
+    void resetDeck();
+    void shuffleDeck();
     Card* dealCard();
 
+    /*
+    * Print Functions
+    */
+    void printDeck();
 };
 
 #endif

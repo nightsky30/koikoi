@@ -27,6 +27,10 @@ const static std::vector<Yaku> acceptableYaku
 };
 
 namespace Ui {
+
+/*
+* Class Definition, also functions as forward declaration
+*/
 class KoiKoi;
 
 //Create deck
@@ -44,23 +48,39 @@ class KoiKoi;
 
 }
 
+/*
+* Class Definition, also functions as forward declaration
+*/
 class KoiKoi : public QMainWindow
 {
     Q_OBJECT
 
+private:
+    /*
+    * Member Initialization List
+    */
+    Ui::KoiKoi *ui;
+    Deck m_gameDeck {Deck()};
+    //Card* oyaCard1;
+    //Card* oyaCard2;
+    Player m_player1 {Player()};
+    Player m_player2 {Player()};
+    Hand m_gameHand {Hand()};
+    Hand m_oyaHand {Hand()};
+    int m_rounds {12};
+    int m_currentRound {0};
+    bool m_gameStatus {false};
+
 public:
+    /*
+    * Constructors / Destructors
+    */
     explicit KoiKoi(QWidget *parent = nullptr);
     ~KoiKoi();
-    void clearScreen();
-    void startGame();
-    void generateOya();
-    void determineOya();
-    void deal();
-    void startRound();
-    void takeTurn(Player &currentPlayer, int &currentTurn);
-    bool compareCards(Card card1, Card card2);
-    void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
+    /*
+    * Get Functions
+    */
     Deck* getDeck();
     Player* getPlayer(int playerNum);
     Hand* getGameHand();
@@ -68,10 +88,28 @@ public:
     int getCurrentRound();
     bool getGameStatus();
 
+    /*
+    * Set Functions
+    */
+    void startGame();
+    void generateOyaCard();
+    void determineOyaPlayer();
+    void deal();
+    void startRound();
+    void takeTurn(Player &currentPlayer, int &currentTurn);
+    bool compareCards(Card card1, Card card2);
+    void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
+
+    /*
+    * Print Functions
+    */
     void printNumRounds();
     void printCurrentRound();
     void printGameStatus();
 
+    /*
+    * GUI Functions
+    */
     void showTitleScreen();
     void showGameScreen();
     void showOyaScreen();
@@ -82,19 +120,6 @@ public slots:
     void onQuitGameClicked();
     void onPreferencesClicked();
     void onAboutClicked();
-
-private:
-    Ui::KoiKoi *ui;
-    Deck m_gameDeck {Deck()};
-    int m_oyaCard {0};
-    Card* oyaCard1;
-    Card* oyaCard2;
-    Player m_player1 {Player()};
-    Player m_player2 {Player()};
-    Hand m_gameHand {Hand()};
-    int m_rounds {12};
-    int m_currentRound {0};
-    bool m_gameStatus {false};
 };
 
 #endif // KOIKOI_H

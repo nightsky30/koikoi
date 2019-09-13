@@ -1,4 +1,5 @@
 #include "player.h"
+#include <iostream>
 
 Player::Player()
 {
@@ -14,19 +15,9 @@ int Player::getScore()
     return m_score;
 }
 
-void Player::setScore(int score)
-{
-    m_score = score;
-}
-
 std::vector<Yaku>::size_type Player::getYaku()
 {
     return m_obtainedYaku;
-}
-
-void Player::setYaku()
-{
-
 }
 
 bool Player::getOya()
@@ -34,19 +25,9 @@ bool Player::getOya()
     return m_oya;
 }
 
-void Player::setOya(bool oya)
-{
-    m_oya = oya;
-}
-
 bool Player::getKoikoi()
 {
     return m_koikoi;
-}
-
-void Player::setKoikoi()
-{
-
 }
 
 Hand* Player::getHand()
@@ -54,6 +35,26 @@ Hand* Player::getHand()
     Hand *playerHand;
     playerHand = &m_playerHand;
     return playerHand;
+}
+
+void Player::setScore(int score)
+{
+    m_score = score;
+}
+
+void Player::setYaku()
+{
+
+}
+
+void Player::setOya(bool oya)
+{
+    m_oya = oya;
+}
+
+void Player::setKoikoi()
+{
+
 }
 
 void Player::printScore()

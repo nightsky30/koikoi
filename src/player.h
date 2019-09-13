@@ -5,11 +5,16 @@
 #include "hand.h"
 #include <vector>
 
+/*
+* Class Definition, also functions as forward declaration
+*/
 class Player
 {
 
 private:
-
+    /*
+    * Member Initialization List
+    */
     int m_score {0};
 //Holds the numbers from the Game's Yaku const??
     std::vector<Yaku>::size_type m_obtainedYaku
@@ -21,26 +26,37 @@ private:
     Hand m_playerHand {Hand()};
 
 public:
-
+    /*
+    * Constructors / Destructors
+    */
     Player();
     ~Player();
 
+    /*
+    * Get Functions
+    */
     int getScore();
-    void setScore(int score);
     std::vector<Yaku>::size_type getYaku();
-    void setYaku();
     bool getOya();
-    void setOya(bool oya);
     bool getKoikoi();
-    void setKoikoi();
     Hand* getHand();
 
+    /*
+    * Set Functions
+    */
+    void setScore(int score);
+    void setYaku();
+    void setOya(bool oya);
+    void setKoikoi();
+
+    /*
+    * Print Functions
+    */
     void printScore();
     void printYaku();
     void printOya();
     void printKoikoi();
     void printHand();
-
 };
 
 #endif

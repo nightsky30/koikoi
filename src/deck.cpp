@@ -22,6 +22,28 @@ Deck::~Deck()
 {
 }
 
+Card* Deck::getCard(std::vector<Card>::size_type cardNum)
+{
+Card *requestedCard;
+requestedCard = &m_cardDeck[cardNum];
+    return requestedCard;
+}
+
+std::vector<Card>::size_type Deck::getNumCards()
+{
+    return m_numCards;
+}
+
+Card* Deck::getRandCard() // Caution: Does not remove card from deck...
+{
+    index_t randNum {0};
+    srand(time(NULL));
+    randNum = ((index_t)std::rand() % (m_numCards-1));
+    Card *requestedCard;
+    requestedCard = &m_cardDeck[randNum];
+    return requestedCard;
+}
+
 void Deck::resetDeck()
 {
     //Ensure deck starts with proper number of cards (48)
@@ -54,6 +76,22 @@ void Deck::shuffleDeck()
     std::cout << "=====================" << std::endl;
 }
 
+Card* Deck::dealCard()
+{
+//when a card is dealt, create a temp card object
+//remove it from the deck
+//it should go into the player's hand or the gamehand.
+//when removed from the deck and either cardNum decremented, or just use vector.size.
+//when cards are matched they should go to an alternate "match hand" to be tallied later.
+//Implement this system...
+
+    Card *tempCard;
+    tempCard = &m_cardDeck[m_numCards-1];
+    m_cardDeck.pop_back();
+    m_numCards = m_numCards - 1;
+    return tempCard;
+}
+
 void Deck::printDeck()
 {
     using index_t = std::vector<Card>::size_type;
@@ -76,42 +114,4 @@ void Deck::printDeck()
         m_cardDeck[i].printWild();
         std::cout << "=========================" << std::endl;
     }
-}
-
-Card* Deck::getCard(std::vector<Card>::size_type cardNum)
-{
-Card *requestedCard;
-requestedCard = &m_cardDeck[cardNum];
-    return requestedCard;
-}
-
-std::vector<Card>::size_type Deck::getNumCards()
-{
-    return m_numCards;
-}
-
-Card* Deck::getRandCard() // Caution: Does not remove card from deck...
-{
-    index_t randNum {0};
-    srand(time(NULL));
-    randNum = ((index_t)std::rand() % (m_numCards-1));
-    Card *requestedCard;
-    requestedCard = &m_cardDeck[randNum];
-    return requestedCard;
-}
-
-Card* Deck::dealCard()
-{
-//when a card is dealt, create a temp card object
-//remove it from the deck
-//it should go into the player's hand or the gamehand.
-//when removed from the deck and either cardNum decremented, or just use vector.size.
-//when cards are matched they should go to an alternate "match hand" to be tallied later.
-//Implement this system...
-
-    Card *tempCard;
-    tempCard = &m_cardDeck[m_numCards-1];
-    m_cardDeck.pop_back();
-    m_numCards = m_numCards - 1;
-    return tempCard;
 }
