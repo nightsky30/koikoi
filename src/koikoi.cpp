@@ -9,6 +9,8 @@
 #include <chrono>  // Sleep Time
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
+#include <QPushButton>
+#include <QIcon>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -407,8 +409,9 @@ void KoiKoi::showGameScreen()
 
 void KoiKoi::showOyaScreen()
 {
-    ui->oyaLabel2->setPixmap(QPixmap(QString(m_oyaHand.getCard(0)->getImageStr())));
-    ui->oyaLabel3->setPixmap(QPixmap(QString(m_oyaHand.getCard(1)->getImageStr())));
+    ui->oyaButton1->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
+    ui->oyaButton2->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
+    //ui->oyaLabel3->setPixmap(QPixmap(QString(m_oyaHand.getCard(1)->getImageStr())));
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();

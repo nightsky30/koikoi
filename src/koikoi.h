@@ -61,8 +61,6 @@ private:
     */
     Ui::KoiKoi *ui;
     Deck m_gameDeck {Deck()};
-    //Card* oyaCard1;
-    //Card* oyaCard2;
     Player m_player1 {Player()};
     Player m_player2 {Player()};
     Hand m_gameHand {Hand()};

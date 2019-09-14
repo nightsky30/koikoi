@@ -83,13 +83,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="oyaLabel2">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QPushButton" name="oyaButton1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -105,10 +99,17 @@
         <property name="text">
          <string/>
         </property>
-        <property name="pixmap">
-         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+        <property name="icon">
+         <iconset resource="../data/resources/deck.qrc">
+          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
         </property>
-        <property name="scaledContents">
+        <property name="iconSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="flat">
          <bool>true</bool>
         </property>
        </widget>
@@ -132,13 +133,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="oyaLabel3">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QPushButton" name="oyaButton2">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -154,10 +149,17 @@
         <property name="text">
          <string/>
         </property>
-        <property name="pixmap">
-         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+        <property name="icon">
+         <iconset resource="../data/resources/deck.qrc">
+          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
         </property>
-        <property name="scaledContents">
+        <property name="iconSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="flat">
          <bool>true</bool>
         </property>
        </widget>
