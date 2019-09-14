@@ -275,7 +275,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>789</y>
+       <y>810</y>
        <width>1004</width>
        <height>170</height>
       </rect>
@@ -507,274 +507,6 @@
       </item>
       <item>
        <widget class="QPushButton" name="playerButton_7">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>310</y>
-       <width>1004</width>
-       <height>451</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gameGridLayout">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="gameButton_4">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="gameButton_6">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="gameButton_3">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="gameButton_2">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QPushButton" name="gameButton_5">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QPushButton" name="gameButton_0">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QPushButton" name="gameButton_7">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QPushButton" name="gameButton_1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -1075,108 +807,660 @@
       </item>
      </layout>
     </widget>
-    <widget class="QLabel" name="deckLabel">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>400</y>
-       <width>120</width>
-       <height>168</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>120</width>
-       <height>168</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>168</height>
-      </size>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>1010</x>
-       <y>410</y>
-       <width>104</width>
-       <height>180</height>
+       <x>10</x>
+       <y>200</y>
+       <width>122</width>
+       <height>591</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="debugVLayout">
+     <layout class="QVBoxLayout" name="infoVLayout">
       <item>
-       <widget class="QLabel" name="dbgCardMonth">
+       <layout class="QVBoxLayout" name="debugVLayout">
+        <item>
+         <widget class="QLabel" name="dbgCardMonth">
+          <property name="text">
+           <string>dbgCardMonth</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardFlower">
+          <property name="text">
+           <string>dbgCardFlower</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardPointVal">
+          <property name="text">
+           <string>dbgCardPointVal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardType">
+          <property name="text">
+           <string>dbgCardType</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardPointVal2">
+          <property name="text">
+           <string>dbgCardPointVal2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardName">
+          <property name="text">
+           <string>dbgCardName</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardType2">
+          <property name="text">
+           <string>dbgCardType2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="dbgCardWild">
+          <property name="text">
+           <string>dbgCardWild</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deckButton">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
         <property name="text">
-         <string>dbgCardMonth</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../data/resources/deck.qrc">
+          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>320</y>
+       <width>1012</width>
+       <height>346</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="gameHandHLayout">
       <item>
-       <widget class="QLabel" name="dbgCardFlower">
-        <property name="text">
-         <string>dbgCardFlower</string>
-        </property>
-       </widget>
+       <layout class="QFormLayout" name="gameHandFormLayout_2">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="gameButton_8">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="gameButton_9">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="gameButton_10">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="gameButton_11">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="dbgCardPointVal">
-        <property name="text">
-         <string>dbgCardPointVal</string>
-        </property>
-       </widget>
+       <layout class="QFormLayout" name="gameHandFormLayout_0">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="gameButton_0">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="gameButton_1">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="gameButton_2">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="gameButton_3">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="dbgCardType">
-        <property name="text">
-         <string>dbgCardType</string>
-        </property>
-       </widget>
+       <layout class="QFormLayout" name="gameHandFormLayout_1">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="gameButton_4">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="gameButton_5">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="gameButton_6">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="gameButton_7">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="dbgCardPointVal2">
-        <property name="text">
-         <string>dbgCardPointVal2</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="dbgCardName">
-        <property name="text">
-         <string>dbgCardName</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="dbgCardType2">
-        <property name="text">
-         <string>dbgCardType2</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="dbgCardWild">
-        <property name="text">
-         <string>dbgCardWild</string>
-        </property>
-       </widget>
+       <layout class="QFormLayout" name="gameHandFormLayout_3">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="gameButton_12">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="gameButton_13">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="gameButton_14">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="gameButton_15">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
