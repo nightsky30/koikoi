@@ -81,9 +81,9 @@
        <height>991</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="oyaHLayout">
       <item>
-       <widget class="QPushButton" name="oyaButton1">
+       <widget class="QPushButton" name="oyaButton_0">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -115,7 +115,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="oyaLabel1">
+       <widget class="QLabel" name="oyaLabel_1">
         <property name="font">
          <font>
           <pointsize>48</pointsize>
@@ -133,7 +133,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2">
+       <widget class="QPushButton" name="oyaButton_1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -203,7 +203,7 @@
        <height>589</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="titleHLayout">
       <item>
        <widget class="QLabel" name="titleLabel">
         <property name="font">
@@ -280,9 +280,9 @@
        <height>170</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <layout class="QHBoxLayout" name="playerHLayout">
       <item>
-       <widget class="QPushButton" name="oyaButton2_12">
+       <widget class="QPushButton" name="playerButton_0">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -314,7 +314,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_10">
+       <widget class="QPushButton" name="playerButton_1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -346,7 +346,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_16">
+       <widget class="QPushButton" name="playerButton_2">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -378,7 +378,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_13">
+       <widget class="QPushButton" name="playerButton_3">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -410,7 +410,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_17">
+       <widget class="QPushButton" name="playerButton_4">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -442,7 +442,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_15">
+       <widget class="QPushButton" name="playerButton_5">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -474,7 +474,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_14">
+       <widget class="QPushButton" name="playerButton_6">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -506,7 +506,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_11">
+       <widget class="QPushButton" name="playerButton_7">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -548,9 +548,9 @@
        <height>451</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gameGridLayout">
       <item row="0" column="0">
-       <widget class="QPushButton" name="oyaButton2_22">
+       <widget class="QPushButton" name="gameButton_4">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -582,7 +582,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QPushButton" name="oyaButton2_24">
+       <widget class="QPushButton" name="gameButton_6">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -614,7 +614,7 @@
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="oyaButton2_21">
+       <widget class="QPushButton" name="gameButton_3">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -646,7 +646,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QPushButton" name="oyaButton2_20">
+       <widget class="QPushButton" name="gameButton_2">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -678,7 +678,7 @@
        </widget>
       </item>
       <item row="0" column="4">
-       <widget class="QPushButton" name="oyaButton2_23">
+       <widget class="QPushButton" name="gameButton_5">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -710,7 +710,7 @@
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QPushButton" name="oyaButton2_18">
+       <widget class="QPushButton" name="gameButton_0">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -742,7 +742,7 @@
        </widget>
       </item>
       <item row="0" column="6">
-       <widget class="QPushButton" name="oyaButton2_25">
+       <widget class="QPushButton" name="gameButton_7">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -774,7 +774,7 @@
        </widget>
       </item>
       <item row="0" column="7">
-       <widget class="QPushButton" name="oyaButton2_19">
+       <widget class="QPushButton" name="gameButton_1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -816,9 +816,9 @@
        <height>170</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QHBoxLayout" name="cpuHLayout">
       <item>
-       <widget class="QPushButton" name="oyaButton2_5">
+       <widget class="QPushButton" name="cpuButton_0">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -850,7 +850,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_6">
+       <widget class="QPushButton" name="cpuButton_1">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -882,7 +882,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_9">
+       <widget class="QPushButton" name="cpuButton_2">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -914,7 +914,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_7">
+       <widget class="QPushButton" name="cpuButton_3">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -946,7 +946,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_3">
+       <widget class="QPushButton" name="cpuButton_4">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -978,7 +978,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_4">
+       <widget class="QPushButton" name="cpuButton_5">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -1010,7 +1010,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_8">
+       <widget class="QPushButton" name="cpuButton_6">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -1042,7 +1042,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton2_2">
+       <widget class="QPushButton" name="cpuButton_7">
         <property name="minimumSize">
          <size>
           <width>120</width>
@@ -1121,7 +1121,7 @@
        <height>180</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayoutDebug">
+     <layout class="QVBoxLayout" name="debugVLayout">
       <item>
        <widget class="QLabel" name="dbgCardMonth">
         <property name="text">
@@ -1262,8 +1262,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../data/resources/deck.qrc"/>
   <include location="../logo/icon.qrc"/>
+  <include location="../data/resources/deck.qrc"/>
  </resources>
  <connections/>
 </ui>

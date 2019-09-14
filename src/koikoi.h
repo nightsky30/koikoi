@@ -91,7 +91,6 @@ public:
     */
     void startGame();
     void generateOyaCard();
-    void determineOyaPlayer();
     void deal();
     void startRound();
     void takeTurn(Player &currentPlayer, int &currentTurn);
@@ -113,11 +112,11 @@ public:
     void showOyaScreen();
 
 public slots:
-    void onLabelClicked();
     void onNewGameClicked();
     void onQuitGameClicked();
     void onPreferencesClicked();
     void onAboutClicked();
+    void determineOyaPlayer();
 };
 
 #endif // KOIKOI_H

@@ -10,6 +10,7 @@
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
 #include <QPushButton>
+#include <QIntegerForSize>
 #include <QIcon>
 
 // Using a type alias
@@ -53,8 +54,9 @@ KoiKoi::KoiKoi(QWidget *parent) :
 
    //QLABELS DO NOT HAVE A CLICKED FUNCTION
    //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
-   //connect(ui->oyaLabel2, &QAction::);
-   //connect(ui->oyaLabel3);
+   connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
+   connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
+
 
    showTitleScreen();
 }
@@ -118,6 +120,7 @@ void KoiKoi::startGame()
 {
     this->m_player1.getHand()->resetHand();
     this->m_player2.getHand()->resetHand();
+    this->m_gameHand.resetHand();
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
     this->m_oyaHand.resetHand();
@@ -173,12 +176,12 @@ void KoiKoi::generateOyaCard()
     //Determine Oya card and set value in hand
     if (month1 < month2)
     {
-        m_oyaHand.setOyaCard(1);
+        m_oyaHand.setOyaCard(0);
         std::cout << "oya is first card" << std::endl;
     }
     else
     {
-        m_oyaHand.setOyaCard(2);
+        m_oyaHand.setOyaCard(1);
         std::cout << "oya is second card" << std::endl;
     }
 
@@ -191,13 +194,16 @@ void KoiKoi::generateOyaCard()
 
 void KoiKoi::determineOyaPlayer()
 {
+    QObject *senderButton = sender();
+    QString buttonName = senderButton->objectName();
 
-    int selection {0};
+    std::cout << buttonName.toStdString() << std::endl;
 
     index_t oyaCard = m_oyaHand.getOyaCard();
+    QChar buttonNum = (buttonName.at(buttonName.size()-1));
 
-    //Dirty trick to get the proper difference (int value) by using the ascii table
-    if (((int)selection - '0') == oyaCard)
+    if (buttonNum.digitValue() == (int)oyaCard)
+    //if (true)
     {
         //Human has Oya
         m_player1.setOya(true);
@@ -214,11 +220,7 @@ void KoiKoi::determineOyaPlayer()
         std::cout << std::endl;
     }
 
-    //***************************************
-    //Cards selected
-    //Start round
-    //***************************************
-
+    deal();
     showGameScreen();
     //startRound();
 }
@@ -257,16 +259,14 @@ void KoiKoi::deal()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Dealing Complete." << std::endl;
-    //    std::cout << "Player1" << std::endl;
-    //    playHand1->printHand();
-    //    std::cout << "Player2" << std::endl;
-    //    playHand2->printHand();
-    //    std::cout << "GameHand" << std::endl;
-    //    m_gameHand.printHand();
+    std::cout << "Player1" << std::endl;
+    playHand1->printHand();
+    std::cout << "Player2" << std::endl;
+    playHand2->printHand();
+    std::cout << "GameHand" << std::endl;
+    m_gameHand.printHand();
     std::cout << std::endl;
     std::cout << std::endl;
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-
 }
 
 void KoiKoi::startRound()
@@ -402,6 +402,7 @@ void KoiKoi::showTitleScreen()
 
 void KoiKoi::showGameScreen()
 {
+    //loop and print all cards?
     ui->titleFrame->setHidden(true);
     ui->gameFrame->show();
     ui->oyaFrame->setHidden(true);
@@ -409,23 +410,12 @@ void KoiKoi::showGameScreen()
 
 void KoiKoi::showOyaScreen()
 {
-    ui->oyaButton1->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
-    ui->oyaButton2->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
+    ui->oyaButton_0->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
+    ui->oyaButton_1->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
     //ui->oyaLabel3->setPixmap(QPixmap(QString(m_oyaHand.getCard(1)->getImageStr())));
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();
-}
-
-void KoiKoi::onLabelClicked()
-{
-    //if user selected card from hand
-    //run checks to see if it can be matched
-    //if so, watch other clicked labels and compare
-
-    //dim other labels that are compatible matches (make other labels disabled, fancy ^^)
-    //on CPU turn, disable labels from being clicked
-
 }
 
 void KoiKoi::onNewGameClicked()
