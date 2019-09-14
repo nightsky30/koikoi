@@ -219,10 +219,7 @@ void KoiKoi::determineOyaPlayer()
         std::cout << "CPU is Oya!!!" << std::endl;
         std::cout << std::endl;
     }
-
-    deal();
-    showGameScreen();
-    //startRound();
+    startRound();//deal and showGameScreen in startRound
 }
 
 void KoiKoi::deal()
@@ -276,60 +273,63 @@ void KoiKoi::startRound()
     std::cout << "Starting Round: " << m_currentRound << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
+
     deal();
-    bool firstTurn {true};
-    bool roundOver {false};
-    int playerTurn {0};
+    showGameScreen();
 
-    Player *player1;
-    player1 = &m_player1;
-    Player *player2;
-    player2 = &m_player2;
+//    bool firstTurn {true};
+//    bool roundOver {false};
+//    int playerTurn {0};
 
-    while(roundOver == false)
-    {
-        if (firstTurn == true)
-        {
-            if (player1->getOya() == true)
-            {
-                //Player 1's turn
-                playerTurn = 1;
-                takeTurn(*player1, playerTurn);
-            }
-            else
-            {
-                //CPU's turn
-                playerTurn = 2;
-                takeTurn(*player2, playerTurn);
-            }
-            firstTurn = false;
-        }
-        else
-        {
-            switch (playerTurn)
-            {
-            case 1:
-                takeTurn(*player1, playerTurn);
-                break;
-            case 2:
-                takeTurn(*player2, playerTurn);
-                break;
-            case 0:
-                roundOver = true;
-                break;
-            default:
-                std::cout << "There was an issue with the turn system..." << std::endl;
-                break;
-            }
-        }
-    }
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    tallyPoints();
-    m_currentRound++;
+//    Player *player1;
+//    player1 = &m_player1;
+//    Player *player2;
+//    player2 = &m_player2;
+
+//    while(roundOver == false)
+//    {
+//        if (firstTurn == true)
+//        {
+//            if (player1->getOya() == true)
+//            {
+//                //Player 1's turn
+//                playerTurn = 1;
+//                takeTurn(*player1, playerTurn);
+//            }
+//            else
+//            {
+//                //CPU's turn
+//                playerTurn = 2;
+//                takeTurn(*player2, playerTurn);
+//            }
+//            firstTurn = false;
+//        }
+//        else
+//        {
+//            switch (playerTurn)
+//            {
+//            case 1:
+//                takeTurn(*player1, playerTurn);
+//                break;
+//            case 2:
+//                takeTurn(*player2, playerTurn);
+//                break;
+//            case 0:
+//                roundOver = true;
+//                break;
+//            default:
+//                std::cout << "There was an issue with the turn system..." << std::endl;
+//                break;
+//            }
+//        }
+//    }
+//    std::cout << std::endl;
+//    std::cout << std::endl;
+//    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
+//    std::cout << std::endl;
+//    std::cout << std::endl;
+//    tallyPoints();
+//    m_currentRound++;
 }
 
 void KoiKoi::takeTurn(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
@@ -410,9 +410,8 @@ void KoiKoi::showGameScreen()
 
 void KoiKoi::showOyaScreen()
 {
-    ui->oyaButton_0->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
-    ui->oyaButton_1->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
-    //ui->oyaLabel3->setPixmap(QPixmap(QString(m_oyaHand.getCard(1)->getImageStr())));
+    //ui->oyaButton_0->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
+    //ui->oyaButton_1->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();
