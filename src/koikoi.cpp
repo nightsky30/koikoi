@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QIntegerForSize>
 #include <QIcon>
+#include <QList>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -45,20 +46,20 @@ KoiKoi::KoiKoi(QWidget *parent) :
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
 
 
-   //Set up menus so they are connected with SIGNALS and SLOTS
-   connect(ui->actionNew_Game, &QAction::triggered, this, &KoiKoi::onNewGameClicked);
-   connect(ui->actionQuit_Game, &QAction::triggered, this, &KoiKoi::onQuitGameClicked);
-   connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
-   connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
-   connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
+    //Set up menus so they are connected with SIGNALS and SLOTS
+    connect(ui->actionNew_Game, &QAction::triggered, this, &KoiKoi::onNewGameClicked);
+    connect(ui->actionQuit_Game, &QAction::triggered, this, &KoiKoi::onQuitGameClicked);
+    connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
+    connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
+    connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
 
-   //QLABELS DO NOT HAVE A CLICKED FUNCTION
-   //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
-   connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
-   connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
+    //QLABELS DO NOT HAVE A CLICKED FUNCTION
+    //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
+    connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
+    connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
 
 
-   showTitleScreen();
+    showTitleScreen();
 }
 
 KoiKoi::~KoiKoi()
@@ -124,6 +125,7 @@ void KoiKoi::startGame()
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
     this->m_oyaHand.resetHand();
+    //call updateCards() to hide all cards??
     generateOyaCard();
 }
 
@@ -203,7 +205,7 @@ void KoiKoi::determineOyaPlayer()
     QChar buttonNum = (buttonName.at(buttonName.size()-1));
 
     if (buttonNum.digitValue() == (int)oyaCard)
-    //if (true)
+        //if (true)
     {
         //Human has Oya
         m_player1.setOya(true);
@@ -275,61 +277,62 @@ void KoiKoi::startRound()
     std::cout << std::endl;
 
     deal();
+    updateCards();
     showGameScreen();
 
-//    bool firstTurn {true};
-//    bool roundOver {false};
-//    int playerTurn {0};
+    //    bool firstTurn {true};
+    //    bool roundOver {false};
+    //    int playerTurn {0};
 
-//    Player *player1;
-//    player1 = &m_player1;
-//    Player *player2;
-//    player2 = &m_player2;
+    //    Player *player1;
+    //    player1 = &m_player1;
+    //    Player *player2;
+    //    player2 = &m_player2;
 
-//    while(roundOver == false)
-//    {
-//        if (firstTurn == true)
-//        {
-//            if (player1->getOya() == true)
-//            {
-//                //Player 1's turn
-//                playerTurn = 1;
-//                takeTurn(*player1, playerTurn);
-//            }
-//            else
-//            {
-//                //CPU's turn
-//                playerTurn = 2;
-//                takeTurn(*player2, playerTurn);
-//            }
-//            firstTurn = false;
-//        }
-//        else
-//        {
-//            switch (playerTurn)
-//            {
-//            case 1:
-//                takeTurn(*player1, playerTurn);
-//                break;
-//            case 2:
-//                takeTurn(*player2, playerTurn);
-//                break;
-//            case 0:
-//                roundOver = true;
-//                break;
-//            default:
-//                std::cout << "There was an issue with the turn system..." << std::endl;
-//                break;
-//            }
-//        }
-//    }
-//    std::cout << std::endl;
-//    std::cout << std::endl;
-//    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
-//    std::cout << std::endl;
-//    std::cout << std::endl;
-//    tallyPoints();
-//    m_currentRound++;
+    //    while(roundOver == false)
+    //    {
+    //        if (firstTurn == true)
+    //        {
+    //            if (player1->getOya() == true)
+    //            {
+    //                //Player 1's turn
+    //                playerTurn = 1;
+    //                takeTurn(*player1, playerTurn);
+    //            }
+    //            else
+    //            {
+    //                //CPU's turn
+    //                playerTurn = 2;
+    //                takeTurn(*player2, playerTurn);
+    //            }
+    //            firstTurn = false;
+    //        }
+    //        else
+    //        {
+    //            switch (playerTurn)
+    //            {
+    //            case 1:
+    //                takeTurn(*player1, playerTurn);
+    //                break;
+    //            case 2:
+    //                takeTurn(*player2, playerTurn);
+    //                break;
+    //            case 0:
+    //                roundOver = true;
+    //                break;
+    //            default:
+    //                std::cout << "There was an issue with the turn system..." << std::endl;
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    std::cout << std::endl;
+    //    std::cout << std::endl;
+    //    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
+    //    std::cout << std::endl;
+    //    std::cout << std::endl;
+    //    tallyPoints();
+    //    m_currentRound++;
 }
 
 void KoiKoi::takeTurn(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
@@ -402,7 +405,6 @@ void KoiKoi::showTitleScreen()
 
 void KoiKoi::showGameScreen()
 {
-    //loop and print all cards?
     ui->titleFrame->setHidden(true);
     ui->gameFrame->show();
     ui->oyaFrame->setHidden(true);
@@ -410,11 +412,67 @@ void KoiKoi::showGameScreen()
 
 void KoiKoi::showOyaScreen()
 {
-    //ui->oyaButton_0->setIcon(QIcon(m_oyaHand.getCard(0)->getImageStr()));
-    //ui->oyaButton_1->setIcon(QIcon(m_oyaHand.getCard(1)->getImageStr()));
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();
+}
+
+void KoiKoi::updateCards()
+{
+    //loop and show all dealt cards
+
+    Hand *playerHand = m_player1.getHand();
+    //Hand *cpuHand = m_player2.getHand();
+    //Already have gameHand
+
+
+
+    ui->playerButton_0->setIcon(QIcon(playerHand->getCard(0)->getImageStr()));
+    ui->playerButton_1->setIcon(QIcon(playerHand->getCard(1)->getImageStr()));
+    ui->playerButton_2->setIcon(QIcon(playerHand->getCard(2)->getImageStr()));
+    ui->playerButton_3->setIcon(QIcon(playerHand->getCard(3)->getImageStr()));
+    ui->playerButton_4->setIcon(QIcon(playerHand->getCard(4)->getImageStr()));
+    ui->playerButton_5->setIcon(QIcon(playerHand->getCard(5)->getImageStr()));
+    ui->playerButton_6->setIcon(QIcon(playerHand->getCard(6)->getImageStr()));
+    ui->playerButton_7->setIcon(QIcon(playerHand->getCard(7)->getImageStr()));
+
+    ui->gameButton_0->setIcon(QIcon(m_gameHand.getCard(0)->getImageStr()));
+    ui->gameButton_1->setIcon(QIcon(m_gameHand.getCard(1)->getImageStr()));
+    ui->gameButton_2->setIcon(QIcon(m_gameHand.getCard(2)->getImageStr()));
+    ui->gameButton_3->setIcon(QIcon(m_gameHand.getCard(3)->getImageStr()));
+    ui->gameButton_4->setIcon(QIcon(m_gameHand.getCard(4)->getImageStr()));
+    ui->gameButton_5->setIcon(QIcon(m_gameHand.getCard(5)->getImageStr()));
+    ui->gameButton_6->setIcon(QIcon(m_gameHand.getCard(6)->getImageStr()));
+    ui->gameButton_7->setIcon(QIcon(m_gameHand.getCard(7)->getImageStr()));
+
+    //if button has icon set...or (hand has card), make ui buttons visible
+    ui->playerButton_0->show();
+    ui->playerButton_1->show();
+    ui->playerButton_2->show();
+    ui->playerButton_3->show();
+    ui->playerButton_4->show();
+    ui->playerButton_5->show();
+    ui->playerButton_6->show();
+    ui->playerButton_7->show();
+
+    ui->gameButton_0->show();
+    ui->gameButton_1->show();
+    ui->gameButton_2->show();
+    ui->gameButton_3->show();
+    ui->gameButton_4->show();
+    ui->gameButton_5->show();
+    ui->gameButton_6->show();
+    ui->gameButton_7->show();
+
+    ui->cpuButton_0->show();
+    ui->cpuButton_1->show();
+    ui->cpuButton_2->show();
+    ui->cpuButton_3->show();
+    ui->cpuButton_4->show();
+    ui->cpuButton_5->show();
+    ui->cpuButton_6->show();
+    ui->cpuButton_7->show();
+
 }
 
 void KoiKoi::onNewGameClicked()

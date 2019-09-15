@@ -110,6 +110,7 @@ public:
     void showTitleScreen();
     void showGameScreen();
     void showOyaScreen();
+    void updateCards();
 
 public slots:
     void onNewGameClicked();
