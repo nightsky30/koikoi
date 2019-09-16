@@ -13,6 +13,7 @@
 #include <QIntegerForSize>
 #include <QIcon>
 #include <QList>
+#include <QDebug>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -52,6 +53,56 @@ KoiKoi::KoiKoi(QWidget *parent) :
     connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
     connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
     connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
+
+    //Set up game cards defaults in GUI
+    for(int i{0};i<8;i++)
+    {
+        QString buttonName = "cpuButton_" + QString::number(i);
+        QPushButton *button = new QPushButton(buttonName, this);
+        button->setMinimumSize(120,168);
+        button->setMaximumSize(120,168);
+        button->setText("");
+        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIconSize(QSize(120,168));
+        button->setFlat(true);
+        button->setVisible(true);
+        button->show();
+        ui->cpuHLayout->addWidget(button);
+        this->guiCPUCards.push_back(button);
+    }
+
+    for(int j{0};j<8;j++)
+    {
+        QString buttonName = "gameButton_" + QString::number(j);
+        QPushButton *button = new QPushButton(buttonName, this);
+        button->setMinimumSize(120,168);
+        button->setMaximumSize(120,168);
+        button->setText("");
+        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIconSize(QSize(120,168));
+        button->setFlat(true);
+        button->setVisible(true);
+        button->show();
+        ui->gameHandHLayout->addWidget(button);
+        this->guiGameHandCards.append(button);
+    }
+
+    for(int k{0};k<8;k++)
+    {
+        QString buttonName = "playerButton_" + QString::number(k);
+        QPushButton *button = new QPushButton(buttonName, this);
+        button->setMinimumSize(120,168);
+        button->setMaximumSize(120,168);
+        button->setText("");
+        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIconSize(QSize(120,168));
+        button->setFlat(true);
+        button->setVisible(true);
+        button->show();
+        ui->playerHLayout->addWidget(button);
+        this->guiPlayerCards.push_back(button);
+    }
+
 
     //QLABELS DO NOT HAVE A CLICKED FUNCTION
     //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
@@ -419,60 +470,58 @@ void KoiKoi::showOyaScreen()
 
 void KoiKoi::updateCards()
 {
-    //loop and show all dealt cards
+    //******************************************
+    //Update and show all dealt cards (not CPU)
+    //******************************************
 
     Hand *playerHand = m_player1.getHand();
-    //Hand *cpuHand = m_player2.getHand();
+    Hand *cpuHand = m_player2.getHand();
     //Already have gameHand
 
+    //*****************************************
+    //Set ALL invisible and default deck style
+    //OR ensure visible and update image
+    //*****************************************
 
+    for(int i{0};i<guiCPUCards.size();i++)
+    {
+        QPushButton *button = guiCPUCards.at(i);
+        if (i>cpuHand->getNumCards()-1)
+        {
+            button->setVisible(false);
+        }
+        else {
+            button->setVisible(true);
+        }
+    }
 
-    ui->playerButton_0->setIcon(QIcon(playerHand->getCard(0)->getImageStr()));
-    ui->playerButton_1->setIcon(QIcon(playerHand->getCard(1)->getImageStr()));
-    ui->playerButton_2->setIcon(QIcon(playerHand->getCard(2)->getImageStr()));
-    ui->playerButton_3->setIcon(QIcon(playerHand->getCard(3)->getImageStr()));
-    ui->playerButton_4->setIcon(QIcon(playerHand->getCard(4)->getImageStr()));
-    ui->playerButton_5->setIcon(QIcon(playerHand->getCard(5)->getImageStr()));
-    ui->playerButton_6->setIcon(QIcon(playerHand->getCard(6)->getImageStr()));
-    ui->playerButton_7->setIcon(QIcon(playerHand->getCard(7)->getImageStr()));
+    for(int j{0};j<guiGameHandCards.size();j++)
+    {
+        QPushButton *button = guiGameHandCards.at(j);
+        if (j>m_gameHand.getNumCards()-1)
+        {
+            button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            button->setVisible(false);
+        }
+        else {
+            button->setIcon(QIcon(m_gameHand.getCard(j)->getImageStr()));
+            button->setVisible(true);
+        }
+    }
 
-    ui->gameButton_0->setIcon(QIcon(m_gameHand.getCard(0)->getImageStr()));
-    ui->gameButton_1->setIcon(QIcon(m_gameHand.getCard(1)->getImageStr()));
-    ui->gameButton_2->setIcon(QIcon(m_gameHand.getCard(2)->getImageStr()));
-    ui->gameButton_3->setIcon(QIcon(m_gameHand.getCard(3)->getImageStr()));
-    ui->gameButton_4->setIcon(QIcon(m_gameHand.getCard(4)->getImageStr()));
-    ui->gameButton_5->setIcon(QIcon(m_gameHand.getCard(5)->getImageStr()));
-    ui->gameButton_6->setIcon(QIcon(m_gameHand.getCard(6)->getImageStr()));
-    ui->gameButton_7->setIcon(QIcon(m_gameHand.getCard(7)->getImageStr()));
-
-    //if button has icon set...or (hand has card), make ui buttons visible
-    ui->playerButton_0->show();
-    ui->playerButton_1->show();
-    ui->playerButton_2->show();
-    ui->playerButton_3->show();
-    ui->playerButton_4->show();
-    ui->playerButton_5->show();
-    ui->playerButton_6->show();
-    ui->playerButton_7->show();
-
-    ui->gameButton_0->show();
-    ui->gameButton_1->show();
-    ui->gameButton_2->show();
-    ui->gameButton_3->show();
-    ui->gameButton_4->show();
-    ui->gameButton_5->show();
-    ui->gameButton_6->show();
-    ui->gameButton_7->show();
-
-    ui->cpuButton_0->show();
-    ui->cpuButton_1->show();
-    ui->cpuButton_2->show();
-    ui->cpuButton_3->show();
-    ui->cpuButton_4->show();
-    ui->cpuButton_5->show();
-    ui->cpuButton_6->show();
-    ui->cpuButton_7->show();
-
+    for(int k{0};k<guiPlayerCards.size();k++)
+    {
+        QPushButton *button = guiPlayerCards.at(k);
+        if (k>playerHand->getNumCards()-1)
+        {
+            button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            button->setVisible(false);
+        }
+        else {
+            button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
+            button->setVisible(true);
+        }
+    }
 }
 
 void KoiKoi::onNewGameClicked()

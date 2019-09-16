@@ -7,6 +7,7 @@
 #include "player.h"
 #include <vector>
 #include <QMainWindow>
+#include <QPushButton>
 
 // The game consists of these yaku
 const static std::vector<Yaku> acceptableYaku
@@ -68,6 +69,10 @@ private:
     int m_rounds {12};
     int m_currentRound {0};
     bool m_gameStatus {false};
+
+    QVector<QPushButton*> guiPlayerCards {};
+    QVector<QPushButton*> guiCPUCards {};
+    QVector<QPushButton*> guiGameHandCards {};
 
 public:
     /*
