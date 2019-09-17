@@ -71,7 +71,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiCPUCards.push_back(button);
     }
 
-    for(int j{0};j<8;j++)
+    for(int j{0};j<16;j++)
     {
         QString buttonName = "gameButton_" + QString::number(j);
         QPushButton *button = new QPushButton(buttonName, this);
@@ -83,7 +83,78 @@ KoiKoi::KoiKoi(QWidget *parent) :
         button->setFlat(true);
         button->setVisible(true);
         button->show();
-        ui->gameHandHLayout->addWidget(button);
+        if (j<4)
+        {
+            switch(j)
+            {
+            case 0:
+                ui->gameHandGridLayout_0->addWidget(button, 0, 0);
+                break;
+            case 1:
+                ui->gameHandGridLayout_0->addWidget(button, 0, 1);
+                break;
+            case 2:
+                ui->gameHandGridLayout_0->addWidget(button, 1, 0);
+                break;
+            case 3:
+                ui->gameHandGridLayout_0->addWidget(button, 1, 1);
+                break;
+            }
+        } else if (j >= 4 && j < 8)
+        {
+            switch(j)
+            {
+            case 4:
+                ui->gameHandGridLayout_1->addWidget(button, 0, 0);
+                break;
+            case 5:
+                ui->gameHandGridLayout_1->addWidget(button, 0, 1);
+                break;
+            case 6:
+                ui->gameHandGridLayout_1->addWidget(button, 1, 0);
+                break;
+            case 7:
+                ui->gameHandGridLayout_1->addWidget(button, 1, 1);
+                break;
+            }
+        } else if (j >= 8 && j < 12)
+        {
+            switch(j)
+            {
+            case 8:
+                ui->gameHandGridLayout_2->addWidget(button, 0, 0);
+                break;
+            case 9:
+                ui->gameHandGridLayout_2->addWidget(button, 0, 1);
+                break;
+            case 10:
+                ui->gameHandGridLayout_2->addWidget(button, 1, 0);
+                break;
+            case 11:
+                ui->gameHandGridLayout_2->addWidget(button, 1, 1);
+                break;
+            }
+        } else if (j >= 12 && j < 16)
+        {
+            switch(j)
+            {
+            case 12:
+                ui->gameHandGridLayout_3->addWidget(button, 0, 0);
+                break;
+            case 13:
+                ui->gameHandGridLayout_3->addWidget(button, 0, 1);
+                break;
+            case 14:
+                ui->gameHandGridLayout_3->addWidget(button, 1, 0);
+                break;
+            case 15:
+                ui->gameHandGridLayout_3->addWidget(button, 1, 1);
+                break;
+            }
+        } else
+        {
+            qDebug() << "Problem:  Too many cards on the gameboard.";
+        }
         this->guiGameHandCards.append(button);
     }
 
@@ -102,7 +173,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
         ui->playerHLayout->addWidget(button);
         this->guiPlayerCards.push_back(button);
     }
-
 
     //QLABELS DO NOT HAVE A CLICKED FUNCTION
     //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
