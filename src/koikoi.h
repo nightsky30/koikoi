@@ -98,7 +98,8 @@ public:
     void generateOyaCard();
     void deal();
     void startRound();
-    void takeTurn(Player &currentPlayer, int &currentTurn);
+    void matchCard(Player &currentPlayer, int &currentTurn);
+    void drawCard(Player &currentPlayer, int &currentTurn);
     bool compareCards(Card card1, Card card2);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
@@ -123,6 +124,8 @@ public slots:
     void onPreferencesClicked();
     void onAboutClicked();
     void determineOyaPlayer();
+    void selectFromHand();
+    void selectFromGameHand();
 };
 
 #endif // KOIKOI_H

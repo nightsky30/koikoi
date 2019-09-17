@@ -179,7 +179,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
 
-
     showTitleScreen();
 }
 
@@ -299,30 +298,6 @@ void KoiKoi::generateOyaCard()
     showOyaScreen();
 }
 
-void KoiKoi::determineOyaPlayer()
-{
-    QObject *senderButton = sender();
-    QString buttonName = senderButton->objectName();
-
-    index_t oyaCard = m_oyaHand.getOyaCard();
-    QChar buttonNum = (buttonName.at(buttonName.size()-1));
-
-    if (buttonNum.digitValue() == (int)oyaCard)
-        //if (true)
-    {
-        //Human has Oya
-        m_player1.setOya(true);
-        m_player2.setOya(false);
-    }
-    else
-    {
-        //CPU has Oya
-        m_player1.setOya(false);
-        m_player2.setOya(true);
-    }
-    startRound();//deal and showGameScreen in startRound
-}
-
 void KoiKoi::deal()
 {
     index_t fourCount {0};
@@ -416,7 +391,7 @@ void KoiKoi::startRound()
     //    m_currentRound++;
 }
 
-void KoiKoi::takeTurn(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
+void KoiKoi::matchCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
 {
     bool turnComplete {false};
     //Do Stuff
@@ -448,6 +423,11 @@ void KoiKoi::takeTurn(Player &currentPlayer, int &currentTurn) //pass by pointer
         std::cout << "There was an issue with the turn system..." << std::endl;
         break;
     }
+}
+
+void KoiKoi::drawCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
+{
+
 }
 
 bool KoiKoi::compareCards(Card card1, Card card2)
@@ -508,10 +488,10 @@ void KoiKoi::updateCards()
     Hand *cpuHand = m_player2.getHand();
     //Already have gameHand
 
-    //*****************************************
-    //Set ALL invisible and default deck style
-    //OR ensure visible and update image
-    //*****************************************
+    //********************************************************
+    //Set ALL invisible, default deck style, and disconnect
+    //OR ensure visible, update image, and connect
+    //********************************************************
 
     for(int i{0};i<guiCPUCards.size();i++)
     {
@@ -531,10 +511,12 @@ void KoiKoi::updateCards()
         if (j>m_gameHand.getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            disconnect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
             button->setVisible(false);
         }
         else {
             button->setIcon(QIcon(m_gameHand.getCard(j)->getImageStr()));
+            connect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
             button->setVisible(true);
         }
     }
@@ -545,10 +527,12 @@ void KoiKoi::updateCards()
         if (k>playerHand->getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            disconnect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
             button->setVisible(false);
         }
         else {
             button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
+            connect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
             button->setVisible(true);
         }
     }
@@ -580,4 +564,66 @@ void KoiKoi::onAboutClicked()
     About *about = new About();
     about->setAttribute(Qt::WA_DeleteOnClose);
     about->show();
+}
+
+void KoiKoi::determineOyaPlayer()
+{
+    QObject *senderButton = sender();
+    QString buttonName = senderButton->objectName();
+
+    index_t oyaCard = m_oyaHand.getOyaCard();
+    QChar buttonNum = (buttonName.at(buttonName.size()-1));
+
+    if (buttonNum.digitValue() == (int)oyaCard)
+        //if (true)
+    {
+        //Human has Oya
+        m_player1.setOya(true);
+        m_player2.setOya(false);
+    }
+    else
+    {
+        //CPU has Oya
+        m_player1.setOya(false);
+        m_player2.setOya(true);
+    }
+    startRound();//deal and showGameScreen in startRound
+}
+
+void KoiKoi::selectFromHand()
+{
+    qDebug("from hand");
+    //*****************
+    //select hand ??
+    //*****************
+
+    //get calling parent object name
+    //get month of card button
+    //compare with gameHand objects
+    //if there are any month matches
+    //then disable all buttons except the matches in player hand and game hand
+    //wait for gamehandbutton click SLOT (finishturn())
+    //end
+    //else discard selected card from hand and place in gamehand, disable player cards
+    //call finishTurn() automatically...maybe have the deck autoclicked??
+    //end
+}
+
+void KoiKoi::selectFromGameHand()
+{
+    qDebug("from game hand");
+    //*********************
+    //select game hand ??
+    //*********************
+
+    //get calling parent object name
+    //get month of card button
+    //compare enabled player hand card month with calling object card month
+    //if match, store in player's played cards
+    //check for yaku
+    //if yaku
+    //then request koikoi
+    //if koikoi
+    //then finish turn
+    //else finish round
 }
