@@ -246,7 +246,6 @@ void KoiKoi::startGame()
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
     this->m_oyaHand.resetHand();
-    //call updateCards() to hide all cards??
     generateOyaCard();
 }
 
@@ -262,12 +261,6 @@ void KoiKoi::generateOyaCard()
     m_oyaHand.acceptCard(*m_gameDeck.getRandCard());
     m_oyaHand.acceptCard(*m_gameDeck.getRandCard());
 
-    std::cout << "******************************************************" << std::endl;
-    std::cout << "INITIAL" << std::endl;
-    std::cout << "******************************************************" << std::endl;
-    m_oyaHand.printHand();
-    std::cout << "******************************************************" << std::endl;
-
     Card* oyaCard1;
     oyaCard1 = m_oyaHand.getCard(0);
 
@@ -282,7 +275,6 @@ void KoiKoi::generateOyaCard()
     {
         while (month1 == month2)
         {
-            std::cout << "Have to get new card..." << std::endl;
             m_oyaHand.removeCard(1);
             m_oyaHand.acceptCard(*m_gameDeck.getRandCard());
             oyaCard2 = m_oyaHand.getCard(1);
@@ -290,22 +282,14 @@ void KoiKoi::generateOyaCard()
         }
     }
 
-    std::cout << "******************************************************" << std::endl;
-    std::cout << "FINAL" << std::endl;
-    std::cout << "******************************************************" << std::endl;
-    m_oyaHand.printHand();
-    std::cout << "******************************************************" << std::endl;
-
     //Determine Oya card and set value in hand
     if (month1 < month2)
     {
         m_oyaHand.setOyaCard(0);
-        std::cout << "oya is first card" << std::endl;
     }
     else
     {
         m_oyaHand.setOyaCard(1);
-        std::cout << "oya is second card" << std::endl;
     }
 
     //***************************************
@@ -320,8 +304,6 @@ void KoiKoi::determineOyaPlayer()
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
 
-    std::cout << buttonName.toStdString() << std::endl;
-
     index_t oyaCard = m_oyaHand.getOyaCard();
     QChar buttonNum = (buttonName.at(buttonName.size()-1));
 
@@ -331,16 +313,12 @@ void KoiKoi::determineOyaPlayer()
         //Human has Oya
         m_player1.setOya(true);
         m_player2.setOya(false);
-        std::cout << "Player is Oya!!!" << std::endl;
-        std::cout << std::endl;
     }
     else
     {
         //CPU has Oya
         m_player1.setOya(false);
         m_player2.setOya(true);
-        std::cout << "CPU is Oya!!!" << std::endl;
-        std::cout << std::endl;
     }
     startRound();//deal and showGameScreen in startRound
 }
@@ -375,28 +353,10 @@ void KoiKoi::deal()
             }
         }
     }
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "Dealing Complete." << std::endl;
-    std::cout << "Player1" << std::endl;
-    playHand1->printHand();
-    std::cout << "Player2" << std::endl;
-    playHand2->printHand();
-    std::cout << "GameHand" << std::endl;
-    m_gameHand.printHand();
-    std::cout << std::endl;
-    std::cout << std::endl;
 }
 
 void KoiKoi::startRound()
 {
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "Starting Round: " << m_currentRound << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-
     deal();
     updateCards();
     showGameScreen();
