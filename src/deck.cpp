@@ -88,7 +88,7 @@ Card* Deck::dealCard()
     Card *tempCard;
     tempCard = &m_cardDeck[m_numCards-1];
     m_cardDeck.pop_back();
-    m_numCards = m_numCards - 1;
+    m_numCards--;
     return tempCard;
 }
 

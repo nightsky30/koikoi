@@ -59,7 +59,7 @@ void Hand::acceptCard(Card &newCard)
 {
     //modify to accept label??...card has label string...but hand has label object
     m_playerHand.push_back(newCard);
-    m_numCards++;
+    m_numCards = m_numCards + 1;
 }
 
 Card* Hand::disCard(std::vector<Card>::size_type cardNum)
@@ -69,9 +69,6 @@ Card* Hand::disCard(std::vector<Card>::size_type cardNum)
 //decrement numCards
 //return card pointer to be placed on the game hand or in the players played cards
 
-    std::cout << "A card has been discarded" << std::endl;
-    m_numCards = m_numCards - 1;
-    std::cout << "The number of cards remaining in hand are: " << m_numCards << std::endl;
     Card *requestedCard;
     requestedCard = &m_playerHand[cardNum];
     return requestedCard;
@@ -80,8 +77,9 @@ Card* Hand::disCard(std::vector<Card>::size_type cardNum)
 void Hand::removeCard(std::vector<Card>::size_type cardNum)
 {
         //modify to accept label??...card has label string...but hand has label object
-        m_playerHand.erase(m_playerHand.begin() + cardNum);
-        m_numCards--;
+        //m_playerHand.erase(m_playerHand.begin() + cardNum);
+        m_playerHand.erase(m_playerHand.begin()+cardNum);
+        m_numCards = m_numCards - 1;
 }
 
 void Hand::resetHand()
