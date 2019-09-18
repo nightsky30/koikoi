@@ -436,13 +436,6 @@ void KoiKoi::drawCard(Player &currentPlayer, int &currentTurn) //pass by pointer
 
 }
 
-bool KoiKoi::compareCards(Card card1, Card card2)
-{
-    std::cout << "Match: " << card1.getMonth() << std::endl;
-    std::cout << "Match: " << card2.getMonth() << std::endl;
-    return true;
-}
-
 void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 {
     //Do stuff
@@ -512,6 +505,12 @@ void KoiKoi::updateCards()
             button->setVisible(true);
         }
     }
+
+    //Possibly move the connection loops to their own functions as sometimes
+    //we do not want the game hand or player hand buttons connected
+    //this enforces game play rules
+    //
+    //Enablement and setting visible are fine here
 
     for(int j{0};j<guiGameHandCards.size();j++)
     {
@@ -668,11 +667,14 @@ void KoiKoi::selectFromHand()
         {
             guiPlayerCards[j]->setDisabled(true);
         }
-        //enable all game hand cards
+        //disable all game hand cards
         for(int m {0};m<m_gameHand.getNumCards();m++)
         {
-            guiGameHandCards[m]->setEnabled(true);
+            guiGameHandCards[m]->setDisabled(true);
         }
+        //*******************************
+        //call drawCard and matchCard
+        //*******************************
     }
     else
     {
@@ -689,8 +691,7 @@ void KoiKoi::selectFromHand()
                 disconnect(guiPlayerCards[k], SIGNAL (released()), this, SLOT (selectFromHand()));
             }
         }
-        //Move cards that matched from gamehand and player hand into another vector
-        //Wait for user to select from gamehand
+        //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
 
     std::cout << "******************" << std::endl;

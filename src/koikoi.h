@@ -100,7 +100,6 @@ public:
     void startRound();
     void matchCard(Player &currentPlayer, int &currentTurn);
     void drawCard(Player &currentPlayer, int &currentTurn);
-    bool compareCards(Card card1, Card card2);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
     /*
