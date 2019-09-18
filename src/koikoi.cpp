@@ -48,11 +48,11 @@ KoiKoi::KoiKoi(QWidget *parent) :
 
 
     //Set up menus so they are connected with SIGNALS and SLOTS
-    connect(ui->actionNew_Game, &QAction::triggered, this, &KoiKoi::onNewGameClicked);
-    connect(ui->actionQuit_Game, &QAction::triggered, this, &KoiKoi::onQuitGameClicked);
-    connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
-    connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked);
-    connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked);
+    connect(ui->actionNew_Game, &QAction::triggered, this, &KoiKoi::onNewGameClicked, Qt::UniqueConnection);
+    connect(ui->actionQuit_Game, &QAction::triggered, this, &KoiKoi::onQuitGameClicked, Qt::UniqueConnection);
+    connect(ui->actionExit, &QAction::triggered, this, &QWidget::close, Qt::UniqueConnection);
+    connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked, Qt::UniqueConnection);
+    connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked, Qt::UniqueConnection);
 
     //Set up game cards defaults in GUI
     for(int i{0};i<8;i++)
@@ -182,8 +182,8 @@ KoiKoi::KoiKoi(QWidget *parent) :
 
     //QLABELS DO NOT HAVE A CLICKED FUNCTION
     //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
-    connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
-    connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()));
+    connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
+    connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 
     showTitleScreen();
 }
@@ -519,13 +519,13 @@ void KoiKoi::updateCards()
         if (j>m_gameHand.getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-            //disconnect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
+            disconnect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
             button->setEnabled(false);
             button->setVisible(false);
         }
         else {
             button->setIcon(QIcon(m_gameHand.getCard(j)->getImageStr()));
-            connect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
+            connect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()), Qt::UniqueConnection);
             button->setEnabled(true);
             button->setVisible(true);
         }
@@ -537,13 +537,13 @@ void KoiKoi::updateCards()
         if (k>playerHand->getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-            //disconnect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
+            disconnect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
             button->setEnabled(false);
             button->setVisible(false);
         }
         else {
             button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
-            connect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
+            connect(button, SIGNAL(released()), this, SLOT(selectFromHand()), Qt::UniqueConnection);
             button->setEnabled(true);
             button->setVisible(true);
         }
@@ -606,7 +606,7 @@ void KoiKoi::determineOyaPlayer()
 
 void KoiKoi::selectFromHand()
 {
-    qDebug("from hand");
+    std::cout << "from hand" << std::endl;
     //*****************
     //select hand ??
     //*****************
@@ -643,13 +643,15 @@ void KoiKoi::selectFromHand()
         }
     }
 
-    qDebug() << "******************";
-    qDebug() << matchingCard;
-    qDebug() << "******************";
+    std::cout << "******************" << std::endl;
+    std::cout << "Selected card" << std::endl;
+    std::cout << "******************" << std::endl;
     currentCard->printCard();
-    qDebug() << "******************";
+    std::cout << "******************" << std::endl;
+    std::cout << "Previous game hand" << std::endl;
+    std::cout << "******************" << std::endl;
     m_gameHand.printHand();
-    qDebug() << "******************";
+    std::cout << "******************" << std::endl;
 
     //See if there are any month matches
     if(matchingCard == false)
@@ -676,7 +678,7 @@ void KoiKoi::selectFromHand()
     {
         //Disable all cards in playerhand except current selected card
         //but disconnect selected card to prevent clicking twice
-        for(int k {0};k<guiPlayerCards.size();k++)
+        for(int k {0};k<playerHand->getNumCards();k++)
         {
             if(k != cardNum)
             {
@@ -687,17 +689,26 @@ void KoiKoi::selectFromHand()
                 disconnect(guiPlayerCards[k], SIGNAL (released()), this, SLOT (selectFromHand()));
             }
         }
+        //Move cards that matched from gamehand and player hand into another vector
         //Wait for user to select from gamehand
     }
 
-    //else discard selected card from hand and place in gamehand, disable player cards
-    //call finishTurn() automatically...maybe have the deck autoclicked??
-    //end
+    std::cout << "******************" << std::endl;
+    std::cout << "Updated game hand" << std::endl;
+    std::cout << "******************" << std::endl;
+    m_gameHand.printHand();
+    std::cout << "******************" << std::endl;
+    std::cout << "******************" << std::endl;
+    std::cout << "******************" << std::endl;
+    std::cout << "Updated player hand" << std::endl;
+    std::cout << "******************" << std::endl;
+    playerHand->printHand();
+    std::cout << "******************" << std::endl;
 }
 
 void KoiKoi::selectFromGameHand()
 {
-    qDebug("from game hand");
+    std::cout << "from game hand" << std::endl;
     //*********************
     //select game hand ??
     //*********************
