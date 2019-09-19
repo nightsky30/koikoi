@@ -14,6 +14,7 @@
 #include <QIcon>
 #include <QList>
 #include <QDebug>
+#include <QThread>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -193,6 +194,9 @@ KoiKoi::~KoiKoi()
     delete ui;
 }
 
+/*
+ * Returns a pointer to the game Deck.
+ */
 Deck* KoiKoi::getDeck()
 {
     Deck *gameDeck;
@@ -200,6 +204,10 @@ Deck* KoiKoi::getDeck()
     return gameDeck;
 }
 
+/*
+ * Returns a pointer to the Player requested.
+ * Input specified by int value of either 1 or 2.
+ */
 Player* KoiKoi::getPlayer(int playerNum)
 {
     Player *requestedPlayer;
@@ -221,6 +229,9 @@ Player* KoiKoi::getPlayer(int playerNum)
     }
 }
 
+/*
+ * Returns a pointer to the game Hand.
+ */
 Hand* KoiKoi::getGameHand()
 {
     Hand *gameHand;
@@ -228,21 +239,35 @@ Hand* KoiKoi::getGameHand()
     return gameHand;
 }
 
+/*
+ * Returns the number of game rounds as an integer.
+ */
 int KoiKoi::getNumRounds()
 {
     return m_rounds;
 }
 
+/*
+ * Returns the current round as an integer.
+ */
 int KoiKoi::getCurrentRound()
 {
     return m_currentRound;
 }
 
+/*
+ * Returns the game status as a boolean.
+ * True indicates an ongoing game.
+ * False indicated the game is complete.
+ */
 bool KoiKoi::getGameStatus()
 {
     return m_gameStatus;
 }
 
+/*
+ * Starts a new game.
+ */
 void KoiKoi::startGame()
 {
     this->m_player1.getHand()->resetHand();
@@ -254,6 +279,12 @@ void KoiKoi::startGame()
     generateOyaCard();
 }
 
+/*
+ * Generates a random 2 card hand used by players to determine
+ * who is the oya player and takes first turn.  It then compares
+ * card months and sets the variable within the hand to indicate
+ * which card is the oya card.
+ */
 void KoiKoi::generateOyaCard()
 {
     //Ask human player to select 1 of 2 random cards
@@ -304,6 +335,9 @@ void KoiKoi::generateOyaCard()
     showOyaScreen();
 }
 
+/*
+ * Deals hands for both players as well as the gameboard.
+ */
 void KoiKoi::deal()
 {
     index_t fourCount {0};
@@ -336,11 +370,16 @@ void KoiKoi::deal()
     }
 }
 
+/*
+ * Starts a round.
+ */
 void KoiKoi::startRound()
 {
+    //startTurn
     deal();
     updateCards();
     showGameScreen();
+    checkGameHand();
 
     //    bool firstTurn {true};
     //    bool roundOver {false};
@@ -397,39 +436,39 @@ void KoiKoi::startRound()
     //    m_currentRound++;
 }
 
-void KoiKoi::matchCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
-{
-    bool turnComplete {false};
-    //Do Stuff
-    while (turnComplete == false)
-    {
-        currentPlayer.printHand();
-        //m_gameHand.printHand();
-        std::this_thread::sleep_for(std::chrono::milliseconds(7000));
-        //Call select card from hand
-        //Call select card in game hand
-        //compare cards
-        //if they match, store in player's wonCards
-        turnComplete = true;
-    }
-    switch (currentTurn)
-    {
-    case 1:
-        //do stuff
-        currentTurn = 2;
-        break;
-    case 2:
-        //do stuff
-        currentTurn = 1;
-        break;
-    case 0:
-        std::cout << "There was an issue with the turn system..." << std::endl;
-        break;
-    default:
-        std::cout << "There was an issue with the turn system..." << std::endl;
-        break;
-    }
-}
+//void KoiKoi::matchCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
+//{
+//    bool turnComplete {false};
+//    //Do Stuff
+//    while (turnComplete == false)
+//    {
+//        currentPlayer.printHand();
+//        //m_gameHand.printHand();
+//        std::this_thread::sleep_for(std::chrono::milliseconds(7000));
+//        //Call select card from hand
+//        //Call select card in game hand
+//        //compare cards
+//        //if they match, store in player's wonCards
+//        turnComplete = true;
+//    }
+//    switch (currentTurn)
+//    {
+//    case 1:
+//        //do stuff
+//        currentTurn = 2;
+//        break;
+//    case 2:
+//        //do stuff
+//        currentTurn = 1;
+//        break;
+//    case 0:
+//        std::cout << "There was an issue with the turn system..." << std::endl;
+//        break;
+//    default:
+//        std::cout << "There was an issue with the turn system..." << std::endl;
+//        break;
+//    }
+//}
 
 void KoiKoi::drawCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
 {
@@ -487,10 +526,12 @@ void KoiKoi::updateCards()
     Hand *cpuHand = m_player2.getHand();
     //Already have gameHand
 
-    //********************************************************
-    //Set ALL invisible, default deck style, and disconnect
-    //OR ensure visible, update image, and connect
-    //********************************************************
+    //***********************************************************
+    //Set ALL invisible, default deck style
+    //OR ensure visible, update image
+    //
+    //This is kept separate from connections and disconnections
+    //***********************************************************
 
     for(int i{0};i<guiCPUCards.size();i++)
     {
@@ -506,25 +547,18 @@ void KoiKoi::updateCards()
         }
     }
 
-    //Possibly move the connection loops to their own functions as sometimes
-    //we do not want the game hand or player hand buttons connected
-    //this enforces game play rules
-    //
-    //Enablement and setting visible are fine here
-
     for(int j{0};j<guiGameHandCards.size();j++)
     {
         QPushButton *button = guiGameHandCards.at(j);
         if (j>m_gameHand.getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-            disconnect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()));
             button->setEnabled(false);
             button->setVisible(false);
         }
-        else {
+        else
+        {
             button->setIcon(QIcon(m_gameHand.getCard(j)->getImageStr()));
-            connect(button, SIGNAL(released()), this, SLOT(selectFromGameHand()), Qt::UniqueConnection);
             button->setEnabled(true);
             button->setVisible(true);
         }
@@ -536,16 +570,130 @@ void KoiKoi::updateCards()
         if (k>playerHand->getNumCards()-1)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-            disconnect(button, SIGNAL(released()), this, SLOT(selectFromHand()));
             button->setEnabled(false);
             button->setVisible(false);
         }
-        else {
+        else
+        {
             button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
-            connect(button, SIGNAL(released()), this, SLOT(selectFromHand()), Qt::UniqueConnection);
             button->setEnabled(true);
             button->setVisible(true);
         }
+    }
+}
+
+/*
+ * Function checks game hand for matching cards in the current player's hand.
+ * Enables cards corresponding buttons that match while disabling the buttons
+ * for cards that do not match.
+ */
+void KoiKoi::checkGameHand()
+{
+    Hand *playerHand = m_player1.getHand();
+    Hand *cpuHand = m_player2.getHand();
+    //Already have gameHand
+    Card *currentGameCard;
+    Card *currentPlayerCard;
+    QPushButton *currentGameButton;
+
+    //For each game card
+    for(int i{0};i<m_gameHand.getNumCards();i++)
+    {
+        //Get game card
+        currentGameCard = m_gameHand.getCard(i);
+        //Get game button
+        currentGameButton = guiGameHandCards.at(i);
+        //Disable gui game button
+        currentGameButton->setDisabled(true);
+        //Compare to each card in player hand
+        for(int j{0};j<playerHand->getNumCards();j++)
+        {
+            currentPlayerCard = playerHand->getCard(j);
+            if(currentGameCard->getMonth() == currentPlayerCard->getMonth())
+            {
+                currentGameButton->setDisabled(false);
+            }
+        }
+    }
+    //Connect player hand cards to enable selection
+    connectPlayerHand();
+}
+
+void KoiKoi::connectGameHand(QPushButton *button)
+{
+    QPushButton *currentButton = button;
+    connect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()), Qt::UniqueConnection);
+}
+
+void KoiKoi::connectGameHand()
+{
+    for(int j{0};j<guiGameHandCards.size();j++)
+    {
+        QPushButton *currentButton = guiGameHandCards.at(j);
+        if (j>m_gameHand.getNumCards()-1)
+        {
+            //Not used
+            disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()));
+        }
+        else
+        {
+            connect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()), Qt::UniqueConnection);
+        }
+    }
+}
+
+void KoiKoi::connectPlayerHand(QPushButton *button)
+{
+    QPushButton *currentButton = button;
+    connect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()), Qt::UniqueConnection);
+}
+
+void KoiKoi::connectPlayerHand()
+{
+    Hand *playerHand = m_player1.getHand();
+
+    for(int k{0};k<guiPlayerCards.size();k++)
+    {
+        QPushButton *currentButton = guiPlayerCards.at(k);
+        if (k>playerHand->getNumCards()-1)
+        {
+            //Not used
+            disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()));
+        }
+        else
+        {
+            connect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()), Qt::UniqueConnection);
+        }
+    }
+}
+
+void KoiKoi::disconnectGameHand(QPushButton *button)
+{
+    QPushButton *currentButton = button;
+    disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()));
+}
+
+void KoiKoi::disconnectGameHand()
+{
+    for(int j{0};j<guiGameHandCards.size();j++)
+    {
+        QPushButton *currentButton = guiGameHandCards.at(j);
+        disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()));
+    }
+}
+
+void KoiKoi::disconnectPlayerHand(QPushButton *button)
+{
+    QPushButton *currentButton = button;
+    disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()));
+}
+
+void KoiKoi::disconnectPlayerHand()
+{
+    for(int k{0};k<guiPlayerCards.size();k++)
+    {
+        QPushButton *currentButton = guiPlayerCards.at(k);
+        disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()));
     }
 }
 
@@ -606,25 +754,22 @@ void KoiKoi::determineOyaPlayer()
 void KoiKoi::selectFromHand()
 {
     std::cout << "from hand" << std::endl;
-    //*****************
-    //select hand ??
-    //*****************
-
-    //get calling parent object name
-    QObject *senderButton = sender();
-    QString buttonName = senderButton->objectName();
 
     Hand *playerHand = m_player1.getHand();
     Hand *cpuHand = m_player2.getHand();
 
+    //get calling parent object name
+    QObject *senderButton = sender();
+    QString buttonName = senderButton->objectName();
+    //Get card number
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
-    Card *currentCard = playerHand->getCard(cardNum);
-    currentCard->printCard();
-
-    //Call compare cards by sending card pointer?
+    //Get player card
+    Card *currentPlayerCard = playerHand->getCard(cardNum);
+    //print card
+    currentPlayerCard->printCard();
 
     //get month of card button
-    CardMonth currentCardMonth = currentCard->getMonth();
+    CardMonth currentCardMonth = currentPlayerCard->getMonth();
 
     bool matchingCard {false};
 
@@ -639,13 +784,15 @@ void KoiKoi::selectFromHand()
         else
         {
             matchingCard = true;
+            //connect the matching game hand cards
+            connectGameHand(guiGameHandCards[i]);
         }
     }
 
     std::cout << "******************" << std::endl;
     std::cout << "Selected card" << std::endl;
     std::cout << "******************" << std::endl;
-    currentCard->printCard();
+    currentPlayerCard->printCard();
     std::cout << "******************" << std::endl;
     std::cout << "Previous game hand" << std::endl;
     std::cout << "******************" << std::endl;
@@ -660,20 +807,14 @@ void KoiKoi::selectFromHand()
         m_gameHand.acceptCard(*playerHand->disCard(cardNum));
         playerHand->removeCard(cardNum);
 
-        //call updateCards??
+        //call updateCards
         updateCards();
-        //disable all playerhand cards
-        for(int j {0};j<playerHand->getNumCards();j++)
-        {
-            guiPlayerCards[j]->setDisabled(true);
-        }
-        //disable all game hand cards
-        for(int m {0};m<m_gameHand.getNumCards();m++)
-        {
-            guiGameHandCards[m]->setDisabled(true);
-        }
+        //disconnect all playerhand cards
+        disconnectPlayerHand();
+        //disconnect all game hand cards
+        disconnectGameHand();
         //*******************************
-        //call drawCard and matchCard
+        //call drawCard
         //*******************************
     }
     else
@@ -688,7 +829,7 @@ void KoiKoi::selectFromHand()
             }
             else
             {
-                disconnect(guiPlayerCards[k], SIGNAL (released()), this, SLOT (selectFromHand()));
+                disconnectPlayerHand(guiPlayerCards[k]);
             }
         }
         //Wait for user to select from gamehand as there may have been multiple match possibilities
@@ -710,9 +851,6 @@ void KoiKoi::selectFromHand()
 void KoiKoi::selectFromGameHand()
 {
     std::cout << "from game hand" << std::endl;
-    //*********************
-    //select game hand ??
-    //*********************
 
     //get calling parent object name
     QObject *senderButton = sender();

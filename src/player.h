@@ -24,6 +24,10 @@ private:
     bool m_oya {false};
     bool m_koikoi {false};
     Hand m_playerHand {Hand()};
+    Hand m_lightMatch {Hand()};
+    Hand m_animalMatch {Hand()};
+    Hand m_ribbonMatch {Hand()};
+    Hand m_plainMatch {Hand()};
 
 public:
     /*
@@ -40,6 +44,10 @@ public:
     bool getOya();
     bool getKoikoi();
     Hand* getHand();
+    Hand* getLightMatch();
+    Hand* getAnimalMatch();
+    Hand* getRibbonMatch();
+    Hand* getPlainMatch();
 
     /*
     * Set Functions
@@ -57,6 +65,10 @@ public:
     void printOya();
     void printKoikoi();
     void printHand();
+    void printLightMatch();
+    void printAnimalMatch();
+    void printRibbonMatch();
+    void printPlainMatch();
 };
 
 #endif

@@ -37,6 +37,34 @@ Hand* Player::getHand()
     return playerHand;
 }
 
+Hand* Player::getLightMatch()
+{
+    Hand *lightMatch;
+    lightMatch = &m_lightMatch;
+    return lightMatch;
+}
+
+Hand* Player::getAnimalMatch()
+{
+    Hand *animalMatch;
+    animalMatch = &m_animalMatch;
+    return animalMatch;
+}
+
+Hand* Player::getRibbonMatch()
+{
+    Hand *ribbonMatch;
+    ribbonMatch = &m_ribbonMatch;
+    return ribbonMatch;
+}
+
+Hand* Player::getPlainMatch()
+{
+    Hand *plainMatch;
+    plainMatch = &m_plainMatch;
+    return plainMatch;
+}
+
 void Player::setScore(int score)
 {
     m_score = score;
@@ -81,4 +109,28 @@ void Player::printHand()
 {
     std::cout << "The player's hand is: " << std::endl;
     m_playerHand.printHand();
+}
+
+void Player::printLightMatch()
+{
+    std::cout << "The player's light matches are: " << std::endl;
+    m_lightMatch.printHand();
+}
+
+void Player::printAnimalMatch()
+{
+    std::cout << "The player's animal matches are: " << std::endl;
+    m_animalMatch.printHand();
+}
+
+void Player::printRibbonMatch()
+{
+    std::cout << "The player's ribbon matches are: " << std::endl;
+    m_ribbonMatch.printHand();
+}
+
+void Player::printPlainMatch()
+{
+    std::cout << "The player's plain matches are: " << std::endl;
+    m_plainMatch.printHand();
 }
