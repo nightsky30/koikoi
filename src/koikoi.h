@@ -98,8 +98,6 @@ public:
     void generateOyaCard();
     void deal();
     void startRound();
-    //void matchCard(Player &currentPlayer, int &currentTurn);
-    void drawCard(Player &currentPlayer, int &currentTurn);
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
 
     /*
@@ -117,10 +115,12 @@ public:
     void showOyaScreen();
     void updateCards();
     void checkGameHand();
+    void connectDeck();
     void connectGameHand(QPushButton *button);
     void connectGameHand();
     void connectPlayerHand(QPushButton *button);
     void connectPlayerHand();
+    void disconnectDeck();
     void disconnectGameHand(QPushButton *button);
     void disconnectGameHand();
     void disconnectPlayerHand(QPushButton *button);
@@ -134,6 +134,8 @@ public slots:
     void determineOyaPlayer();
     void selectFromHand();
     void selectFromGameHand();
+    //void drawCard(Player &currentPlayer, int &currentTurn);
+    void drawCard();
 };
 
 #endif // KOIKOI_H

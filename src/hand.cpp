@@ -62,18 +62,6 @@ void Hand::acceptCard(Card &newCard)
     m_numCards = m_numCards + 1;
 }
 
-Card* Hand::disCard(std::vector<Card>::size_type cardNum)
-{
-//create a card pointer
-//remove the card from the hand's vector or cards
-//decrement numCards
-//return card pointer to be placed on the game hand or in the players played cards
-
-    Card *requestedCard;
-    requestedCard = &m_playerHand[cardNum];
-    return requestedCard;
-}
-
 void Hand::removeCard(std::vector<Card>::size_type cardNum)
 {
         //modify to accept label??...card has label string...but hand has label object

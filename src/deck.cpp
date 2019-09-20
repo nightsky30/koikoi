@@ -24,8 +24,8 @@ Deck::~Deck()
 
 Card* Deck::getCard(std::vector<Card>::size_type cardNum)
 {
-Card *requestedCard;
-requestedCard = &m_cardDeck[cardNum];
+    Card *requestedCard;
+    requestedCard = &m_cardDeck[cardNum];
     return requestedCard;
 }
 
@@ -42,6 +42,11 @@ Card* Deck::getRandCard() // Caution: Does not remove card from deck...
     Card *requestedCard;
     requestedCard = &m_cardDeck[randNum];
     return requestedCard;
+}
+
+std::string Deck::getDeckIcon()
+{
+    return m_deckIcon;
 }
 
 void Deck::resetDeck()
@@ -78,18 +83,23 @@ void Deck::shuffleDeck()
 
 Card* Deck::dealCard()
 {
-//when a card is dealt, create a temp card object
-//remove it from the deck
-//it should go into the player's hand or the gamehand.
-//when removed from the deck and either cardNum decremented, or just use vector.size.
-//when cards are matched they should go to an alternate "match hand" to be tallied later.
-//Implement this system...
+    //when a card is dealt, create a temp card object
+    //remove it from the deck
+    //it should go into the player's hand or the gamehand.
+    //when removed from the deck and either cardNum decremented, or just use vector.size.
+    //when cards are matched they should go to an alternate "match hand" to be tallied later.
+    //Implement this system...
 
     Card *tempCard;
     tempCard = &m_cardDeck[m_numCards-1];
     m_cardDeck.pop_back();
     m_numCards--;
     return tempCard;
+}
+
+void Deck::setDeckIcon(std::string iconStr)
+{
+    m_deckIcon = iconStr;
 }
 
 void Deck::printDeck()
