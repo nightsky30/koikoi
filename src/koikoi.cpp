@@ -528,9 +528,6 @@ void KoiKoi::updateCards()
     //This is kept separate from connections and disconnections
     //***********************************************************
 
-    ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-    m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
-
     for(int i{0};i<guiCPUCards.size();i++)
     {
         QPushButton *button = guiCPUCards.at(i);
@@ -960,13 +957,27 @@ void KoiKoi::selectFromGameHand()
                 break;
             }
         }
+        //connect all playerhand cards
+        connectPlayerHand();
+        //disconnect all game hand cards
+        disconnectGameHand();
+        //disconnect deck
+        disconnectDeck();
+        //call updateCards
+        updateCards();
+        ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+        m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
+        checkGameHand();
+        //**********************************************************
+        //allows to click player hand card to call selectFromHand
+        //**********************************************************
     }
     else
     {
         int playerCardNum {0};
-        for(int i {0};i<guiPlayerCards.size()-1;i++)
+        for(int i {0};i<guiPlayerCards.size();i++)
         {
-            if(guiPlayerCards[i]->isEnabled())
+            if(guiPlayerCards[i]->isEnabled() == true)
             {
                 playerCardNum = i;
             }
@@ -1042,21 +1053,18 @@ void KoiKoi::selectFromGameHand()
         }
     }
 
-    //connect all playerhand cards
-    connectPlayerHand();
+    //disconnect all playerhand cards
+    disconnectPlayerHand();
     //disconnect all game hand cards
     disconnectGameHand();
-    //disconnect deck
-    disconnectDeck();
+    //connect deck
+    connectDeck();
     //call updateCards
     updateCards();
+    //***************************************
+    //allows to click deck to call drawCard
+    //***************************************
 
-    checkGameHand();
-    //**********************************************************
-    //allows to click player hand card to call selectFromHand
-    //**********************************************************
-
-    //if match, store in player's played cards
     //check for yaku
     //if yaku
     //then request koikoi
@@ -1128,6 +1136,12 @@ void KoiKoi::drawCard()
         m_gameDeck.setDeckIcon(nextCard->getImageStr().toStdString());
         //Disconnect deck
         disconnectDeck();
+        //disconnect playerhand
+        disconnectPlayerHand();
+        //**********************************************************
+        //allows to click game hand card to call selectFromGameHand
+        //**********************************************************
         //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
+    disconnectDeck();
 }
