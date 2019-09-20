@@ -10,7 +10,6 @@ Hand::Hand()
     this->m_numCards = 0;
     this->m_playerHand.resize(0);
     this->m_oyaCard = 0;
-    this->m_handLabels.resize(0);
 }
 
 Hand::~Hand()
@@ -40,11 +39,6 @@ Card* Hand::getRandCard()
     return requestedCard;
 }
 
-//QLabel* getLabel()
-//{
-
-//}
-
 index_t Hand::getOyaCard()
 {
 return m_oyaCard;
@@ -57,16 +51,13 @@ void Hand::setOyaCard(index_t oyaCard)
 
 void Hand::acceptCard(Card &newCard)
 {
-    //modify to accept label??...card has label string...but hand has label object
     m_playerHand.push_back(newCard);
     m_numCards = m_numCards + 1;
 }
 
 void Hand::removeCard(std::vector<Card>::size_type cardNum)
 {
-        //modify to accept label??...card has label string...but hand has label object
-        //m_playerHand.erase(m_playerHand.begin() + cardNum);
-        m_playerHand.erase(m_playerHand.begin()+cardNum);
+        m_playerHand.erase(m_playerHand.begin() + cardNum);
         m_numCards = m_numCards - 1;
 }
 
@@ -75,7 +66,6 @@ void Hand::resetHand()
     this->m_numCards = 0;
     this->m_playerHand.resize(0);
     this->m_oyaCard = 0;
-    this->m_handLabels.resize(0);
 }
 
 void Hand::printHand()
@@ -86,7 +76,6 @@ void Hand::printHand()
 
     for (i = 0; i < m_numCards; i++)
     {
-        //Print
         std::cout << "=========================" << std::endl;
         std::cout << "Information for card " << (i + 1) << ":" << std::endl;
         std::cout << "=========================" << std::endl;

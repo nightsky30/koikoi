@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <QString>
-#include <QDebug>
 
 //Default Constructor
 Card::Card()

@@ -9,11 +9,10 @@
 #include <chrono>  // Sleep Time
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
+#include <QString>
 #include <QPushButton>
 #include <QIntegerForSize>
 #include <QIcon>
-#include <QList>
-#include <QDebug>
 #include <QThread>
 
 // Using a type alias
@@ -157,7 +156,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
             }
         } else
         {
-            qDebug() << "Problem:  Too many cards on the gameboard.";
+            std::cout << "Problem:  Too many cards on the gameboard." << std::endl;;
         }
         this->guiGameHandCards.append(button);
     }
@@ -180,8 +179,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiPlayerCards.push_back(button);
     }
 
-    //QLABELS DO NOT HAVE A CLICKED FUNCTION
-    //USE BUTTONS STYLED DIFFERENTLY OR EXTEND THE QLABEL WITH A SUBCLASS THAT IMPLEMENTS THE CLICKABLE SIGNAL/SLOT JUNK
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 
@@ -612,6 +609,7 @@ void KoiKoi::checkGameHand()
     }
     //Connect player hand cards to enable selection
     connectPlayerHand();
+    disconnectDeck();
 }
 
 void KoiKoi::connectDeck()
@@ -968,12 +966,14 @@ void KoiKoi::selectFromGameHand()
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         checkGameHand();
+        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
     }
     else
     {
+        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
         int playerCardNum {0};
         for(int i {0};i<guiPlayerCards.size();i++)
         {
@@ -982,89 +982,85 @@ void KoiKoi::selectFromGameHand()
                 playerCardNum = i;
             }
         }
-        if(playerCardNum!=0)
+        Hand *playerHand = m_player1.getHand();
+        //Get player hand card
+        Card *playerHandCard = playerHand->getCard(playerCardNum);
+        //Get player card month
+        CardMonth playerCardMonth = playerHandCard->getMonth();
+        if(currentCardMonth != playerCardMonth)
         {
+            std::cout << "There was an issue with the cards matching..." << std::endl;
+            std::cout << "The current card month:" << currentCardMonth << std::endl;
+            std::cout << "The player card month:" << playerCardMonth << std::endl;
+        }
+        else
+        {
+            //Need to store card matches from the deck and game hand in players' special match hands
+            CardType currentGameCardType = currentGameCard->getCardType();
+            CardType playerHandCardType = playerHandCard->getCardType();
             Hand *playerHand = m_player1.getHand();
-            //Get player hand card
-            Card *playerHandCard = playerHand->getCard(playerCardNum);
-            //Get player card month
-            CardMonth playerCardMonth = playerHandCard->getMonth();
-            if(currentCardMonth != playerCardMonth)
+            Hand *playerLight = m_player1.getLightMatch();
+            Hand *playerAnimal = m_player1.getAnimalMatch();
+            Hand *playerRibbon = m_player1.getRibbonMatch();
+            Hand *playerPlain = m_player1.getPlainMatch();
+            switch (currentGameCardType)
             {
-                std::cout << "There was an issue with the cards matching..." << std::endl;
-                std::cout << "The current card month:" << currentCardMonth << std::endl;
-                std::cout << "The player card month:" << playerCardMonth << std::endl;
+            case LIGHT:
+                playerLight->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case ANIMAL:
+                playerAnimal->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case RIBBON:
+                playerRibbon->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case PLAIN:
+                playerPlain->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
             }
-            else
+            switch (playerHandCardType)
             {
-                //Need to store card matches from the deck and game hand in players' special match hands
-                CardType currentGameCardType = currentGameCard->getCardType();
-                CardType playerHandCardType = playerHandCard->getCardType();
-                Hand *playerHand = m_player1.getHand();
-                Hand *playerLight = m_player1.getLightMatch();
-                Hand *playerAnimal = m_player1.getAnimalMatch();
-                Hand *playerRibbon = m_player1.getRibbonMatch();
-                Hand *playerPlain = m_player1.getPlainMatch();
-                switch (currentGameCardType)
-                {
-                case LIGHT:
-                    playerLight->acceptCard(*m_gameHand.getCard(cardNum));
-                    m_gameHand.removeCard(cardNum);
-                    break;
-                case ANIMAL:
-                    playerAnimal->acceptCard(*m_gameHand.getCard(cardNum));
-                    m_gameHand.removeCard(cardNum);
-                    break;
-                case RIBBON:
-                    playerRibbon->acceptCard(*m_gameHand.getCard(cardNum));
-                    m_gameHand.removeCard(cardNum);
-                    break;
-                case PLAIN:
-                    playerPlain->acceptCard(*m_gameHand.getCard(cardNum));
-                    m_gameHand.removeCard(cardNum);
-                    break;
-                default:
-                    std::cout << "It shouldn't get here..." << std::endl;
-                    break;
-                }
-                switch (playerHandCardType)
-                {
-                case LIGHT:
-                    playerLight->acceptCard(*playerHand->getCard(playerCardNum));
-                    playerHand->removeCard(playerCardNum);
-                    break;
-                case ANIMAL:
-                    playerAnimal->acceptCard(*playerHand->getCard(playerCardNum));
-                    playerHand->removeCard(playerCardNum);
-                    break;
-                case RIBBON:
-                    playerRibbon->acceptCard(*playerHand->getCard(playerCardNum));
-                    playerHand->removeCard(playerCardNum);
-                    break;
-                case PLAIN:
-                    playerPlain->acceptCard(*playerHand->getCard(playerCardNum));
-                    playerHand->removeCard(playerCardNum);
-                    break;
-                default:
-                    std::cout << "It shouldn't get here..." << std::endl;
-                    break;
-                }
+            case LIGHT:
+                playerLight->acceptCard(*playerHand->getCard(playerCardNum));
+                playerHand->removeCard(playerCardNum);
+                break;
+            case ANIMAL:
+                playerAnimal->acceptCard(*playerHand->getCard(playerCardNum));
+                playerHand->removeCard(playerCardNum);
+                break;
+            case RIBBON:
+                playerRibbon->acceptCard(*playerHand->getCard(playerCardNum));
+                playerHand->removeCard(playerCardNum);
+                break;
+            case PLAIN:
+                playerPlain->acceptCard(*playerHand->getCard(playerCardNum));
+                playerHand->removeCard(playerCardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
             }
         }
+        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
+        //disconnect all playerhand cards
+        disconnectPlayerHand();
+        //disconnect all game hand cards
+        disconnectGameHand();
+        //connect deck
+        connectDeck();
+        //call updateCards
+        updateCards();
+        //***************************************
+        //allows to click deck to call drawCard
+        //***************************************
     }
-
-    //disconnect all playerhand cards
-    disconnectPlayerHand();
-    //disconnect all game hand cards
-    disconnectGameHand();
-    //connect deck
-    connectDeck();
-    //call updateCards
-    updateCards();
-    //***************************************
-    //allows to click deck to call drawCard
-    //***************************************
-
     //check for yaku
     //if yaku
     //then request koikoi

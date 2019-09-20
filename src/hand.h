@@ -3,7 +3,6 @@
 
 #include "card.h"
 #include <vector>
-#include <QLabel>
 #include <QVector>
 #include <QString>
 
@@ -25,8 +24,6 @@ private:
         Card()
     };
     index_t m_oyaCard {0};
-    //numLabels needed??
-    QVector<QLabel*> m_handLabels;
 
 public:
     /*
@@ -41,7 +38,6 @@ public:
     Card* getCard(std::vector<Card>::size_type cardNum);
     std::vector<Card>::size_type getNumCards();
     Card* getRandCard();
-    QLabel* getLabel(QVector<QLabel>::size_type labelNum);
     index_t getOyaCard();
 
     /*

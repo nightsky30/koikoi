@@ -3,6 +3,7 @@
 
 #include "card.h"
 #include <vector>
+#include <string>
 
 // The game consists of this deck of 48 cards
 constexpr static int fullDeck {48};

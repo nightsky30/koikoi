@@ -1,4 +1,5 @@
 #include "player.h"
+#include "hand.h"
 #include <iostream>
 
 Player::Player()
