@@ -865,18 +865,17 @@ void KoiKoi::selectFromHand()
 
 void KoiKoi::selectFromGameHand()
 {
-
     /*
      * Could match from deck or player hand.
      * Check both.
+     *
+     * Might need to pass a var to check stage of turn
      */
-
     std::cout << "from game hand" << std::endl;
 
     //get calling parent object name
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
-
     //Already have gameHand
     //Get card number
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
@@ -884,11 +883,8 @@ void KoiKoi::selectFromGameHand()
     Card *currentGameCard = m_gameHand.getCard(cardNum);
     //print card
     currentGameCard->printCard();
-
     //get month of card button
     CardMonth currentCardMonth = currentGameCard->getMonth();
-
-    //bool matchingCard {false};
 
     /*
      * If the deck was recently clicked and there was a match
@@ -916,39 +912,58 @@ void KoiKoi::selectFromGameHand()
         }
         else
         {
-
-            /*
-             * Move this into storeMatches
-             * and pass the player and cards.
-             * Inside storeMatches use a switch
-             * case statement to create the various
-             * match hand pointers and accept/remove the cards
-             *
-             * How to deal with deck vs game hand???
-             */
-
-//            CardType currentCardType = currentGameCard->getCardType();
-//            CardType nextCardType = nextCard->getCardType();
-
-//            Hand *playerHand = m_player1.getHand();
-//            Hand *playerLight = m_player1.getLightMatch();
-//            Hand *playerAnimal = m_player1.getAnimalMatch();
-//            Hand *playerRibbon = m_player1.getRibbonMatch();
-//            Hand *playerPlain = m_player1.getPlainMatch();
-
-//            playerHand->acceptCard(*m_gameDeck.dealCard());
-//            playerHand->acceptCard(*m_gameHand.getCard(cardNum));
-//            m_gameHand.removeCard(cardNum);
-
             //Need to store card matches from the deck and game hand in players' special match hands
-            storeMatches(m_player1, currentGameCard);
-            storeMatches(m_player1, nextCard);
+            CardType currentGameCardType = currentGameCard->getCardType();
+            CardType nextCardType = nextCard->getCardType();
+            Hand *playerLight = m_player1.getLightMatch();
+            Hand *playerAnimal = m_player1.getAnimalMatch();
+            Hand *playerRibbon = m_player1.getRibbonMatch();
+            Hand *playerPlain = m_player1.getPlainMatch();
+            switch (currentGameCardType)
+            {
+            case LIGHT:
+                playerLight->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case ANIMAL:
+                playerAnimal->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case RIBBON:
+                playerRibbon->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case PLAIN:
+                playerPlain->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
+            switch (nextCardType)
+            {
+            case LIGHT:
+                playerLight->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case ANIMAL:
+                playerAnimal->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case RIBBON:
+                playerRibbon->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case PLAIN:
+                playerPlain->acceptCard(*m_gameDeck.dealCard());
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
         }
     }
     else
     {
         int playerCardNum {0};
-
         for(int i {0};i<guiPlayerCards.size()-1;i++)
         {
             if(guiPlayerCards[i]->isEnabled())
@@ -956,7 +971,6 @@ void KoiKoi::selectFromGameHand()
                 playerCardNum = i;
             }
         }
-
         if(playerCardNum!=0)
         {
             Hand *playerHand = m_player1.getHand();
@@ -973,11 +987,57 @@ void KoiKoi::selectFromGameHand()
             else
             {
                 //Need to store card matches from the deck and game hand in players' special match hands
-
-                playerHand->acceptCard(*playerHand->getCard(playerCardNum));
-                playerHand->removeCard(playerCardNum);
-                playerHand->acceptCard(*m_gameHand.getCard(cardNum));
-                m_gameHand.removeCard(cardNum);
+                CardType currentGameCardType = currentGameCard->getCardType();
+                CardType playerHandCardType = playerHandCard->getCardType();
+                Hand *playerHand = m_player1.getHand();
+                Hand *playerLight = m_player1.getLightMatch();
+                Hand *playerAnimal = m_player1.getAnimalMatch();
+                Hand *playerRibbon = m_player1.getRibbonMatch();
+                Hand *playerPlain = m_player1.getPlainMatch();
+                switch (currentGameCardType)
+                {
+                case LIGHT:
+                    playerLight->acceptCard(*m_gameHand.getCard(cardNum));
+                    m_gameHand.removeCard(cardNum);
+                    break;
+                case ANIMAL:
+                    playerAnimal->acceptCard(*m_gameHand.getCard(cardNum));
+                    m_gameHand.removeCard(cardNum);
+                    break;
+                case RIBBON:
+                    playerRibbon->acceptCard(*m_gameHand.getCard(cardNum));
+                    m_gameHand.removeCard(cardNum);
+                    break;
+                case PLAIN:
+                    playerPlain->acceptCard(*m_gameHand.getCard(cardNum));
+                    m_gameHand.removeCard(cardNum);
+                    break;
+                default:
+                    std::cout << "It shouldn't get here..." << std::endl;
+                    break;
+                }
+                switch (playerHandCardType)
+                {
+                case LIGHT:
+                    playerLight->acceptCard(*playerHand->getCard(playerCardNum));
+                    playerHand->removeCard(playerCardNum);
+                    break;
+                case ANIMAL:
+                    playerAnimal->acceptCard(*playerHand->getCard(playerCardNum));
+                    playerHand->removeCard(playerCardNum);
+                    break;
+                case RIBBON:
+                    playerRibbon->acceptCard(*playerHand->getCard(playerCardNum));
+                    playerHand->removeCard(playerCardNum);
+                    break;
+                case PLAIN:
+                    playerPlain->acceptCard(*playerHand->getCard(playerCardNum));
+                    playerHand->removeCard(playerCardNum);
+                    break;
+                default:
+                    std::cout << "It shouldn't get here..." << std::endl;
+                    break;
+                }
             }
         }
     }
@@ -990,6 +1050,11 @@ void KoiKoi::selectFromGameHand()
     disconnectDeck();
     //call updateCards
     updateCards();
+
+    checkGameHand();
+    //**********************************************************
+    //allows to click player hand card to call selectFromHand
+    //**********************************************************
 
     //if match, store in player's played cards
     //check for yaku

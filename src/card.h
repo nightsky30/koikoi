@@ -52,9 +52,9 @@ enum CardFlower
 * ==================
 * Light     =       0-5
 * Animal    =       6-15
-* Ribbon    =       16-18
-* Plain     =       19
-* Nil       =       20
+* Ribbon    =       16-19
+* Plain     =       20
+* Nil       =       21
 */
 enum CardType
 {
@@ -74,6 +74,7 @@ enum CardType
     SAKE_CUP, //Wild, can also be plain for 10 Kasu Yaku
     DEER,
     SWALLOW,
+    RIBBON,
     RED_RIBBON,
     RED_POEM,
     BLUE_RIBBON,
