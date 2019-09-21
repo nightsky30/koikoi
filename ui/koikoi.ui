@@ -274,123 +274,6 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>200</y>
-       <width>122</width>
-       <height>601</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="infoVLayout">
-      <item>
-       <layout class="QVBoxLayout" name="debugVLayout">
-        <item>
-         <widget class="QLabel" name="dbgCardMonth">
-          <property name="text">
-           <string>dbgCardMonth</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardFlower">
-          <property name="text">
-           <string>dbgCardFlower</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardPointVal">
-          <property name="text">
-           <string>dbgCardPointVal</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardType">
-          <property name="text">
-           <string>dbgCardType</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardPointVal2">
-          <property name="text">
-           <string>dbgCardPointVal2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardName">
-          <property name="text">
-           <string>dbgCardName</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardType2">
-          <property name="text">
-           <string>dbgCardType2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="dbgCardWild">
-          <property name="text">
-           <string>dbgCardWild</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QPushButton" name="deckButton">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
        <x>140</x>
        <y>10</y>
        <width>1014</width>
@@ -529,6 +412,182 @@
       </item>
       <item>
        <layout class="QHBoxLayout" name="playerHLayout"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>3</y>
+       <width>122</width>
+       <height>991</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QVBoxLayout" name="cpuVerticalLayout">
+        <item>
+         <widget class="QLabel" name="cpuLabel">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>CPU</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="cpuFormLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="cpuScore">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Score:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="cpuScoreNum">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>30</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>98</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="deckButton">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../data/resources/deck.qrc">
+          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>120</width>
+          <height>168</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>98</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="playerVerticalLayout">
+        <item>
+         <widget class="QLabel" name="playerLabel">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Player</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="playerFormLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="playerScore">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Score:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="playerScoreNum">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>30</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
