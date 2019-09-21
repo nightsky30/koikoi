@@ -438,8 +438,6 @@ void KoiKoi::startRound()
 //    //Do Stuff
 //    while (turnComplete == false)
 //    {
-//        currentPlayer.printHand();
-//        //m_gameHand.printHand();
 //        std::this_thread::sleep_for(std::chrono::milliseconds(7000));
 //        //Call select card from hand
 //        //Call select card in game hand
@@ -756,8 +754,6 @@ void KoiKoi::determineOyaPlayer()
 
 void KoiKoi::selectFromHand()
 {
-    std::cout << "from hand" << std::endl;
-
     Hand *playerHand = m_player1.getHand();
     Hand *cpuHand = m_player2.getHand();
 
@@ -768,18 +764,11 @@ void KoiKoi::selectFromHand()
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
     //Get player card
     Card *currentPlayerCard = playerHand->getCard(cardNum);
-    //print card
-    currentPlayerCard->printCard();
 
     //get month of card button
     CardMonth currentCardMonth = currentPlayerCard->getMonth();
 
     bool matchingCard {false};
-
-    /*
-     * This disabling might be done with checkGameHand...
-     * but checking the bool for matching is still required
-     */
 
     //compare with gameHand objects
     for(int i{0};i<m_gameHand.getNumCards();i++)
@@ -796,17 +785,6 @@ void KoiKoi::selectFromHand()
             connectGameHand(guiGameHandCards[i]);
         }
     }
-
-    std::cout << "******************" << std::endl;
-    std::cout << "Selected card" << std::endl;
-    std::cout << "******************" << std::endl;
-    currentPlayerCard->printCard();
-    std::cout << "******************" << std::endl;
-    std::cout << "Previous game hand" << std::endl;
-    std::cout << "******************" << std::endl;
-    m_gameHand.printHand();
-    std::cout << "******************" << std::endl;
-
     //See if there are any month matches
     if(matchingCard == false)
     {
@@ -844,18 +822,6 @@ void KoiKoi::selectFromHand()
         //**********************************************************
         //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
-
-    std::cout << "******************" << std::endl;
-    std::cout << "Updated game hand" << std::endl;
-    std::cout << "******************" << std::endl;
-    m_gameHand.printHand();
-    std::cout << "******************" << std::endl;
-    std::cout << "******************" << std::endl;
-    std::cout << "******************" << std::endl;
-    std::cout << "Updated player hand" << std::endl;
-    std::cout << "******************" << std::endl;
-    playerHand->printHand();
-    std::cout << "******************" << std::endl;
 }
 
 void KoiKoi::selectFromGameHand()
@@ -863,11 +829,7 @@ void KoiKoi::selectFromGameHand()
     /*
      * Could match from deck or player hand.
      * Check both.
-     *
-     * Might need to pass a var to check stage of turn
      */
-    std::cout << "from game hand" << std::endl;
-
     //get calling parent object name
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
@@ -876,8 +838,6 @@ void KoiKoi::selectFromGameHand()
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
     //Get game hand card
     Card *currentGameCard = m_gameHand.getCard(cardNum);
-    //print card
-    currentGameCard->printCard();
     //get month of card button
     CardMonth currentCardMonth = currentGameCard->getMonth();
 
@@ -890,9 +850,6 @@ void KoiKoi::selectFromGameHand()
      * Perhaps in the future with turn based stuff, pass in
      * the player, and some sort of turn state variable
      */
-
-    std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
-
     if(m_gameDeck.getDeckIcon() != ":/deck/Hanafuda_koi-2.svg")
     {
         //Get next card
@@ -966,14 +923,12 @@ void KoiKoi::selectFromGameHand()
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         checkGameHand();
-        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
     }
     else
     {
-        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
         int playerCardNum {0};
         for(int i {0};i<guiPlayerCards.size();i++)
         {
@@ -1048,7 +1003,6 @@ void KoiKoi::selectFromGameHand()
                 break;
             }
         }
-        std::cout << "The current deck icon is:" << m_gameDeck.getDeckIcon() << std::endl;
         //disconnect all playerhand cards
         disconnectPlayerHand();
         //disconnect all game hand cards
@@ -1094,16 +1048,6 @@ void KoiKoi::drawCard()
             connectGameHand(guiGameHandCards[i]);
         }
     }
-
-    std::cout << "******************" << std::endl;
-    std::cout << "Deck card" << std::endl;
-    std::cout << "******************" << std::endl;
-    nextCard->printCard();
-    std::cout << "******************" << std::endl;
-    std::cout << "Previous game hand" << std::endl;
-    std::cout << "******************" << std::endl;
-    m_gameHand.printHand();
-    std::cout << "******************" << std::endl;
 
     //See if there are any month matches
     if(matchingCard == false)
