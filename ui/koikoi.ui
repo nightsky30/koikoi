@@ -298,11 +298,11 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="cpuYakuHLayout">
         <item>
-         <layout class="QVBoxLayout" name="lightVLayout_2">
+         <layout class="QVBoxLayout" name="cpuLightVLayout">
           <item>
-           <widget class="QLabel" name="light_Label_2">
+           <widget class="QLabel" name="cpu_light_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -320,7 +320,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="lightHLayout_2">
+           <layout class="QHBoxLayout" name="cpuLightHLayout">
             <item>
              <widget class="QLabel" name="label_5">
               <property name="text">
@@ -338,7 +338,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="sanko_yaku_2">
+           <widget class="QLabel" name="cpu_sanko_yaku">
             <property name="text">
              <string>Sanko (3 Brights)</string>
             </property>
@@ -348,7 +348,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="ameshiko_yaku_2">
+           <widget class="QLabel" name="cpu_ameshiko_yaku">
             <property name="text">
              <string>Ame-Shiko (Rain man)</string>
             </property>
@@ -358,7 +358,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="shiko_yaku_2">
+           <widget class="QLabel" name="cpu_shiko_yaku">
             <property name="text">
              <string>Shiko (4 Brights)</string>
             </property>
@@ -368,7 +368,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="goku_yaku_2">
+           <widget class="QLabel" name="cpu_goku_yaku">
             <property name="text">
              <string>Goko (5 Brights)</string>
             </property>
@@ -393,9 +393,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="animalVLayout_2">
+         <layout class="QVBoxLayout" name="cpuAnimalVLayout">
           <item>
-           <widget class="QLabel" name="animal_Label_2">
+           <widget class="QLabel" name="cpu_Animal_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -413,7 +413,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="animalHLayout_2">
+           <layout class="QHBoxLayout" name="cpuAnimalHLayout">
             <item>
              <widget class="QLabel" name="label_13">
               <property name="text">
@@ -431,7 +431,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="tane_yaku_2">
+           <widget class="QLabel" name="cpu_tane_yaku">
             <property name="text">
              <string>Tane (Animals)</string>
             </property>
@@ -441,7 +441,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="inoshikacho_yaku_2">
+           <widget class="QLabel" name="cpu_inoshikacho_yaku">
             <property name="text">
              <string>Ino-Shika-Cho (Boar-Deer-Butterflies)</string>
             </property>
@@ -466,9 +466,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="ribbonVLayout_2">
+         <layout class="QVBoxLayout" name="cpuRibbonVLayout">
           <item>
-           <widget class="QLabel" name="ribbon_Label_2">
+           <widget class="QLabel" name="cpu_ribbon_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -486,7 +486,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ribbonHLayout_2">
+           <layout class="QHBoxLayout" name="cpuRibbonHLayout">
             <item>
              <widget class="QLabel" name="label_8">
               <property name="text">
@@ -504,7 +504,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="tanzaku_yaku_2">
+           <widget class="QLabel" name="cpu_tanzaku_yaku">
             <property name="text">
              <string>Tanzaku (Ribbons)</string>
             </property>
@@ -514,7 +514,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="akatan_yaku_2">
+           <widget class="QLabel" name="cpu_akatan_yaku">
             <property name="text">
              <string>Akatan (Red Poetry Ribbons)</string>
             </property>
@@ -524,7 +524,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="aotan_yaku_2">
+           <widget class="QLabel" name="cpu_aotan_yaku">
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
             </property>
@@ -549,9 +549,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="plainVLayout_2">
+         <layout class="QVBoxLayout" name="cpuPlainVLayout">
           <item>
-           <widget class="QLabel" name="plain_misc_label_2">
+           <widget class="QLabel" name="cpu_plain_misc_label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -569,7 +569,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="plainHLayout_2">
+           <layout class="QHBoxLayout" name="cpuPlainHLayout">
             <item>
              <widget class="QLabel" name="label_15">
               <property name="text">
@@ -587,7 +587,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="kasu_yaku_2">
+           <widget class="QLabel" name="cpu_kasu_yaku">
             <property name="text">
              <string>Kasu (Plains)</string>
             </property>
@@ -597,7 +597,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="tsuki_fuda_yaku_2">
+           <widget class="QLabel" name="cpu_tsuki_fuda_yaku">
             <property name="text">
              <string>Tsuki-fuda (Monthly Cards)</string>
             </property>
@@ -607,7 +607,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="oya_ken_yaku_2">
+           <widget class="QLabel" name="cpu_oya_ken_yaku">
             <property name="text">
              <string>Oya-Ken (Dealer's Privilege)</string>
             </property>
@@ -617,7 +617,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="bake_fuda_yaku_2">
+           <widget class="QLabel" name="cpu_bake_fuda_yaku">
             <property name="text">
              <string>Bake-Fuda (Wild Card)</string>
             </property>
@@ -770,11 +770,11 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="playerYakuHLayout">
         <item>
-         <layout class="QVBoxLayout" name="lightVLayout">
+         <layout class="QVBoxLayout" name="playerLightVLayout">
           <item>
-           <widget class="QLabel" name="light_Label">
+           <widget class="QLabel" name="player_light_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -792,7 +792,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="lightHLayout">
+           <layout class="QHBoxLayout" name="playerLightHLayout">
             <item>
              <widget class="QLabel" name="label">
               <property name="text">
@@ -810,7 +810,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="sanko_yaku">
+           <widget class="QLabel" name="player_sanko_yaku">
             <property name="text">
              <string>Sanko (3 Brights)</string>
             </property>
@@ -820,7 +820,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="ameshiko_yaku">
+           <widget class="QLabel" name="player_ameshiko_yaku">
             <property name="text">
              <string>Ame-Shiko (Rain man)</string>
             </property>
@@ -830,7 +830,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="shiko_yaku">
+           <widget class="QLabel" name="player_shiko_yaku">
             <property name="text">
              <string>Shiko (4 Brights)</string>
             </property>
@@ -840,7 +840,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="goku_yaku">
+           <widget class="QLabel" name="player_goku_yaku">
             <property name="text">
              <string>Goko (5 Brights)</string>
             </property>
@@ -865,9 +865,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="animalVLayout">
+         <layout class="QVBoxLayout" name="playerAnimalVLayout">
           <item>
-           <widget class="QLabel" name="animal_Label">
+           <widget class="QLabel" name="player_animal_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -885,7 +885,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="animalHLayout">
+           <layout class="QHBoxLayout" name="playerAnimalHLayout">
             <item>
              <widget class="QLabel" name="label_3">
               <property name="text">
@@ -903,7 +903,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="tane_yaku">
+           <widget class="QLabel" name="player_tane_yaku">
             <property name="text">
              <string>Tane (Animals)</string>
             </property>
@@ -913,7 +913,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="inoshikacho_yaku">
+           <widget class="QLabel" name="player_inoshikacho_yaku">
             <property name="text">
              <string>Ino-Shika-Cho (Boar-Deer-Butterflies)</string>
             </property>
@@ -938,9 +938,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="ribbonVLayout">
+         <layout class="QVBoxLayout" name="playerRibbonVLayout">
           <item>
-           <widget class="QLabel" name="ribbon_Label">
+           <widget class="QLabel" name="player_ribbon_Label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -958,7 +958,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="ribbonHLayout">
+           <layout class="QHBoxLayout" name="playerRibbonHLayout">
             <item>
              <widget class="QLabel" name="label_6">
               <property name="text">
@@ -976,7 +976,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="tanzaku_yaku">
+           <widget class="QLabel" name="player_tanzaku_yaku">
             <property name="text">
              <string>Tanzaku (Ribbons)</string>
             </property>
@@ -986,7 +986,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="akatan_yaku">
+           <widget class="QLabel" name="player_akatan_yaku">
             <property name="text">
              <string>Akatan (Red Poetry Ribbons)</string>
             </property>
@@ -996,7 +996,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="aotan_yaku">
+           <widget class="QLabel" name="player_aotan_yaku">
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
             </property>
@@ -1021,9 +1021,9 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="plainVLayout">
+         <layout class="QVBoxLayout" name="playerPlainVLayout">
           <item>
-           <widget class="QLabel" name="plain_misc_label">
+           <widget class="QLabel" name="player_plain_misc_label">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1041,7 +1041,7 @@
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="plainHLayout">
+           <layout class="QHBoxLayout" name="playerPlainHLayout">
             <item>
              <widget class="QLabel" name="label_11">
               <property name="text">
@@ -1059,7 +1059,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="kasu_yaku">
+           <widget class="QLabel" name="player_kasu_yaku">
             <property name="text">
              <string>Kasu (Plains)</string>
             </property>
@@ -1069,7 +1069,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="tsuki_fuda_yaku">
+           <widget class="QLabel" name="player_tsuki_fuda_yaku">
             <property name="text">
              <string>Tsuki-fuda (Monthly Cards)</string>
             </property>
@@ -1079,7 +1079,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="oya_ken_yaku">
+           <widget class="QLabel" name="player_oya_ken_yaku">
             <property name="text">
              <string>Oya-Ken (Dealer's Privilege)</string>
             </property>
@@ -1089,7 +1089,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="bake_fuda_yaku">
+           <widget class="QLabel" name="player_bake_fuda_yaku">
             <property name="text">
              <string>Bake-Fuda (Wild Card)</string>
             </property>
@@ -1391,8 +1391,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../data/resources/deck.qrc"/>
   <include location="../logo/icon.qrc"/>
+  <include location="../data/resources/deck.qrc"/>
  </resources>
  <connections/>
 </ui>
