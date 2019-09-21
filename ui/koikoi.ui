@@ -373,7 +373,7 @@
            <widget class="QLabel" name="cpu_light_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -494,6 +494,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_sanko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Sanko (3 Brights)</string>
             </property>
@@ -504,6 +512,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_ameshiko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Ame-Shiko (Rain man)</string>
             </property>
@@ -514,6 +530,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_shiko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Shiko (4 Brights)</string>
             </property>
@@ -524,6 +548,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_goku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Goko (5 Brights)</string>
             </property>
@@ -553,7 +585,7 @@
            <widget class="QLabel" name="cpu_Animal_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -690,6 +722,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_tane_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tane (Animals)</string>
             </property>
@@ -700,6 +740,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_inoshikacho_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Ino-Shika-Cho (Boar-Deer-Butterflies)</string>
             </property>
@@ -729,7 +777,7 @@
            <widget class="QLabel" name="cpu_ribbon_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -775,6 +823,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_tanzaku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tanzaku (Ribbons)</string>
             </property>
@@ -785,6 +841,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_akatan_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Akatan (Red Poetry Ribbons)</string>
             </property>
@@ -795,6 +859,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_aotan_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
             </property>
@@ -824,7 +896,7 @@
            <widget class="QLabel" name="cpu_plain_misc_label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -870,6 +942,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_kasu_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Kasu (Plains)</string>
             </property>
@@ -880,6 +960,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_tsuki_fuda_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tsuki-fuda (Monthly Cards)</string>
             </property>
@@ -890,6 +978,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_oya_ken_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Oya-Ken (Dealer's Privilege)</string>
             </property>
@@ -900,6 +996,14 @@
           </item>
           <item>
            <widget class="QLabel" name="cpu_bake_fuda_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Bake-Fuda (Wild Card)</string>
             </property>
@@ -1085,7 +1189,7 @@
            <widget class="QLabel" name="player_light_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -1119,6 +1223,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_sanko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Sanko (3 Brights)</string>
             </property>
@@ -1129,6 +1241,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_ameshiko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Ame-Shiko (Rain man)</string>
             </property>
@@ -1139,6 +1259,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_shiko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Shiko (4 Brights)</string>
             </property>
@@ -1149,6 +1277,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_goku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Goko (5 Brights)</string>
             </property>
@@ -1178,7 +1314,7 @@
            <widget class="QLabel" name="player_animal_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -1212,6 +1348,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_tane_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tane (Animals)</string>
             </property>
@@ -1222,6 +1366,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_inoshikacho_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Ino-Shika-Cho (Boar-Deer-Butterflies)</string>
             </property>
@@ -1251,7 +1403,7 @@
            <widget class="QLabel" name="player_ribbon_Label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -1285,6 +1437,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_tanzaku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tanzaku (Ribbons)</string>
             </property>
@@ -1295,6 +1455,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_akatan_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Akatan (Red Poetry Ribbons)</string>
             </property>
@@ -1305,6 +1473,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_aotan_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
             </property>
@@ -1334,7 +1510,7 @@
            <widget class="QLabel" name="player_plain_misc_label">
             <property name="font">
              <font>
-              <pointsize>12</pointsize>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>true</italic>
               <bold>true</bold>
@@ -1368,6 +1544,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_kasu_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Kasu (Plains)</string>
             </property>
@@ -1378,6 +1562,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_tsuki_fuda_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Tsuki-fuda (Monthly Cards)</string>
             </property>
@@ -1388,6 +1580,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_oya_ken_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Oya-Ken (Dealer's Privilege)</string>
             </property>
@@ -1398,6 +1598,14 @@
           </item>
           <item>
            <widget class="QLabel" name="player_bake_fuda_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Bake-Fuda (Wild Card)</string>
             </property>
@@ -1712,8 +1920,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../logo/icon.qrc"/>
   <include location="../data/resources/deck.qrc"/>
+  <include location="../logo/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
