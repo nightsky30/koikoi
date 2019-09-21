@@ -9,20 +9,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>1024</height>
+    <width>1440</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1280</width>
-    <height>1024</height>
+    <width>1440</width>
+    <height>1080</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1280</width>
-    <height>1024</height>
+    <width>1440</width>
+    <height>1080</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,14 +35,14 @@
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
     <size>
-     <width>1280</width>
-     <height>1024</height>
+     <width>1440</width>
+     <height>1080</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>1280</width>
-     <height>1024</height>
+     <width>1440</width>
+     <height>1080</height>
     </size>
    </property>
    <widget class="QFrame" name="oyaFrame">
@@ -50,20 +50,20 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="frameShape">
@@ -75,13 +75,26 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>0</y>
-       <width>961</width>
-       <height>991</height>
+       <x>10</x>
+       <y>10</y>
+       <width>1261</width>
+       <height>1041</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="oyaHLayout">
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item>
        <widget class="QPushButton" name="oyaButton_0">
         <property name="minimumSize">
@@ -164,6 +177,19 @@
         </property>
        </widget>
       </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -172,20 +198,20 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="frameShape">
@@ -197,13 +223,26 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>200</y>
-       <width>967</width>
-       <height>589</height>
+       <x>10</x>
+       <y>8</y>
+       <width>1261</width>
+       <height>1041</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="titleHLayout">
+      <item>
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item>
        <widget class="QLabel" name="titleLabel">
         <property name="font">
@@ -235,6 +274,19 @@
         </property>
        </widget>
       </item>
+      <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </widget>
@@ -246,20 +298,20 @@
      <rect>
       <x>-1</x>
       <y>-1</y>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1280</width>
-      <height>1024</height>
+      <width>1440</width>
+      <height>1080</height>
      </size>
     </property>
     <property name="autoFillBackground">
@@ -276,8 +328,8 @@
       <rect>
        <x>140</x>
        <y>10</y>
-       <width>1014</width>
-       <height>981</height>
+       <width>1131</width>
+       <height>1041</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="gameVLayout">
@@ -300,7 +352,23 @@
       <item>
        <layout class="QHBoxLayout" name="cpuYakuHLayout">
         <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="cpuLightVLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
           <item>
            <widget class="QLabel" name="cpu_light_Label">
             <property name="font">
@@ -321,17 +389,104 @@
           </item>
           <item>
            <layout class="QHBoxLayout" name="cpuLightHLayout">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="sizeConstraint">
+             <enum>QLayout::SetDefaultConstraint</enum>
+            </property>
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="cpu_light_0">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_10">
+             <widget class="QLabel" name="cpu_light_1">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
-               <string>TextLabel</string>
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_light_3">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_light_2">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_light_4">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2.svg</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -415,14 +570,117 @@
           <item>
            <layout class="QHBoxLayout" name="cpuAnimalHLayout">
             <item>
-             <widget class="QLabel" name="label_13">
+             <widget class="QLabel" name="cpu_animal_0">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_14">
+             <widget class="QLabel" name="cpu_animal_1">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_2">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_3">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_4">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_5">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_6">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_7">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="cpu_animal_8">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -488,14 +746,26 @@
           <item>
            <layout class="QHBoxLayout" name="cpuRibbonHLayout">
             <item>
-             <widget class="QLabel" name="label_8">
+             <widget class="QLabel" name="cpu_ribbon_0">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_9">
+             <widget class="QLabel" name="cpu_ribbon_1">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -571,14 +841,26 @@
           <item>
            <layout class="QHBoxLayout" name="cpuPlainHLayout">
             <item>
-             <widget class="QLabel" name="label_15">
+             <widget class="QLabel" name="cpu_plain_0">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_16">
+             <widget class="QLabel" name="cpu_plain_1">
+              <property name="maximumSize">
+               <size>
+                <width>30</width>
+                <height>42</height>
+               </size>
+              </property>
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -640,6 +922,19 @@
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
@@ -772,6 +1067,19 @@
       <item>
        <layout class="QHBoxLayout" name="playerYakuHLayout">
         <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <layout class="QVBoxLayout" name="playerLightVLayout">
           <item>
            <widget class="QLabel" name="player_light_Label">
@@ -794,14 +1102,14 @@
           <item>
            <layout class="QHBoxLayout" name="playerLightHLayout">
             <item>
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="player_light_0">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="player_light_1">
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -887,14 +1195,14 @@
           <item>
            <layout class="QHBoxLayout" name="playerAnimalHLayout">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="player_animal_0">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_4">
+             <widget class="QLabel" name="player_animal_1">
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -960,14 +1268,14 @@
           <item>
            <layout class="QHBoxLayout" name="playerRibbonHLayout">
             <item>
-             <widget class="QLabel" name="label_6">
+             <widget class="QLabel" name="player_ribbon_0">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_7">
+             <widget class="QLabel" name="player_ribbon_1">
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -1043,14 +1351,14 @@
           <item>
            <layout class="QHBoxLayout" name="playerPlainHLayout">
             <item>
-             <widget class="QLabel" name="label_11">
+             <widget class="QLabel" name="player_plain_0">
               <property name="text">
                <string>TextLabel</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_12">
+             <widget class="QLabel" name="player_plain_1">
               <property name="text">
                <string>TextLabel</string>
               </property>
@@ -1113,6 +1421,19 @@
           </item>
          </layout>
         </item>
+        <item>
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </item>
       <item>
@@ -1139,7 +1460,7 @@
        <x>10</x>
        <y>3</y>
        <width>122</width>
-       <height>991</height>
+       <height>1051</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -1319,7 +1640,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>1440</width>
      <height>27</height>
     </rect>
    </property>
