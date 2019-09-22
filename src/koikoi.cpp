@@ -179,6 +179,158 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiPlayerCards.push_back(button);
     }
 
+    //Set up player yaku cards defaults in GUI
+    for(int i{0};i<5;i++)
+    {
+        QString yakuLabelName = "player_light_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->playerLightHLayout->addWidget(label);
+        this->guiPlayerLightYaku.push_back(label);
+    }
+
+    for(int i{0};i<9;i++)
+    {
+        QString yakuLabelName = "player_animal_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->playerAnimalHLayout->addWidget(label);
+        this->guiPlayerAnimalYaku.push_back(label);
+    }
+
+    for(int i{0};i<10;i++)
+    {
+        QString yakuLabelName = "player_ribbon_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->playerRibbonHLayout->addWidget(label);
+        this->guiPlayerRibbonYaku.push_back(label);
+    }
+
+    for(int i{0};i<24;i++)
+    {
+        QString yakuLabelName = "player_plain_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->playerPlainHLayout->addWidget(label);
+        this->guiPlayerPlainYaku.push_back(label);
+    }
+
+    //Set up CPU yaku cards defaults in GUI
+    for(int i{0};i<5;i++)
+    {
+        QString yakuLabelName = "cpu_light_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->cpuLightHLayout->addWidget(label);
+        this->guiCPULightYaku.push_back(label);
+    }
+
+    for(int i{0};i<9;i++)
+    {
+        QString yakuLabelName = "cpu_animal_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->cpuAnimalHLayout->addWidget(label);
+        this->guiCPUAnimalYaku.push_back(label);
+    }
+
+    for(int i{0};i<10;i++)
+    {
+        QString yakuLabelName = "cpu_ribbon_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->cpuRibbonHLayout->addWidget(label);
+        this->guiCPURibbonYaku.push_back(label);
+    }
+
+    for(int i{0};i<24;i++)
+    {
+        QString yakuLabelName = "cpu_plain_" + QString::number(i);
+        QLabel *label = new QLabel(yakuLabelName, this);
+        label->setObjectName(yakuLabelName);
+        label->setMinimumSize(30,42);
+        label->setMaximumSize(30,42);
+        label->setText("");
+        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setScaledContents(true);
+        label->setVisible(false);
+        ui->cpuPlainHLayout->addWidget(label);
+        this->guiCPUPlainYaku.push_back(label);
+    }
+
+    //Set player yaku labels invisible
+    ui->player_ameshiko_yaku->setVisible(false);
+    ui->player_goku_yaku->setVisible(false);
+    ui->player_sanko_yaku->setVisible(false);
+    ui->player_shiko_yaku->setVisible(false);
+    ui->player_inoshikacho_yaku->setVisible(false);
+    ui->player_tane_yaku->setVisible(false);
+    ui->player_akatan_yaku->setVisible(false);
+    ui->player_aotan_yaku->setVisible(false);
+    ui->player_tanzaku_yaku->setVisible(false);
+    ui->player_bake_fuda_yaku->setVisible(false);
+    ui->player_kasu_yaku->setVisible(false);
+    ui->player_oya_ken_yaku->setVisible(false);
+    ui->player_tsuki_fuda_yaku->setVisible(false);
+
+    //Set cpu yaku labels invisible
+    ui->cpu_ameshiko_yaku->setVisible(false);
+    ui->cpu_goku_yaku->setVisible(false);
+    ui->cpu_sanko_yaku->setVisible(false);
+    ui->cpu_shiko_yaku->setVisible(false);
+    ui->cpu_inoshikacho_yaku->setVisible(false);
+    ui->cpu_tane_yaku->setVisible(false);
+    ui->cpu_akatan_yaku->setVisible(false);
+    ui->cpu_aotan_yaku->setVisible(false);
+    ui->cpu_tanzaku_yaku->setVisible(false);
+    ui->cpu_bake_fuda_yaku->setVisible(false);
+    ui->cpu_kasu_yaku->setVisible(false);
+    ui->cpu_oya_ken_yaku->setVisible(false);
+    ui->cpu_tsuki_fuda_yaku->setVisible(false);
+
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 

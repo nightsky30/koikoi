@@ -74,6 +74,16 @@ private:
     QVector<QPushButton*> guiCPUCards {};
     QVector<QPushButton*> guiGameHandCards {};
 
+    QVector<QLabel*> guiPlayerLightYaku {};
+    QVector<QLabel*> guiPlayerAnimalYaku {};
+    QVector<QLabel*> guiPlayerRibbonYaku {};
+    QVector<QLabel*> guiPlayerPlainYaku {};
+
+    QVector<QLabel*> guiCPULightYaku {};
+    QVector<QLabel*> guiCPUAnimalYaku {};
+    QVector<QLabel*> guiCPURibbonYaku {};
+    QVector<QLabel*> guiCPUPlainYaku {};
+
 public:
     /*
     * Constructors / Destructors
