@@ -14,6 +14,7 @@
 #include <QIntegerForSize>
 #include <QIcon>
 #include <QThread>
+#include <QPixmap>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -190,7 +191,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setText("");
         label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
         label->setScaledContents(true);
-        label->setVisible(false);
+        label->setVisible(true);
         ui->playerLightHLayout->addWidget(label);
         this->guiPlayerLightYaku.push_back(label);
     }
@@ -205,7 +206,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setText("");
         label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
         label->setScaledContents(true);
-        label->setVisible(false);
+        label->setVisible(true);
         ui->playerAnimalHLayout->addWidget(label);
         this->guiPlayerAnimalYaku.push_back(label);
     }
@@ -220,7 +221,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setText("");
         label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
         label->setScaledContents(true);
-        label->setVisible(false);
+        label->setVisible(true);
         ui->playerRibbonHLayout->addWidget(label);
         this->guiPlayerRibbonYaku.push_back(label);
     }
@@ -235,7 +236,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setText("");
         label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
         label->setScaledContents(true);
-        label->setVisible(false);
+        label->setVisible(true);
         ui->playerPlainHLayout->addWidget(label);
         this->guiPlayerPlainYaku.push_back(label);
     }
@@ -420,6 +421,14 @@ void KoiKoi::startGame()
 {
     this->m_player1.getHand()->resetHand();
     this->m_player2.getHand()->resetHand();
+    this->m_player1.getLightMatch()->resetHand();
+    this->m_player1.getAnimalMatch()->resetHand();
+    this->m_player1.getRibbonMatch()->resetHand();
+    this->m_player1.getPlainMatch()->resetHand();
+    this->m_player2.getLightMatch()->resetHand();
+    this->m_player2.getAnimalMatch()->resetHand();
+    this->m_player2.getRibbonMatch()->resetHand();
+    this->m_player2.getPlainMatch()->resetHand();
     this->m_gameHand.resetHand();
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
@@ -722,6 +731,183 @@ void KoiKoi::updateCards()
             button->setVisible(true);
         }
     }
+}
+
+void KoiKoi::updateYaku()
+{
+    Hand *playerLightHand = m_player1.getLightMatch();
+    Hand *playerAnimalHand = m_player1.getAnimalMatch();
+    Hand *playerRibbonHand = m_player1.getRibbonMatch();
+    Hand *playerPlainHand = m_player1.getPlainMatch();
+
+    Hand *cpuLightHand = m_player2.getLightMatch();
+    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
+    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
+    Hand *cpuPlainHand = m_player2.getPlainMatch();
+
+    //Iterate like update cards...
+
+//    for(int i{0};i<guiPlayerLightYaku.size();i++)
+//    {
+//        QLabel *label = guiPlayerLightYaku.at(i);
+//        if (i>playerLightHand->getNumCards()-1)
+//        {
+//            label->setPixmap(QPixmap(QString(":/deck/Hanafuda_koi-2.svg")));
+//            label->setEnabled(false);
+//            label->setVisible(false);
+//        }
+//        else
+//        {
+//            label->setPixmap(QPixmap(playerLightHand->getCard(i)->getImageStr()));
+//            label->setEnabled(true);
+//            label->setVisible(true);
+//        }
+//    }
+
+    //    for(int j{0};j<guiPlayerAnimalYaku.size();j++)
+    //    {
+    //        QLabel *label2 = guiPlayerAnimalYaku.at(j);
+    //        if (j>playerAnimalHand->getNumCards()-1)
+    //        {
+    //            label2->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label2->setEnabled(false);
+    //            label2->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label2->setPixmap(QString(playerAnimalHand->getCard(j)->getImageStr()));
+    //            label2->setEnabled(true);
+    //            label2->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int k{0};k<guiPlayerRibbonYaku.size();k++)
+    //    {
+    //        QLabel *label = guiPlayerRibbonYaku.at(k);
+    //        if (k>playerRibbonHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setEnabled(false);
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(playerRibbonHand->getCard(k)->getImageStr()));
+    //            label->setEnabled(true);
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int l{0};l<guiPlayerPlainYaku.size();l++)
+    //    {
+    //        QLabel *label = guiPlayerPlainYaku.at(l);
+    //        if (l>playerPlainHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setEnabled(false);
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(playerPlainHand->getCard(l)->getImageStr()));
+    //            label->setEnabled(true);
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int m{0};m<guiCPULightYaku.size();m++)
+    //    {
+    //        QLabel *label = guiCPULightYaku.at(m);
+    //        if (m>cpuLightHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(cpuLightHand->getCard(m)->getImageStr()));
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int n{0};n<guiCPUAnimalYaku.size();n++)
+    //    {
+    //        QLabel *label = guiCPUAnimalYaku.at(n);
+    //        if (n>cpuAnimalHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(cpuAnimalHand->getCard(n)->getImageStr()));
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int p{0};p<guiCPURibbonYaku.size();p++)
+    //    {
+    //        QLabel *label = guiCPURibbonYaku.at(p);
+    //        if (p>cpuRibbonHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(cpuRibbonHand->getCard(p)->getImageStr()));
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    for(int q{0};q<guiCPUPlainYaku.size();q++)
+    //    {
+    //        QLabel *label = guiCPUPlainYaku.at(q);
+    //        if (q>cpuPlainHand->getNumCards()-1)
+    //        {
+    //            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+    //            label->setVisible(false);
+    //        }
+    //        else
+    //        {
+    //            label->setPixmap(QString(cpuPlainHand->getCard(q)->getImageStr()));
+    //            label->setVisible(true);
+    //        }
+    //    }
+
+    //    if (yaku)
+    //    {
+    //        //Set player yaku labels visible
+    //        ui->player_ameshiko_yaku->setVisible(true);
+    //        ui->player_goku_yaku->setVisible(true);
+    //        ui->player_sanko_yaku->setVisible(true);
+    //        ui->player_shiko_yaku->setVisible(true);
+    //        ui->player_inoshikacho_yaku->setVisible(true);
+    //        ui->player_tane_yaku->setVisible(true);
+    //        ui->player_akatan_yaku->setVisible(true);
+    //        ui->player_aotan_yaku->setVisible(true);
+    //        ui->player_tanzaku_yaku->setVisible(true);
+    //        ui->player_bake_fuda_yaku->setVisible(true);
+    //        ui->player_kasu_yaku->setVisible(true);
+    //        ui->player_oya_ken_yaku->setVisible(true);
+    //        ui->player_tsuki_fuda_yaku->setVisible(true);
+
+    //        //Set cpu yaku labels visible
+    //        ui->cpu_ameshiko_yaku->setVisible(true);
+    //        ui->cpu_goku_yaku->setVisible(true);
+    //        ui->cpu_sanko_yaku->setVisible(true);
+    //        ui->cpu_shiko_yaku->setVisible(true);
+    //        ui->cpu_inoshikacho_yaku->setVisible(true);
+    //        ui->cpu_tane_yaku->setVisible(true);
+    //        ui->cpu_akatan_yaku->setVisible(true);
+    //        ui->cpu_aotan_yaku->setVisible(true);
+    //        ui->cpu_tanzaku_yaku->setVisible(true);
+    //        ui->cpu_bake_fuda_yaku->setVisible(true);
+    //        ui->cpu_kasu_yaku->setVisible(true);
+    //        ui->cpu_oya_ken_yaku->setVisible(true);
+    //        ui->cpu_tsuki_fuda_yaku->setVisible(true);
+    //    }
+
 }
 
 /*
@@ -1072,6 +1258,8 @@ void KoiKoi::selectFromGameHand()
         disconnectDeck();
         //call updateCards
         updateCards();
+        //call updatePlayerYaku
+        updateYaku();
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         checkGameHand();
@@ -1163,6 +1351,8 @@ void KoiKoi::selectFromGameHand()
         connectDeck();
         //call updateCards
         updateCards();
+        //call updatePlayerYaku
+        updateYaku();
         //***************************************
         //allows to click deck to call drawCard
         //***************************************

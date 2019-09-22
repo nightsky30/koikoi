@@ -124,6 +124,7 @@ public:
     void showGameScreen();
     void showOyaScreen();
     void updateCards();
+    void updateYaku();
     void checkGameHand();
     void connectDeck();
     void connectGameHand(QPushButton *button);
