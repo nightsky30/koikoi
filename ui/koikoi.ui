@@ -398,6 +398,42 @@
            </layout>
           </item>
           <item>
+           <widget class="QLabel" name="cpu_tsukimi_de_ippai_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Tsukimi De Ippai</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="cpu_hanami_de_ippai_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Hanami De Ippai</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="cpu_sanko_yaku">
             <property name="font">
              <font>
@@ -669,6 +705,24 @@
             </property>
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="cpu_akatan_aotan_no_chofuku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Akatan Aotan No Chofuku (3 Red Poetry, 3 Blue)</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1000,7 +1054,7 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="player_shiko_yaku">
+           <widget class="QLabel" name="player_tsukimi_de_ippai_yaku">
             <property name="font">
              <font>
               <pointsize>8</pointsize>
@@ -1010,7 +1064,43 @@
              </font>
             </property>
             <property name="text">
-             <string>Shiko (4 Brights)</string>
+             <string>Tsukimi De Ippai</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="player_hanami_de_ippai_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Hanami De Ippai</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="player_sanko_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Sanko (3 Brights)</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1036,7 +1126,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="player_sanko_yaku">
+           <widget class="QLabel" name="player_shiko_yaku">
             <property name="font">
              <font>
               <pointsize>8</pointsize>
@@ -1046,7 +1136,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Sanko (3 Brights)</string>
+             <string>Shiko (4 Brights)</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1271,6 +1361,24 @@
             </property>
             <property name="text">
              <string>Aotan (Blue Ribbons)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="player_akatan_aotan_no_chofuku_yaku">
+            <property name="font">
+             <font>
+              <pointsize>8</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Akatan Aotan No Chofuku (3 Red Poetry, 3 Blue)</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
