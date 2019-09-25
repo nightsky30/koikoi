@@ -19,6 +19,9 @@
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
 
+/*
+ * Constructor
+ */
 KoiKoi::KoiKoi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::KoiKoi)
@@ -54,7 +57,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
     connect(ui->actionPreferences, &QAction::triggered, this, &KoiKoi::onPreferencesClicked, Qt::UniqueConnection);
     connect(ui->actionAbout, &QAction::triggered, this, &KoiKoi::onAboutClicked, Qt::UniqueConnection);
 
-    //Set up game cards defaults in GUI
+    //Set up CPU game cards defaults in GUI
     for(int i{0};i<8;i++)
     {
         QString buttonName = "cpuButton_" + QString::number(i);
@@ -73,6 +76,8 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiCPUCards.push_back(button);
     }
 
+    //Set up game board game cards defaults in GUI
+    //Special ordering of cards to match 4 sets of 4
     for(int j{0};j<16;j++)
     {
         QString buttonName = "gameButton_" + QString::number(j);
@@ -162,6 +167,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiGameHandCards.append(button);
     }
 
+    //Set up Player game cards defaults in GUI
     for(int k{0};k<8;k++)
     {
         QString buttonName = "playerButton_" + QString::number(k);
@@ -180,7 +186,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiPlayerCards.push_back(button);
     }
 
-    //Set up player yaku cards defaults in GUI
+    //Set up Player yaku cards defaults in GUI
     for(int i{0};i<5;i++)
     {
         QString yakuLabelName = "player_light_" + QString::number(i);
@@ -302,12 +308,16 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiCPUPlainYaku.push_back(label);
     }
 
+    //Set up SLOT/SIGNAL for oya selection
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 
     showTitleScreen();
 }
 
+/*
+ * Default Destructor
+ */
 KoiKoi::~KoiKoi()
 {
     delete ui;
@@ -386,6 +396,7 @@ bool KoiKoi::getGameStatus()
 
 /*
  * Starts a new game.
+ * Must reset deck, hands, yaku, etc.
  */
 void KoiKoi::startGame()
 {
@@ -401,18 +412,13 @@ void KoiKoi::startGame()
 
 /*
  * Generates a random 2 card hand used by players to determine
- * who is the oya player and takes first turn.  It then compares
- * card months and sets the variable within the hand to indicate
+ * who is the oya player which takes the first turn.  It then compares
+ * card months.  The earlier card is the oya card.
+ * It sets the variable within the hand to indicate
  * which card is the oya card.
  */
 void KoiKoi::generateOyaCard()
 {
-    //Ask human player to select 1 of 2 random cards
-    //Compare cards
-    //Earliest card is the Oya and has advantage of going first
-
-    //Use m_oyaHand...
-    //Card 1 and 2
     //Not removed from deck because they are only used to determine dealer
     m_oyaHand.acceptCard(*m_gameDeck.getRandCard());
     m_oyaHand.acceptCard(*m_gameDeck.getRandCard());
@@ -589,26 +595,41 @@ void KoiKoi::startRound()
 //    }
 //}
 
+/*
+ * Tally the points for each player at the end of the round.
+ */
 void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 {
     //Do stuff
 }
 
+/*
+ * Prints the number of rounds to the console.
+ */
 void KoiKoi::printNumRounds()
 {
     std::cout << "The number of rounds set for the current game are: " << m_rounds << std::endl;
 }
 
+/*
+ * Prints the current round to the console.
+ */
 void KoiKoi::printCurrentRound()
 {
     std::cout << "The current round is: " << m_currentRound << std::endl;
 }
 
+/*
+ * Prints the current game status to the console.
+ */
 void KoiKoi::printGameStatus()
 {
     std::cout << "The game's current status is: " << m_gameStatus << std::endl;
 }
 
+/*
+ * Displays the title screen within the GUI.
+ */
 void KoiKoi::showTitleScreen()
 {
     ui->titleFrame->show();
@@ -616,6 +637,9 @@ void KoiKoi::showTitleScreen()
     ui->oyaFrame->setHidden(true);
 }
 
+/*
+ * Displays the game screen within the GUI.
+ */
 void KoiKoi::showGameScreen()
 {
     ui->titleFrame->setHidden(true);
@@ -623,6 +647,9 @@ void KoiKoi::showGameScreen()
     ui->oyaFrame->setHidden(true);
 }
 
+/*
+ * Displays the oya selection screen within the GUI.
+ */
 void KoiKoi::showOyaScreen()
 {
     ui->titleFrame->setHidden(true);
@@ -630,24 +657,23 @@ void KoiKoi::showOyaScreen()
     ui->oyaFrame->show();
 }
 
+/*
+ * Updates and shows all dealt cards (not CPU).
+ *
+ * Set unused cards in the GUI as invisible, default deck style.
+ * Or if the cards are currently being used, ensures they are
+ * visible within the GUI, and updates the images.
+ *
+ * This is kept separate from connections and disconnections
+ */
 void KoiKoi::updateCards()
 {
-    //******************************************
-    //Update and show all dealt cards (not CPU)
-    //******************************************
-
     Hand *playerHand = m_player1.getHand();
     Hand *cpuHand = m_player2.getHand();
     //Already have gameHand
     //Already have deck
 
-    //***********************************************************
-    //Set ALL invisible, default deck style
-    //OR ensure visible, update image
-    //
-    //This is kept separate from connections and disconnections
-    //***********************************************************
-
+    //Set used/unused cards in the GUI
     for(int i{0};i<guiCPUCards.size();i++)
     {
         QPushButton *button = guiCPUCards.at(i);
@@ -697,6 +723,10 @@ void KoiKoi::updateCards()
     }
 }
 
+/*
+ * Resets yaku status for all players both at the
+ * variable level as well as visual status within the GUI.
+ */
 void KoiKoi::resetYaku()
 {
     this->m_player1.getLightMatch()->resetHand();
@@ -748,6 +778,10 @@ void KoiKoi::resetYaku()
     ui->cpu_tsuki_fuda_yaku->setVisible(false);
 }
 
+/*
+ * Updates yaku status for all players both at the
+ * variable level as well as visual status within the GUI.
+ */
 void KoiKoi::updateYaku()
 {
     Hand *playerLightHand = m_player1.getLightMatch();
@@ -760,8 +794,11 @@ void KoiKoi::updateYaku()
     Hand *cpuRibbonHand = m_player2.getRibbonMatch();
     Hand *cpuPlainHand = m_player2.getPlainMatch();
 
-    //Iterate like update cards...
-
+    /*
+     * If the number of cards in each yaku GUI QVector exceed
+     * the number in each yaku hand, then set the default card
+     * image and hide.
+     */
     for(int i{0};i<guiPlayerLightYaku.size();i++)
     {
         QLabel *label = guiPlayerLightYaku.at(i);
@@ -883,8 +920,8 @@ void KoiKoi::updateYaku()
     }
 
     /*
-     * Add yaku to player via bool vector
-     * List as acquired in GUI
+     * Add yaku to player via bool vector.
+     * List as acquired in GUI.
      *
      * The following Yaku have not been implemented code-wise:
      *
@@ -1061,9 +1098,9 @@ void KoiKoi::updateYaku()
 }
 
 /*
- * Function checks game hand for matching cards in the current player's hand.
- * Enables cards corresponding buttons that match while disabling the buttons
- * for cards that do not match.
+ * Checks game hand for matching cards in the current player's hand.
+ * Enables cards corresponding buttons that match while disabling the
+ * buttons for cards that do not match.
  */
 void KoiKoi::checkGameHand()
 {
@@ -1098,17 +1135,29 @@ void KoiKoi::checkGameHand()
     disconnectDeck();
 }
 
+/*
+ * Connects the SIGNAL/SLOT for the game deck card button in the GUI so players may draw cards.
+ */
 void KoiKoi::connectDeck()
 {
     connect(ui->deckButton, SIGNAL(released()), this, SLOT(drawCard()), Qt::UniqueConnection);
 }
 
+/*
+ * Connects the SIGNAL/SLOT for individual card buttons in the GUI for the game board
+ * hand so players may select cards to match.
+ */
 void KoiKoi::connectGameHand(QPushButton *button)
 {
     QPushButton *currentButton = button;
     connect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()), Qt::UniqueConnection);
 }
 
+/*
+ * Connects the SIGNAL/SLOT for all card buttons in the GUI for the game board
+ * hand if they have corresponding game hand cards.  This is so players
+ * may select cards to match.
+ */
 void KoiKoi::connectGameHand()
 {
     for(int j{0};j<guiGameHandCards.size();j++)
@@ -1126,12 +1175,21 @@ void KoiKoi::connectGameHand()
     }
 }
 
+/*
+ * Connects the SIGNAL/SLOT for individual card buttons in the GUI for the player
+ * hand so players may select cards to match.
+ */
 void KoiKoi::connectPlayerHand(QPushButton *button)
 {
     QPushButton *currentButton = button;
     connect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()), Qt::UniqueConnection);
 }
 
+/*
+ * Connects the SIGNAL/SLOT for all card buttons in the GUI for the player
+ * hand if they have corresponding player hand cards.  This is so players
+ * may select cards to match.
+ */
 void KoiKoi::connectPlayerHand()
 {
     Hand *playerHand = m_player1.getHand();
@@ -1151,17 +1209,29 @@ void KoiKoi::connectPlayerHand()
     }
 }
 
+/*
+ * Disconnects the SIGNAL/SLOT for the game deck card button in the GUI so players may NOT draw cards.
+ */
 void KoiKoi::disconnectDeck()
 {
     disconnect(ui->deckButton, SIGNAL(released()), this, SLOT(drawCard()));
 }
 
+/*
+ * Disconnects the SIGNAL/SLOT for individual card buttons in the GUI for the game board
+ * hand so players may NOT select cards to match.
+ */
 void KoiKoi::disconnectGameHand(QPushButton *button)
 {
     QPushButton *currentButton = button;
     disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromGameHand()));
 }
 
+/*
+ * Disconnects the SIGNAL/SLOT for all card buttons in the GUI for the game board
+ * hand if they have corresponding game hand cards.  This is so players
+ * may NOT select cards to match.
+ */
 void KoiKoi::disconnectGameHand()
 {
     for(int j{0};j<guiGameHandCards.size();j++)
@@ -1171,12 +1241,21 @@ void KoiKoi::disconnectGameHand()
     }
 }
 
+/*
+ * Disconnects the SIGNAL/SLOT for individual card buttons in the GUI for the player
+ * hand so players may NOT select cards to match.
+ */
 void KoiKoi::disconnectPlayerHand(QPushButton *button)
 {
     QPushButton *currentButton = button;
     disconnect(currentButton, SIGNAL(released()), this, SLOT(selectFromHand()));
 }
 
+/*
+ * Disconnects the SIGNAL/SLOT for all card buttons in the GUI for the player
+ * hand if they have corresponding player hand cards.  This is so players
+ * may NOT select cards to match.
+ */
 void KoiKoi::disconnectPlayerHand()
 {
     for(int k{0};k<guiPlayerCards.size();k++)
@@ -1186,18 +1265,30 @@ void KoiKoi::disconnectPlayerHand()
     }
 }
 
+/*
+ * Slot function for the menu item which calls the
+ * function to start a new game.
+ */
 void KoiKoi::onNewGameClicked()
 {
     //Create game
     startGame();
 }
 
+/*
+ * Slot function for the menu item which calls the
+ * function to quit the current game.
+ */
 void KoiKoi::onQuitGameClicked()
 {
     //Quit Game
     showTitleScreen();
 }
 
+/*
+ * Slot function for the menu item which calls the
+ * function to open the preferences dialog.
+ */
 void KoiKoi::onPreferencesClicked()
 {
     //Open preferences dialog
@@ -1206,6 +1297,10 @@ void KoiKoi::onPreferencesClicked()
     prefs->show();
 }
 
+/*
+ * Slot function for the menu item which calls the
+ * function to open the about dialog.
+ */
 void KoiKoi::onAboutClicked()
 {
     //Open about dialog
@@ -1214,6 +1309,11 @@ void KoiKoi::onAboutClicked()
     about->show();
 }
 
+/*
+ * Slot function for the oya card buttons in the GUI which
+ * determine the oya player based on the player's card selection.
+ * It then calls the function to start the initial round.
+ */
 void KoiKoi::determineOyaPlayer()
 {
     QObject *senderButton = sender();
@@ -1240,6 +1340,16 @@ void KoiKoi::determineOyaPlayer()
     startRound();//deal and showGameScreen in startRound
 }
 
+/*
+ * Slot function for the player hand card buttons in the GUI which
+ * determine the player's card selection.
+ * It then determines if there are matching cards in the game hand
+ * on the game board.  If there are matches it will enable them and
+ * connect the buttons allowing the player to then select a matching
+ * card from the game board.  If there aren't matches, then it will
+ * discard the player's selected card, and allow the player to draw
+ * a card from the deck.
+ */
 void KoiKoi::selectFromHand()
 {
     Hand *playerHand = m_player1.getHand();
@@ -1312,6 +1422,17 @@ void KoiKoi::selectFromHand()
     }
 }
 
+/*
+ * Slot function for the game hand card buttons in the GUI which
+ * determine the player's card selection.
+ * It then determines if there are matching cards in the player hand
+ * or deck.  If there are matches it will move the cards to the
+ * appropriate yaku hands.
+ *
+ * This function helps maintain turn flow with connections and
+ * disconnections from various buttons in the GUI under certain
+ * circumstances.
+ */
 void KoiKoi::selectFromGameHand()
 {
     /*
@@ -1410,6 +1531,12 @@ void KoiKoi::selectFromGameHand()
         updateCards();
         //call updatePlayerYaku
         updateYaku();
+        //check for yaku
+        //if yaku
+        //then request koikoi
+        //if koikoi
+        //then finish turn
+        //else finish round
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         checkGameHand();
@@ -1503,19 +1630,28 @@ void KoiKoi::selectFromGameHand()
         updateCards();
         //call updatePlayerYaku
         updateYaku();
+        //check for yaku
+        //if yaku
+        //then request koikoi
+        //if koikoi
+        //then finish turn
+        //else finish round
         //***************************************
         //allows to click deck to call drawCard
         //***************************************
     }
-    //check for yaku
-    //if yaku
-    //then request koikoi
-    //if koikoi
-    //then finish turn
-    //else finish round
 }
 
-//void KoiKoi::drawCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
+/*
+ * Slot function for the deck card button in the GUI which
+ * determines the player's card selection.
+ * It then determines if there are matching cards in the game hand
+ * on the game board.  If there are matches it will enable them and
+ * connect the buttons allowing the player to then select a matching
+ * card from the game board.  If there aren't matches, then it will
+ * discard the player's selected card.  Then it will allow the next
+ * player to start their turn and select a card from their hand.
+ */
 void KoiKoi::drawCard()
 {
     //Shows next card for deck
