@@ -302,8 +302,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiCPUPlainYaku.push_back(label);
     }
 
-    resetYaku();
-
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 
@@ -888,16 +886,20 @@ void KoiKoi::updateYaku()
      * Add yaku to player via bool vector
      * List as acquired in GUI
      *
-     * Also the sake cup appears to be animal type, but also matches with
-     * light yaku...dbl check animal when checking light
+     * The following Yaku have not been implemented code-wise:
+     *
+     * 1 Yaku(1, "Bake-Fuda (Wild Card)", "The animal card of Chrysanthemum can be regarded as a plain card as well. If you have this, 9 plain cards and this card will be the Yaku of Kasu."),
+     * 2 Yaku(4, "Tsuki-fuda (Monthly Cards)", "All four cards in one group shown right on screen. 4 points."),
+     * 3 Yaku(6, "Oya-Ken (Dealer's Privilege)", "If neither gets any Yaku, Dealer wins 6 points."),
      */
+
+    //Sanko, 5pts
+    //Shiko, without Rain, 8pts
+    //Ame Shiko, with rain, 7pts
+    //Goku, 10pts
+    bool foundRain {false};
     switch (playerLightHand->getNumCards())
     {
-    case 1:
-        //Sake Cup is in animal hand...
-        //Tsukimi De Ippai, 5 Pts
-        //Hanami De Ippai, 5 Pts
-        break;
     case 3:
         //Sanko, 5pts
         m_player1.setYaku(12, true);
@@ -906,6 +908,27 @@ void KoiKoi::updateYaku()
     case 4:
         //Shiko, without Rain, 8pts
         //Ame Shiko, with rain, 7pts
+        for (int i {0};i<playerLightHand->getNumCards();i++)
+        {
+            switch (playerLightHand->getCard(i)->getCardType2())
+            {
+            case RAIN:
+                foundRain = true;
+                break;
+            default:
+                break;
+            }
+        }
+        if(foundRain == true)
+        {
+            m_player1.setYaku(13, true);
+            ui->player_ameshiko_yaku->setVisible(true);
+        }
+        else
+        {
+            m_player1.setYaku(14, true);
+            ui->player_shiko_yaku->setVisible(true);
+        }
         break;
     case 5:
         //Goku, 10pts
@@ -916,83 +939,125 @@ void KoiKoi::updateYaku()
         break;
     }
 
-    switch (playerAnimalHand->getNumCards())
+    //Sake Cup is in animal hand...
+    //Tsukimi De Ippai, 5 Pts
+    //Hanami De Ippai, 5 Pts
+    for (int i {0};i<playerLightHand->getNumCards();i++)
     {
-    case 3:
-        //Inoshikacho, 5pts
-        break;
-    case 5:
-        //Tane, 1pt
+        switch (playerLightHand->getCard(i)->getCardType2())
+        {
+        case MOON:
+            for(int j {0};j<playerAnimalHand->getNumCards();j++)
+            {
+                if (playerAnimalHand->getCard(j)->getCardType2() == SAKE_CUP)
+                {
+                    m_player1.setYaku(10, true);
+                    ui->player_tsukimi_de_ippai_yaku->setVisible(true);
+                }
+            }
+            break;
+        case CURTAIN:
+            for(int j {0};j<playerAnimalHand->getNumCards();j++)
+            {
+                if (playerAnimalHand->getCard(j)->getCardType2() == SAKE_CUP)
+                {
+                    m_player1.setYaku(11, true);
+                    ui->player_hanami_de_ippai_yaku->setVisible(true);
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    //Tane, 1pt
+    if (playerAnimalHand->getNumCards() >= 5)
+    {
         m_player1.setYaku(4, true);
         ui->player_tane_yaku->setVisible(true);
-        break;
-    default:
-        break;
     }
 
-    switch (playerRibbonHand->getNumCards())
+    //Inoshikacho, 5pts
+    if (playerAnimalHand->getNumCards() >= 3)
     {
-    case 3:
+        for(int i{0};i<playerAnimalHand->getNumCards();i++)
+        {
+            if(playerAnimalHand->getCard(i)->getCardType2() == BOAR)
+            {
+                for(int j{0};j<playerAnimalHand->getNumCards();j++)
+                {
+                    if(playerAnimalHand->getCard(j)->getCardType2() == DEER)
+                    {
+                        for(int k{0};k<playerAnimalHand->getNumCards();k++)
+                        {
+                            if(playerAnimalHand->getCard(k)->getCardType2() == BUTTERFLIES)
+                            {
+                                m_player1.setYaku(5, true);
+                                ui->player_inoshikacho_yaku->setVisible(true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    int numRedPoems {0};
+    int numBlueRibbons {0};
+
+    //Akatan, 5pts
+    //Aotan, 5pts
+    //Akatan Aotan No Chofuku, 10pts
+    if(playerRibbonHand->getNumCards() >= 3)
+    {
+        for (int i {0};i<playerRibbonHand->getNumCards();i++)
+        {
+            switch (playerRibbonHand->getCard(i)->getCardType2())
+            {
+            case RED_POEM:
+                numRedPoems++;
+                break;
+            case BLUE_RIBBON:
+                numBlueRibbons++;
+                break;
+            default:
+                break;
+            }
+        }
         //Akatan, 5pts
+        if(numRedPoems >= 3)
+        {
+            m_player1.setYaku(7, true);
+            ui->player_akatan_yaku->setVisible(true);
+        }
         //Aotan, 5pts
-        break;
-    case 5:
-        //Tanzaku, 1pt
+        if(numBlueRibbons >= 3)
+        {
+            m_player1.setYaku(8, true);
+            ui->player_aotan_yaku->setVisible(true);
+        }
+        //Akatan Aotan No Chofuku, 10pts
+        if(numRedPoems >= 3 && numBlueRibbons >= 3)
+        {
+            m_player1.setYaku(9, true);
+            ui->player_akatan_aotan_no_chofuku_yaku->setVisible(true);
+        }
+    }
+
+    //Tanzaku, 1pt
+    if(playerRibbonHand->getNumCards() >= 5)
+    {
         m_player1.setYaku(6, true);
         ui->player_tanzaku_yaku->setVisible(true);
-        break;
-    case 6:
-        //Akatan Aotan No Chofuku, 10pts
-        break;
-    default:
-        break;
     }
 
-    switch (playerPlainHand->getNumCards())
+    //Kasu, 1pt
+    if (playerPlainHand->getNumCards() >=10)
     {
-    case 10:
-        //Kasu, 1pt
         m_player1.setYaku(0, true);
         ui->player_kasu_yaku->setVisible(true);
-        break;
-    default:
-        break;
     }
-
-//    ui->player_ameshiko_yaku->setVisible(true);
-//    ui->player_goku_yaku->setVisible(true);
-//    ui->player_sanko_yaku->setVisible(true);
-//    ui->player_shiko_yaku->setVisible(true);
-//    ui->player_hanami_de_ippai_yaku->setVisible(true);
-//    ui->player_tsukimi_de_ippai_yaku->setVisible(true);
-//    ui->player_inoshikacho_yaku->setVisible(true);
-//    ui->player_tane_yaku->setVisible(true);
-//    ui->player_akatan_yaku->setVisible(true);
-//    ui->player_aotan_yaku->setVisible(true);
-//    ui->player_akatan_aotan_no_chofuku_yaku->setVisible(true);
-//    ui->player_tanzaku_yaku->setVisible(true);
-//    ui->player_bake_fuda_yaku->setVisible(true);
-//    ui->player_kasu_yaku->setVisible(true);
-//    ui->player_oya_ken_yaku->setVisible(true);
-//    ui->player_tsuki_fuda_yaku->setVisible(true);
-
-//    ui->cpu_ameshiko_yaku->setVisible(true);
-//    ui->cpu_goku_yaku->setVisible(true);
-//    ui->cpu_sanko_yaku->setVisible(true);
-//    ui->cpu_shiko_yaku->setVisible(true);
-//    ui->cpu_hanami_de_ippai_yaku->setVisible(true);
-//    ui->cpu_tsukimi_de_ippai_yaku->setVisible(true);
-//    ui->cpu_inoshikacho_yaku->setVisible(true);
-//    ui->cpu_tane_yaku->setVisible(true);
-//    ui->cpu_akatan_yaku->setVisible(true);
-//    ui->cpu_aotan_yaku->setVisible(true);
-//    ui->cpu_akatan_aotan_no_chofuku_yaku->setVisible(true);
-//    ui->cpu_tanzaku_yaku->setVisible(true);
-//    ui->cpu_bake_fuda_yaku->setVisible(true);
-//    ui->cpu_kasu_yaku->setVisible(true);
-//    ui->cpu_oya_ken_yaku->setVisible(true);
-//    ui->cpu_tsuki_fuda_yaku->setVisible(true);
-
 }
 
 /*
