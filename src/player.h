@@ -17,9 +17,9 @@ private:
     */
     int m_score {0};
 //Holds the numbers from the Game's Yaku const??
-    std::vector<Yaku> m_obtainedYaku
+    std::vector<bool> m_obtainedYaku
     {
-        std::vector<Yaku> {}
+        std::vector<bool> {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
     };
     bool m_oya {false};
     bool m_koikoi {false};
@@ -40,7 +40,7 @@ public:
     * Get Functions
     */
     int getScore();
-    std::vector<Yaku> getYaku();
+    bool getYaku(int numYaku);
     bool getOya();
     bool getKoikoi();
     Hand* getHand();
@@ -53,7 +53,8 @@ public:
     * Set Functions
     */
     void setScore(int score);
-    void setYaku();
+    void setYaku(int numYaku, bool yakuValue);
+    void resetYaku();
     void setOya(bool oya);
     void setKoikoi();
 

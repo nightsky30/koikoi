@@ -9,7 +9,12 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-// The game consists of these yaku
+/*
+ * The game consists of these yaku.
+ * Order here matters.
+ * Each player has a corresponding bool vector that
+ * matches values with objects in this Yaku vector.
+ */
 const static std::vector<Yaku> acceptableYaku
 {
     Yaku(1, "Kasu (Plains)", "10 Plain cards. 1 point. Each Additional 1P after."),
@@ -127,6 +132,7 @@ public:
     void showGameScreen();
     void showOyaScreen();
     void updateCards();
+    void resetYaku();
     void updateYaku();
     void checkGameHand();
     void connectDeck();

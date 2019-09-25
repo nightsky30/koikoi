@@ -302,41 +302,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         this->guiCPUPlainYaku.push_back(label);
     }
 
-    //Set player yaku labels invisible
-    ui->player_ameshiko_yaku->setVisible(false);
-    ui->player_goku_yaku->setVisible(false);
-    ui->player_sanko_yaku->setVisible(false);
-    ui->player_shiko_yaku->setVisible(false);
-    ui->player_hanami_de_ippai_yaku->setVisible(false);
-    ui->player_tsukimi_de_ippai_yaku->setVisible(false);
-    ui->player_inoshikacho_yaku->setVisible(false);
-    ui->player_tane_yaku->setVisible(false);
-    ui->player_akatan_yaku->setVisible(false);
-    ui->player_aotan_yaku->setVisible(false);
-    ui->player_akatan_aotan_no_chofuku_yaku->setVisible(false);
-    ui->player_tanzaku_yaku->setVisible(false);
-    ui->player_bake_fuda_yaku->setVisible(false);
-    ui->player_kasu_yaku->setVisible(false);
-    ui->player_oya_ken_yaku->setVisible(false);
-    ui->player_tsuki_fuda_yaku->setVisible(false);
-
-    //Set cpu yaku labels invisible
-    ui->cpu_ameshiko_yaku->setVisible(false);
-    ui->cpu_goku_yaku->setVisible(false);
-    ui->cpu_sanko_yaku->setVisible(false);
-    ui->cpu_shiko_yaku->setVisible(false);
-    ui->cpu_hanami_de_ippai_yaku->setVisible(false);
-    ui->cpu_tsukimi_de_ippai_yaku->setVisible(false);
-    ui->cpu_inoshikacho_yaku->setVisible(false);
-    ui->cpu_tane_yaku->setVisible(false);
-    ui->cpu_akatan_yaku->setVisible(false);
-    ui->cpu_aotan_yaku->setVisible(false);
-    ui->cpu_akatan_aotan_no_chofuku_yaku->setVisible(false);
-    ui->cpu_tanzaku_yaku->setVisible(false);
-    ui->cpu_bake_fuda_yaku->setVisible(false);
-    ui->cpu_kasu_yaku->setVisible(false);
-    ui->cpu_oya_ken_yaku->setVisible(false);
-    ui->cpu_tsuki_fuda_yaku->setVisible(false);
+    resetYaku();
 
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
@@ -425,20 +391,13 @@ bool KoiKoi::getGameStatus()
  */
 void KoiKoi::startGame()
 {
-    this->m_player1.getHand()->resetHand();
-    this->m_player2.getHand()->resetHand();
-    this->m_player1.getLightMatch()->resetHand();
-    this->m_player1.getAnimalMatch()->resetHand();
-    this->m_player1.getRibbonMatch()->resetHand();
-    this->m_player1.getPlainMatch()->resetHand();
-    this->m_player2.getLightMatch()->resetHand();
-    this->m_player2.getAnimalMatch()->resetHand();
-    this->m_player2.getRibbonMatch()->resetHand();
-    this->m_player2.getPlainMatch()->resetHand();
-    this->m_gameHand.resetHand();
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
+    this->m_gameHand.resetHand();
     this->m_oyaHand.resetHand();
+    this->m_player1.getHand()->resetHand();
+    this->m_player2.getHand()->resetHand();
+    resetYaku();
     generateOyaCard();
 }
 
@@ -740,6 +699,57 @@ void KoiKoi::updateCards()
     }
 }
 
+void KoiKoi::resetYaku()
+{
+    this->m_player1.getLightMatch()->resetHand();
+    this->m_player1.getAnimalMatch()->resetHand();
+    this->m_player1.getRibbonMatch()->resetHand();
+    this->m_player1.getPlainMatch()->resetHand();
+    this->m_player2.getLightMatch()->resetHand();
+    this->m_player2.getAnimalMatch()->resetHand();
+    this->m_player2.getRibbonMatch()->resetHand();
+    this->m_player2.getPlainMatch()->resetHand();
+
+    this->m_player1.resetYaku();
+    this->m_player2.resetYaku();
+
+    //Set player yaku labels invisible
+    ui->player_ameshiko_yaku->setVisible(false);
+    ui->player_goku_yaku->setVisible(false);
+    ui->player_sanko_yaku->setVisible(false);
+    ui->player_shiko_yaku->setVisible(false);
+    ui->player_hanami_de_ippai_yaku->setVisible(false);
+    ui->player_tsukimi_de_ippai_yaku->setVisible(false);
+    ui->player_inoshikacho_yaku->setVisible(false);
+    ui->player_tane_yaku->setVisible(false);
+    ui->player_akatan_yaku->setVisible(false);
+    ui->player_aotan_yaku->setVisible(false);
+    ui->player_akatan_aotan_no_chofuku_yaku->setVisible(false);
+    ui->player_tanzaku_yaku->setVisible(false);
+    ui->player_bake_fuda_yaku->setVisible(false);
+    ui->player_kasu_yaku->setVisible(false);
+    ui->player_oya_ken_yaku->setVisible(false);
+    ui->player_tsuki_fuda_yaku->setVisible(false);
+
+    //Set cpu yaku labels invisible
+    ui->cpu_ameshiko_yaku->setVisible(false);
+    ui->cpu_goku_yaku->setVisible(false);
+    ui->cpu_sanko_yaku->setVisible(false);
+    ui->cpu_shiko_yaku->setVisible(false);
+    ui->cpu_hanami_de_ippai_yaku->setVisible(false);
+    ui->cpu_tsukimi_de_ippai_yaku->setVisible(false);
+    ui->cpu_inoshikacho_yaku->setVisible(false);
+    ui->cpu_tane_yaku->setVisible(false);
+    ui->cpu_akatan_yaku->setVisible(false);
+    ui->cpu_aotan_yaku->setVisible(false);
+    ui->cpu_akatan_aotan_no_chofuku_yaku->setVisible(false);
+    ui->cpu_tanzaku_yaku->setVisible(false);
+    ui->cpu_bake_fuda_yaku->setVisible(false);
+    ui->cpu_kasu_yaku->setVisible(false);
+    ui->cpu_oya_ken_yaku->setVisible(false);
+    ui->cpu_tsuki_fuda_yaku->setVisible(false);
+}
+
 void KoiKoi::updateYaku()
 {
     Hand *playerLightHand = m_player1.getLightMatch();
@@ -875,24 +885,23 @@ void KoiKoi::updateYaku()
     }
 
     /*
-     * Add yaku to player yaku vector
+     * Add yaku to player via bool vector
      * List as acquired in GUI
      *
-     * How best to iterate through and check the player's hands and yaku and
-     * only award once??
-     *
      * Also the sake cup appears to be animal type, but also matches with
-     * light yaku.  Should Sake be added to both or just dbl check animal
-     * when checking light??
+     * light yaku...dbl check animal when checking light
      */
     switch (playerLightHand->getNumCards())
     {
-    case 2:
+    case 1:
+        //Sake Cup is in animal hand...
         //Tsukimi De Ippai, 5 Pts
         //Hanami De Ippai, 5 Pts
         break;
     case 3:
         //Sanko, 5pts
+        m_player1.setYaku(12, true);
+        ui->player_sanko_yaku->setVisible(true);
         break;
     case 4:
         //Shiko, without Rain, 8pts
@@ -900,6 +909,8 @@ void KoiKoi::updateYaku()
         break;
     case 5:
         //Goku, 10pts
+        m_player1.setYaku(15, true);
+        ui->player_goku_yaku->setVisible(true);
         break;
     default:
         break;
@@ -912,6 +923,8 @@ void KoiKoi::updateYaku()
         break;
     case 5:
         //Tane, 1pt
+        m_player1.setYaku(4, true);
+        ui->player_tane_yaku->setVisible(true);
         break;
     default:
         break;
@@ -925,6 +938,8 @@ void KoiKoi::updateYaku()
         break;
     case 5:
         //Tanzaku, 1pt
+        m_player1.setYaku(6, true);
+        ui->player_tanzaku_yaku->setVisible(true);
         break;
     case 6:
         //Akatan Aotan No Chofuku, 10pts
@@ -937,13 +952,13 @@ void KoiKoi::updateYaku()
     {
     case 10:
         //Kasu, 1pt
+        m_player1.setYaku(0, true);
+        ui->player_kasu_yaku->setVisible(true);
         break;
     default:
         break;
     }
 
-    //    if (yaku)
-    //    {
 //    ui->player_ameshiko_yaku->setVisible(true);
 //    ui->player_goku_yaku->setVisible(true);
 //    ui->player_sanko_yaku->setVisible(true);
@@ -977,43 +992,6 @@ void KoiKoi::updateYaku()
 //    ui->cpu_kasu_yaku->setVisible(true);
 //    ui->cpu_oya_ken_yaku->setVisible(true);
 //    ui->cpu_tsuki_fuda_yaku->setVisible(true);
-    //    }
-    //    else
-    //    {
-//    ui->player_ameshiko_yaku->setVisible(false);
-//    ui->player_goku_yaku->setVisible(false);
-//    ui->player_sanko_yaku->setVisible(false);
-//    ui->player_shiko_yaku->setVisible(false);
-//    ui->player_hanami_de_ippai_yaku->setVisible(false);
-//    ui->player_tsukimi_de_ippai_yaku->setVisible(false);
-//    ui->player_inoshikacho_yaku->setVisible(false);
-//    ui->player_tane_yaku->setVisible(false);
-//    ui->player_akatan_yaku->setVisible(false);
-//    ui->player_aotan_yaku->setVisible(false);
-//    ui->player_akatan_aotan_no_chofuku_yaku->setVisible(false);
-//    ui->player_tanzaku_yaku->setVisible(false);
-//    ui->player_bake_fuda_yaku->setVisible(false);
-//    ui->player_kasu_yaku->setVisible(false);
-//    ui->player_oya_ken_yaku->setVisible(false);
-//    ui->player_tsuki_fuda_yaku->setVisible(false);
-
-//    ui->cpu_ameshiko_yaku->setVisible(false);
-//    ui->cpu_goku_yaku->setVisible(false);
-//    ui->cpu_sanko_yaku->setVisible(false);
-//    ui->cpu_shiko_yaku->setVisible(false);
-//    ui->cpu_hanami_de_ippai_yaku->setVisible(false);
-//    ui->cpu_tsukimi_de_ippai_yaku->setVisible(false);
-//    ui->cpu_inoshikacho_yaku->setVisible(false);
-//    ui->cpu_tane_yaku->setVisible(false);
-//    ui->cpu_akatan_yaku->setVisible(false);
-//    ui->cpu_aotan_yaku->setVisible(false);
-//    ui->cpu_akatan_aotan_no_chofuku_yaku->setVisible(false);
-//    ui->cpu_tanzaku_yaku->setVisible(false);
-//    ui->cpu_bake_fuda_yaku->setVisible(false);
-//    ui->cpu_kasu_yaku->setVisible(false);
-//    ui->cpu_oya_ken_yaku->setVisible(false);
-//    ui->cpu_tsuki_fuda_yaku->setVisible(false);
-    //    }
 
 }
 

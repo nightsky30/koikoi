@@ -16,9 +16,9 @@ int Player::getScore()
     return m_score;
 }
 
-std::vector<Yaku> Player::getYaku()
+bool Player::getYaku(int numYaku)
 {
-    return m_obtainedYaku;
+    return m_obtainedYaku[numYaku];
 }
 
 bool Player::getOya()
@@ -71,9 +71,17 @@ void Player::setScore(int score)
     m_score = score;
 }
 
-void Player::setYaku()
+void Player::setYaku(int numYaku, bool yakuValue)
 {
+    m_obtainedYaku[numYaku] = yakuValue;
+}
 
+void Player::resetYaku()
+{
+    for(int i {0};i<m_obtainedYaku.size();i++)
+    {
+        m_obtainedYaku[i] = false;
+    }
 }
 
 void Player::setOya(bool oya)
@@ -94,6 +102,10 @@ void Player::printScore()
 void Player::printYaku()
 {
     std::cout << "The player's yaku is: " << "" << std::endl;
+    for (int i {0};i<m_obtainedYaku.size();i++)
+    {
+        std::cout << m_obtainedYaku[i] << std::endl;
+    }
 }
 
 void Player::printOya()
