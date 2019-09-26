@@ -400,6 +400,8 @@ bool KoiKoi::getGameStatus()
  */
 void KoiKoi::startGame()
 {
+    this->m_currentRound = 0;
+    this->m_gameStatus = false;
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
     this->m_gameHand.resetHand();
@@ -501,7 +503,18 @@ void KoiKoi::deal()
  */
 void KoiKoi::startRound()
 {
-    //startTurn
+    if(this->m_currentRound<m_rounds)
+    {
+        //start round
+        this->m_currentRound = this->m_currentRound + 1;
+        this->m_gameStatus = true;
+    }
+    else
+    {
+        //end game
+        this->m_gameStatus = false;
+    }
+
     deal();
     updateYaku();
     updateCards();
@@ -635,6 +648,7 @@ void KoiKoi::showTitleScreen()
     ui->titleFrame->show();
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->setHidden(true);
+    ui->koikoiFrame->setHidden(true);
 }
 
 /*
@@ -645,6 +659,7 @@ void KoiKoi::showGameScreen()
     ui->titleFrame->setHidden(true);
     ui->gameFrame->show();
     ui->oyaFrame->setHidden(true);
+    ui->koikoiFrame->setHidden(true);
 }
 
 /*
@@ -655,6 +670,18 @@ void KoiKoi::showOyaScreen()
     ui->titleFrame->setHidden(true);
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();
+    ui->koikoiFrame->setHidden(true);
+}
+
+/*
+ * Displays the Koi-Koi selection screen within the GUI.
+ */
+void KoiKoi::showKoiKoiScreen()
+{
+    ui->titleFrame->setHidden(true);
+    ui->gameFrame->setHidden(true);
+    ui->oyaFrame->setHidden(true);
+    ui->koikoiFrame->show();
 }
 
 /*
@@ -919,6 +946,8 @@ void KoiKoi::updateYaku()
         }
     }
 
+    bool obtainedYaku {false};
+
     /*
      * Add yaku to player via bool vector.
      * List as acquired in GUI.
@@ -941,6 +970,7 @@ void KoiKoi::updateYaku()
         //Sanko, 5pts
         m_player1.setYaku(12, true);
         ui->player_sanko_yaku->setVisible(true);
+        obtainedYaku = true;
         break;
     case 4:
         //Shiko, without Rain, 8pts
@@ -960,17 +990,20 @@ void KoiKoi::updateYaku()
         {
             m_player1.setYaku(13, true);
             ui->player_ameshiko_yaku->setVisible(true);
+            obtainedYaku = true;
         }
         else
         {
             m_player1.setYaku(14, true);
             ui->player_shiko_yaku->setVisible(true);
+            obtainedYaku = true;
         }
         break;
     case 5:
         //Goku, 10pts
         m_player1.setYaku(15, true);
         ui->player_goku_yaku->setVisible(true);
+        obtainedYaku = true;
         break;
     default:
         break;
@@ -990,6 +1023,7 @@ void KoiKoi::updateYaku()
                 {
                     m_player1.setYaku(10, true);
                     ui->player_tsukimi_de_ippai_yaku->setVisible(true);
+                    obtainedYaku = true;
                 }
             }
             break;
@@ -1000,6 +1034,7 @@ void KoiKoi::updateYaku()
                 {
                     m_player1.setYaku(11, true);
                     ui->player_hanami_de_ippai_yaku->setVisible(true);
+                    obtainedYaku = true;
                 }
             }
             break;
@@ -1013,6 +1048,7 @@ void KoiKoi::updateYaku()
     {
         m_player1.setYaku(4, true);
         ui->player_tane_yaku->setVisible(true);
+        obtainedYaku = true;
     }
 
     //Inoshikacho, 5pts
@@ -1032,6 +1068,7 @@ void KoiKoi::updateYaku()
                             {
                                 m_player1.setYaku(5, true);
                                 ui->player_inoshikacho_yaku->setVisible(true);
+                                obtainedYaku = true;
                             }
                         }
                     }
@@ -1067,18 +1104,21 @@ void KoiKoi::updateYaku()
         {
             m_player1.setYaku(7, true);
             ui->player_akatan_yaku->setVisible(true);
+            obtainedYaku = true;
         }
         //Aotan, 5pts
         if(numBlueRibbons >= 3)
         {
             m_player1.setYaku(8, true);
             ui->player_aotan_yaku->setVisible(true);
+            obtainedYaku = true;
         }
         //Akatan Aotan No Chofuku, 10pts
         if(numRedPoems >= 3 && numBlueRibbons >= 3)
         {
             m_player1.setYaku(9, true);
             ui->player_akatan_aotan_no_chofuku_yaku->setVisible(true);
+            obtainedYaku = true;
         }
     }
 
@@ -1087,6 +1127,7 @@ void KoiKoi::updateYaku()
     {
         m_player1.setYaku(6, true);
         ui->player_tanzaku_yaku->setVisible(true);
+        obtainedYaku = true;
     }
 
     //Kasu, 1pt
@@ -1094,7 +1135,26 @@ void KoiKoi::updateYaku()
     {
         m_player1.setYaku(0, true);
         ui->player_kasu_yaku->setVisible(true);
+        obtainedYaku = true;
     }
+
+    if(obtainedYaku == true)
+    {
+        //Call function to declare koikoi
+        showKoiKoiScreen();
+    }
+}
+
+void KoiKoi::requestKoiKoi()
+{
+    //yes or no buttons
+    //get sender();
+    //if no, then end round, tally points, reset, start next round
+    //else yes, then allow players to continue, but update player koikoi status
+    //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
+
+    //track koikoi with both players
+
 }
 
 /*
