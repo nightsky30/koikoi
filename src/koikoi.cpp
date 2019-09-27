@@ -1145,18 +1145,6 @@ void KoiKoi::updateYaku()
     }
 }
 
-void KoiKoi::requestKoiKoi()
-{
-    //yes or no buttons
-    //get sender();
-    //if no, then end round, tally points, reset, start next round
-    //else yes, then allow players to continue, but update player koikoi status
-    //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
-
-    //track koikoi with both players
-
-}
-
 /*
  * Checks game hand for matching cards in the current player's hand.
  * Enables cards corresponding buttons that match while disabling the
@@ -1772,4 +1760,20 @@ void KoiKoi::drawCard()
         //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
     disconnectDeck();
+}
+
+/*
+ * Slot function for the koi-koi buttons in the GUI which
+ * determine if the player is declaring koi-koi or shobu after obtaining yaku.
+ */
+void KoiKoi::requestKoiKoi()
+{
+    //yes or no buttons
+    //get sender();
+    //if no, then end round, tally points, reset, start next round
+    //else yes, then allow players to continue, but update player koikoi status
+    //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
+
+    //track koikoi with both players
+
 }

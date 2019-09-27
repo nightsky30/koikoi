@@ -72,120 +72,150 @@
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>1261</width>
-       <height>1041</height>
+       <x>0</x>
+       <y>0</y>
+       <width>1441</width>
+       <height>1051</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="oyaHLayout">
+     <layout class="QVBoxLayout" name="oyaVLayout">
       <item>
-       <spacer name="horizontalSpacer_5">
+       <spacer name="verticalSpacer_17">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="oyaButton_0">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="oyaHLayout">
+        <item>
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="oyaButton_0">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="oyaLabel_1">
+          <property name="font">
+           <font>
+            <pointsize>48</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Select a card!</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="oyaButton_1">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../data/resources/deck.qrc">
+            <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>120</width>
+            <height>168</height>
+           </size>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="oyaLabel_1">
-        <property name="font">
-         <font>
-          <pointsize>48</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Select a card!</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="oyaButton_1">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
-          <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>120</width>
-          <height>168</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_6">
+       <spacer name="verticalSpacer_18">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
@@ -220,69 +250,227 @@
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="verticalLayoutWidget_2">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>8</y>
-       <width>1261</width>
-       <height>1041</height>
+       <x>0</x>
+       <y>0</y>
+       <width>1441</width>
+       <height>1051</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="titleHLayout">
+     <layout class="QVBoxLayout" name="titleVLayout">
       <item>
-       <spacer name="horizontalSpacer_8">
+       <spacer name="verticalSpacer_19">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="titleLabel">
-        <property name="font">
-         <font>
-          <pointsize>48</pointsize>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Koi-Koi Hanafuda</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="titleHLayout">
+        <item>
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="titleLabel">
+          <property name="font">
+           <font>
+            <pointsize>48</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Koi-Koi Hanafuda</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="titleImage">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLabel" name="titleImage">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_7">
+       <spacer name="verticalSpacer_20">
         <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+         <enum>Qt::Vertical</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="koikoiFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1440</width>
+      <height>1080</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1440</width>
+      <height>1080</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1440</width>
+      <height>1080</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>3</y>
+       <width>1441</width>
+       <height>1051</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="koikoiVLayout">
+      <item>
+       <spacer name="verticalSpacer_15">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="koikoiHLayout">
+        <item>
+         <spacer name="horizontalSpacer_15">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="yesButton">
+          <property name="text">
+           <string>Yes</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="koikoiLabel">
+          <property name="font">
+           <font>
+            <pointsize>48</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTipDuration">
+           <number>-1</number>
+          </property>
+          <property name="text">
+           <string>Koi-Koi?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="noButton">
+          <property name="text">
+           <string>No</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_16">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_16">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
          </size>
         </property>
        </spacer>
@@ -1740,9 +1928,10 @@
      </layout>
     </widget>
    </widget>
-   <zorder>titleFrame</zorder>
-   <zorder>oyaFrame</zorder>
    <zorder>gameFrame</zorder>
+   <zorder>oyaFrame</zorder>
+   <zorder>titleFrame</zorder>
+   <zorder>koikoiFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1821,8 +2010,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../logo/icon.qrc"/>
   <include location="../data/resources/deck.qrc"/>
+  <include location="../logo/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

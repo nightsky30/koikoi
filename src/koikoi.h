@@ -131,6 +131,7 @@ public:
     void showTitleScreen();
     void showGameScreen();
     void showOyaScreen();
+    void showKoiKoiScreen();
     void updateCards();
     void resetYaku();
     void updateYaku();
@@ -156,6 +157,7 @@ public slots:
     void selectFromGameHand();
     //void drawCard(Player &currentPlayer, int &currentTurn);
     void drawCard();
+    void requestKoiKoi();
 };
 
 #endif // KOIKOI_H
