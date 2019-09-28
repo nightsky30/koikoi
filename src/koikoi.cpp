@@ -316,6 +316,10 @@ KoiKoi::KoiKoi(QWidget *parent) :
     connect(ui->yesButton, SIGNAL (released()), this, SLOT(requestKoiKoi()), Qt::UniqueConnection);
     connect(ui->noButton, SIGNAL (released()), this, SLOT(requestKoiKoi()), Qt::UniqueConnection);
 
+    //Set up SLOT/SIGNAL for tally score screen
+    connect(ui->newGameButton, SIGNAL (released()), this, SLOT(onNewGameClicked()), Qt::UniqueConnection);
+    connect(ui->continueButton, SIGNAL (released()), this, SLOT(nextRound()), Qt::UniqueConnection);
+
     showTitleScreen();
 }
 
@@ -522,6 +526,7 @@ void KoiKoi::startRound()
     deal();
     updateYaku();
     updateCards();
+    updateScores();
     showGameScreen();
     checkGameHand();
 
@@ -617,18 +622,28 @@ void KoiKoi::startRound()
  */
 void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 {
+    ui->roundLabel->setText(QString("Round:  %1").arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
+
     //Tally points
     //Take into account player koikoi statuses
+
+    ui->tallyCPULabel->setText(QString("CPU:  %1").arg(m_player2.getScore()));
+    ui->tallyPlayerLabel->setText(QString("Player:  %1").arg(m_player1.getScore()));
+
     //Show Tally Points frame/screen
     showTallyScreen();
     if(m_currentRound == 12)
     {
         //End game
         //Display label that asks to "Play again?"
+        ui->playAgainLabel->setVisible(true);
+        //Display New Game button
+        ui->newGameButton->setVisible(true);
     }
     else
     {
         //Display continue button
+        ui->continueButton->setVisible(true);
         //Wait for player to click contine button which should call startRound();
     }
 }
@@ -781,6 +796,12 @@ void KoiKoi::updateCards()
             button->setVisible(true);
         }
     }
+}
+
+void KoiKoi::updateScores()
+{
+    ui->cpuScore->setText(QString("CPU:  %1").arg(m_player2.getScore()));
+    ui->playerScore->setText(QString("Player:  %1").arg(m_player1.getScore()));
 }
 
 /*
@@ -1418,7 +1439,7 @@ void KoiKoi::determineOyaPlayer()
         m_player2.setOya(true);
         std::cout << "cpu is oya!" << std::endl;
     }
-    startRound();//deal and showGameScreen in startRound
+    startRound();
 }
 
 /*
@@ -1815,5 +1836,13 @@ void KoiKoi::requestKoiKoi()
         //else yes, then round continues, but update player koikoi status
         //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
         m_player1.setKoikoi(true);
+        //Switch to next player turn
+        showGameScreen();
     }
+}
+
+void KoiKoi::nextRound()
+{
+    //Crashing here
+    //startRound();
 }

@@ -15,7 +15,7 @@ private:
     /*
     * Member Initialization List
     */
-    int m_score {0};
+    int m_score {30};
 //Holds the numbers from the Game's Yaku const??
     std::vector<bool> m_obtainedYaku
     {
