@@ -312,6 +312,10 @@ KoiKoi::KoiKoi(QWidget *parent) :
     connect(ui->oyaButton_0, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
     connect(ui->oyaButton_1, SIGNAL (released()), this, SLOT(determineOyaPlayer()), Qt::UniqueConnection);
 
+    //Set up SLOT/SIGNAL for koikoi selection
+    connect(ui->yesButton, SIGNAL (released()), this, SLOT(requestKoiKoi()), Qt::UniqueConnection);
+    connect(ui->noButton, SIGNAL (released()), this, SLOT(requestKoiKoi()), Qt::UniqueConnection);
+
     showTitleScreen();
 }
 
@@ -613,7 +617,20 @@ void KoiKoi::startRound()
  */
 void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 {
-    //Do stuff
+    //Tally points
+    //Take into account player koikoi statuses
+    //Show Tally Points frame/screen
+    showTallyScreen();
+    if(m_currentRound == 12)
+    {
+        //End game
+        //Display label that asks to "Play again?"
+    }
+    else
+    {
+        //Display continue button
+        //Wait for player to click contine button which should call startRound();
+    }
 }
 
 /*
@@ -649,6 +666,7 @@ void KoiKoi::showTitleScreen()
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->setHidden(true);
     ui->koikoiFrame->setHidden(true);
+    ui->tallyFrame->setHidden(true);
 }
 
 /*
@@ -660,6 +678,7 @@ void KoiKoi::showGameScreen()
     ui->gameFrame->show();
     ui->oyaFrame->setHidden(true);
     ui->koikoiFrame->setHidden(true);
+    ui->tallyFrame->setHidden(true);
 }
 
 /*
@@ -671,6 +690,7 @@ void KoiKoi::showOyaScreen()
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->show();
     ui->koikoiFrame->setHidden(true);
+    ui->tallyFrame->setHidden(true);
 }
 
 /*
@@ -682,6 +702,19 @@ void KoiKoi::showKoiKoiScreen()
     ui->gameFrame->setHidden(true);
     ui->oyaFrame->setHidden(true);
     ui->koikoiFrame->show();
+    ui->tallyFrame->setHidden(true);
+}
+
+/*
+ * Displays the Tally score screen within the GUI.
+ */
+void KoiKoi::showTallyScreen()
+{
+    ui->titleFrame->setHidden(true);
+    ui->gameFrame->setHidden(true);
+    ui->oyaFrame->setHidden(true);
+    ui->koikoiFrame->setHidden(true);
+    ui->tallyFrame->show();
 }
 
 /*
@@ -1769,11 +1802,18 @@ void KoiKoi::drawCard()
 void KoiKoi::requestKoiKoi()
 {
     //yes or no buttons
-    //get sender();
-    //if no, then end round, tally points, reset, start next round
-    //else yes, then allow players to continue, but update player koikoi status
-    //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
+    //get sender()
+    QString theSender = sender()->objectName();
 
-    //track koikoi with both players
-
+    if(theSender.toStdString() == "noButton")
+    {
+        //if no, then round over, tally points
+        tallyPoints();
+    }
+    else
+    {
+        //else yes, then round continues, but update player koikoi status
+        //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
+        m_player1.setKoikoi(true);
+    }
 }

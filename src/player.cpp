@@ -89,9 +89,9 @@ void Player::setOya(bool oya)
     m_oya = oya;
 }
 
-void Player::setKoikoi()
+void Player::setKoikoi(bool koikoi)
 {
-
+    m_koikoi = koikoi;
 }
 
 void Player::printScore()

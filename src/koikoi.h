@@ -132,6 +132,7 @@ public:
     void showGameScreen();
     void showOyaScreen();
     void showKoiKoiScreen();
+    void showTallyScreen();
     void updateCards();
     void resetYaku();
     void updateYaku();

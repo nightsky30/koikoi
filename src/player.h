@@ -56,7 +56,7 @@ public:
     void setYaku(int numYaku, bool yakuValue);
     void resetYaku();
     void setOya(bool oya);
-    void setKoikoi();
+    void setKoikoi(bool koikoi);
 
     /*
     * Print Functions
