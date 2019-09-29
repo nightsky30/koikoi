@@ -511,24 +511,31 @@ void KoiKoi::deal()
  */
 void KoiKoi::startRound()
 {
-    if(this->m_currentRound<m_rounds)
+    if(this->m_currentRound < m_rounds)
     {
         //start round
         this->m_currentRound = this->m_currentRound + 1;
         this->m_gameStatus = true;
+
+        this->m_gameDeck.resetDeck();
+        this->m_gameDeck.shuffleDeck();
+        this->m_gameHand.resetHand();
+        this->m_player1.getHand()->resetHand();
+        this->m_player2.getHand()->resetHand();
+        resetYaku();
+
+        deal();
+        updateYaku();
+        updateCards();
+        updateScores();
+        showGameScreen();
+        checkGameHand();
     }
     else
     {
         //end game
         this->m_gameStatus = false;
     }
-
-    deal();
-    updateYaku();
-    updateCards();
-    updateScores();
-    showGameScreen();
-    checkGameHand();
 
     //    bool firstTurn {true};
     //    bool roundOver {false};
@@ -1851,5 +1858,5 @@ void KoiKoi::requestKoiKoi()
 void KoiKoi::nextRound()
 {
     //Crashing here
-    //startRound();
+    startRound();
 }
