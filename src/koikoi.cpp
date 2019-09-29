@@ -627,8 +627,8 @@ void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
     //Tally points
     //Take into account player koikoi statuses
 
-    ui->tallyCPULabel->setText(QString("CPU:  %1").arg(m_player2.getScore()));
-    ui->tallyPlayerLabel->setText(QString("Player:  %1").arg(m_player1.getScore()));
+    ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
+    ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
 
     //Show Tally Points frame/screen
     showTallyScreen();
@@ -639,9 +639,16 @@ void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
         ui->playAgainLabel->setVisible(true);
         //Display New Game button
         ui->newGameButton->setVisible(true);
+        //Hide continue button
+        ui->continueButton->setVisible(false);
     }
     else
     {
+        //Continue game
+        //Hide label that asks to "Play again?"
+        ui->playAgainLabel->setVisible(false);
+        //Hide New Game button
+        ui->newGameButton->setVisible(false);
         //Display continue button
         ui->continueButton->setVisible(true);
         //Wait for player to click contine button which should call startRound();
