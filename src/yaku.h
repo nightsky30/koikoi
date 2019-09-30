@@ -28,9 +28,9 @@ public:
     /*
     * Get Functions
     */
-    int getPointValue();
-    std::string getName();
-    std::string getDescription();
+    int getPointValue() const;
+    std::string getName() const;
+    std::string getDescription() const;
 
     /*
     * Print Functions

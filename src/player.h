@@ -41,6 +41,7 @@ public:
     */
     int getScore();
     bool getYaku(int numYaku);
+    std::vector<bool>::size_type getYakuSize();
     bool getOya();
     bool getKoikoi();
     Hand* getHand();

@@ -21,6 +21,11 @@ bool Player::getYaku(int numYaku)
     return m_obtainedYaku[numYaku];
 }
 
+std::vector<bool>::size_type Player::getYakuSize()
+{
+    return m_obtainedYaku.size();
+}
+
 bool Player::getOya()
 {
     return m_oya;

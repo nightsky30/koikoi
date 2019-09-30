@@ -136,7 +136,9 @@ public:
     void updateCards();
     void updateScores();
     void resetYaku();
+    void resetTally();
     void updateYaku();
+    void checkYaku();
     void checkGameHand();
     void connectDeck();
     void connectGameHand(QPushButton *button);

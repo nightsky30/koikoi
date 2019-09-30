@@ -20,17 +20,17 @@ Yaku::~Yaku()
 {
 }
 
-int Yaku::getPointValue()
+int Yaku::getPointValue() const
 {
     return m_pointValue;
 }
 
-std::string Yaku::getName()
+std::string Yaku::getName() const
 {
     return m_name;
 }
 
-std::string Yaku::getDescription()
+std::string Yaku::getDescription() const
 {
     return m_description;
 }
