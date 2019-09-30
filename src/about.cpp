@@ -35,7 +35,7 @@ About::About(QWidget *parent) : QDialog (parent)
     //Title and Application Icon
     this->setWindowTitle("Koi-Koi Hanafuda - About");
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
-    this->setMinimumSize(QSize(150, 100));
+    this->setMinimumSize(QSize(225, 100));
 
     //Create vertical box layout
     QVBoxLayout *vBoxLayout = new QVBoxLayout(this);
