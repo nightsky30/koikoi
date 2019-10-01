@@ -435,6 +435,8 @@ void KoiKoi::startGame()
     this->m_oyaHand.resetHand();
     this->m_player1.getHand()->resetHand();
     this->m_player2.getHand()->resetHand();
+    this->m_player1.setScore(30);
+    this->m_player2.setScore(30);
     resetYaku();
     resetTally();
     generateOyaCard();
@@ -551,7 +553,6 @@ void KoiKoi::startRound()
         updateScores();
         showGameScreen();
 
-        //At end of round (tallyPoints()) make sure to determine who had more points and make them oya for the next round...
         if(m_player1.getOya() == true)
         {
             //player is oya
@@ -719,15 +720,18 @@ void KoiKoi::tallyPoints()
         }
     }
 
+    //Revisit this as koi-koi may cause negative points
     ui->tally_subtotal_player_points->setText(QString("%1").arg(playerSubTotal));
     ui->tally_subtotal_cpu_points->setText(QString("%1").arg(cpuSubTotal));
 
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
     ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
 
+
+
     //Show Tally Points frame/screen
     showTallyScreen();
-    if(m_currentRound == 12)
+    if(m_currentRound == 12 || m_player1.getScore() >= 60 || m_player2.getScore() >= 60)
     {
         //End game
         //Display label that asks to "Play again?"
@@ -740,6 +744,22 @@ void KoiKoi::tallyPoints()
     else
     {
         //Continue game
+        //Set oya for next round
+        if (playerSubTotal >= cpuSubTotal)
+        {
+            //Human has Oya
+            m_player1.setOya(true);
+            m_player2.setOya(false);
+            std::cout << "player is oya!" << std::endl;
+        }
+        else
+        {
+            //CPU has Oya
+            m_player1.setOya(false);
+            m_player2.setOya(true);
+            std::cout << "cpu is oya!" << std::endl;
+        }
+
         //Hide label that asks to "Play again?"
         ui->playAgainLabel->setVisible(false);
         //Hide New Game button
@@ -1001,6 +1021,8 @@ void KoiKoi::resetTally()
     ui->tally_ameshiko_player_points->setText(QString("%1").arg(0));
     ui->tally_shiko_player_points->setText(QString("%1").arg(0));
     ui->tally_goku_player_points->setText(QString("%1").arg(0));
+    ui->tally_subtotal_player_points->setText(QString("%1").arg(0));
+    ui->tally_total_player_points->setText(QString("%1").arg(0));
 
     ui->tally_kasu_cpu_points->setText(QString("%1").arg(0));
     ui->tally_tane_cpu_points->setText(QString("%1").arg(0));
@@ -1015,6 +1037,8 @@ void KoiKoi::resetTally()
     ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(0));
     ui->tally_shiko_cpu_points->setText(QString("%1").arg(0));
     ui->tally_goku_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_subtotal_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_total_cpu_points->setText(QString("%1").arg(0));
 }
 
 /*
