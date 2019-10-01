@@ -550,7 +550,21 @@ void KoiKoi::startRound()
         updateCards();
         updateScores();
         showGameScreen();
-        checkGameHand();
+
+        //At end of round (tallyPoints()) make sure to determine who had more points and make them oya for the next round...
+        if(m_player1.getOya() == true)
+        {
+            //player is oya
+            checkGameHand();
+            //Make sure at end of player's turn when drawing card and
+            //possibly matching with game hand to kick off next cpu turn...
+        }
+        else
+        {
+            //cpu is oya
+            //call cpu/ai functions to facilitate cpu turns
+            //At end of cpu turn, make sure stage is set for player...
+        }
     }
     else
     {
@@ -558,98 +572,12 @@ void KoiKoi::startRound()
         this->m_gameStatus = false;
         tallyPoints();
     }
-
-    //    bool firstTurn {true};
-    //    bool roundOver {false};
-    //    int playerTurn {0};
-
-    //    Player *player1;
-    //    player1 = &m_player1;
-    //    Player *player2;
-    //    player2 = &m_player2;
-
-    //    while(roundOver == false)
-    //    {
-    //        if (firstTurn == true)
-    //        {
-    //            if (player1->getOya() == true)
-    //            {
-    //                //Player 1's turn
-    //                playerTurn = 1;
-    //                takeTurn(*player1, playerTurn);
-    //            }
-    //            else
-    //            {
-    //                //CPU's turn
-    //                playerTurn = 2;
-    //                takeTurn(*player2, playerTurn);
-    //            }
-    //            firstTurn = false;
-    //        }
-    //        else
-    //        {
-    //            switch (playerTurn)
-    //            {
-    //            case 1:
-    //                takeTurn(*player1, playerTurn);
-    //                break;
-    //            case 2:
-    //                takeTurn(*player2, playerTurn);
-    //                break;
-    //            case 0:
-    //                roundOver = true;
-    //                break;
-    //            default:
-    //                std::cout << "There was an issue with the turn system..." << std::endl;
-    //                break;
-    //            }
-    //        }
-    //    }
-    //    std::cout << std::endl;
-    //    std::cout << std::endl;
-    //    std::cout << "Round " << m_currentRound << " Complete" << std::endl;
-    //    std::cout << std::endl;
-    //    std::cout << std::endl;
-    //    tallyPoints();
-    //    m_currentRound++;
 }
-
-//void KoiKoi::matchCard(Player &currentPlayer, int &currentTurn) //pass by pointer and ref, no need to return values
-//{
-//    bool turnComplete {false};
-//    //Do Stuff
-//    while (turnComplete == false)
-//    {
-//        std::this_thread::sleep_for(std::chrono::milliseconds(7000));
-//        //Call select card from hand
-//        //Call select card in game hand
-//        //compare cards
-//        //if they match, store in player's wonCards
-//        turnComplete = true;
-//    }
-//    switch (currentTurn)
-//    {
-//    case 1:
-//        //do stuff
-//        currentTurn = 2;
-//        break;
-//    case 2:
-//        //do stuff
-//        currentTurn = 1;
-//        break;
-//    case 0:
-//        std::cout << "There was an issue with the turn system..." << std::endl;
-//        break;
-//    default:
-//        std::cout << "There was an issue with the turn system..." << std::endl;
-//        break;
-//    }
-//}
 
 /*
  * Tally the points for each player at the end of the round.
  */
-void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
+void KoiKoi::tallyPoints()
 {
     ui->roundLabel->setText(QString("Round:  %1").arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
 
@@ -661,12 +589,17 @@ void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
     bool playerKoiKoi = m_player1.getKoikoi();
     bool cpuKoiKoi = m_player2.getKoikoi();
 
-    m_player1.printYaku();
+    int playerSubTotal {0};
+    int cpuSubTotal {0};
+
+    //m_player1.printYaku();
+    //m_player2.printYaku();
 
     for (int i {0}; i < m_player1.getYakuSize();i++)
     {
         if(m_player1.getYaku(i) == true)
         {
+            playerSubTotal = playerSubTotal + acceptableYaku[i].getPointValue();
             m_player1.setScore(m_player1.getScore() + acceptableYaku[i].getPointValue());
             switch (i)
             {
@@ -724,8 +657,73 @@ void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
         }
     }
 
-    ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
+    for (int j {0}; j < m_player2.getYakuSize();j++)
+    {
+        if(m_player2.getYaku(j) == true)
+        {
+            cpuSubTotal = cpuSubTotal + acceptableYaku[j].getPointValue();
+            m_player2.setScore(m_player2.getScore() + acceptableYaku[j].getPointValue());
+            switch (j)
+            {
+            case 0:
+                ui->tally_kasu_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 1:
+                //Not used
+                break;
+            case 2:
+                //Not used
+                break;
+            case 3:
+                //Not used
+                break;
+            case 4:
+                ui->tally_tane_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 5:
+                ui->tally_inoshikacho_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 6:
+                ui->tally_tanzaku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 7:
+                ui->tally_akatan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 8:
+                ui->tally_aotan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 9:
+                ui->tally_akatanaotannochofuku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 10:
+                ui->tally_tsukimideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 11:
+                ui->tally_hanamideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 12:
+                ui->tally_sanko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 13:
+                ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 14:
+                ui->tally_shiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            case 15:
+                ui->tally_goku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    ui->tally_subtotal_player_points->setText(QString("%1").arg(playerSubTotal));
+    ui->tally_subtotal_cpu_points->setText(QString("%1").arg(cpuSubTotal));
+
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
+    ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
 
     //Show Tally Points frame/screen
     showTallyScreen();
@@ -856,14 +854,22 @@ void KoiKoi::updateCards()
     for(int i{0};i<guiCPUCards.size();i++)
     {
         QPushButton *button = guiCPUCards.at(i);
-        if (i>cpuHand->getNumCards()-1)
+        if(cpuHand->getNumCards() == 0)
         {
             button->setEnabled(false);
             button->setVisible(false);
         }
-        else {
-            button->setEnabled(true);
-            button->setVisible(true);
+        else
+        {
+            if (i>cpuHand->getNumCards()-1)
+            {
+                button->setEnabled(false);
+                button->setVisible(false);
+            }
+            else {
+                button->setEnabled(true);
+                button->setVisible(true);
+            }
         }
     }
 
@@ -887,7 +893,7 @@ void KoiKoi::updateCards()
     for(int k{0};k<guiPlayerCards.size();k++)
     {
         QPushButton *button = guiPlayerCards.at(k);
-        if (k>playerHand->getNumCards()-1)
+        if(playerHand->getNumCards() == 0)
         {
             button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
             button->setEnabled(false);
@@ -895,13 +901,26 @@ void KoiKoi::updateCards()
         }
         else
         {
-            button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
-            button->setEnabled(true);
-            button->setVisible(true);
+            if (k>playerHand->getNumCards()-1)
+            {
+                button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+                button->setEnabled(false);
+                button->setVisible(false);
+            }
+            else
+            {
+                button->setIcon(QIcon(playerHand->getCard(k)->getImageStr()));
+                button->setEnabled(true);
+                button->setVisible(true);
+            }
         }
     }
 }
 
+/*
+ * Updates the scores for all players on the gameboard GUI.
+ * This is called at the start of each round.
+ */
 void KoiKoi::updateScores()
 {
     ui->cpuScore->setText(QString("CPU:  %1").arg(m_player2.getScore()));
@@ -963,6 +982,10 @@ void KoiKoi::resetYaku()
     ui->cpu_tsuki_fuda_yaku->setVisible(false);
 }
 
+/*
+ * Resets the yaku point indicators for all players on the tally screen.
+ * This is called at the start of each round.
+ */
 void KoiKoi::resetTally()
 {
     ui->tally_kasu_player_points->setText(QString("%1").arg(0));
@@ -2074,6 +2097,5 @@ void KoiKoi::requestKoiKoi()
 
 void KoiKoi::nextRound()
 {
-    //Crashing here
     startRound();
 }
