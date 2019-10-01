@@ -2046,14 +2046,10 @@ void KoiKoi::drawCard()
         connectPlayerHand();
         //call updateCards
         updateCards();
-        //        checkGameHand();  //Done below
 
         /*
-         * Check for end of round??
+         * Check for end of round (if player has cards)
          */
-        //Check if player still has cards
-        //If there was actual Yaku combination
-        //Allow to decide if to declare koi-koi
         if(m_player1.getHand()->getNumCards() > 0)
         {
             //Turn is ending
@@ -2065,8 +2061,8 @@ void KoiKoi::drawCard()
             //Player out of cards
             //End round, show tally screen
 
-            //Should probably show the last card not match and have been added
-            //Added to the gameboard
+            //Should probably show the last card not match
+            //and have been added to the gameboard (sleep 2)
 
             tallyPoints();
         }
