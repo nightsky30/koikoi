@@ -96,6 +96,7 @@ private:
     int m_rounds {12};
     int m_currentRound {0};
     bool m_gameStatus {false};
+    QTimer *timeDelay {};
 
     QVector<QPushButton*> guiPlayerCards {};
     QVector<QPushButton*> guiCPUCards {};
@@ -158,7 +159,6 @@ public:
     void resetTally();
     void updateYaku();
     void checkYaku();
-    void checkGameHand();
     void connectDeck();
     void connectGameHand(QPushButton *button);
     void connectGameHand();
@@ -178,7 +178,6 @@ public slots:
     void determineOyaPlayer();
     void selectFromHand();
     void selectFromGameHand();
-    //void drawCard(Player &currentPlayer, int &currentTurn);
     void drawCard();
     void requestKoiKoi();
     void nextRound();

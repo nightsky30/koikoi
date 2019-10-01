@@ -34,6 +34,7 @@
 #include <QIcon>
 #include <QThread>
 #include <QPixmap>
+#include <QTimer>
 
 // Using a type alias
 using index_t = std::vector<Card>::size_type;
@@ -556,13 +557,20 @@ void KoiKoi::startRound()
         if(m_player1.getOya() == true)
         {
             //player is oya
-            checkGameHand();
+            connectPlayerHand();
+            disconnectGameHand();
+            disconnectDeck();
+
             //Make sure at end of player's turn when drawing card and
             //possibly matching with game hand to kick off next cpu turn...
         }
         else
         {
             //cpu is oya
+            disconnectPlayerHand();
+            disconnectGameHand();
+            disconnectDeck();
+
             //call cpu/ai functions to facilitate cpu turns
             //At end of cpu turn, make sure stage is set for player...
         }
@@ -1440,7 +1448,9 @@ void KoiKoi::checkYaku()
         {
             //Turn is ending
             //Do it at the beginning of a new turn
-            checkGameHand();
+            //This will change with CPU
+            connectPlayerHand();
+            disconnectDeck();
         }
     }
     else
@@ -1449,49 +1459,6 @@ void KoiKoi::checkYaku()
         //End round, show tally screen
         tallyPoints();
     }
-}
-
-/*
- * Checks game hand for matching cards in the current player's hand.
- * Enables cards corresponding buttons that match while disabling the
- * buttons for cards that do not match.
- *
- * Maybe don't need this, or do it at the beginning of a turn
- */
-void KoiKoi::checkGameHand()
-{
-    Hand *playerHand = m_player1.getHand();
-    Hand *cpuHand = m_player2.getHand();
-    //Already have gameHand
-    Card *currentGameCard;
-    Card *currentPlayerCard;
-    QPushButton *currentGameButton;
-
-    //Check for more than 0 cards in player hand
-    //Otherwise end round?
-
-    //For each game card
-    for(int i{0};i<m_gameHand.getNumCards();i++)
-    {
-        //Get game card
-        currentGameCard = m_gameHand.getCard(i);
-        //Get game button
-        currentGameButton = guiGameHandCards.at(i);
-        //Disable gui game button
-        currentGameButton->setDisabled(true);
-        //Compare to each card in player hand
-        for(int j{0};j<playerHand->getNumCards();j++)
-        {
-            currentPlayerCard = playerHand->getCard(j);
-            if(currentGameCard->getMonth() == currentPlayerCard->getMonth())
-            {
-                currentGameButton->setDisabled(false);
-            }
-        }
-    }
-    //Connect player hand cards to enable selection
-    connectPlayerHand();
-    disconnectDeck();
 }
 
 /*
@@ -1717,6 +1684,10 @@ void KoiKoi::selectFromHand()
     //get calling parent object name
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
+
+    //disconnect all playerhand cards
+    disconnectPlayerHand();
+
     //Get card number
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
     //Get player card
@@ -1750,8 +1721,6 @@ void KoiKoi::selectFromHand()
         m_gameHand.acceptCard(*playerHand->getCard(cardNum));
         playerHand->removeCard(cardNum);
 
-        //disconnect all playerhand cards
-        disconnectPlayerHand();
         //disconnect all game hand cards
         disconnectGameHand();
         //Connect deck
@@ -1765,7 +1734,7 @@ void KoiKoi::selectFromHand()
     else
     {
         //Disconnect player hand
-        disconnectPlayerHand();
+        //disconnectPlayerHand();
         //Disable all cards in playerhand except current selected card
         for(int k {0};k<playerHand->getNumCards();k++)
         {
@@ -1801,6 +1770,10 @@ void KoiKoi::selectFromGameHand()
     //get calling parent object name
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
+
+    //disconnect all game hand cards
+    disconnectGameHand();
+
     //Already have gameHand
     //Get card number
     int cardNum = buttonName.at(buttonName.size()-1).digitValue();
@@ -1880,10 +1853,9 @@ void KoiKoi::selectFromGameHand()
                 break;
             }
         }
-        //connect all playerhand cards
+        //Connect all playerhand cards
+        //This will change with CPU
         connectPlayerHand();
-        //disconnect all game hand cards
-        disconnectGameHand();
         //disconnect deck
         disconnectDeck();
         //call updateCards
@@ -1982,8 +1954,6 @@ void KoiKoi::selectFromGameHand()
         }
         //disconnect all playerhand cards
         disconnectPlayerHand();
-        //disconnect all game hand cards
-        disconnectGameHand();
         //connect deck
         connectDeck();
         //call updateCards
@@ -2009,7 +1979,6 @@ void KoiKoi::selectFromGameHand()
 void KoiKoi::drawCard()
 {
     //Shows next card for deck
-    //Connects button
     Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
     CardMonth nextMonth = nextCard->getMonth();
 
@@ -2043,6 +2012,7 @@ void KoiKoi::drawCard()
         //disconnect all game hand cards
         disconnectGameHand();
         //Connect playerhand
+        //This will change with CPU
         connectPlayerHand();
         //call updateCards
         updateCards();
@@ -2054,7 +2024,9 @@ void KoiKoi::drawCard()
         {
             //Turn is ending
             //Do it at the beginning of a new turn
-            checkGameHand();
+            //Already done above, but as mentioned this will change with CPU
+            //connectPlayerHand();
+            //disconnectDeck();
         }
         else
         {
@@ -2111,7 +2083,9 @@ void KoiKoi::requestKoiKoi()
         //Switch to next player turn
         showGameScreen();
         //Do it at the beginning of a new turn
-        checkGameHand();
+        //This will change with CPU
+        //connectPlayerHand();
+        //disconnectDeck();
     }
 }
 
