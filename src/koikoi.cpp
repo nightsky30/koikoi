@@ -1451,8 +1451,9 @@ void KoiKoi::checkYaku()
             //Turn is ending
             //Do it at the beginning of a new turn
             //This will change with CPU
-            connectPlayerHand();
-            disconnectDeck();
+            //connectPlayerHand();
+            //disconnectDeck();
+            cpuSelectFromHand();
         }
     }
     else
@@ -2294,7 +2295,10 @@ void KoiKoi::cpuSelectFromGameHand()
         //then finish turn
         //continue round with next player turn and call checkCards()
         //else finish round
-        checkYaku();
+
+        //RE-ENABLE AFTER FIXING!!!
+        //checkYaku();
+
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
