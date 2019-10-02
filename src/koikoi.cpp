@@ -28,6 +28,7 @@
 #include <chrono>  // Sleep Time
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
+#include <vector>
 #include <QString>
 #include <QPushButton>
 #include <QIntegerForSize>
@@ -573,6 +574,7 @@ void KoiKoi::startRound()
 
             //call cpu/ai functions to facilitate cpu turns
             //At end of cpu turn, make sure stage is set for player...
+            cpuSelectFromHand();
         }
     }
     else
@@ -1855,7 +1857,9 @@ void KoiKoi::selectFromGameHand()
         }
         //Connect all playerhand cards
         //This will change with CPU
-        connectPlayerHand();
+        //connectPlayerHand();
+
+
         //disconnect deck
         disconnectDeck();
         //call updateCards
@@ -1872,9 +1876,8 @@ void KoiKoi::selectFromGameHand()
         //continue round with next player turn and call checkCards()
         //else finish round
         checkYaku();
-        //**********************************************************
-        //allows to click player hand card to call selectFromHand
-        //**********************************************************
+
+        cpuSelectFromHand();
     }
     else
     {
@@ -2011,9 +2014,11 @@ void KoiKoi::drawCard()
         disconnectDeck();
         //disconnect all game hand cards
         disconnectGameHand();
+
         //Connect playerhand
         //This will change with CPU
-        connectPlayerHand();
+        //connectPlayerHand();
+
         //call updateCards
         updateCards();
 
@@ -2027,6 +2032,7 @@ void KoiKoi::drawCard()
             //Already done above, but as mentioned this will change with CPU
             //connectPlayerHand();
             //disconnectDeck();
+            cpuSelectFromHand();
         }
         else
         {
@@ -2057,7 +2063,7 @@ void KoiKoi::drawCard()
         //**********************************************************
         //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
-    disconnectDeck();
+    //disconnectDeck();
 }
 
 /*
@@ -2082,6 +2088,400 @@ void KoiKoi::requestKoiKoi()
         m_player1.setKoikoi(true);
         //Switch to next player turn
         showGameScreen();
+
+        //Do it at the beginning of a new turn
+        //This will change with CPU
+        //connectPlayerHand();
+        //disconnectDeck();
+        cpuSelectFromHand();
+    }
+}
+
+void KoiKoi::nextRound()
+{
+    startRound();
+}
+
+void KoiKoi::cpuSelectFromHand()
+{
+    Hand *cpuHand = m_player2.getHand();
+
+    //Get card number, randomly
+    index_t cardNum {0};
+    srand(time(NULL));
+    cardNum = ((index_t)std::rand() % (cpuHand->getNumCards()-1));
+
+    //Get cpu card
+    Card *currentCPUCard = cpuHand->getCard(cardNum);
+
+    //get month of card button
+    CardMonth currentCardMonth = currentCPUCard->getMonth();
+
+    bool matchingCard {false};
+
+    //compare with gameHand objects
+    for(int i{0};i<m_gameHand.getNumCards();i++)
+    {
+        if (m_gameHand.getCard(i)->getMonth() != currentCardMonth)
+        {
+            //Disable gamehand card
+            guiGameHandCards[i]->setDisabled(true);
+        }
+        else
+        {
+            matchingCard = true;
+        }
+    }
+    //Sleep 3??
+    QTimer::singleShot(2000, this, SLOT(waitABit()));
+    //See if there are any month matches
+    if(matchingCard == false)
+    {
+        //discard selected card from cpuhand
+        //accept in gamehand
+        m_gameHand.acceptCard(*cpuHand->getCard(cardNum));
+        cpuHand->removeCard(cardNum);
+
+        //call updateCards
+        updateCards();
+        //Sleep 3??
+        QTimer::singleShot(2000, this, SLOT(waitABit()));
+        //******************
+        //call cpuDrawCard
+        //******************
+        cpuDrawCard();
+    }
+    else
+    {
+        //Disable all cards in cpuhand except current selected card
+        for(int k {0};k<cpuHand->getNumCards();k++)
+        {
+            if(k != cardNum)
+            {
+                guiCPUCards[k]->setDisabled(true);
+            }
+        }
+        //Sleep 3??
+        QTimer::singleShot(2000, this, SLOT(waitABit()));
+        //*****************************
+        //call cpuSelectFromGameHand
+        //*****************************
+        cpuSelectFromGameHand();
+    }
+}
+
+void KoiKoi::cpuSelectFromGameHand()
+{
+    /*
+     * Could match from deck or cpu hand.
+     * Check both.
+     */
+
+    //Get random card that was enabled in the game hand
+    //since the user can't click stuff the cpu must select somehow
+    bool cardFound {false};
+    std::vector<int> a {};
+    while(cardFound == false)
+    {
+        //search through gameHand objects
+        for(int i{0};i<guiGameHandCards.size();i++)
+        {
+            if (guiGameHandCards[i]->isEnabled() == true)
+            {
+                //Store numbers of found enabled cards
+                a.push_back(i);
+                cardFound = true;
+            }
+        }
+    }
+
+    //Get card number randomly from stored selection
+    index_t cardNum {0};
+    srand(time(NULL));
+    cardNum = ((index_t)std::rand() % a.size() - 1);
+
+    //Get game hand card
+    Card *currentGameCard = m_gameHand.getCard(cardNum);
+    //get month of card button
+    CardMonth currentCardMonth = currentGameCard->getMonth();
+
+    /*
+     * If the deck was recently clicked and there was a match
+     * then there should be an icon of the next card image.
+     * Otherwise it should just be the normal deck image
+     * indicating the check should be made with the player's hand.
+     *
+     * Perhaps in the future with turn based stuff, pass in
+     * the player, and some sort of turn state variable
+     */
+    if(m_gameDeck.getDeckIcon() != ":/deck/Hanafuda_koi-2.svg")
+    {
+        //Get next card
+        Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
+        //Get next card month
+        CardMonth nextCardMonth = nextCard->getMonth();
+        if(currentCardMonth != nextCardMonth)
+        {
+            std::cout << "There was an issue with the cards matching..." << std::endl;
+            std::cout << "The current card month:" << currentCardMonth << std::endl;
+            std::cout << "The next card month:" << nextCardMonth << std::endl;
+        }
+        else
+        {
+            //Need to store card matches from the deck and game hand in players' special match hands
+            CardType currentGameCardType = currentGameCard->getCardType();
+            CardType nextCardType = nextCard->getCardType();
+            Hand *cpuLight = m_player2.getLightMatch();
+            Hand *cpuAnimal = m_player2.getAnimalMatch();
+            Hand *cpuRibbon = m_player2.getRibbonMatch();
+            Hand *cpuPlain = m_player2.getPlainMatch();
+            switch (currentGameCardType)
+            {
+            case LIGHT:
+                cpuLight->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case ANIMAL:
+                cpuAnimal->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case RIBBON:
+                cpuRibbon->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case PLAIN:
+                cpuPlain->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
+            switch (nextCardType)
+            {
+            case LIGHT:
+                cpuLight->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case ANIMAL:
+                cpuAnimal->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case RIBBON:
+                cpuRibbon->acceptCard(*m_gameDeck.dealCard());
+                break;
+            case PLAIN:
+                cpuPlain->acceptCard(*m_gameDeck.dealCard());
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
+        }
+        //Connect all playerhand cards
+        //This will change with CPU
+        connectPlayerHand();
+        //disconnect deck
+        disconnectDeck();
+        //call updateCards
+        updateCards();
+        //call updateYaku
+        updateYaku();
+        ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+        m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
+        //check for yaku
+        //if yaku
+        //then request to declare koikoi
+        //if koikoi
+        //then finish turn
+        //continue round with next player turn and call checkCards()
+        //else finish round
+        checkYaku();
+        //**********************************************************
+        //allows to click player hand card to call selectFromHand
+        //**********************************************************
+    }
+    else
+    {
+        int cpuCardNum {0};
+        for(int i {0};i<guiCPUCards.size();i++)
+        {
+            if(guiCPUCards[i]->isEnabled() == true)
+            {
+                cpuCardNum = i;
+            }
+        }
+        Hand *cpuHand = m_player2.getHand();
+        //Get player hand card
+        Card *cpuHandCard = cpuHand->getCard(cpuCardNum);
+        //Get player card month
+        CardMonth cpuCardMonth = cpuHandCard->getMonth();
+        if(currentCardMonth != cpuCardMonth)
+        {
+            std::cout << "There was an issue with the cards matching..." << std::endl;
+            std::cout << "The current card month:" << currentCardMonth << std::endl;
+            std::cout << "The player card month:" << cpuCardMonth << std::endl;
+        }
+        else
+        {
+            //Need to store card matches from the deck and game hand in players' special match hands
+            CardType currentGameCardType = currentGameCard->getCardType();
+            CardType cpuHandCardType = cpuHandCard->getCardType();
+            Hand *cpuHand = m_player2.getHand();
+            Hand *cpuLight = m_player2.getLightMatch();
+            Hand *cpuAnimal = m_player2.getAnimalMatch();
+            Hand *cpuRibbon = m_player2.getRibbonMatch();
+            Hand *cpuPlain = m_player2.getPlainMatch();
+            switch (currentGameCardType)
+            {
+            case LIGHT:
+                cpuLight->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case ANIMAL:
+                cpuAnimal->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case RIBBON:
+                cpuRibbon->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            case PLAIN:
+                cpuPlain->acceptCard(*m_gameHand.getCard(cardNum));
+                m_gameHand.removeCard(cardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
+            switch (cpuHandCardType)
+            {
+            case LIGHT:
+                cpuLight->acceptCard(*cpuHand->getCard(cpuCardNum));
+                cpuHand->removeCard(cpuCardNum);
+                break;
+            case ANIMAL:
+                cpuAnimal->acceptCard(*cpuHand->getCard(cpuCardNum));
+                cpuHand->removeCard(cpuCardNum);
+                break;
+            case RIBBON:
+                cpuRibbon->acceptCard(*cpuHand->getCard(cpuCardNum));
+                cpuHand->removeCard(cpuCardNum);
+                break;
+            case PLAIN:
+                cpuPlain->acceptCard(*cpuHand->getCard(cpuCardNum));
+                cpuHand->removeCard(cpuCardNum);
+                break;
+            default:
+                std::cout << "It shouldn't get here..." << std::endl;
+                break;
+            }
+        }
+        //call updateCards
+        updateCards();
+        //call updateYaku
+        updateYaku();
+        //******************
+        //call cpuDrawCard
+        //******************
+        cpuDrawCard();
+    }
+}
+
+void KoiKoi::cpuDrawCard()
+{
+    //Shows next card for deck
+    Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
+    CardMonth nextMonth = nextCard->getMonth();
+
+    bool matchingCard {false};
+
+    //compare with gameHand objects
+    for(int i{0};i<m_gameHand.getNumCards();i++)
+    {
+        if (m_gameHand.getCard(i)->getMonth() != nextMonth)
+        {
+            //Disable gamehand card
+            guiGameHandCards[i]->setDisabled(true);
+        }
+        else
+        {
+            matchingCard = true;
+        }
+    }
+    //Sleep 3??
+    QTimer::singleShot(2000, this, SLOT(waitABit()));
+    //See if there are any month matches
+    if(matchingCard == false)
+    {
+        //deal deck card
+        //accept in gamehand
+        m_gameHand.acceptCard(*m_gameDeck.dealCard());
+
+        //call updateCards
+        updateCards();
+
+        //Sleep 3??
+        QTimer::singleShot(2000, this, SLOT(waitABit()));
+
+        /*
+         * Check for end of round (if player has cards)
+         */
+        if(m_player2.getHand()->getNumCards() > 0)
+        {
+            //Turn is ending
+            //Do it at the beginning of a new turn
+            //Already done above, but as mentioned this will change with CPU
+            connectPlayerHand();
+            disconnectDeck();
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+
+            //Should probably show the last card not match
+            //and have been added to the gameboard (sleep 2)
+
+            tallyPoints();
+        }
+
+        //**********************************************************
+        //allows to click player hand card to call selectFromHand
+        //**********************************************************
+    }
+    else
+    {
+        //Show next deck card image
+        ui->deckButton->setIcon(QIcon(QString(nextCard->getImageStr())));
+        m_gameDeck.setDeckIcon(nextCard->getImageStr().toStdString());
+        //****************************
+        //call cpuSelectFromGameHand
+        //****************************
+        cpuSelectFromGameHand();
+    }
+}
+
+/*
+ * Slot function for the koi-koi buttons in the GUI which
+ * determine if the player is declaring koi-koi or shobu after obtaining yaku.
+ */
+void KoiKoi::cpuRequestKoiKoi()
+{
+    //yes or no buttons
+    //get sender()
+    QString theSender = sender()->objectName();
+
+    if(theSender.toStdString() == "noButton")
+    {
+        //if no, then round over, tally points
+        tallyPoints();
+    }
+    else
+    {
+        //else yes, then round continues, but update player koikoi status
+        //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
+        m_player2.setKoikoi(true);
+        //Switch to next player turn
+        showGameScreen();
         //Do it at the beginning of a new turn
         //This will change with CPU
         //connectPlayerHand();
@@ -2089,7 +2489,7 @@ void KoiKoi::requestKoiKoi()
     }
 }
 
-void KoiKoi::nextRound()
+void KoiKoi::waitABit()
 {
-    startRound();
+    std::cout << "Waited..." << std::endl;
 }

@@ -137,6 +137,10 @@ public:
     void deal();
     void startRound();
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
+    void cpuSelectFromHand();
+    void cpuSelectFromGameHand();
+    void cpuDrawCard();
+    void cpuRequestKoiKoi();
 
     /*
     * Print Functions
@@ -181,6 +185,7 @@ public slots:
     void drawCard();
     void requestKoiKoi();
     void nextRound();
+    void waitABit();
 };
 
 #endif // KOIKOI_H
