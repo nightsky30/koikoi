@@ -21,11 +21,8 @@
 #define HAND_H
 
 #include "card.h"
-#include <vector>
 #include <QVector>
 #include <QString>
-
-using index_t = std::vector<Card>::size_type;
 
 /*
 * Class Definition, also functions as forward declaration
@@ -37,12 +34,12 @@ private:
     /*
     * Member Initialization List
     */
-    index_t m_numCards {0};
-    std::vector<Card> m_playerHand
+    int m_numCards {0};
+    QVector<Card> m_playerHand
     {
         Card()
     };
-    index_t m_oyaCard {0};
+    int m_oyaCard {0};
 
 public:
     /*
@@ -54,18 +51,18 @@ public:
     /*
     * Get Functions
     */
-    Card* getCard(std::vector<Card>::size_type cardNum);
-    std::vector<Card>::size_type getNumCards();
+    Card* getCard(int cardNum);
+    int getNumCards();
     Card* getRandCard();
-    index_t getOyaCard();
+    int getOyaCard();
 
     /*
     * Set Functions
     */
-    void setOyaCard(index_t oyaCard);
+    void setOyaCard(int oyaCard);
     void acceptCard(Card &newCard);
-    Card* disCard(std::vector<Card>::size_type cardNum);
-    void removeCard(std::vector<Card>::size_type cardNum);
+    Card* disCard(int cardNum);
+    void removeCard(int cardNum);
     void resetHand();
 
     /*
