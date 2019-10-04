@@ -1,3 +1,22 @@
+/*
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * Koi-Koi Hanafuda - Card Game
+ * Copyright (C) 2019  nightsky30 @ github
+ */
+
 #include "koikoi.h"
 #include "preferences.h"
 #include "about.h"
@@ -417,6 +436,7 @@ void KoiKoi::startGame()
     this->m_player1.getHand()->resetHand();
     this->m_player2.getHand()->resetHand();
     resetYaku();
+    resetTally();
     generateOyaCard();
 }
 
@@ -511,24 +531,33 @@ void KoiKoi::deal()
  */
 void KoiKoi::startRound()
 {
-    if(this->m_currentRound<m_rounds)
+    if(this->m_currentRound < m_rounds)
     {
         //start round
         this->m_currentRound = this->m_currentRound + 1;
         this->m_gameStatus = true;
+
+        this->m_gameDeck.resetDeck();
+        this->m_gameDeck.shuffleDeck();
+        this->m_gameHand.resetHand();
+        this->m_player1.getHand()->resetHand();
+        this->m_player2.getHand()->resetHand();
+        resetYaku();
+        resetTally();
+
+        deal();
+        updateYaku();
+        updateCards();
+        updateScores();
+        showGameScreen();
+        checkGameHand();
     }
     else
     {
         //end game
         this->m_gameStatus = false;
+        tallyPoints();
     }
-
-    deal();
-    updateYaku();
-    updateCards();
-    updateScores();
-    showGameScreen();
-    checkGameHand();
 
     //    bool firstTurn {true};
     //    bool roundOver {false};
@@ -626,6 +655,74 @@ void KoiKoi::tallyPoints() //??  Player currentPlayer, Player nextPlayer
 
     //Tally points
     //Take into account player koikoi statuses
+    //Players can have multiple koikois and if one player gets one after another
+    //had declared it, then the other player gets no points
+
+    bool playerKoiKoi = m_player1.getKoikoi();
+    bool cpuKoiKoi = m_player2.getKoikoi();
+
+    m_player1.printYaku();
+
+    for (int i {0}; i < m_player1.getYakuSize();i++)
+    {
+        if(m_player1.getYaku(i) == true)
+        {
+            m_player1.setScore(m_player1.getScore() + acceptableYaku[i].getPointValue());
+            switch (i)
+            {
+            case 0:
+                ui->tally_kasu_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 1:
+                //Not used
+                break;
+            case 2:
+                //Not used
+                break;
+            case 3:
+                //Not used
+                break;
+            case 4:
+                ui->tally_tane_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 5:
+                ui->tally_inoshikacho_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 6:
+                ui->tally_tanzaku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 7:
+                ui->tally_akatan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 8:
+                ui->tally_aotan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 9:
+                ui->tally_akatanaotannochofuku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 10:
+                ui->tally_tsukimideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 11:
+                ui->tally_hanamideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 12:
+                ui->tally_sanko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 13:
+                ui->tally_ameshiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 14:
+                ui->tally_shiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            case 15:
+                ui->tally_goku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                break;
+            default:
+                break;
+            }
+        }
+    }
 
     ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
@@ -866,6 +963,37 @@ void KoiKoi::resetYaku()
     ui->cpu_tsuki_fuda_yaku->setVisible(false);
 }
 
+void KoiKoi::resetTally()
+{
+    ui->tally_kasu_player_points->setText(QString("%1").arg(0));
+    ui->tally_tane_player_points->setText(QString("%1").arg(0));
+    ui->tally_inoshikacho_player_points->setText(QString("%1").arg(0));
+    ui->tally_tanzaku_player_points->setText(QString("%1").arg(0));
+    ui->tally_akatan_player_points->setText(QString("%1").arg(0));
+    ui->tally_aotan_player_points->setText(QString("%1").arg(0));
+    ui->tally_akatanaotannochofuku_player_points->setText(QString("%1").arg(0));
+    ui->tally_tsukimideippai_player_points->setText(QString("%1").arg(0));
+    ui->tally_hanamideippai_player_points->setText(QString("%1").arg(0));
+    ui->tally_sanko_player_points->setText(QString("%1").arg(0));
+    ui->tally_ameshiko_player_points->setText(QString("%1").arg(0));
+    ui->tally_shiko_player_points->setText(QString("%1").arg(0));
+    ui->tally_goku_player_points->setText(QString("%1").arg(0));
+
+    ui->tally_kasu_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_tane_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_inoshikacho_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_tanzaku_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_akatan_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_aotan_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_akatanaotannochofuku_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_tsukimideippai_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_hanamideippai_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_sanko_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_shiko_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_goku_cpu_points->setText(QString("%1").arg(0));
+}
+
 /*
  * Updates yaku status for all players both at the
  * variable level as well as visual status within the GUI.
@@ -1006,6 +1134,19 @@ void KoiKoi::updateYaku()
             label->setVisible(true);
         }
     }
+}
+
+void KoiKoi::checkYaku()
+{
+    Hand *playerLightHand = m_player1.getLightMatch();
+    Hand *playerAnimalHand = m_player1.getAnimalMatch();
+    Hand *playerRibbonHand = m_player1.getRibbonMatch();
+    Hand *playerPlainHand = m_player1.getPlainMatch();
+
+    Hand *cpuLightHand = m_player2.getLightMatch();
+    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
+    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
+    Hand *cpuPlainHand = m_player2.getPlainMatch();
 
     bool obtainedYaku {false};
 
@@ -1028,10 +1169,13 @@ void KoiKoi::updateYaku()
     switch (playerLightHand->getNumCards())
     {
     case 3:
-        //Sanko, 5pts
-        m_player1.setYaku(12, true);
-        ui->player_sanko_yaku->setVisible(true);
-        obtainedYaku = true;
+        if(m_player1.getYaku(12) != true)
+        {
+            //Sanko, 5pts
+            m_player1.setYaku(12, true);
+            ui->player_sanko_yaku->setVisible(true);
+            obtainedYaku = true;
+        }
         break;
     case 4:
         //Shiko, without Rain, 8pts
@@ -1049,22 +1193,31 @@ void KoiKoi::updateYaku()
         }
         if(foundRain == true)
         {
-            m_player1.setYaku(13, true);
-            ui->player_ameshiko_yaku->setVisible(true);
-            obtainedYaku = true;
+            if(m_player1.getYaku(13) != true)
+            {
+                m_player1.setYaku(13, true);
+                ui->player_ameshiko_yaku->setVisible(true);
+                obtainedYaku = true;
+            }
         }
         else
         {
-            m_player1.setYaku(14, true);
-            ui->player_shiko_yaku->setVisible(true);
-            obtainedYaku = true;
+            if(m_player1.getYaku(14) != true)
+            {
+                m_player1.setYaku(14, true);
+                ui->player_shiko_yaku->setVisible(true);
+                obtainedYaku = true;
+            }
         }
         break;
     case 5:
-        //Goku, 10pts
-        m_player1.setYaku(15, true);
-        ui->player_goku_yaku->setVisible(true);
-        obtainedYaku = true;
+        if(m_player1.getYaku(15) != true)
+        {
+            //Goku, 10pts
+            m_player1.setYaku(15, true);
+            ui->player_goku_yaku->setVisible(true);
+            obtainedYaku = true;
+        }
         break;
     default:
         break;
@@ -1082,9 +1235,12 @@ void KoiKoi::updateYaku()
             {
                 if (playerAnimalHand->getCard(j)->getCardType2() == SAKE_CUP)
                 {
-                    m_player1.setYaku(10, true);
-                    ui->player_tsukimi_de_ippai_yaku->setVisible(true);
-                    obtainedYaku = true;
+                    if(m_player1.getYaku(10) != true)
+                    {
+                        m_player1.setYaku(10, true);
+                        ui->player_tsukimi_de_ippai_yaku->setVisible(true);
+                        obtainedYaku = true;
+                    }
                 }
             }
             break;
@@ -1093,9 +1249,12 @@ void KoiKoi::updateYaku()
             {
                 if (playerAnimalHand->getCard(j)->getCardType2() == SAKE_CUP)
                 {
-                    m_player1.setYaku(11, true);
-                    ui->player_hanami_de_ippai_yaku->setVisible(true);
-                    obtainedYaku = true;
+                    if(m_player1.getYaku(11) != true)
+                    {
+                        m_player1.setYaku(11, true);
+                        ui->player_hanami_de_ippai_yaku->setVisible(true);
+                        obtainedYaku = true;
+                    }
                 }
             }
             break;
@@ -1107,9 +1266,12 @@ void KoiKoi::updateYaku()
     //Tane, 1pt
     if (playerAnimalHand->getNumCards() >= 5)
     {
-        m_player1.setYaku(4, true);
-        ui->player_tane_yaku->setVisible(true);
-        obtainedYaku = true;
+        if(m_player1.getYaku(4) != true)
+        {
+            m_player1.setYaku(4, true);
+            ui->player_tane_yaku->setVisible(true);
+            obtainedYaku = true;
+        }
     }
 
     //Inoshikacho, 5pts
@@ -1127,9 +1289,12 @@ void KoiKoi::updateYaku()
                         {
                             if(playerAnimalHand->getCard(k)->getCardType2() == BUTTERFLIES)
                             {
-                                m_player1.setYaku(5, true);
-                                ui->player_inoshikacho_yaku->setVisible(true);
-                                obtainedYaku = true;
+                                if(m_player1.getYaku(5) != true)
+                                {
+                                    m_player1.setYaku(5, true);
+                                    ui->player_inoshikacho_yaku->setVisible(true);
+                                    obtainedYaku = true;
+                                }
                             }
                         }
                     }
@@ -1163,46 +1328,79 @@ void KoiKoi::updateYaku()
         //Akatan, 5pts
         if(numRedPoems >= 3)
         {
-            m_player1.setYaku(7, true);
-            ui->player_akatan_yaku->setVisible(true);
-            obtainedYaku = true;
+            if(m_player1.getYaku(7) != true)
+            {
+                m_player1.setYaku(7, true);
+                ui->player_akatan_yaku->setVisible(true);
+                obtainedYaku = true;
+            }
         }
         //Aotan, 5pts
         if(numBlueRibbons >= 3)
         {
-            m_player1.setYaku(8, true);
-            ui->player_aotan_yaku->setVisible(true);
-            obtainedYaku = true;
+            if(m_player1.getYaku(8) != true)
+            {
+                m_player1.setYaku(8, true);
+                ui->player_aotan_yaku->setVisible(true);
+                obtainedYaku = true;
+            }
         }
         //Akatan Aotan No Chofuku, 10pts
         if(numRedPoems >= 3 && numBlueRibbons >= 3)
         {
-            m_player1.setYaku(9, true);
-            ui->player_akatan_aotan_no_chofuku_yaku->setVisible(true);
-            obtainedYaku = true;
+            if(m_player1.getYaku(9) != true)
+            {
+                m_player1.setYaku(9, true);
+                ui->player_akatan_aotan_no_chofuku_yaku->setVisible(true);
+                obtainedYaku = true;
+            }
         }
     }
 
     //Tanzaku, 1pt
     if(playerRibbonHand->getNumCards() >= 5)
     {
-        m_player1.setYaku(6, true);
-        ui->player_tanzaku_yaku->setVisible(true);
-        obtainedYaku = true;
+        if(m_player1.getYaku(6) != true)
+        {
+            m_player1.setYaku(6, true);
+            ui->player_tanzaku_yaku->setVisible(true);
+            obtainedYaku = true;
+        }
     }
 
     //Kasu, 1pt
     if (playerPlainHand->getNumCards() >=10)
     {
-        m_player1.setYaku(0, true);
-        ui->player_kasu_yaku->setVisible(true);
-        obtainedYaku = true;
+        if(m_player1.getYaku(0) != true)
+        {
+            m_player1.setYaku(0, true);
+            ui->player_kasu_yaku->setVisible(true);
+            obtainedYaku = true;
+        }
     }
 
-    if(obtainedYaku == true)
+    //Check if player still has cards
+    //If there was actual Yaku combination
+    //Allow to decide if to declare koi-koi
+    if(m_player1.getHand()->getNumCards() > 0)
     {
-        //Call function to declare koikoi
-        showKoiKoiScreen();
+        if(obtainedYaku == true)
+        {
+            //Call function to ask if player wants to declare koikoi
+            showKoiKoiScreen();
+        }
+        else
+        {
+            //Turn is ending
+            //Do it at the beginning of a new turn
+            checkGameHand();
+        }
+    }
+    else
+    {
+        //Player out of cards
+        //End round, show tally screen
+        tallyPoints();
     }
 }
 
@@ -1210,6 +1408,8 @@ void KoiKoi::updateYaku()
  * Checks game hand for matching cards in the current player's hand.
  * Enables cards corresponding buttons that match while disabling the
  * buttons for cards that do not match.
+ *
+ * Maybe don't need this, or do it at the beginning of a turn
  */
 void KoiKoi::checkGameHand()
 {
@@ -1219,6 +1419,9 @@ void KoiKoi::checkGameHand()
     Card *currentGameCard;
     Card *currentPlayerCard;
     QPushButton *currentGameButton;
+
+    //Check for more than 0 cards in player hand
+    //Otherwise end round?
 
     //For each game card
     for(int i{0};i<m_gameHand.getNumCards();i++)
@@ -1638,17 +1841,18 @@ void KoiKoi::selectFromGameHand()
         disconnectDeck();
         //call updateCards
         updateCards();
-        //call updatePlayerYaku
+        //call updateYaku
         updateYaku();
-        //check for yaku
-        //if yaku
-        //then request koikoi
-        //if koikoi
-        //then finish turn
-        //else finish round
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
-        checkGameHand();
+        //check for yaku
+        //if yaku
+        //then request to declare koikoi
+        //if koikoi
+        //then finish turn
+        //continue round with next player turn and call checkCards()
+        //else finish round
+        checkYaku();
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
@@ -1737,14 +1941,8 @@ void KoiKoi::selectFromGameHand()
         connectDeck();
         //call updateCards
         updateCards();
-        //call updatePlayerYaku
+        //call updateYaku
         updateYaku();
-        //check for yaku
-        //if yaku
-        //then request koikoi
-        //if koikoi
-        //then finish turn
-        //else finish round
         //***************************************
         //allows to click deck to call drawCard
         //***************************************
@@ -1801,7 +1999,31 @@ void KoiKoi::drawCard()
         connectPlayerHand();
         //call updateCards
         updateCards();
-        checkGameHand();
+        //        checkGameHand();  //Done below
+
+        /*
+         * Check for end of round??
+         */
+        //Check if player still has cards
+        //If there was actual Yaku combination
+        //Allow to decide if to declare koi-koi
+        if(m_player1.getHand()->getNumCards() > 0)
+        {
+            //Turn is ending
+            //Do it at the beginning of a new turn
+            checkGameHand();
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+
+            //Should probably show the last card not match and have been added
+            //Added to the gameboard
+
+            tallyPoints();
+        }
+
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
@@ -1845,11 +2067,13 @@ void KoiKoi::requestKoiKoi()
         m_player1.setKoikoi(true);
         //Switch to next player turn
         showGameScreen();
+        //Do it at the beginning of a new turn
+        checkGameHand();
     }
 }
 
 void KoiKoi::nextRound()
 {
     //Crashing here
-    //startRound();
+    startRound();
 }

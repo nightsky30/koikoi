@@ -289,7 +289,7 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout" columnminimumwidth="0,0,0,0">
+         <layout class="QGridLayout" name="gridLayout" columnminimumwidth="0,0,0">
           <item row="24" column="0">
            <widget class="QLabel" name="tally_total_yaku">
             <property name="font">
@@ -456,7 +456,7 @@
            </widget>
           </item>
           <item row="6" column="2">
-           <widget class="QLabel" name="tall_tane_cpu_points">
+           <widget class="QLabel" name="tally_tane_cpu_points">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
