@@ -21,14 +21,14 @@
 #define DECK_H
 
 #include "card.h"
-#include <vector>
+#include <QVector>
 #include <string>
 
 // The game consists of this deck of 48 cards
 constexpr static int fullDeck {48};
 
 // Deck of 48 cards listed by point value by month
-const static std::vector<Card> koikoiDeck
+const static QVector<Card> koikoiDeck
 {
     Card(JANUARY, PINE, ":/deck/Hanafuda_1-4.svg", LIGHT, CRANE, 20, 0, "Crane", false),
     Card(JANUARY, PINE, ":/deck/Hanafuda_1-3.svg", RIBBON, RED_POEM, 5, 0, "Red Poem Tanzaku", false),
@@ -90,8 +90,8 @@ private:
     /*
     * Member Initialization List
     */
-    std::vector<Card>::size_type m_numCards {fullDeck};
-    std::vector<Card> m_cardDeck {koikoiDeck};
+    int m_numCards {fullDeck};
+    QVector<Card> m_cardDeck {koikoiDeck};
     //Currently QIcon.name() does not have a way to return the currently set QString for an icon...
     std::string m_deckIcon = ":/deck/Hanafuda_koi-2.svg";
 
@@ -105,8 +105,8 @@ public:
     /*
     * Get Functions
     */
-    Card* getCard(std::vector<Card>::size_type cardNum);
-    std::vector<Card>::size_type getNumCards();
+    Card* getCard(int cardNum);
+    int getNumCards();
     Card* getRandCard();
     std::string getDeckIcon();
 

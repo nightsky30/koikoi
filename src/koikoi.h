@@ -24,7 +24,7 @@
 #include "hand.h"
 #include "yaku.h"
 #include "player.h"
-#include <vector>
+#include <QVector>
 #include <QMainWindow>
 #include <QPushButton>
 
@@ -34,7 +34,7 @@
  * Each player has a corresponding bool vector that
  * matches values with objects in this Yaku vector.
  */
-const static std::vector<Yaku> acceptableYaku
+const static QVector<Yaku> acceptableYaku
 {
     Yaku(1, "Kasu (Plains)", "10 Plain cards. 1 point. Each Additional 1P after."),
             Yaku(1, "Bake-Fuda (Wild Card)", "The animal card of Chrysanthemum can be regarded as a plain card as well. If you have this, 9 plain cards and this card will be the Yaku of Kasu."),
@@ -96,6 +96,7 @@ private:
     int m_rounds {12};
     int m_currentRound {0};
     bool m_gameStatus {false};
+    QTimer *timeDelay {};
 
     QVector<QPushButton*> guiPlayerCards {};
     QVector<QPushButton*> guiCPUCards {};
@@ -136,6 +137,10 @@ public:
     void deal();
     void startRound();
     void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
+    void cpuSelectFromHand();
+    void cpuSelectFromGameHand();
+    void cpuDrawCard();
+    void cpuRequestKoiKoi();
 
     /*
     * Print Functions
@@ -158,7 +163,6 @@ public:
     void resetTally();
     void updateYaku();
     void checkYaku();
-    void checkGameHand();
     void connectDeck();
     void connectGameHand(QPushButton *button);
     void connectGameHand();
@@ -178,10 +182,10 @@ public slots:
     void determineOyaPlayer();
     void selectFromHand();
     void selectFromGameHand();
-    //void drawCard(Player &currentPlayer, int &currentTurn);
     void drawCard();
     void requestKoiKoi();
     void nextRound();
+    void waitABit();
 };
 
 #endif // KOIKOI_H

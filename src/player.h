@@ -22,7 +22,7 @@
 
 #include "yaku.h"
 #include "hand.h"
-#include <vector>
+#include <QVector>
 
 /*
 * Class Definition, also functions as forward declaration
@@ -36,9 +36,9 @@ private:
     */
     int m_score {30};
 //Holds the numbers from the Game's Yaku const??
-    std::vector<bool> m_obtainedYaku
+    QVector<bool> m_obtainedYaku
     {
-        std::vector<bool> {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
+        QVector<bool> {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
     };
     bool m_oya {false};
     bool m_koikoi {false};
@@ -60,7 +60,7 @@ public:
     */
     int getScore();
     bool getYaku(int numYaku);
-    std::vector<bool>::size_type getYakuSize();
+    int getYakuSize();
     bool getOya();
     bool getKoikoi();
     Hand* getHand();

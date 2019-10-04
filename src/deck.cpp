@@ -20,12 +20,10 @@
 #include "deck.h"
 #include "card.h"
 #include <iostream>     /* cout, cin, endl */
-#include <vector>       /* vector */
+#include <QVector>
 #include <cstdio>      /* NULL */
 #include <cstdlib>     /* srand, rand */
 #include <ctime>       /* time */
-
-using index_t = std::vector<Card>::size_type;
 
 //Default Constructor
 Deck::Deck()
@@ -41,23 +39,23 @@ Deck::~Deck()
 {
 }
 
-Card* Deck::getCard(std::vector<Card>::size_type cardNum)
+Card* Deck::getCard(int cardNum)
 {
     Card *requestedCard;
     requestedCard = &m_cardDeck[cardNum];
     return requestedCard;
 }
 
-std::vector<Card>::size_type Deck::getNumCards()
+int Deck::getNumCards()
 {
     return m_numCards;
 }
 
 Card* Deck::getRandCard() // Caution: Does not remove card from deck...
 {
-    index_t randNum {0};
+    int randNum {0};
     srand(time(NULL));
-    randNum = ((index_t)std::rand() % (m_numCards-1));
+    randNum = ((int)std::rand() % (m_numCards-1));
     Card *requestedCard;
     requestedCard = &m_cardDeck[randNum];
     return requestedCard;
@@ -82,8 +80,8 @@ void Deck::resetDeck()
 void Deck::shuffleDeck()
 {
 
-    index_t i {0};
-    index_t r {0};
+    int i {0};
+    int r {0};
     srand(time(NULL));
 
     for (i = 0; i < m_numCards; i++)
@@ -91,7 +89,7 @@ void Deck::shuffleDeck()
         //Generate a random number to select a card in the deck
         // Normally r = ((std::rand()) % 10) + 1;
         //  but since we want 0 thru 47 we change this a bit
-        r = ((index_t)std::rand() % (m_numCards-1));
+        r = ((int)std::rand() % (m_numCards-1));
         //Swap the current card number being iterated through with the randomly picked card
         std::swap(m_cardDeck[i], m_cardDeck[r]);
     }
@@ -123,9 +121,7 @@ void Deck::setDeckIcon(std::string iconStr)
 
 void Deck::printDeck()
 {
-    using index_t = std::vector<Card>::size_type;
-
-    index_t i {0};
+    int i {0};
 
     for (i = 0; i < m_numCards; i++)
     {
