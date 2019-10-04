@@ -1194,10 +1194,10 @@ void KoiKoi::checkYaku()
     Hand *playerRibbonHand = m_player1.getRibbonMatch();
     Hand *playerPlainHand = m_player1.getPlainMatch();
 
-//    Hand *cpuLightHand = m_player2.getLightMatch();
-//    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
-//    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
-//    Hand *cpuPlainHand = m_player2.getPlainMatch();
+    //    Hand *cpuLightHand = m_player2.getLightMatch();
+    //    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
+    //    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
+    //    Hand *cpuPlainHand = m_player2.getPlainMatch();
 
     bool obtainedYaku {false};
 
@@ -1430,31 +1430,10 @@ void KoiKoi::checkYaku()
         }
     }
 
-    //Check if player still has cards
-    //If there was actual Yaku combination
-    //Allow to decide if to declare koi-koi
-    if(m_player1.getHand()->getNumCards() > 0)
+    if(obtainedYaku == true)
     {
-        if(obtainedYaku == true)
-        {
-            //Call function to ask if player wants to declare koikoi
-            showKoiKoiScreen();
-        }
-        else
-        {
-            //Turn is ending
-            //Do it at the beginning of a new turn
-            //This will change with CPU
-            //connectPlayerHand();
-            //disconnectDeck();
-            cpuSelectFromHand();
-        }
-    }
-    else
-    {
-        //Player out of cards
-        //End round, show tally screen
-        tallyPoints();
+        //Call function to ask if player wants to declare koikoi
+        showKoiKoiScreen();
     }
 }
 
@@ -1676,7 +1655,6 @@ void KoiKoi::determineOyaPlayer()
 void KoiKoi::selectFromHand()
 {
     Hand *playerHand = m_player1.getHand();
-    //Hand *cpuHand = m_player2.getHand();
 
     //get calling parent object name
     QObject *senderButton = sender();
@@ -1730,8 +1708,6 @@ void KoiKoi::selectFromHand()
     }
     else
     {
-        //Disconnect player hand
-        //disconnectPlayerHand();
         //Disable all cards in playerhand except current selected card
         for(int k {0};k<playerHand->getNumCards();k++)
         {
@@ -1850,11 +1826,6 @@ void KoiKoi::selectFromGameHand()
                 break;
             }
         }
-        //Connect all playerhand cards
-        //This will change with CPU
-        //connectPlayerHand();
-
-
         //disconnect deck
         disconnectDeck();
         //call updateCards
@@ -1864,15 +1835,22 @@ void KoiKoi::selectFromGameHand()
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         //check for yaku
-        //if yaku
-        //then request to declare koikoi
-        //if koikoi
-        //then finish turn
-        //continue round with next player turn and call checkCards()
-        //else finish round
         checkYaku();
 
-        cpuSelectFromHand();
+        /*
+         * Check for end of round (if player has cards)
+         */
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        {
+            //Turn is ending
+            cpuSelectFromHand();
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints();
+        }
     }
     else
     {
@@ -2009,34 +1987,24 @@ void KoiKoi::drawCard()
         disconnectDeck();
         //disconnect all game hand cards
         disconnectGameHand();
-
-        //Connect playerhand
-        //This will change with CPU
-        //connectPlayerHand();
-
         //call updateCards
         updateCards();
+
+        //Testing
+        checkYaku();
 
         /*
          * Check for end of round (if player has cards)
          */
-        if(m_player1.getHand()->getNumCards() > 0)
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
             //Turn is ending
-            //Do it at the beginning of a new turn
-            //Already done above, but as mentioned this will change with CPU
-            //connectPlayerHand();
-            //disconnectDeck();
             cpuSelectFromHand();
         }
         else
         {
             //Player out of cards
             //End round, show tally screen
-
-            //Should probably show the last card not match
-            //and have been added to the gameboard (sleep 2)
-
             tallyPoints();
         }
 
@@ -2058,7 +2026,6 @@ void KoiKoi::drawCard()
         //**********************************************************
         //Wait for user to select from gamehand as there may have been multiple match possibilities
     }
-    //disconnectDeck();
 }
 
 /*
@@ -2078,17 +2045,21 @@ void KoiKoi::requestKoiKoi()
     }
     else
     {
-        //else yes, then round continues, but update player koikoi status
-        //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
-        m_player1.setKoikoi(true);
-        //Switch to next player turn
-        showGameScreen();
-
-        //Do it at the beginning of a new turn
-        //This will change with CPU
-        //connectPlayerHand();
-        //disconnectDeck();
-        cpuSelectFromHand();
+        /*
+         * Check for end of round (if player has cards)
+         */
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        {
+            m_player1.setKoikoi(true);
+            showGameScreen();
+            //cpuSelectFromHand();
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints();
+        }
     }
 }
 
@@ -2101,15 +2072,26 @@ void KoiKoi::cpuSelectFromHand()
 {
     Hand *cpuHand = m_player2.getHand();
 
+    std::cout << "" << std::endl;
+    std::cout << "CPU Hand" << std::endl;
+    cpuHand->printHand();
+    std::cout << "" << std::endl;
+
     //Get card number, randomly
     int cardNum {0};
     srand(time(NULL));
+    //cardNum = ((int)std::rand() % (m_numCards-1));
     cardNum = ((int)std::rand() % cpuHand->getNumCards());
 
     std::cout << "CardNum from hand is:  " << cardNum << std::endl;
 
     //Get cpu card
     Card *currentCPUCard = cpuHand->getCard(cardNum);
+
+    std::cout << "" << std::endl;
+    std::cout << "Current Selected CPU card:" << std::endl;
+    currentCPUCard->printCard();
+    std::cout << "" << std::endl;
 
     //get month of card button
     CardMonth currentCardMonth = currentCPUCard->getMonth();
@@ -2129,6 +2111,9 @@ void KoiKoi::cpuSelectFromHand()
             matchingCard = true;
         }
     }
+    std::cout << "" << std::endl;
+    std::cout << "Matching card is:  " << matchingCard << std::endl;
+    std::cout << "" << std::endl;
     //Sleep 3??
     QTimer::singleShot(2000, this, SLOT(waitABit()));
     //See if there are any month matches
@@ -2146,6 +2131,14 @@ void KoiKoi::cpuSelectFromHand()
         //******************
         //call cpuDrawCard
         //******************
+        std::cout << "" << std::endl;
+        std::cout << "Updated CPU hand:" << std::endl;
+        cpuHand->printHand();
+        std::cout << "" << std::endl;
+        std::cout << "" << std::endl;
+        std::cout << "Updated game hand:" << std::endl;
+        m_gameHand.printHand();
+        std::cout << "" << std::endl;
         cpuDrawCard();
     }
     else
@@ -2178,26 +2171,33 @@ void KoiKoi::cpuSelectFromGameHand()
     //since the user can't click stuff the cpu must select somehow
     bool cardFound {false};
     QVector<int> a {};
-    while(cardFound == false)
+    //while(cardFound == false)
+    //{
+    //search through gameHand objects
+    for(int i{0};i<guiGameHandCards.size();i++)
     {
-        //search through gameHand objects
-        for(int i{0};i<guiGameHandCards.size();i++)
+        if (guiGameHandCards[i]->isEnabled() == true)
         {
-            if (guiGameHandCards[i]->isEnabled() == true)
-            {
-                //Store numbers of found enabled cards
-                a.push_back(i);
-                cardFound = true;
-            }
+            //Store numbers of found enabled cards
+            a.push_back(i);
+            cardFound = true;
+            std::cout << "a was pushed:  " << i << std::endl;
         }
     }
+    //}
+
+    std::cout << "a.size is:  " << a.size() << std::endl;
 
     //Get card number randomly from stored selection
+    int tempCardNum {0};
     int cardNum {0};
     srand(time(NULL));
-    cardNum = ((int)std::rand() % a.size());
+    //cardNum = ((int)std::rand() % (m_numCards-1));
+    tempCardNum = ((int)std::rand() % a.size());
+    cardNum = a[tempCardNum];
 
-    std::cout << "CardNum from game hand is:  " << cardNum << std::endl;
+    std::cout << "tempCardNum from game hand is:  " << tempCardNum << std::endl;
+    std::cout << "a's tempCardNum value (cardNum) is:  " << cardNum << std::endl;
 
     //Get game hand card
     Card *currentGameCard = m_gameHand.getCard(cardNum);
@@ -2458,6 +2458,10 @@ void KoiKoi::cpuDrawCard()
         //****************************
         //call cpuSelectFromGameHand
         //****************************
+        std::cout << "" << std::endl;
+        std::cout << "Next deck card:" << std::endl;
+        nextCard->printCard();
+        std::cout << "" << std::endl;
         cpuSelectFromGameHand();
     }
 }
