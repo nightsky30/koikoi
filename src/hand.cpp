@@ -20,9 +20,7 @@
 #include "hand.h"
 #include "card.h"
 #include <iostream>
-#include <vector>
-
-using index_t = std::vector<Card>::size_type;
+#include <QVector>
 
 Hand::Hand()
 {
@@ -36,34 +34,34 @@ Hand::~Hand()
 
 }
 
-Card* Hand::getCard(std::vector<Card>::size_type cardNum)
+Card* Hand::getCard(int cardNum)
 {
     Card *requestedCard;
     requestedCard = &m_playerHand[cardNum];
     return requestedCard;
 }
 
-std::vector<Card>::size_type Hand::getNumCards()
+int Hand::getNumCards()
 {
     return m_numCards;
 }
 
 Card* Hand::getRandCard()
 {
-    index_t randNum {0};
+    int randNum {0};
     srand(time(NULL));
-    randNum = ((index_t)std::rand() % (m_numCards-1));
+    randNum = ((int)std::rand() % m_numCards - 1);
     Card *requestedCard;
     requestedCard = &m_playerHand[randNum];
     return requestedCard;
 }
 
-index_t Hand::getOyaCard()
+int Hand::getOyaCard()
 {
 return m_oyaCard;
 }
 
-void Hand::setOyaCard(index_t oyaCard)
+void Hand::setOyaCard(int oyaCard)
 {
     m_oyaCard = oyaCard;
 }
@@ -74,7 +72,7 @@ void Hand::acceptCard(Card &newCard)
     m_numCards = m_numCards + 1;
 }
 
-void Hand::removeCard(std::vector<Card>::size_type cardNum)
+void Hand::removeCard(int cardNum)
 {
         m_playerHand.erase(m_playerHand.begin() + cardNum);
         m_numCards = m_numCards - 1;
@@ -89,9 +87,7 @@ void Hand::resetHand()
 
 void Hand::printHand()
 {
-    using index_t = std::vector<Card>::size_type;
-
-    index_t i {0};
+    int i {0};
 
     for (i = 0; i < m_numCards; i++)
     {

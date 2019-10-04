@@ -40,7 +40,7 @@ bool Player::getYaku(int numYaku)
     return m_obtainedYaku[numYaku];
 }
 
-std::vector<bool>::size_type Player::getYakuSize()
+int Player::getYakuSize()
 {
     return m_obtainedYaku.size();
 }

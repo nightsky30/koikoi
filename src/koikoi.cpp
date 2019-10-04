@@ -28,7 +28,7 @@
 #include <chrono>  // Sleep Time
 #include <thread>  //Thread Sleep
 #include "ui_koikoi.h"
-#include <vector>
+#include <QVector>
 #include <QString>
 #include <QPushButton>
 #include <QIntegerForSize>
@@ -36,9 +36,6 @@
 #include <QThread>
 #include <QPixmap>
 #include <QTimer>
-
-// Using a type alias
-using index_t = std::vector<Card>::size_type;
 
 /*
  * Constructor
@@ -374,16 +371,13 @@ Player* KoiKoi::getPlayer(int playerNum)
     case 1:
         requestedPlayer = &m_player1;
         return requestedPlayer;
-        break;
     case 2:
         requestedPlayer = &m_player2;
         return requestedPlayer;
-        break;
     default:
         std::cout << "Invalid player number. You must specify a value of 1 or 2. Returning player 1 by default." << std::endl;
         requestedPlayer = &m_player1;
         return requestedPlayer;
-        break;
     }
 }
 
@@ -500,7 +494,7 @@ void KoiKoi::generateOyaCard()
  */
 void KoiKoi::deal()
 {
-    index_t fourCount {0};
+    int fourCount {0};
 
     Hand *playHand1 = m_player1.getHand();  // Had to use pointers
     Hand *playHand2 = m_player2.getHand();
@@ -597,8 +591,8 @@ void KoiKoi::tallyPoints()
     //Players can have multiple koikois and if one player gets one after another
     //had declared it, then the other player gets no points
 
-    bool playerKoiKoi = m_player1.getKoikoi();
-    bool cpuKoiKoi = m_player2.getKoikoi();
+    //bool playerKoiKoi = m_player1.getKoikoi();
+    //bool cpuKoiKoi = m_player2.getKoikoi();
 
     int playerSubTotal {0};
     int cpuSubTotal {0};
@@ -1200,10 +1194,10 @@ void KoiKoi::checkYaku()
     Hand *playerRibbonHand = m_player1.getRibbonMatch();
     Hand *playerPlainHand = m_player1.getPlainMatch();
 
-    Hand *cpuLightHand = m_player2.getLightMatch();
-    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
-    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
-    Hand *cpuPlainHand = m_player2.getPlainMatch();
+//    Hand *cpuLightHand = m_player2.getLightMatch();
+//    Hand *cpuAnimalHand = m_player2.getAnimalMatch();
+//    Hand *cpuRibbonHand = m_player2.getRibbonMatch();
+//    Hand *cpuPlainHand = m_player2.getPlainMatch();
 
     bool obtainedYaku {false};
 
@@ -1648,7 +1642,7 @@ void KoiKoi::determineOyaPlayer()
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
 
-    index_t oyaCard = m_oyaHand.getOyaCard();
+    int oyaCard = m_oyaHand.getOyaCard();
     QChar buttonNum = (buttonName.at(buttonName.size()-1));
 
     //Compare selected sender object card with predetermined oya
@@ -1682,7 +1676,7 @@ void KoiKoi::determineOyaPlayer()
 void KoiKoi::selectFromHand()
 {
     Hand *playerHand = m_player1.getHand();
-    Hand *cpuHand = m_player2.getHand();
+    //Hand *cpuHand = m_player2.getHand();
 
     //get calling parent object name
     QObject *senderButton = sender();
@@ -2108,9 +2102,11 @@ void KoiKoi::cpuSelectFromHand()
     Hand *cpuHand = m_player2.getHand();
 
     //Get card number, randomly
-    index_t cardNum {0};
+    int cardNum {0};
     srand(time(NULL));
-    cardNum = ((index_t)std::rand() % (cpuHand->getNumCards()-1));
+    cardNum = ((int)std::rand() % cpuHand->getNumCards());
+
+    std::cout << "CardNum from hand is:  " << cardNum << std::endl;
 
     //Get cpu card
     Card *currentCPUCard = cpuHand->getCard(cardNum);
@@ -2181,7 +2177,7 @@ void KoiKoi::cpuSelectFromGameHand()
     //Get random card that was enabled in the game hand
     //since the user can't click stuff the cpu must select somehow
     bool cardFound {false};
-    std::vector<int> a {};
+    QVector<int> a {};
     while(cardFound == false)
     {
         //search through gameHand objects
@@ -2197,9 +2193,11 @@ void KoiKoi::cpuSelectFromGameHand()
     }
 
     //Get card number randomly from stored selection
-    index_t cardNum {0};
+    int cardNum {0};
     srand(time(NULL));
-    cardNum = ((index_t)std::rand() % a.size() - 1);
+    cardNum = ((int)std::rand() % a.size());
+
+    std::cout << "CardNum from game hand is:  " << cardNum << std::endl;
 
     //Get game hand card
     Card *currentGameCard = m_gameHand.getCard(cardNum);
