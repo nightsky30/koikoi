@@ -162,7 +162,7 @@ public:
     void resetYaku();
     void resetTally();
     void updateYaku();
-    void checkYaku();
+    void checkYaku(int playerNum);
     void connectDeck();
     void connectGameHand(QPushButton *button);
     void connectGameHand();
