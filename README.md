@@ -14,9 +14,8 @@ Hope to package for distros here...
 ## Compiling
 
 The following may be done to compile manually:
-
-,,,
+```
 meson builddir
 ninja -C builddir
 ./builddir/src/koikoi
-,,,
+```
