@@ -760,46 +760,67 @@ void KoiKoi::tallyPoints(int playerNum)
     bool opponentKoiKoi = opponent->getKoikoi();
 
     //Set default koikoi amount
-    int koikoiTotal {0};
+    int currentKoikoiTotal {0};
+    int opponentKoikoiTotal {0};
 
     //If koikoi, get points for each koikoi (1 per koikoi)
     if(currentKoiKoi == true)
     {
         //Get koikoi amount
-        koikoiTotal = currentPlayer->getKoikoiNum();
+        currentKoikoiTotal = currentPlayer->getKoikoiNum();
+    }
+
+    //If koikoi, get points for each koikoi (1 per koikoi)
+    if(opponentKoiKoi == true)
+    {
+        //Get koikoi amount
+        opponentKoikoiTotal = opponent->getKoikoiNum();
     }
 
     //Add koikoi amount to subtotal
     //If opponent had koikoi as well, currentPlayer's points from current round are doubled
     if(playerNum == 1)
     {
+        ui->tally_koikoi_player_points->setText(QString("%1").arg(currentKoikoiTotal));
+        ui->tally_koikoi_cpu_points->setText(QString("%1").arg(opponentKoikoiTotal));
         if(opponentKoiKoi == true)
         {
-            currentPlayer->setScore(currentPlayer->getScore() + ((playerSubTotal + currentKoiKoi) * 2));
-            opponent->setScore(opponent->getScore() - ((playerSubTotal + currentKoiKoi) * 2));
+            currentPlayer->setScore(currentPlayer->getScore() + ((playerSubTotal + currentKoikoiTotal) * 2));
+            opponent->setScore(opponent->getScore() - ((playerSubTotal + currentKoikoiTotal) * 2));
+            ui->tally_koikoi_player_double->setText(QString("%1").arg("x2"));
+            ui->tally_koikoi_cpu_double->setText(QString("%1").arg("N/A"));
         }
         else
         {
-            currentPlayer->setScore(currentPlayer->getScore() + (playerSubTotal + currentKoiKoi));
-            opponent->setScore(opponent->getScore() - (playerSubTotal + currentKoiKoi));
+            currentPlayer->setScore(currentPlayer->getScore() + (playerSubTotal + currentKoikoiTotal));
+            opponent->setScore(opponent->getScore() - (playerSubTotal + currentKoikoiTotal));
+            ui->tally_koikoi_player_double->setText(QString("%1").arg("N/A"));
+            ui->tally_koikoi_cpu_double->setText(QString("%1").arg("N/A"));
         }
     }
     else
     {
+        ui->tally_koikoi_cpu_points->setText(QString("%1").arg(currentKoikoiTotal));
+        ui->tally_koikoi_player_points->setText(QString("%1").arg(opponentKoikoiTotal));
         if(opponentKoiKoi == true)
         {
-            currentPlayer->setScore(currentPlayer->getScore() + ((cpuSubTotal + currentKoiKoi) * 2));
-            opponent->setScore(opponent->getScore() - ((cpuSubTotal + currentKoiKoi) * 2));
+            currentPlayer->setScore(currentPlayer->getScore() + ((cpuSubTotal + currentKoikoiTotal) * 2));
+            opponent->setScore(opponent->getScore() - ((cpuSubTotal + currentKoikoiTotal) * 2));
+            ui->tally_koikoi_cpu_double->setText(QString("%1").arg("x2"));
+            ui->tally_koikoi_player_double->setText(QString("%1").arg("N/A"));
         }
         else
         {
-            currentPlayer->setScore(currentPlayer->getScore() + (cpuSubTotal + currentKoiKoi));
-            opponent->setScore(opponent->getScore() - (cpuSubTotal + currentKoiKoi));
+            currentPlayer->setScore(currentPlayer->getScore() + (cpuSubTotal + currentKoikoiTotal));
+            opponent->setScore(opponent->getScore() - (cpuSubTotal + currentKoikoiTotal));
+            ui->tally_koikoi_cpu_double->setText(QString("%1").arg("N/A"));
+            ui->tally_koikoi_player_double->setText(QString("%1").arg("N/A"));
         }
     }
 
     //Total points should equal (current score + ((subtotal + koikoi amount) * 2))) if opponent had koikoi
     //Or current score - currentPlayer's ((subtotal + koikoi amount) * 2))) if you are the opponent and round loser
+
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
     ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
 
@@ -2172,37 +2193,37 @@ void KoiKoi::drawCard()
  */
 void KoiKoi::requestKoiKoi()
 {
-        //yes or no buttons
-        //get sender()
-        QString theSender = sender()->objectName();
+    //yes or no buttons
+    //get sender()
+    QString theSender = sender()->objectName();
 
-        if(theSender.toStdString() == "noButton")
-        {
-            //if no, then round over, tally points
-            tallyPoints(1);
-        }
-        else
-        {
-            /*
+    if(theSender.toStdString() == "noButton")
+    {
+        //if no, then round over, tally points
+        tallyPoints(1);
+    }
+    else
+    {
+        /*
              * Check for end of round (if player has cards)
              *
              * The check might need to be done before requesting koikoi
              */
-            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
-            {
-                m_player1.setKoikoi(true);
-                m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
-                showGameScreen();
-                //cpuSelectFromHand();
-            }
-            else
-            {
-                //Player out of cards
-                //End round, show tally screen
-                tallyPoints(1);
-            }
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        {
+            m_player1.setKoikoi(true);
+            m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
+            showGameScreen();
+            //cpuSelectFromHand();
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints(1);
         }
     }
+}
 
 /*
  * Public slot used to start the next round.
