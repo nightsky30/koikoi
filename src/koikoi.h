@@ -136,7 +136,7 @@ public:
     void generateOyaCard();
     void deal();
     void startRound();
-    void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
+    void tallyPoints(int playerNum); //??  Player currentPlayer, Player nextPlayer
     void cpuSelectFromHand();
     void cpuSelectFromGameHand();
     void cpuDrawCard();

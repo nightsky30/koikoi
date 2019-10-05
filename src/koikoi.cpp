@@ -433,6 +433,10 @@ void KoiKoi::startGame()
     this->m_player2.getHand()->resetHand();
     this->m_player1.setScore(30);
     this->m_player2.setScore(30);
+    this->m_player1.setKoikoi(false);
+    this->m_player2.setKoikoi(false);
+    this->m_player1.setKoikoiNum(0);
+    this->m_player2.setKoikoiNum(0);
     resetYaku();
     resetTally();
     generateOyaCard();
@@ -540,6 +544,10 @@ void KoiKoi::startRound()
         this->m_gameHand.resetHand();
         this->m_player1.getHand()->resetHand();
         this->m_player2.getHand()->resetHand();
+        this->m_player1.setKoikoi(false);
+        this->m_player2.setKoikoi(false);
+        this->m_player1.setKoikoiNum(0);
+        this->m_player2.setKoikoiNum(0);
         resetYaku();
         resetTally();
 
@@ -573,161 +581,225 @@ void KoiKoi::startRound()
     }
     else
     {
-        //end game
-        this->m_gameStatus = false;
-        tallyPoints();
+        if(m_player1.getOya() == true)
+        {
+            //end game
+            //don't think it should get here...
+            this->m_gameStatus = false;
+            tallyPoints(1);
+        }
+        else
+        {
+            //end game
+            //don't think it should get here...
+            this->m_gameStatus = false;
+            tallyPoints(2);
+        }
     }
 }
 
 /*
  * Tally the points for each player at the end of the round.
  */
-void KoiKoi::tallyPoints()
+void KoiKoi::tallyPoints(int playerNum)
 {
+    //Set round number in UI
     ui->roundLabel->setText(QString("Round:  %1").arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
 
-    //Tally points
-    //Take into account player koikoi statuses
-    //Players can have multiple koikois and if one player gets one after another
-    //had declared it, then the other player gets no points
+    //Get current player and opponent
+    Player *currentPlayer = this->getPlayer(playerNum);
+    Player *opponent;
 
-    //bool playerKoiKoi = m_player1.getKoikoi();
-    //bool cpuKoiKoi = m_player2.getKoikoi();
+    if(playerNum == 1)
+    {
+        opponent = this->getPlayer(2);
+    }
+    else
+    {
+        opponent = this->getPlayer(1);
+    }
 
+    //Tally points - Subtotals
     int playerSubTotal {0};
     int cpuSubTotal {0};
 
     //m_player1.printYaku();
     //m_player2.printYaku();
 
-    for (int i {0}; i < m_player1.getYakuSize();i++)
+    if(playerNum == 1)
     {
-        if(m_player1.getYaku(i) == true)
+        for (int i {0}; i < currentPlayer->getYakuSize();i++)
         {
-            playerSubTotal = playerSubTotal + acceptableYaku[i].getPointValue();
-            m_player1.setScore(m_player1.getScore() + acceptableYaku[i].getPointValue());
-            switch (i)
+            if(currentPlayer->getYaku(i) == true)
             {
-            case 0:
-                ui->tally_kasu_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 1:
-                //Not used
-                break;
-            case 2:
-                //Not used
-                break;
-            case 3:
-                //Not used
-                break;
-            case 4:
-                ui->tally_tane_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 5:
-                ui->tally_inoshikacho_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 6:
-                ui->tally_tanzaku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 7:
-                ui->tally_akatan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 8:
-                ui->tally_aotan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 9:
-                ui->tally_akatanaotannochofuku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 10:
-                ui->tally_tsukimideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 11:
-                ui->tally_hanamideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 12:
-                ui->tally_sanko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 13:
-                ui->tally_ameshiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 14:
-                ui->tally_shiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            case 15:
-                ui->tally_goku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
-                break;
-            default:
-                break;
+                playerSubTotal = playerSubTotal + acceptableYaku[i].getPointValue();
+                switch (i)
+                {
+                case 0:
+                    ui->tally_kasu_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 1:
+                    //Not used
+                    break;
+                case 2:
+                    //Not used
+                    break;
+                case 3:
+                    //Not used
+                    break;
+                case 4:
+                    ui->tally_tane_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 5:
+                    ui->tally_inoshikacho_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 6:
+                    ui->tally_tanzaku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 7:
+                    ui->tally_akatan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 8:
+                    ui->tally_aotan_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 9:
+                    ui->tally_akatanaotannochofuku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 10:
+                    ui->tally_tsukimideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 11:
+                    ui->tally_hanamideippai_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 12:
+                    ui->tally_sanko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 13:
+                    ui->tally_ameshiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 14:
+                    ui->tally_shiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                case 15:
+                    ui->tally_goku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    break;
+                default:
+                    break;
+                }
             }
+        }
+        ui->tally_subtotal_player_points->setText(QString("%1").arg(playerSubTotal));
+    }
+    else
+    {
+        for (int j {0}; j < currentPlayer->getYakuSize();j++)
+        {
+            if(currentPlayer->getYaku(j) == true)
+            {
+                cpuSubTotal = cpuSubTotal + acceptableYaku[j].getPointValue();
+                switch (j)
+                {
+                case 0:
+                    ui->tally_kasu_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 1:
+                    //Not used
+                    break;
+                case 2:
+                    //Not used
+                    break;
+                case 3:
+                    //Not used
+                    break;
+                case 4:
+                    ui->tally_tane_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 5:
+                    ui->tally_inoshikacho_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 6:
+                    ui->tally_tanzaku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 7:
+                    ui->tally_akatan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 8:
+                    ui->tally_aotan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 9:
+                    ui->tally_akatanaotannochofuku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 10:
+                    ui->tally_tsukimideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 11:
+                    ui->tally_hanamideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 12:
+                    ui->tally_sanko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 13:
+                    ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 14:
+                    ui->tally_shiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                case 15:
+                    ui->tally_goku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        ui->tally_subtotal_cpu_points->setText(QString("%1").arg(cpuSubTotal));
+    }
+
+    //Get koikoi
+    bool currentKoiKoi = currentPlayer->getKoikoi();
+    bool opponentKoiKoi = opponent->getKoikoi();
+
+    //Set default koikoi amount
+    int koikoiTotal {0};
+
+    //If koikoi, get points for each koikoi (1 per koikoi)
+    if(currentKoiKoi == true)
+    {
+        //Get koikoi amount
+        koikoiTotal = currentPlayer->getKoikoiNum();
+    }
+
+    //Add koikoi amount to subtotal
+    //If opponent had koikoi as well, currentPlayer's points from current round are doubled
+    if(playerNum == 1)
+    {
+        if(opponentKoiKoi == true)
+        {
+            currentPlayer->setScore(currentPlayer->getScore() + ((playerSubTotal + currentKoiKoi) * 2));
+            opponent->setScore(opponent->getScore() - ((playerSubTotal + currentKoiKoi) * 2));
+        }
+        else
+        {
+            currentPlayer->setScore(currentPlayer->getScore() + (playerSubTotal + currentKoiKoi));
+            opponent->setScore(opponent->getScore() - (playerSubTotal + currentKoiKoi));
+        }
+    }
+    else
+    {
+        if(opponentKoiKoi == true)
+        {
+            currentPlayer->setScore(currentPlayer->getScore() + ((cpuSubTotal + currentKoiKoi) * 2));
+            opponent->setScore(opponent->getScore() - ((cpuSubTotal + currentKoiKoi) * 2));
+        }
+        else
+        {
+            currentPlayer->setScore(currentPlayer->getScore() + (cpuSubTotal + currentKoiKoi));
+            opponent->setScore(opponent->getScore() - (cpuSubTotal + currentKoiKoi));
         }
     }
 
-    for (int j {0}; j < m_player2.getYakuSize();j++)
-    {
-        if(m_player2.getYaku(j) == true)
-        {
-            cpuSubTotal = cpuSubTotal + acceptableYaku[j].getPointValue();
-            m_player2.setScore(m_player2.getScore() + acceptableYaku[j].getPointValue());
-            switch (j)
-            {
-            case 0:
-                ui->tally_kasu_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 1:
-                //Not used
-                break;
-            case 2:
-                //Not used
-                break;
-            case 3:
-                //Not used
-                break;
-            case 4:
-                ui->tally_tane_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 5:
-                ui->tally_inoshikacho_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 6:
-                ui->tally_tanzaku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 7:
-                ui->tally_akatan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 8:
-                ui->tally_aotan_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 9:
-                ui->tally_akatanaotannochofuku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 10:
-                ui->tally_tsukimideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 11:
-                ui->tally_hanamideippai_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 12:
-                ui->tally_sanko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 13:
-                ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 14:
-                ui->tally_shiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            case 15:
-                ui->tally_goku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
-                break;
-            default:
-                break;
-            }
-        }
-    }
-
-    //Revisit this as koi-koi may cause negative points
-    ui->tally_subtotal_player_points->setText(QString("%1").arg(playerSubTotal));
-    ui->tally_subtotal_cpu_points->setText(QString("%1").arg(cpuSubTotal));
-
+    //Total points should equal (current score + ((subtotal + koikoi amount) * 2))) if opponent had koikoi
+    //Or current score - currentPlayer's ((subtotal + koikoi amount) * 2))) if you are the opponent and round loser
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
     ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
 
@@ -1489,8 +1561,16 @@ void KoiKoi::checkYaku(int playerNum)
 
     if(obtainedYaku == true)
     {
-        //Call function to ask if player wants to declare koikoi
-        showKoiKoiScreen();
+        if(playerNum == 1)
+        {
+            //Call function to ask if player wants to declare koikoi
+            showKoiKoiScreen();
+        }
+        else
+        {
+            //Call function to determine if cpu declares koikoi
+            cpuRequestKoiKoi();
+        }
     }
 }
 
@@ -1906,7 +1986,7 @@ void KoiKoi::selectFromGameHand()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints();
+            tallyPoints(1);
         }
     }
     else
@@ -2063,7 +2143,7 @@ void KoiKoi::drawCard()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints();
+            tallyPoints(1);
         }
 
         //**********************************************************
@@ -2092,34 +2172,37 @@ void KoiKoi::drawCard()
  */
 void KoiKoi::requestKoiKoi()
 {
-    //yes or no buttons
-    //get sender()
-    QString theSender = sender()->objectName();
+        //yes or no buttons
+        //get sender()
+        QString theSender = sender()->objectName();
 
-    if(theSender.toStdString() == "noButton")
-    {
-        //if no, then round over, tally points
-        tallyPoints();
-    }
-    else
-    {
-        /*
-         * Check for end of round (if player has cards)
-         */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if(theSender.toStdString() == "noButton")
         {
-            m_player1.setKoikoi(true);
-            showGameScreen();
-            //cpuSelectFromHand();
+            //if no, then round over, tally points
+            tallyPoints(1);
         }
         else
         {
-            //Player out of cards
-            //End round, show tally screen
-            tallyPoints();
+            /*
+             * Check for end of round (if player has cards)
+             *
+             * The check might need to be done before requesting koikoi
+             */
+            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+            {
+                m_player1.setKoikoi(true);
+                m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
+                showGameScreen();
+                //cpuSelectFromHand();
+            }
+            else
+            {
+                //Player out of cards
+                //End round, show tally screen
+                tallyPoints(1);
+            }
         }
     }
-}
 
 /*
  * Public slot used to start the next round.
@@ -2368,6 +2451,20 @@ void KoiKoi::cpuSelectFromGameHand()
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
         //call checkYaku
         checkYaku(2);
+
+        /*
+         * Check for end of round (if player has cards)
+         */
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        {
+            //Turn is ending
+        }
+        else
+        {
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints(2);
+        }
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
@@ -2498,7 +2595,7 @@ void KoiKoi::cpuDrawCard()
         /*
          * Check for end of round (if player has cards)
          */
-        if(m_player2.getHand()->getNumCards() > 0)
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
             //Turn is ending
             //Do it at the beginning of a new turn
@@ -2513,7 +2610,7 @@ void KoiKoi::cpuDrawCard()
 
             //Should probably show the last card not match
             //and have been added to the gameboard (sleep 2)
-            tallyPoints();
+            tallyPoints(2);
         }
 
         //**********************************************************
@@ -2542,27 +2639,41 @@ void KoiKoi::cpuDrawCard()
  */
 void KoiKoi::cpuRequestKoiKoi()
 {
-    //yes or no buttons
-    //get sender()
-    QString theSender = sender()->objectName();
+    //requestKoiKoi(2);
 
-    if(theSender.toStdString() == "noButton")
+    //Randomly select yes or no for koikoi
+    //Get number randomly
+    int koikoiDecision {0};
+    srand(time(NULL));
+    //cardNum = ((int)std::rand() % (m_numCards-1));
+    koikoiDecision = ((int)std::rand() % 2);
+
+    if(koikoiDecision == 0)
     {
-        //if no, then round over, tally points
-        tallyPoints();
+        tallyPoints(2);
     }
     else
     {
-        //else yes, then round continues, but update player koikoi status
-        //if opponent scores a yaku and declares shobu while player has called koikoi, they lose points
-        m_player2.setKoikoi(true);
-        //Switch to next player turn
-        showGameScreen();
-        //Do it at the beginning of a new turn
-        //This will change with CPU
-        //connectPlayerHand();
-        //disconnectDeck();
+        /*
+         * Check for end of round (if player has cards)
+         *
+         * The check might need to be done before requesting koikoi
+         */
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        {
+            m_player2.setKoikoi(true);
+            m_player2.setKoikoiNum(m_player2.getKoikoiNum()+1);
+            showGameScreen();
+            //Set up connections for player??
+        }
+        else
+        {
+            //player out of cards
+            //End round, show tally screen
+            tallyPoints(2);
+        }
     }
+
 }
 
 void KoiKoi::waitABit()
