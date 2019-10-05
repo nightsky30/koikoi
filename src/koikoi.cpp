@@ -1989,8 +1989,8 @@ void KoiKoi::drawCard()
         disconnectGameHand();
         //call updateCards
         updateCards();
-
         //Testing
+        updateYaku();
         checkYaku();
 
         /*
@@ -2286,17 +2286,8 @@ void KoiKoi::cpuSelectFromGameHand()
         updateYaku();
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
-        //check for yaku
-        //if yaku
-        //then request to declare koikoi
-        //if koikoi
-        //then finish turn
-        //continue round with next player turn and call checkCards()
-        //else finish round
-
         //RE-ENABLE AFTER FIXING!!!
         //checkYaku();
-
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
@@ -2420,9 +2411,9 @@ void KoiKoi::cpuDrawCard()
 
         //call updateCards
         updateCards();
-
-        //Sleep 3??
-        QTimer::singleShot(2000, this, SLOT(waitABit()));
+        //Testing
+        updateYaku();
+        checkYaku();
 
         /*
          * Check for end of round (if player has cards)
