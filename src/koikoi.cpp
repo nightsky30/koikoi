@@ -1187,6 +1187,12 @@ void KoiKoi::updateYaku()
     }
 }
 
+/*
+ * Determines if player has obtained specific yaku, and assigns values appropriately.
+ * It then displays the yaku in the UI.  The player is specified by passing an int of 1 or 2.
+ * 1 - Player 1, Human
+ * 2 - Player 2, CPU
+ */
 void KoiKoi::checkYaku(int playerNum)
 {
     Player *currentPlayer = this->getPlayer(playerNum);
@@ -1887,7 +1893,7 @@ void KoiKoi::selectFromGameHand()
         updateYaku();
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
-        //check for yaku
+        //call checkYaku
         checkYaku(1);
 
         /*
@@ -2042,8 +2048,9 @@ void KoiKoi::drawCard()
         disconnectGameHand();
         //call updateCards
         updateCards();
-        //Testing
+        //call updateYaku
         updateYaku();
+        //call checkYaku
         checkYaku(1);
 
         /*
@@ -2116,11 +2123,23 @@ void KoiKoi::requestKoiKoi()
     }
 }
 
+/*
+ * Public slot used to start the next round.
+ * Triggered and called by the Continue Button on the tally screen.
+ */
 void KoiKoi::nextRound()
 {
     startRound();
 }
 
+/*
+ * Function for the CPU hand which determines the CPU's card selection.
+ * It then determines if there are matching cards in the game hand
+ * on the game board.  If there are matches it will randomly select
+ * a matching card from the game board.  If there aren't matches, then it will
+ * discard the CPU's selected card, and allow the CPU to draw
+ * a card from the deck.
+ */
 void KoiKoi::cpuSelectFromHand()
 {
     Hand *cpuHand = m_player2.getHand();
@@ -2213,6 +2232,17 @@ void KoiKoi::cpuSelectFromHand()
     }
 }
 
+/*
+ * Function for the game hand which determines the CPU's selection.
+ * It then determines if there are matching cards in the CPU hand
+ * or deck.  If there are matches it will move the cards to the
+ * appropriate yaku hands.
+ *
+ * This function helps maintain turn flow with connections and
+ * disconnections from various buttons in the GUI under certain
+ * circumstances for the human player as well as calling required
+ * functions for the CPU.
+ */
 void KoiKoi::cpuSelectFromGameHand()
 {
     /*
@@ -2329,7 +2359,6 @@ void KoiKoi::cpuSelectFromGameHand()
             }
         }
         //Connect all playerhand cards
-        //This will change with CPU
         connectPlayerHand();
         //disconnect deck
         disconnectDeck();
@@ -2339,7 +2368,7 @@ void KoiKoi::cpuSelectFromGameHand()
         updateYaku();
         ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
         m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
-        //RE-ENABLE AFTER FIXING!!!
+        //call checkYaku
         checkYaku(2);
         //**********************************************************
         //allows to click player hand card to call selectFromHand
@@ -2486,7 +2515,6 @@ void KoiKoi::cpuDrawCard()
 
             //Should probably show the last card not match
             //and have been added to the gameboard (sleep 2)
-
             tallyPoints();
         }
 
@@ -2511,8 +2539,8 @@ void KoiKoi::cpuDrawCard()
 }
 
 /*
- * Slot function for the koi-koi buttons in the GUI which
- * determine if the player is declaring koi-koi or shobu after obtaining yaku.
+ * Function for the CPU to determine if it is declaring koi-koi
+ * or shobu after obtaining yaku.
  */
 void KoiKoi::cpuRequestKoiKoi()
 {
