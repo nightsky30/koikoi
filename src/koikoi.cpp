@@ -731,8 +731,6 @@ void KoiKoi::tallyPoints()
     ui->tally_total_player_points->setText(QString("%1").arg(m_player1.getScore()));
     ui->tally_total_cpu_points->setText(QString("%1").arg(m_player2.getScore()));
 
-
-
     //Show Tally Points frame/screen
     showTallyScreen();
     if(m_currentRound == 12 || m_player1.getScore() >= 60 || m_player2.getScore() >= 60)
