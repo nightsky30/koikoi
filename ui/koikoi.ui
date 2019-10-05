@@ -429,7 +429,7 @@
            </widget>
           </item>
           <item row="20" column="2">
-           <widget class="QLabel" name="tally_goku_cpu_points">
+           <widget class="QLabel" name="tally_goko_cpu_points">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -567,7 +567,7 @@
            </widget>
           </item>
           <item row="20" column="1">
-           <widget class="QLabel" name="tally_goku_player_points">
+           <widget class="QLabel" name="tally_goko_player_points">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1180,7 +1180,7 @@
            </widget>
           </item>
           <item row="20" column="0">
-           <widget class="QLabel" name="tally_goku_yaku">
+           <widget class="QLabel" name="tally_goko_yaku">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1819,7 +1819,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="cpu_goku_yaku">
+           <widget class="QLabel" name="cpu_goko_yaku">
             <property name="font">
              <font>
               <pointsize>8</pointsize>
@@ -2475,7 +2475,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="player_goku_yaku">
+           <widget class="QLabel" name="player_goko_yaku">
             <property name="font">
              <font>
               <pointsize>8</pointsize>

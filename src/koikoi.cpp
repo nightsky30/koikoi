@@ -681,7 +681,7 @@ void KoiKoi::tallyPoints(int playerNum)
                     ui->tally_shiko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
                     break;
                 case 15:
-                    ui->tally_goku_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
+                    ui->tally_goko_player_points->setText(QString("%1").arg(acceptableYaku[i].getPointValue()));
                     break;
                 default:
                     break;
@@ -745,7 +745,7 @@ void KoiKoi::tallyPoints(int playerNum)
                     ui->tally_shiko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
                     break;
                 case 15:
-                    ui->tally_goku_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
+                    ui->tally_goko_cpu_points->setText(QString("%1").arg(acceptableYaku[j].getPointValue()));
                     break;
                 default:
                     break;
@@ -1062,7 +1062,7 @@ void KoiKoi::resetYaku()
 
     //Set player yaku labels invisible
     ui->player_ameshiko_yaku->setVisible(false);
-    ui->player_goku_yaku->setVisible(false);
+    ui->player_goko_yaku->setVisible(false);
     ui->player_sanko_yaku->setVisible(false);
     ui->player_shiko_yaku->setVisible(false);
     ui->player_hanami_de_ippai_yaku->setVisible(false);
@@ -1080,7 +1080,7 @@ void KoiKoi::resetYaku()
 
     //Set cpu yaku labels invisible
     ui->cpu_ameshiko_yaku->setVisible(false);
-    ui->cpu_goku_yaku->setVisible(false);
+    ui->cpu_goko_yaku->setVisible(false);
     ui->cpu_sanko_yaku->setVisible(false);
     ui->cpu_shiko_yaku->setVisible(false);
     ui->cpu_hanami_de_ippai_yaku->setVisible(false);
@@ -1115,7 +1115,7 @@ void KoiKoi::resetTally()
     ui->tally_sanko_player_points->setText(QString("%1").arg(0));
     ui->tally_ameshiko_player_points->setText(QString("%1").arg(0));
     ui->tally_shiko_player_points->setText(QString("%1").arg(0));
-    ui->tally_goku_player_points->setText(QString("%1").arg(0));
+    ui->tally_goko_player_points->setText(QString("%1").arg(0));
     ui->tally_subtotal_player_points->setText(QString("%1").arg(0));
     ui->tally_total_player_points->setText(QString("%1").arg(0));
 
@@ -1131,7 +1131,7 @@ void KoiKoi::resetTally()
     ui->tally_sanko_cpu_points->setText(QString("%1").arg(0));
     ui->tally_ameshiko_cpu_points->setText(QString("%1").arg(0));
     ui->tally_shiko_cpu_points->setText(QString("%1").arg(0));
-    ui->tally_goku_cpu_points->setText(QString("%1").arg(0));
+    ui->tally_goko_cpu_points->setText(QString("%1").arg(0));
     ui->tally_subtotal_cpu_points->setText(QString("%1").arg(0));
     ui->tally_total_cpu_points->setText(QString("%1").arg(0));
 }
@@ -1294,7 +1294,7 @@ void KoiKoi::checkYaku(int playerNum)
 
     //Yaku UI QLabels
     QLabel *ameshiko_yaku;
-    QLabel *goku_yaku;
+    QLabel *goko_yaku;
     QLabel *sanko_yaku;
     QLabel *shiko_yaku;
     QLabel *hanami_de_ippai_yaku;
@@ -1313,7 +1313,7 @@ void KoiKoi::checkYaku(int playerNum)
     if(playerNum == 1)
     {
         ameshiko_yaku = ui->player_ameshiko_yaku;
-        goku_yaku = ui->player_goku_yaku;
+        goko_yaku = ui->player_goko_yaku;
         sanko_yaku = ui->player_sanko_yaku;
         shiko_yaku = ui->player_shiko_yaku;
         hanami_de_ippai_yaku = ui->player_hanami_de_ippai_yaku;
@@ -1332,7 +1332,7 @@ void KoiKoi::checkYaku(int playerNum)
     else
     {
         ameshiko_yaku = ui->cpu_ameshiko_yaku;
-        goku_yaku = ui->cpu_goku_yaku;
+        goko_yaku = ui->cpu_goko_yaku;
         sanko_yaku = ui->cpu_sanko_yaku;
         shiko_yaku = ui->cpu_shiko_yaku;
         hanami_de_ippai_yaku = ui->cpu_hanami_de_ippai_yaku;
@@ -1365,7 +1365,7 @@ void KoiKoi::checkYaku(int playerNum)
     //Sanko, 5pts
     //Shiko, without Rain, 8pts
     //Ame Shiko, with rain, 7pts
-    //Goku, 10pts
+    //goko, 10pts
     bool foundRain {false};
     switch (playerLightHand->getNumCards())
     {
@@ -1414,9 +1414,9 @@ void KoiKoi::checkYaku(int playerNum)
     case 5:
         if(currentPlayer->getYaku(15) != true)
         {
-            //Goku, 10pts
+            //goko, 10pts
             currentPlayer->setYaku(15, true);
-            goku_yaku->setVisible(true);
+            goko_yaku->setVisible(true);
             obtainedYaku = true;
         }
         break;
