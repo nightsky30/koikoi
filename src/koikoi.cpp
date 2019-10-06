@@ -2285,10 +2285,6 @@ void KoiKoi::cpuSelectFromHand()
             matchingCard = true;
         }
     }
-
-    //Sleep 3??
-    QTimer::singleShot(2000, this, SLOT(waitABit()));
-
     //See if there are any month matches
     if(matchingCard == false)
     {
@@ -2299,10 +2295,6 @@ void KoiKoi::cpuSelectFromHand()
 
         //call updateCards
         updateCards();
-
-        //Sleep 3??
-        QTimer::singleShot(2000, this, SLOT(waitABit()));
-
         //******************
         //call cpuDrawCard
         //******************
@@ -2318,10 +2310,6 @@ void KoiKoi::cpuSelectFromHand()
                 guiCPUCards[k]->setDisabled(true);
             }
         }
-
-        //Sleep 3??
-        QTimer::singleShot(2000, this, SLOT(waitABit()));
-
         //*****************************
         //call cpuSelectFromGameHand
         //*****************************
@@ -2583,10 +2571,6 @@ void KoiKoi::cpuDrawCard()
             matchingCard = true;
         }
     }
-
-    //Sleep 3??
-    QTimer::singleShot(2000, this, SLOT(waitABit()));
-
     //See if there are any month matches
     if(matchingCard == false)
     {
@@ -2596,7 +2580,6 @@ void KoiKoi::cpuDrawCard()
 
         //call updateCards
         updateCards();
-        //Testing
         updateYaku();
         checkYaku(2);
 
@@ -2617,7 +2600,6 @@ void KoiKoi::cpuDrawCard()
             //End round, show tally screen
 
             //Should probably show the last card not match
-            //and have been added to the gameboard (sleep 2)
             tallyPoints(2);
         }
 
@@ -2643,8 +2625,6 @@ void KoiKoi::cpuDrawCard()
  */
 void KoiKoi::cpuRequestKoiKoi()
 {
-    //requestKoiKoi(2);
-
     //Randomly select yes or no for koikoi
     //Get number randomly
     int koikoiDecision {0};
@@ -2681,5 +2661,6 @@ void KoiKoi::cpuRequestKoiKoi()
 
 void KoiKoi::waitABit()
 {
+    QThread::sleep(1);
     std::cout << "Waited..." << std::endl;
 }
