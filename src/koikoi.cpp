@@ -66,7 +66,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
     ui->setupUi(this);
 
     //Title and Application Icon
-    this->setWindowTitle("Koi-Koi Hanafuda");
+    this->setWindowTitle(tr("Koi-Koi Hanafuda"));
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
 
     //Set up menus so they are connected with SIGNALS and SLOTS
@@ -605,7 +605,7 @@ void KoiKoi::startRound()
 void KoiKoi::tallyPoints(int playerNum)
 {
     //Set round number in UI
-    ui->roundLabel->setText(QString("Round:  %1").arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
+    ui->roundLabel->setText(QString(tr("Round:  %1")).arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
 
     //Get current player and opponent
     Player *currentPlayer = this->getPlayer(playerNum);
@@ -1039,8 +1039,8 @@ void KoiKoi::updateCards()
  */
 void KoiKoi::updateScores()
 {
-    ui->cpuScore->setText(QString("CPU:  %1").arg(m_player2.getScore()));
-    ui->playerScore->setText(QString("Player:  %1").arg(m_player1.getScore()));
+    ui->cpuScore->setText(QString(tr("CPU:  %1")).arg(m_player2.getScore()));
+    ui->playerScore->setText(QString(tr("Player:  %1")).arg(m_player1.getScore()));
 }
 
 /*
