@@ -36,6 +36,7 @@
 #include <QThread>
 #include <QPixmap>
 #include <QTimer>
+#include <QRegularExpression>
 
 /*
  * Constructor
@@ -1365,7 +1366,7 @@ void KoiKoi::checkYaku(int playerNum)
     //Sanko, 5pts
     //Shiko, without Rain, 8pts
     //Ame Shiko, with rain, 7pts
-    //goko, 10pts
+    //Goko, 10pts
     bool foundRain {false};
     switch (playerLightHand->getNumCards())
     {
@@ -1414,7 +1415,7 @@ void KoiKoi::checkYaku(int playerNum)
     case 5:
         if(currentPlayer->getYaku(15) != true)
         {
-            //goko, 10pts
+            //Goko, 10pts
             currentPlayer->setYaku(15, true);
             goko_yaku->setVisible(true);
             obtainedYaku = true;
@@ -1901,13 +1902,25 @@ void KoiKoi::selectFromGameHand()
     //get calling parent object name
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
+    //Get card number
+    int cardNum {0};
+
+    QRegularExpression regEx("(\\d{2}|\\d{1})");
+    QRegularExpressionMatch match = regEx.match(buttonName);
+    if (match.hasMatch())
+    {
+        //Get card number
+        QString matchedString = match.captured(1);
+        cardNum = matchedString.toInt();
+    }
+    else
+    {
+        std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+    }
 
     //disconnect all game hand cards
     disconnectGameHand();
 
-    //Already have gameHand
-    //Get card number
-    int cardNum = buttonName.at(buttonName.size()-1).digitValue();
     //Get game hand card
     Card *currentGameCard = m_gameHand.getCard(cardNum);
     //get month of card button
@@ -2036,7 +2049,6 @@ void KoiKoi::selectFromGameHand()
             //Need to store card matches from the deck and game hand in players' special match hands
             CardType currentGameCardType = currentGameCard->getCardType();
             CardType playerHandCardType = playerHandCard->getCardType();
-            Hand *playerHand = m_player1.getHand();
             Hand *playerLight = m_player1.getLightMatch();
             Hand *playerAnimal = m_player1.getAnimalMatch();
             Hand *playerRibbon = m_player1.getRibbonMatch();
@@ -2246,26 +2258,14 @@ void KoiKoi::cpuSelectFromHand()
 {
     Hand *cpuHand = m_player2.getHand();
 
-    std::cout << "" << std::endl;
-    std::cout << "CPU Hand" << std::endl;
-    cpuHand->printHand();
-    std::cout << "" << std::endl;
-
     //Get card number, randomly
     int cardNum {0};
     srand(time(NULL));
     //cardNum = ((int)std::rand() % (m_numCards-1));
     cardNum = ((int)std::rand() % cpuHand->getNumCards());
 
-    std::cout << "CardNum from hand is:  " << cardNum << std::endl;
-
     //Get cpu card
     Card *currentCPUCard = cpuHand->getCard(cardNum);
-
-    std::cout << "" << std::endl;
-    std::cout << "Current Selected CPU card:" << std::endl;
-    currentCPUCard->printCard();
-    std::cout << "" << std::endl;
 
     //get month of card button
     CardMonth currentCardMonth = currentCPUCard->getMonth();
@@ -2285,11 +2285,10 @@ void KoiKoi::cpuSelectFromHand()
             matchingCard = true;
         }
     }
-    std::cout << "" << std::endl;
-    std::cout << "Matching card is:  " << matchingCard << std::endl;
-    std::cout << "" << std::endl;
+
     //Sleep 3??
     QTimer::singleShot(2000, this, SLOT(waitABit()));
+
     //See if there are any month matches
     if(matchingCard == false)
     {
@@ -2300,19 +2299,13 @@ void KoiKoi::cpuSelectFromHand()
 
         //call updateCards
         updateCards();
+
         //Sleep 3??
         QTimer::singleShot(2000, this, SLOT(waitABit()));
+
         //******************
         //call cpuDrawCard
         //******************
-        std::cout << "" << std::endl;
-        std::cout << "Updated CPU hand:" << std::endl;
-        cpuHand->printHand();
-        std::cout << "" << std::endl;
-        std::cout << "" << std::endl;
-        std::cout << "Updated game hand:" << std::endl;
-        m_gameHand.printHand();
-        std::cout << "" << std::endl;
         cpuDrawCard();
     }
     else
@@ -2325,8 +2318,10 @@ void KoiKoi::cpuSelectFromHand()
                 guiCPUCards[k]->setDisabled(true);
             }
         }
+
         //Sleep 3??
         QTimer::singleShot(2000, this, SLOT(waitABit()));
+
         //*****************************
         //call cpuSelectFromGameHand
         //*****************************
@@ -2356,8 +2351,7 @@ void KoiKoi::cpuSelectFromGameHand()
     //since the user can't click stuff the cpu must select somehow
     bool cardFound {false};
     QVector<int> a {};
-    //while(cardFound == false)
-    //{
+
     //search through gameHand objects
     for(int i{0};i<guiGameHandCards.size();i++)
     {
@@ -2366,23 +2360,15 @@ void KoiKoi::cpuSelectFromGameHand()
             //Store numbers of found enabled cards
             a.push_back(i);
             cardFound = true;
-            std::cout << "a was pushed:  " << i << std::endl;
         }
     }
-    //}
-
-    std::cout << "a.size is:  " << a.size() << std::endl;
 
     //Get card number randomly from stored selection
     int tempCardNum {0};
     int cardNum {0};
     srand(time(NULL));
-    //cardNum = ((int)std::rand() % (m_numCards-1));
     tempCardNum = ((int)std::rand() % a.size());
     cardNum = a[tempCardNum];
-
-    std::cout << "tempCardNum from game hand is:  " << tempCardNum << std::endl;
-    std::cout << "a's tempCardNum value (cardNum) is:  " << cardNum << std::endl;
 
     //Get game hand card
     Card *currentGameCard = m_gameHand.getCard(cardNum);
@@ -2516,7 +2502,6 @@ void KoiKoi::cpuSelectFromGameHand()
             //Need to store card matches from the deck and game hand in players' special match hands
             CardType currentGameCardType = currentGameCard->getCardType();
             CardType cpuHandCardType = cpuHandCard->getCardType();
-            Hand *cpuHand = m_player2.getHand();
             Hand *cpuLight = m_player2.getLightMatch();
             Hand *cpuAnimal = m_player2.getAnimalMatch();
             Hand *cpuRibbon = m_player2.getRibbonMatch();
@@ -2598,8 +2583,10 @@ void KoiKoi::cpuDrawCard()
             matchingCard = true;
         }
     }
+
     //Sleep 3??
     QTimer::singleShot(2000, this, SLOT(waitABit()));
+
     //See if there are any month matches
     if(matchingCard == false)
     {
@@ -2646,10 +2633,6 @@ void KoiKoi::cpuDrawCard()
         //****************************
         //call cpuSelectFromGameHand
         //****************************
-        std::cout << "" << std::endl;
-        std::cout << "Next deck card:" << std::endl;
-        nextCard->printCard();
-        std::cout << "" << std::endl;
         cpuSelectFromGameHand();
     }
 }
@@ -2666,7 +2649,6 @@ void KoiKoi::cpuRequestKoiKoi()
     //Get number randomly
     int koikoiDecision {0};
     srand(time(NULL));
-    //cardNum = ((int)std::rand() % (m_numCards-1));
     koikoiDecision = ((int)std::rand() % 2);
 
     if(koikoiDecision == 0)

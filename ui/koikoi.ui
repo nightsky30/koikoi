@@ -3041,11 +3041,11 @@
      </layout>
     </widget>
    </widget>
-   <zorder>gameFrame</zorder>
    <zorder>oyaFrame</zorder>
    <zorder>titleFrame</zorder>
    <zorder>koikoiFrame</zorder>
    <zorder>tallyFrame</zorder>
+   <zorder>gameFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
