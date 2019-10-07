@@ -9,7 +9,8 @@ configure_file(input : 'config.h.in',
 koikoi_sources = ['main.cpp', 'about.cpp', 'card.cpp', 'deck.cpp', 'hand.cpp', 'koikoi.cpp', 'player.cpp', 'preferences.cpp', 'yaku.cpp']
 
 processed = qt5.preprocess(
-  moc_headers : ['about.h', 'card.h', 'config.h', 'deck.h', 'hand.h', 'koikoi.h', 'player.h', 'preferences.h', 'yaku.h'],
+  moc_headers : ['about.h', 'card.h', 'deck.h', 'hand.h', 'koikoi.h', 'player.h', 'preferences.h', 'yaku.h'],
+  qresources: ['../data/resources/deck.qrc', '../logo/icon.qrc'],
   ui_files : '../ui/koikoi.ui'
 )
 
