@@ -9,11 +9,22 @@ Koi-Koi (Japanese: こいこい) is a popular card game in Japan played with Han
 
 ## Installation
 
-Hope to package for distros here...
+TBD
 
-## Compiling
+## Build and Compile
 
-The following may be done to compile manually:
+### Dependencies
+
+Dependency | Packages
+---------- | --------
+Qt5 | Qt5 packages
+lrelease-qt5 or lrelease | lrelease packages
+[Meson](https://mesonbuild.com/Quick-guide.html) | Meson packages
+[Ninja](https://ninja-build.org/) | Ninja packages
+
+### Instructions
+
+The following may be done to compile and run:
 ```
 meson builddir
 ninja -C builddir
