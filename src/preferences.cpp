@@ -18,12 +18,16 @@
  */
 
 #include "preferences.h"
+#include "ui_preferences.h"
 #include <QIcon>
 #include <QString>
 #include <QVBoxLayout>
 
-Preferences::Preferences(QWidget *parent) : QDialog (parent)
+Preferences::Preferences(QWidget *parent) : QDialog (parent),
+    ui(new Ui::Preferences)
 {
+
+    ui->setupUi(this);
     //Create QWidget object pointers and assign values to their attributes
     //VBox layout with some checkboxes, labels, etc
 
@@ -40,12 +44,12 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent)
 
 //    //Set up application name
 //    QLabel *appName = new QLabel(this);
-//    appName->setText(QString("Koi-Koi Hanafuda"));
+//    appName->setText(QString(tr("Koi-Koi Hanafuda")));
 //    appName->setFont(titleFont);
 
 //    //Set up application version
 //    QLabel *appVersion = new QLabel(this);
-//    appVersion->setText(QString("Version: " + QString(version)));
+//    appVersion->setText(QString(tr("Version: ") + QString(version)));
 //    appVersion->setFont(aboutFont);
 
 //    //Set up Git project link
@@ -53,7 +57,7 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent)
 //    gitUrlLabel->setTextFormat(Qt::RichText);
 //    gitUrlLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
 //    gitUrlLabel->openExternalLinks();
-//    gitUrlLabel->setText("<a href='" + QString(git) + "'>Git Project Page</a>");
+//    gitUrlLabel->setText("<a href='" + QString(git) + "'>" + tr("Git Project Page") + "</a>");
 //    connect(gitUrlLabel, &QLabel::linkActivated, this, &About::openGitUrl);
 
 //    //Set up the vertical box layout by adding the created widgets
@@ -64,4 +68,5 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent)
 
 Preferences::~Preferences()
 {
+    delete ui;
 }

@@ -23,6 +23,14 @@
 #include <QDialog>
 #include <QSettings>
 
+namespace Ui {
+
+/*
+* Class Definition, also functions as forward declaration
+*/
+class Preferences;
+}
+
 /*
 * Class Definition, also functions as forward declaration
 */
@@ -34,13 +42,14 @@ private:
     /*
     * Member Initialization List
     */
+    Ui::Preferences *ui;
     QSettings settings;
 
 public:
     /*
     * Constructors / Destructors
     */
-    Preferences(QWidget* parent = 0);
+    Preferences(QWidget* parent = nullptr);
     ~Preferences();
 };
 

@@ -17,7 +17,7 @@
  * Copyright (C) 2019  nightsky30 @ github
  */
 
-#include "config.h"
+#include "config.h.in"
 #include "koikoi.h"
 #include <QApplication>
 #include <QCommandLineParser>

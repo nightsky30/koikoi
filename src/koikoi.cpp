@@ -18,7 +18,9 @@
  */
 
 #include "koikoi.h"
+#include "ui_koikoi.h"
 #include "preferences.h"
+#include "ui_preferences.h"
 #include "about.h"
 #include "card.h"
 #include "deck.h"
@@ -27,7 +29,6 @@
 #include <iostream>
 #include <chrono>  // Sleep Time
 #include <thread>  //Thread Sleep
-#include "ui_koikoi.h"
 #include <QVector>
 #include <QString>
 #include <QPushButton>
