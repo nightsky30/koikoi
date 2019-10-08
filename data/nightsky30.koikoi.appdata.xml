@@ -6,7 +6,7 @@
   <name>Koi-Koi Hanafuda</name>
   <summary>Traditional Japanese Card Game</summary>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
+  <project_license>GPL-2.0+</project_license>
   <developer_name>nightsky30</developer_name>
   <description>
     <p>Qt / C++ implementation of Koi-Koi</p>
