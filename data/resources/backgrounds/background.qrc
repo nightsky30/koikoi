@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/background">
+        <file>res-rawpixel-id-426236-jpeg.jpg</file>
+        <file>res-rawpixel-id-426240-jpeg.jpg</file>
+        <file>res-rawpixel-id-426271-jpeg.jpg</file>
+        <file>res-rawpixel-id-426272-jpeg.jpg</file>
+        <file>res-rawpixel-id-426278-jpeg.jpg</file>
+        <file>res-rawpixel-id-428169-jpeg.jpg</file>
+        <file>res-rawpixel-id-428170-jpeg.jpg</file>
+        <file>res-rawpixel-id-428173-jpeg.jpg</file>
+        <file>res-rawpixel-id-434953-jpeg.jpg</file>
+        <file>res-rawpixel-id-434971-jpeg.jpg</file>
+        <file>res-rawpixel-id-436470-jpeg.jpg</file>
+        <file>res-rawpixel-id-436484-jpeg.jpg</file>
+        <file>res-rawpixel-id-436501-jpeg.jpg</file>
+        <file>res-rawpixel-id-436568-jpeg.jpg</file>
+        <file>res-rawpixel-id-436575-jpeg.jpg</file>
+        <file>res-rawpixel-id-436656-jpeg.jpg</file>
+        <file>res-rawpixel-id-436668-jpeg.jpg</file>
+        <file>res-rawpixel-id-436677-jpeg.jpg</file>
+        <file>res-rawpixel-id-436696-jpeg.jpg</file>
+        <file>res-rawpixel-id-436705-jpeg.jpg</file>
+        <file>res-rawpixel-id-436707-jpeg.jpg</file>
+        <file>res-rawpixel-id-459410-jpeg.jpg</file>
+    </qresource>
+</RCC>
