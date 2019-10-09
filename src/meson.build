@@ -10,8 +10,8 @@ koikoi_sources = ['main.cpp', 'about.cpp', 'card.cpp', 'deck.cpp', 'hand.cpp', '
 
 processed = qt5.preprocess(
   moc_headers : ['about.h', 'card.h', 'deck.h', 'hand.h', 'koikoi.h', 'player.h', 'preferences.h', 'yaku.h'],
-  qresources: ['../data/resources/deck.qrc', '../logo/icon.qrc'],
-  ui_files : '../ui/koikoi.ui'
+  qresources: ['../data/resources/decks/deck.qrc', '../data/resources/backgrounds/background.qrc', '../logo/icon.qrc'],
+  ui_files : ['../ui/koikoi.ui', '../ui/preferences.ui']
 )
 
 koikoi = executable('koikoi',
