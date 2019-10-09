@@ -38,6 +38,7 @@
 #include <QPixmap>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QDir>
 
 /*
  * Constructor
@@ -1754,7 +1755,7 @@ void KoiKoi::onQuitGameClicked()
 void KoiKoi::onPreferencesClicked()
 {
     //Open preferences dialog
-    Preferences *prefs = new Preferences();
+    Preferences *prefs = new Preferences(this);
     prefs->setAttribute(Qt::WA_DeleteOnClose);
     prefs->show();
 }
@@ -2664,4 +2665,41 @@ void KoiKoi::waitABit()
 {
     QThread::sleep(1);
     std::cout << "Waited..." << std::endl;
+}
+
+void KoiKoi::setBG()
+{
+    QObject *senderButton = sender();
+    QString buttonName = senderButton->objectName();
+
+    //Get card number
+    int buttonNum {0};
+
+    QRegularExpression regEx("(\\d{2}|\\d{1})");
+    QRegularExpressionMatch match = regEx.match(buttonName);
+    if (match.hasMatch())
+    {
+        //Get card number
+        QString matchedString = match.captured(1);
+        buttonNum = matchedString.toInt();
+    }
+    else
+    {
+        std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+    }
+    //std::cout << cardNum << std::endl;
+
+    QDir *backResource = new QDir(":/background/");
+
+
+    QPixmap bkgnd(QString(":/background/" + backResource->entryList().at(buttonNum)));
+    bkgnd = bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+//    ui->titleFrame->setPalette(palette);
+//    ui->oyaFrame->setPalette(palette);
+//    ui->gameFrame->setPalette(palette);
+//    ui->tallyFrame->setPalette(palette);
+    this->setPalette(palette);
+
 }

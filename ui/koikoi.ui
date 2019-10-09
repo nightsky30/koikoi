@@ -128,7 +128,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../data/resources/deck.qrc">
+           <iconset resource="../data/resources/decks/deck.qrc">
             <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
           </property>
           <property name="iconSize">
@@ -178,7 +178,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../data/resources/deck.qrc">
+           <iconset resource="../data/resources/decks/deck.qrc">
             <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
           </property>
           <property name="iconSize">
@@ -1388,7 +1388,7 @@
      </size>
     </property>
     <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+     <enum>QFrame::StyledPanel</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
@@ -1455,7 +1455,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap resource="../data/resources/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
+           <pixmap resource="../data/resources/decks/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -2973,7 +2973,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../data/resources/deck.qrc">
+         <iconset resource="../data/resources/decks/deck.qrc">
           <normaloff>:/deck/Hanafuda_koi-2.svg</normaloff>:/deck/Hanafuda_koi-2.svg</iconset>
         </property>
         <property name="iconSize">
@@ -3125,7 +3125,7 @@
  </widget>
  <resources>
   <include location="../logo/icon.qrc"/>
-  <include location="../data/resources/deck.qrc"/>
+  <include location="../data/resources/decks/deck.qrc"/>
  </resources>
  <connections/>
 </ui>

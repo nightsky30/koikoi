@@ -22,6 +22,10 @@
 
 #include <QDialog>
 #include <QSettings>
+#include <QDir>
+#include <QVector>
+#include <QLabel>
+#include <QRadioButton>
 
 namespace Ui {
 
@@ -44,6 +48,9 @@ private:
     */
     Ui::Preferences *ui;
     QSettings settings;
+    QDir *backResource = new QDir(":/");
+    QVector<QLabel*> guiBGLabels {};
+    QVector<QRadioButton*> guiBGRadios {};
 
 public:
     /*

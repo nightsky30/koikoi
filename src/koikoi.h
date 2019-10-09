@@ -186,6 +186,7 @@ public slots:
     void requestKoiKoi();
     void nextRound();
     void waitABit();
+    void setBG();
 };
 
 #endif // KOIKOI_H
