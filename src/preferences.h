@@ -21,11 +21,12 @@
 #define PREFERENCES_H
 
 #include <QDialog>
-#include <QSettings>
+//#include <QSettings>
 #include <QDir>
 #include <QVector>
 #include <QLabel>
 #include <QRadioButton>
+#include <QSettings>
 
 namespace Ui {
 

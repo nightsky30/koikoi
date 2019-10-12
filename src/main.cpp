@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QApplication::setApplicationName("Koi-Koi Hanafuda");
+    QApplication::setApplicationDisplayName("Koi-Koi Hanafuda");
     QApplication::setApplicationVersion(KOIKOI_VERSION);
     QApplication::setOrganizationName("Koi-Koi Hanafuda"); // for QSettings
 

@@ -28,6 +28,7 @@
 #include <QLabel>
 #include <QRadioButton>
 #include <QRegularExpression>
+#include <QSettings>
 
 Preferences::Preferences(QWidget *parent) : QDialog (parent),
     ui(new Ui::Preferences)
@@ -86,6 +87,35 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
 
                     itemNum++;
                 }
+            }
+        }
+        if(!settings.isWritable())
+        {
+            //We got issues
+        }
+        else
+        {
+            QString buttonName = this->settings.value("bgRadio", "").toString();
+            int buttonNum {0};
+
+            if(buttonName != nullptr)
+            {
+                QRegularExpression regEx("(\\d{2}|\\d{1})");
+                QRegularExpressionMatch match = regEx.match(buttonName);
+                if (match.hasMatch())
+                {
+                    //Get card number
+                    QString matchedString = match.captured(1);
+                    buttonNum = matchedString.toInt();
+                }
+                else
+                {
+                    std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+                }
+            }
+            QRadioButton *radioButton = guiBGRadios.at(buttonNum);
+            if (radioButton != nullptr) {
+                radioButton->setChecked(true);
             }
         }
     }

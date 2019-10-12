@@ -39,9 +39,8 @@
 #include <QTimer>
 #include <QRegularExpression>
 #include <QDir>
-
-#include <QStyle>
 #include <QPainter>
+#include <QSettings>
 
 /*
  * Constructor
@@ -69,6 +68,10 @@ KoiKoi::KoiKoi(QWidget *parent) :
     this->m_gameStatus = false;
 
     ui->setupUi(this);
+
+    m_bkgnd = {};
+    //Load settings
+    loadSettings();
 
     //Title and Application Icon
     this->setWindowTitle(tr("Koi-Koi Hanafuda"));
@@ -2265,7 +2268,7 @@ void KoiKoi::cpuSelectFromHand()
 
     //Get card number, randomly
     int cardNum {0};
-    srand(time(NULL));
+    srand(time(nullptr));
     //cardNum = ((int)std::rand() % (m_numCards-1));
     cardNum = ((int)std::rand() % cpuHand->getNumCards());
 
@@ -2359,7 +2362,7 @@ void KoiKoi::cpuSelectFromGameHand()
     //Get card number randomly from stored selection
     int tempCardNum {0};
     int cardNum {0};
-    srand(time(NULL));
+    srand(time(nullptr));
     tempCardNum = ((int)std::rand() % a.size());
     cardNum = a[tempCardNum];
 
@@ -2633,7 +2636,7 @@ void KoiKoi::cpuRequestKoiKoi()
     //Randomly select yes or no for koikoi
     //Get number randomly
     int koikoiDecision {0};
-    srand(time(NULL));
+    srand(time(nullptr));
     koikoiDecision = ((int)std::rand() % 2);
 
     if(koikoiDecision == 0)
@@ -2670,37 +2673,96 @@ void KoiKoi::waitABit()
     std::cout << "Waited..." << std::endl;
 }
 
+/*
+ * Allows the setting of a custom background image from the resource collection.
+ */
 void KoiKoi::setBG()
 {
     QObject *senderButton = sender();
-    QString buttonName = senderButton->objectName();
 
-    //Get card number
-    int buttonNum {0};
-
-    QRegularExpression regEx("(\\d{2}|\\d{1})");
-    QRegularExpressionMatch match = regEx.match(buttonName);
-    if (match.hasMatch())
+    if(senderButton == nullptr)
     {
-        //Get card number
-        QString matchedString = match.captured(1);
-        buttonNum = matchedString.toInt();
+        //BG has been set from settings file, just wait
     }
     else
     {
-        std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+        QString buttonName = senderButton->objectName();
+
+        //std::cout << buttonName.toStdString() << std::endl;
+
+        //Get card number
+        int buttonNum {0};
+
+        QRegularExpression regEx("(\\d{2}|\\d{1})");
+        QRegularExpressionMatch match = regEx.match(buttonName);
+        if (match.hasMatch())
+        {
+            //Get card number
+            QString matchedString = match.captured(1);
+            buttonNum = matchedString.toInt();
+        }
+        else
+        {
+            std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+        }
+
+        QDir *backResource = new QDir(":/background/");
+
+        QString resFilename = QString(":/background/" + backResource->entryList().at(buttonNum));
+
+        this->m_bkgnd = QPixmap(resFilename);
+
+        if (resFilename == nullptr)
+        {
+            //We got issues
+        }
+        else
+        {
+            if(!settings.isWritable())
+            {
+                //We got issues
+            }
+            else
+            {
+                this->settings.setValue("background", resFilename);
+                this->settings.setValue("bgRadio", buttonName);
+                //std::cout << this->settings.fileName().toStdString() << std::endl;
+                this->settings.sync();
+                this->settings.status();
+            }
+        }
     }
-
-    QDir *backResource = new QDir(":/background/");
-
-    this->bkgnd = QPixmap(QString(":/background/" + backResource->entryList().at(buttonNum)));
-    this->bkgnd = this->bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
-
+    //Ensure scaled
+    this->m_bkgnd = this->m_bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
+    //Sends paintEvent()
     this->repaint();
 }
 
+/*
+ * Used to enforce painting of the custom background pixmap.
+ * QPainter and paintEvent had to be used as opposed to using QPalette due
+ * to the fact that setting the background with QPalette affected the menubar negatively.
+ * The menubar colors were not respected, and there was no way to force the pixmap to begin
+ * painting in the window below the menubar.
+ */
 void KoiKoi::paintEvent(QPaintEvent *pe)
 {
     QPainter paint(this);
-    paint.drawPixmap(0, 0+ui->menubar->height(), bkgnd);
+    paint.drawPixmap(0, 0+ui->menubar->height(), m_bkgnd);
+}
+
+void KoiKoi::loadSettings()
+{
+    if(!settings.isWritable())
+    {
+        //We got issues
+    }
+    else
+    {
+        QString resFilename = this->settings.value("background", "").toString();
+        if (resFilename != nullptr) {
+            this->m_bkgnd = QPixmap(resFilename);
+            setBG();
+        }
+    }
 }

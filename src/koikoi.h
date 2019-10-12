@@ -27,6 +27,7 @@
 #include <QVector>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QSettings>
 
 /*
  * The game consists of these yaku.
@@ -112,7 +113,9 @@ private:
     QVector<QLabel*> guiCPURibbonYaku {};
     QVector<QLabel*> guiCPUPlainYaku {};
 
-    QPixmap bkgnd;
+    QSettings settings;
+    QPixmap m_bkgnd {};
+    //QString m_sSettingsFile {};
 
 public:
     /*
@@ -176,6 +179,7 @@ public:
     void disconnectPlayerHand(QPushButton *button);
     void disconnectPlayerHand();
     void paintEvent(QPaintEvent *pe);
+    void loadSettings();
 
 public slots:
     void onNewGameClicked();
