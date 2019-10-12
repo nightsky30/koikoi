@@ -40,6 +40,9 @@
 #include <QRegularExpression>
 #include <QDir>
 
+#include <QStyle>
+#include <QPainter>
+
 /*
  * Constructor
  */
@@ -2687,19 +2690,17 @@ void KoiKoi::setBG()
     {
         std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
     }
-    //std::cout << cardNum << std::endl;
 
     QDir *backResource = new QDir(":/background/");
 
+    this->bkgnd = QPixmap(QString(":/background/" + backResource->entryList().at(buttonNum)));
+    this->bkgnd = this->bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
 
-    QPixmap bkgnd(QString(":/background/" + backResource->entryList().at(buttonNum)));
-    bkgnd = bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-//    ui->titleFrame->setPalette(palette);
-//    ui->oyaFrame->setPalette(palette);
-//    ui->gameFrame->setPalette(palette);
-//    ui->tallyFrame->setPalette(palette);
-    this->setPalette(palette);
+    this->repaint();
+}
 
+void KoiKoi::paintEvent(QPaintEvent *pe)
+{
+    QPainter paint(this);
+    paint.drawPixmap(0, 0+ui->menubar->height(), bkgnd);
 }

@@ -112,6 +112,8 @@ private:
     QVector<QLabel*> guiCPURibbonYaku {};
     QVector<QLabel*> guiCPUPlainYaku {};
 
+    QPixmap bkgnd;
+
 public:
     /*
     * Constructors / Destructors
@@ -173,6 +175,7 @@ public:
     void disconnectGameHand();
     void disconnectPlayerHand(QPushButton *button);
     void disconnectPlayerHand();
+    void paintEvent(QPaintEvent *pe);
 
 public slots:
     void onNewGameClicked();
