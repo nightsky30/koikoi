@@ -274,7 +274,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="tallyHLayout">
         <item>
          <spacer name="horizontalSpacer_18">
           <property name="orientation">
@@ -1451,11 +1451,26 @@
         </item>
         <item>
          <widget class="QLabel" name="titleImage">
+          <property name="minimumSize">
+           <size>
+            <width>186</width>
+            <height>294</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>186</width>
+            <height>294</height>
+           </size>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="pixmap">
            <pixmap resource="../data/resources/decks/deck.qrc">:/deck/Hanafuda_koi-2-trans.svg</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -2899,7 +2914,7 @@
       <rect>
        <x>10</x>
        <y>3</y>
-       <width>122</width>
+       <width>124</width>
        <height>1051</height>
       </rect>
      </property>
@@ -2923,7 +2938,7 @@
         </item>
         <item>
          <layout class="QFormLayout" name="cpuFormLayout">
-          <item row="0" column="0">
+          <item row="0" column="0" colspan="2">
            <widget class="QLabel" name="cpuScore">
             <property name="font">
              <font>
@@ -3019,7 +3034,7 @@
         </item>
         <item>
          <layout class="QFormLayout" name="playerFormLayout">
-          <item row="0" column="0">
+          <item row="0" column="0" colspan="2">
            <widget class="QLabel" name="playerScore">
             <property name="font">
              <font>
@@ -3042,10 +3057,10 @@
     </widget>
    </widget>
    <zorder>oyaFrame</zorder>
-   <zorder>titleFrame</zorder>
    <zorder>koikoiFrame</zorder>
    <zorder>tallyFrame</zorder>
    <zorder>gameFrame</zorder>
+   <zorder>titleFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

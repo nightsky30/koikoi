@@ -69,6 +69,17 @@ KoiKoi::KoiKoi(QWidget *parent) :
 
     ui->setupUi(this);
 
+    this->setStyleSheet("QLabel"
+                        "{"
+                        "background-color: rgba(42, 42, 42, 191);"
+                        "border-radius: 10px;"
+                        "}"
+                        "QGridLayout"
+                        "{"
+                        "background-color: rgba(42, 42, 42, 191);"
+                        "border-radius: 10px;"
+                        "}");
+
     m_bkgnd = {};
     //Load settings
     loadSettings();
@@ -1047,8 +1058,8 @@ void KoiKoi::updateCards()
  */
 void KoiKoi::updateScores()
 {
-    ui->cpuScore->setText(QString(tr("CPU:  %1")).arg(m_player2.getScore()));
-    ui->playerScore->setText(QString(tr("Player:  %1")).arg(m_player1.getScore()));
+    ui->cpuScore->setText(QString(tr("Score:  %1")).arg(m_player2.getScore()));
+    ui->playerScore->setText(QString(tr("Score:  %1")).arg(m_player1.getScore()));
 }
 
 /*
