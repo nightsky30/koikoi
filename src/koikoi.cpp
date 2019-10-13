@@ -73,11 +73,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
                         "{"
                         "background-color: rgba(42, 42, 42, 191);"
                         "border-radius: 10px;"
-                        "}"
-                        "QGridLayout"
-                        "{"
-                        "background-color: rgba(42, 42, 42, 191);"
-                        "border-radius: 10px;"
                         "}");
 
     m_bkgnd = {};

@@ -310,6 +310,12 @@
           </item>
           <item row="22" column="1">
            <widget class="QLabel" name="tally_subtotal_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -328,6 +334,12 @@
           </item>
           <item row="14" column="2">
            <widget class="QLabel" name="tally_sanko_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -361,6 +373,12 @@
           </item>
           <item row="13" column="2">
            <widget class="QLabel" name="tally_hanamideippai_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -379,6 +397,12 @@
           </item>
           <item row="5" column="2">
            <widget class="QLabel" name="tally_kasu_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -397,6 +421,12 @@
           </item>
           <item row="5" column="1">
            <widget class="QLabel" name="tally_kasu_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -430,6 +460,12 @@
           </item>
           <item row="20" column="2">
            <widget class="QLabel" name="tally_goko_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -466,6 +502,12 @@
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="tallyPlayerLabel">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -484,6 +526,12 @@
           </item>
           <item row="19" column="2">
            <widget class="QLabel" name="tally_shiko_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -517,6 +565,12 @@
           </item>
           <item row="10" column="1">
            <widget class="QLabel" name="tally_aotan_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -535,6 +589,12 @@
           </item>
           <item row="12" column="2">
            <widget class="QLabel" name="tally_tsukimideippai_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -568,6 +628,12 @@
           </item>
           <item row="20" column="1">
            <widget class="QLabel" name="tally_goko_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -586,6 +652,12 @@
           </item>
           <item row="24" column="1">
            <widget class="QLabel" name="tally_koikoi_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -619,6 +691,12 @@
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="tallyCPULabel">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -637,6 +715,12 @@
           </item>
           <item row="18" column="2">
            <widget class="QLabel" name="tally_ameshiko_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -670,6 +754,12 @@
           </item>
           <item row="22" column="2">
            <widget class="QLabel" name="tally_subtotal_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -688,6 +778,12 @@
           </item>
           <item row="30" column="2">
            <widget class="QLabel" name="tally_total_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -706,6 +802,12 @@
           </item>
           <item row="7" column="1">
            <widget class="QLabel" name="tally_inoshikacho_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -724,6 +826,12 @@
           </item>
           <item row="30" column="1">
            <widget class="QLabel" name="tally_total_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -742,6 +850,12 @@
           </item>
           <item row="8" column="1">
            <widget class="QLabel" name="tally_tanzaku_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -760,6 +874,12 @@
           </item>
           <item row="7" column="2">
            <widget class="QLabel" name="tally_inoshikacho_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -808,6 +928,12 @@
           </item>
           <item row="12" column="1">
            <widget class="QLabel" name="tally_tsukimideippai_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -826,6 +952,12 @@
           </item>
           <item row="11" column="1">
            <widget class="QLabel" name="tally_akatanaotannochofuku_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -859,6 +991,12 @@
           </item>
           <item row="6" column="1">
            <widget class="QLabel" name="tally_tane_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -877,6 +1015,12 @@
           </item>
           <item row="10" column="2">
            <widget class="QLabel" name="tally_aotan_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -932,6 +1076,12 @@
           </item>
           <item row="19" column="1">
            <widget class="QLabel" name="tally_shiko_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -965,6 +1115,12 @@
           </item>
           <item row="24" column="2">
            <widget class="QLabel" name="tally_koikoi_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -998,6 +1154,12 @@
           </item>
           <item row="8" column="2">
            <widget class="QLabel" name="tally_tanzaku_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1016,6 +1178,12 @@
           </item>
           <item row="14" column="1">
            <widget class="QLabel" name="tally_sanko_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1049,6 +1217,12 @@
           </item>
           <item row="13" column="1">
            <widget class="QLabel" name="tally_hanamideippai_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1082,6 +1256,12 @@
           </item>
           <item row="9" column="1">
            <widget class="QLabel" name="tally_akatan_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1100,6 +1280,12 @@
           </item>
           <item row="6" column="2">
            <widget class="QLabel" name="tally_tane_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1133,6 +1319,12 @@
           </item>
           <item row="11" column="2">
            <widget class="QLabel" name="tally_akatanaotannochofuku_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1218,6 +1410,12 @@
           </item>
           <item row="9" column="2">
            <widget class="QLabel" name="tally_akatan_cpu_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1251,6 +1449,12 @@
           </item>
           <item row="18" column="1">
            <widget class="QLabel" name="tally_ameshiko_player_points">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1284,6 +1488,12 @@
           </item>
           <item row="28" column="1">
            <widget class="QLabel" name="tally_koikoi_player_double">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -1302,6 +1512,12 @@
           </item>
           <item row="28" column="2">
            <widget class="QLabel" name="tally_koikoi_cpu_double">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -3088,9 +3304,9 @@
    </widget>
    <zorder>oyaFrame</zorder>
    <zorder>koikoiFrame</zorder>
-   <zorder>tallyFrame</zorder>
    <zorder>titleFrame</zorder>
    <zorder>gameFrame</zorder>
+   <zorder>tallyFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
