@@ -115,7 +115,7 @@ private:
 
     QSettings settings;
     QPixmap m_bkgnd {};
-    QPixmap m_deckArt {};
+    QString m_deckArt {};
 
 public:
     /*

@@ -76,6 +76,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
                         "}");
 
     m_bkgnd = {};
+    m_deckArt = "";
     //Load settings
     loadSettings();
 
@@ -99,7 +100,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         button->setMinimumSize(120,168);
         button->setMaximumSize(120,168);
         button->setText("");
-        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIcon(QIcon(m_deckArt));
         button->setIconSize(QSize(120,168));
         button->setFlat(true);
         button->setEnabled(true);
@@ -119,7 +120,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         button->setMinimumSize(120,168);
         button->setMaximumSize(120,168);
         button->setText("");
-        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIcon(QIcon(m_deckArt));
         button->setIconSize(QSize(120,168));
         button->setFlat(true);
         button->setEnabled(true);
@@ -209,7 +210,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         button->setMinimumSize(120,168);
         button->setMaximumSize(120,168);
         button->setText("");
-        button->setIcon(QIcon(":/deck/Hanafuda_koi-2.svg"));
+        button->setIcon(QIcon(m_deckArt));
         button->setIconSize(QSize(120,168));
         button->setFlat(true);
         button->setEnabled(true);
@@ -228,7 +229,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->playerLightHLayout->addWidget(label);
@@ -243,7 +244,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->playerAnimalHLayout->addWidget(label);
@@ -258,7 +259,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->playerRibbonHLayout->addWidget(label);
@@ -273,7 +274,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->playerPlainHLayout->addWidget(label);
@@ -289,7 +290,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->cpuLightHLayout->addWidget(label);
@@ -304,7 +305,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->cpuAnimalHLayout->addWidget(label);
@@ -319,7 +320,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->cpuRibbonHLayout->addWidget(label);
@@ -334,7 +335,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
         label->setMinimumSize(30,42);
         label->setMaximumSize(30,42);
         label->setText("");
-        label->setPixmap(QPixmap(":/deck/Hanafuda_koi-2.svg"));
+        label->setPixmap(QPixmap(m_deckArt));
         label->setScaledContents(true);
         label->setVisible(false);
         ui->cpuPlainHLayout->addWidget(label);
@@ -1012,7 +1013,7 @@ void KoiKoi::updateCards()
         QPushButton *button = guiGameHandCards.at(j);
         if (j>m_gameHand.getNumCards()-1)
         {
-            button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            button->setIcon(QIcon(m_deckArt));
             button->setEnabled(false);
             button->setVisible(false);
         }
@@ -1029,7 +1030,7 @@ void KoiKoi::updateCards()
         QPushButton *button = guiPlayerCards.at(k);
         if(playerHand->getNumCards() == 0)
         {
-            button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+            button->setIcon(QIcon(m_deckArt));
             button->setEnabled(false);
             button->setVisible(false);
         }
@@ -1037,7 +1038,7 @@ void KoiKoi::updateCards()
         {
             if (k>playerHand->getNumCards()-1)
             {
-                button->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
+                button->setIcon(QIcon(m_deckArt));
                 button->setEnabled(false);
                 button->setVisible(false);
             }
@@ -1181,7 +1182,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiPlayerLightYaku.at(i);
         if (i>=playerLightHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1196,7 +1197,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiPlayerAnimalYaku.at(j);
         if (j>=playerAnimalHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1211,7 +1212,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiPlayerRibbonYaku.at(k);
         if (k>=playerRibbonHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1226,7 +1227,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiPlayerPlainYaku.at(l);
         if (l>=playerPlainHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1241,7 +1242,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiCPULightYaku.at(m);
         if (m>=cpuLightHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1256,7 +1257,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiCPUAnimalYaku.at(n);
         if (n>=cpuAnimalHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1271,7 +1272,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiCPURibbonYaku.at(p);
         if (p>=cpuRibbonHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1286,7 +1287,7 @@ void KoiKoi::updateYaku()
         QLabel *label = guiCPUPlainYaku.at(q);
         if (q>=cpuPlainHand->getNumCards())
         {
-            label->setPixmap(QString(":/deck/Hanafuda_koi-2.svg"));
+            label->setPixmap(m_deckArt);
             label->setVisible(false);
         }
         else
@@ -1951,7 +1952,7 @@ void KoiKoi::selectFromGameHand()
      * Perhaps in the future with turn based stuff, pass in
      * the player, and some sort of turn state variable
      */
-    if(m_gameDeck.getDeckIcon() != ":/deck/Hanafuda_koi-2.svg")
+    if(m_gameDeck.getDeckIcon() != m_deckArt.toStdString())
     {
         //Get next card
         Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
@@ -2019,8 +2020,8 @@ void KoiKoi::selectFromGameHand()
         updateCards();
         //call updateYaku
         updateYaku();
-        ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-        m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
+        ui->deckButton->setIcon(QIcon(m_deckArt));
+        m_gameDeck.setDeckIcon(m_deckArt.toStdString());
         //call checkYaku
         checkYaku(1);
 
@@ -2388,7 +2389,7 @@ void KoiKoi::cpuSelectFromGameHand()
      * Perhaps in the future with turn based stuff, pass in
      * the player, and some sort of turn state variable
      */
-    if(m_gameDeck.getDeckIcon() != ":/deck/Hanafuda_koi-2.svg")
+    if(m_gameDeck.getDeckIcon() != m_deckArt.toStdString())
     {
         //Get next card
         Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
@@ -2458,8 +2459,8 @@ void KoiKoi::cpuSelectFromGameHand()
         updateCards();
         //call updateYaku
         updateYaku();
-        ui->deckButton->setIcon(QIcon(QString(":/deck/Hanafuda_koi-2.svg")));
-        m_gameDeck.setDeckIcon(":/deck/Hanafuda_koi-2.svg");
+        ui->deckButton->setIcon(QIcon(m_deckArt));
+        m_gameDeck.setDeckIcon(m_deckArt.toStdString());
         //call checkYaku
         checkYaku(2);
 
@@ -2716,11 +2717,11 @@ void KoiKoi::setBG()
 
         QDir *backResource = new QDir(":/backgrounds/");
 
-        QString resFilename = QString(":/backgrounds/" + backResource->entryList().at(buttonNum));
+        QString resBGFilename = QString(":/backgrounds/" + backResource->entryList().at(buttonNum));
 
-        this->m_bkgnd = QPixmap(resFilename);
+        this->m_bkgnd = QPixmap(resBGFilename);
 
-        if (resFilename == nullptr)
+        if (resBGFilename == nullptr)
         {
             //We got issues
         }
@@ -2732,7 +2733,7 @@ void KoiKoi::setBG()
             }
             else
             {
-                this->settings.setValue("background", resFilename);
+                this->settings.setValue("background", resBGFilename);
                 this->settings.setValue("bgRadio", buttonName);
                 this->settings.sync();
                 this->settings.status();
@@ -2773,13 +2774,13 @@ void KoiKoi::setDeck()
             std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
         }
 
-        QDir *backResource = new QDir(":/decks/");
+        QDir *deckResource = new QDir(":/decks/");
 
-        QString resFilename = QString(":/decks/" + backResource->entryList().at(buttonNum));
+        QString resDeckFilename = QString(":/decks/" + deckResource->entryList().at(buttonNum));
 
-        this->m_deckArt = QPixmap(resFilename);
+        this->m_deckArt = resDeckFilename;
 
-        if (resFilename == nullptr)
+        if (resDeckFilename == nullptr)
         {
             //We got issues
         }
@@ -2791,7 +2792,7 @@ void KoiKoi::setDeck()
             }
             else
             {
-                this->settings.setValue("deck", resFilename);
+                this->settings.setValue("deck", resDeckFilename);
                 this->settings.setValue("deckRadio", buttonName);
                 this->settings.sync();
                 this->settings.status();
@@ -2803,11 +2804,13 @@ void KoiKoi::setDeck()
      * Figure out how to go about setting the deck art
      * for game deck, oya cards, and CPU hand
      */
-
-    //Ensure scaled
-    //this->m_deckArt = this->m_deckArt.scaled(this->size(), Qt::KeepAspectRatio);
-    //Sends paintEvent()
-    this->repaint();
+    ui->oyaButton_0->setIcon(QIcon(m_deckArt));
+    ui->oyaButton_1->setIcon(QIcon(m_deckArt));
+    ui->deckButton->setIcon(QIcon(m_deckArt));
+    for(int i{0};i<guiCPUCards.size();i++)
+    {
+        guiCPUCards.at(i)->setIcon(QIcon(m_deckArt));
+    }
 }
 
 /*
@@ -2856,14 +2859,19 @@ void KoiKoi::loadSettings()
     }
     else
     {
-        QString resFilename = this->settings.value("background", "").toString();
-        if (resFilename != nullptr) {
-            this->m_bkgnd = QPixmap(resFilename);
+        QString resBGFilename = this->settings.value("background", "").toString();
+        if (resBGFilename != nullptr) {
+            this->m_bkgnd = QPixmap(resBGFilename);
             setBG();
         }
         /*
          * Figure out how to go about setting the deck art
          * for game deck, oya cards, and CPU hand
          */
+        QString resDeckFilename = this->settings.value("deck", "").toString();
+        if (resDeckFilename != nullptr) {
+            this->m_deckArt = resDeckFilename;
+            setDeck();
+        }
     }
 }
