@@ -584,6 +584,9 @@ void KoiKoi::startRound()
             disconnectGameHand();
             disconnectDeck();
 
+            ui->playerOya->setVisible(true);
+            ui->cpuOya->setVisible(false);
+
             //Make sure at end of player's turn when drawing card and
             //possibly matching with game hand to kick off next cpu turn...
         }
@@ -593,6 +596,9 @@ void KoiKoi::startRound()
             disconnectPlayerHand();
             disconnectGameHand();
             disconnectDeck();
+
+            ui->playerOya->setVisible(false);
+            ui->cpuOya->setVisible(true);
 
             //call cpu/ai functions to facilitate cpu turns
             //At end of cpu turn, make sure stage is set for player...
@@ -1808,14 +1814,12 @@ void KoiKoi::determineOyaPlayer()
         //Human has Oya
         m_player1.setOya(true);
         m_player2.setOya(false);
-        std::cout << "player is oya!" << std::endl;
     }
     else
     {
         //CPU has Oya
         m_player1.setOya(false);
         m_player2.setOya(true);
-        std::cout << "cpu is oya!" << std::endl;
     }
     startRound();
 }

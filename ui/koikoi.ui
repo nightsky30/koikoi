@@ -2953,6 +2953,21 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="cpuOya">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Oya</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -3049,6 +3064,21 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="playerOya">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Oya</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -3059,8 +3089,8 @@
    <zorder>oyaFrame</zorder>
    <zorder>koikoiFrame</zorder>
    <zorder>tallyFrame</zorder>
-   <zorder>gameFrame</zorder>
    <zorder>titleFrame</zorder>
+   <zorder>gameFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -3139,8 +3169,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../logo/icon.qrc"/>
   <include location="../data/resources/decks/deck.qrc"/>
+  <include location="../logo/icon.qrc"/>
  </resources>
  <connections/>
 </ui>
