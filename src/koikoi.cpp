@@ -2733,7 +2733,7 @@ void KoiKoi::setBG()
         }
     }
     //Ensure scaled
-    this->m_bkgnd = this->m_bkgnd.scaled(this->size(), Qt::KeepAspectRatioByExpanding);
+    this->m_bkgnd = this->m_bkgnd.scaled(this->size(), Qt::KeepAspectRatio);
     //Sends paintEvent()
     this->repaint();
 }
@@ -2747,8 +2747,33 @@ void KoiKoi::setBG()
  */
 void KoiKoi::paintEvent(QPaintEvent *pe)
 {
+    //width - x
+    //height - y
+
+    int relativeWidth = this->width();
+    int relativeHeight = this->height() - ui->menubar->height();
+
+    int pixWidth = m_bkgnd.width();
+    int pixHeight = m_bkgnd.height();
+
+    int diffWidth {0};
+    int diffHeight {0};
+
     QPainter paint(this);
-    paint.drawPixmap(0, 0+ui->menubar->height(), m_bkgnd);
+
+    //Centers pixmap
+    if (pixWidth < relativeWidth)
+    {
+        //then center horizontally
+        diffWidth = relativeWidth - pixWidth;
+        paint.drawPixmap(0+(diffWidth/2), 0+ui->menubar->height(), m_bkgnd);
+    }
+    else if(pixHeight < relativeHeight)
+    {
+        //then center vertically
+        diffHeight = relativeHeight -pixHeight;
+        paint.drawPixmap(0, 0+(diffHeight/2)+ui->menubar->height(), m_bkgnd);
+    }
 }
 
 void KoiKoi::loadSettings()
