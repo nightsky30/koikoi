@@ -4,6 +4,9 @@
 <svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="372px" height="587px" viewBox="0 0 372 587" enable-background="new 0 0 372 587" xml:space="preserve">
 <g>
+	<g>
+		<rect width="372" height="587" fill="#FFFFFF" fill-opacity="1.0"/>
+	</g>
 	<path id="PATH1" fill="#F93419" stroke="#000000" stroke-width="3" d="M338,219.5l-10,12c-41-72-60-83-88.5-117.5l25.5,8.5
 		C291,168,299.5,174,338,219.5z"/>
 	<path id="PATH2" fill="#F93419" stroke="#000000" stroke-width="3" d="M450,429l-78,0.5c-18.5-70.5-3.5-124-43.5-204.5

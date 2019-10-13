@@ -5,6 +5,9 @@
 	 width="372px" height="587px" viewBox="0 0 372 587" enable-background="new 0 0 372 587" xml:space="preserve">
 <g>
 	<g>
+		<rect width="372" height="587" fill="#FFFFFF" fill-opacity="1.0"/>
+	</g>
+	<g>
 		<g>
 			<path fill="#333333" d="M63.43,39.056l-1.316-3.288l-3.947-1.317c-2.629,0-3.946,1.317-3.946,4.604
 				c0,3.288,1.317,5.26,3.946,5.26l3.947-1.316L63.43,39.056z"/>
