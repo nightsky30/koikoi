@@ -115,6 +115,7 @@ private:
 
     QSettings settings;
     QPixmap m_bkgnd {};
+    QPixmap m_deckArt {};
 
 public:
     /*
@@ -193,6 +194,7 @@ public slots:
     void nextRound();
     void waitABit();
     void setBG();
+    void setDeck();
 };
 
 #endif // KOIKOI_H

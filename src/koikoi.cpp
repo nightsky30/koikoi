@@ -2745,6 +2745,71 @@ void KoiKoi::setBG()
     this->repaint();
 }
 
+void KoiKoi::setDeck()
+{
+    QObject *senderButton = sender();
+
+    if(senderButton == nullptr)
+    {
+        //Deck has been set from settings file, just wait
+    }
+    else
+    {
+        QString buttonName = senderButton->objectName();
+
+        //Get card number
+        int buttonNum {0};
+
+        QRegularExpression regEx("(\\d{2}|\\d{1})");
+        QRegularExpressionMatch match = regEx.match(buttonName);
+        if (match.hasMatch())
+        {
+            //Get card number
+            QString matchedString = match.captured(1);
+            buttonNum = matchedString.toInt();
+        }
+        else
+        {
+            std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+        }
+
+        QDir *backResource = new QDir(":/decks/");
+
+        QString resFilename = QString(":/decks/" + backResource->entryList().at(buttonNum));
+
+        this->m_deckArt = QPixmap(resFilename);
+
+        if (resFilename == nullptr)
+        {
+            //We got issues
+        }
+        else
+        {
+            if(!settings.isWritable())
+            {
+                //We got issues
+            }
+            else
+            {
+                this->settings.setValue("deck", resFilename);
+                this->settings.setValue("deckRadio", buttonName);
+                this->settings.sync();
+                this->settings.status();
+            }
+        }
+    }
+
+    /*
+     * Figure out how to go about setting the deck art
+     * for game deck, oya cards, and CPU hand
+     */
+
+    //Ensure scaled
+    //this->m_deckArt = this->m_deckArt.scaled(this->size(), Qt::KeepAspectRatio);
+    //Sends paintEvent()
+    this->repaint();
+}
+
 /*
  * Used to enforce painting of the custom background pixmap.
  * QPainter and paintEvent had to be used as opposed to using QPalette due
@@ -2796,5 +2861,9 @@ void KoiKoi::loadSettings()
             this->m_bkgnd = QPixmap(resFilename);
             setBG();
         }
+        /*
+         * Figure out how to go about setting the deck art
+         * for game deck, oya cards, and CPU hand
+         */
     }
 }
