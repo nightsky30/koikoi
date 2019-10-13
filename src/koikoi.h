@@ -115,7 +115,6 @@ private:
 
     QSettings settings;
     QPixmap m_bkgnd {};
-    //QString m_sSettingsFile {};
 
 public:
     /*

@@ -39,7 +39,10 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     this->setWindowTitle("Koi-Koi Hanafuda - Preferences");
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
 
-    backResource->setPath(":/background");
+    /*
+     * Backgrounds
+     */
+    backResource->setPath(":/backgrounds");
 
     ui->gridLayout_2->setContentsMargins(50,50,50,50);
 
@@ -59,7 +62,7 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
                     label->setMinimumSize(100,100);
                     label->setMaximumSize(100,100);
                     label->setText("");
-                    label->setPixmap(QString(":/background/" + backResource->entryList().at(itemNum)));
+                    label->setPixmap(QString(":/backgrounds/" + backResource->entryList().at(itemNum)));
                     label->setScaledContents(true);
                     label->setEnabled(true);
                     label->setVisible(true);
@@ -114,6 +117,94 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
                 }
             }
             QRadioButton *radioButton = guiBGRadios.at(buttonNum);
+            if (radioButton != nullptr) {
+                radioButton->setChecked(true);
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Problem:  Resources not found." << std::endl;;
+    }
+
+    /*
+     * Decks
+     */
+    deckResource->setPath(":/decks");
+
+    ui->gridLayout->setContentsMargins(50,50,50,50);
+
+    if(deckResource->isEmpty() == false)
+    {
+        int itemNum {0};
+        //Set up deck label and radio button defaults in GUI
+        for(unsigned int i{0};i<(deckResource->count()*2)-1;i=i+2)
+        {
+            for(unsigned int j{0};j<(deckResource->count()/5)+1;j++)
+            {
+                if(itemNum < deckResource->count())
+                {
+                    QString labelName = "deckLabel_" + QString::number(itemNum);
+                    QLabel *label = new QLabel(labelName, this);
+                    label->setObjectName(labelName);
+                    label->setMinimumSize(60,84);
+                    label->setMaximumSize(60,84);
+                    label->setText("");
+                    label->setPixmap(QString(":/decks/" + deckResource->entryList().at(itemNum)));
+                    label->setScaledContents(true);
+                    label->setEnabled(true);
+                    label->setVisible(true);
+                    label->show();
+
+                    QString radioName = "deckRadio_" + QString::number(itemNum);
+                    QRadioButton *radio = new QRadioButton(radioName, this);
+                    radio->setObjectName(radioName);
+                    radio->setText("");
+                    radio->setEnabled(true);
+                    radio->setVisible(true);
+                    radio->show();
+
+                    ui->gridLayout->addWidget(label, i, j);
+                    ui->gridLayout->setAlignment(label, Qt::AlignCenter);
+
+                    ui->gridLayout->addWidget(radio, i+1, j);
+                    ui->gridLayout->setAlignment(radio, Qt::AlignCenter);
+
+                    guiDeckLabels.append(label);
+                    guiDeckRadios.append(radio);
+
+                    //Connect radio buttons with labels' resources and send SIGNALS to the parent's (KoiKoi) SLOT (setDeck())
+                    connect(radio, SIGNAL(clicked()), parent, SLOT(setDeck()), Qt::UniqueConnection);
+
+                    itemNum++;
+                }
+            }
+        }
+        if(!settings.isWritable())
+        {
+            //We got issues
+        }
+        else
+        {
+            QString buttonName = this->settings.value("deckRadio", "").toString();
+            int buttonNum {0};
+
+            if(buttonName != nullptr)
+            {
+                QRegularExpression regEx("(\\d{2}|\\d{1})");
+                QRegularExpressionMatch match = regEx.match(buttonName);
+                if (match.hasMatch())
+                {
+                    //Get card number
+                    QString matchedString = match.captured(1);
+                    buttonNum = matchedString.toInt();
+                }
+                else
+                {
+                    std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+                }
+            }
+            QRadioButton *radioButton = guiDeckRadios.at(buttonNum);
             if (radioButton != nullptr) {
                 radioButton->setChecked(true);
             }

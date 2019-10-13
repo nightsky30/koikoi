@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/decks">
+        <file>Hanafuda_koi-1.svg</file>
+        <file>Hanafuda_koi-2.svg</file>
+        <file>Hanafuda_tengu-demon-1.svg</file>
+        <file>Hanafuda_tengu-demon-2.svg</file>
+    </qresource>
+</RCC>

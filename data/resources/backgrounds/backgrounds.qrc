@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/background">
+    <qresource prefix="/backgrounds">
         <file>res-image-from-rawpixel-id-426236.jpg</file>
         <file>res-image-from-rawpixel-id-426240.jpg</file>
         <file>res-image-from-rawpixel-id-426271.jpg</file>

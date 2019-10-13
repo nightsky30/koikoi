@@ -866,14 +866,12 @@ void KoiKoi::tallyPoints(int playerNum)
             //Human has Oya
             m_player1.setOya(true);
             m_player2.setOya(false);
-            std::cout << "player is oya!" << std::endl;
         }
         else
         {
             //CPU has Oya
             m_player1.setOya(false);
             m_player2.setOya(true);
-            std::cout << "cpu is oya!" << std::endl;
         }
 
         //Hide label that asks to "Play again?"
@@ -2716,9 +2714,9 @@ void KoiKoi::setBG()
             std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
         }
 
-        QDir *backResource = new QDir(":/background/");
+        QDir *backResource = new QDir(":/backgrounds/");
 
-        QString resFilename = QString(":/background/" + backResource->entryList().at(buttonNum));
+        QString resFilename = QString(":/backgrounds/" + backResource->entryList().at(buttonNum));
 
         this->m_bkgnd = QPixmap(resFilename);
 
@@ -2736,7 +2734,6 @@ void KoiKoi::setBG()
             {
                 this->settings.setValue("background", resFilename);
                 this->settings.setValue("bgRadio", buttonName);
-                //std::cout << this->settings.fileName().toStdString() << std::endl;
                 this->settings.sync();
                 this->settings.status();
             }

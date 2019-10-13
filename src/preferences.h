@@ -50,8 +50,11 @@ private:
     Ui::Preferences *ui;
     QSettings settings;
     QDir *backResource = new QDir(":/");
+    QDir *deckResource = new QDir(":/");
     QVector<QLabel*> guiBGLabels {};
     QVector<QRadioButton*> guiBGRadios {};
+    QVector<QLabel*> guiDeckLabels {};
+    QVector<QRadioButton*> guiDeckRadios {};
 
 public:
     /*
