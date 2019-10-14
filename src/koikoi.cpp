@@ -561,6 +561,11 @@ void KoiKoi::startRound()
         resetYaku();
         resetTally();
 
+        //Testing
+        ui->deckButton->setIcon(QIcon(m_deckArt));
+        m_gameDeck.setDeckIcon(m_deckArt.toStdString());
+
+        //Set Round Label
         ui->gameRoundLabel->setText(QString(tr("Round: %1 / %2")).arg(m_currentRound).arg(m_rounds));
 
         deal();
@@ -1959,6 +1964,10 @@ void KoiKoi::selectFromGameHand()
             std::cout << "There was an issue with the cards matching..." << std::endl;
             std::cout << "The current card month:" << currentCardMonth << std::endl;
             std::cout << "The next card month:" << nextCardMonth << std::endl;
+            std::cout << "Area 1" << std::endl;
+            std::cout << m_gameDeck.getDeckIcon() << std::endl;
+            std::cout << m_deckArt.toStdString() << std::endl;
+            std::cout << "" << std::endl;
         }
         else
         {
@@ -2056,6 +2065,7 @@ void KoiKoi::selectFromGameHand()
             std::cout << "There was an issue with the cards matching..." << std::endl;
             std::cout << "The current card month:" << currentCardMonth << std::endl;
             std::cout << "The player card month:" << playerCardMonth << std::endl;
+            std::cout << "Area 2" << std::endl;
         }
         else
         {
@@ -2396,6 +2406,10 @@ void KoiKoi::cpuSelectFromGameHand()
             std::cout << "There was an issue with the cards matching..." << std::endl;
             std::cout << "The current card month:" << currentCardMonth << std::endl;
             std::cout << "The next card month:" << nextCardMonth << std::endl;
+            std::cout << "Area 3" << std::endl;
+            std::cout << m_gameDeck.getDeckIcon() << std::endl;
+            std::cout << m_deckArt.toStdString() << std::endl;
+            std::cout << "" << std::endl;
         }
         else
         {
@@ -2497,6 +2511,7 @@ void KoiKoi::cpuSelectFromGameHand()
             std::cout << "There was an issue with the cards matching..." << std::endl;
             std::cout << "The current card month:" << currentCardMonth << std::endl;
             std::cout << "The player card month:" << cpuCardMonth << std::endl;
+            std::cout << "Area 4" << std::endl;
         }
         else
         {
