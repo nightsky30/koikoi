@@ -164,6 +164,7 @@ public:
     void showTallyScreen();
     void updateCards();
     void updateScores();
+    void updateKoiKoi();
     void resetYaku();
     void resetTally();
     void updateYaku();

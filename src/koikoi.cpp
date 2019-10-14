@@ -558,6 +558,7 @@ void KoiKoi::startRound()
         this->m_player2.setKoikoi(false);
         this->m_player1.setKoikoiNum(0);
         this->m_player2.setKoikoiNum(0);
+        updateKoiKoi();
         resetYaku();
         resetTally();
 
@@ -1061,6 +1062,12 @@ void KoiKoi::updateScores()
 {
     ui->cpuScore->setText(QString(tr("Score:  %1")).arg(m_player2.getScore()));
     ui->playerScore->setText(QString(tr("Score:  %1")).arg(m_player1.getScore()));
+}
+
+void KoiKoi::updateKoiKoi()
+{
+    ui->playerKoiKoi->setText(QString(tr("Koi-Koi: x%1")).arg(this->m_player1.getKoikoiNum()));
+    ui->cpuKoiKoi->setText(QString(tr("Koi-Koi: x%1")).arg(this->m_player2.getKoikoiNum()));
 }
 
 /*
@@ -2248,6 +2255,7 @@ void KoiKoi::requestKoiKoi()
         {
             m_player1.setKoikoi(true);
             m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
+            updateKoiKoi();
             showGameScreen();
             //cpuSelectFromHand();
         }
@@ -2674,6 +2682,7 @@ void KoiKoi::cpuRequestKoiKoi()
         {
             m_player2.setKoikoi(true);
             m_player2.setKoikoiNum(m_player2.getKoikoiNum()+1);
+            updateKoiKoi();
             showGameScreen();
             //Set up connections for player??
         }

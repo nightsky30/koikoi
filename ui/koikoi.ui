@@ -3187,7 +3187,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="2" column="0" colspan="2">
            <widget class="QLabel" name="cpuOya">
             <property name="maximumSize">
              <size>
@@ -3205,6 +3205,30 @@
             </property>
             <property name="text">
              <string>Oya</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="cpuKoiKoi">
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Koi-Koi: xx</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -3349,7 +3373,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0" colspan="2">
+          <item row="2" column="0" colspan="2">
            <widget class="QLabel" name="playerOya">
             <property name="minimumSize">
              <size>
@@ -3373,6 +3397,30 @@
             </property>
             <property name="text">
              <string>Oya</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="playerKoiKoi">
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <italic>true</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Koi-Koi: xx</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
