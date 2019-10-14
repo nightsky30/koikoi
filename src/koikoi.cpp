@@ -561,6 +561,8 @@ void KoiKoi::startRound()
         resetYaku();
         resetTally();
 
+        ui->gameRoundLabel->setText(QString(tr("Round: %1 / %2")).arg(m_currentRound).arg(m_rounds));
+
         deal();
         updateYaku();
         updateCards();

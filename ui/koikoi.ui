@@ -3130,7 +3130,7 @@
       <rect>
        <x>10</x>
        <y>3</y>
-       <width>124</width>
+       <width>168</width>
        <height>1051</height>
       </rect>
      </property>
@@ -3139,6 +3139,12 @@
        <layout class="QVBoxLayout" name="cpuVerticalLayout">
         <item>
          <widget class="QLabel" name="cpuLabel">
+          <property name="maximumSize">
+           <size>
+            <width>125</width>
+            <height>125</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>18</pointsize>
@@ -3150,12 +3156,21 @@
           <property name="text">
            <string>CPU</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
         <item>
          <layout class="QFormLayout" name="cpuFormLayout">
           <item row="0" column="0" colspan="2">
            <widget class="QLabel" name="cpuScore">
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -3167,10 +3182,19 @@
             <property name="text">
              <string>Score:  xx</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QLabel" name="cpuOya">
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -3181,6 +3205,9 @@
             </property>
             <property name="text">
              <string>Oya</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -3234,6 +3261,30 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="gameRoundLabel">
+        <property name="maximumSize">
+         <size>
+          <width>125</width>
+          <height>125</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>75</weight>
+          <italic>true</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Round: xx / xx</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer_4">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -3250,6 +3301,12 @@
        <layout class="QVBoxLayout" name="playerVerticalLayout">
         <item>
          <widget class="QLabel" name="playerLabel">
+          <property name="maximumSize">
+           <size>
+            <width>125</width>
+            <height>125</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>18</pointsize>
@@ -3261,12 +3318,21 @@
           <property name="text">
            <string>Player</string>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
          </widget>
         </item>
         <item>
          <layout class="QFormLayout" name="playerFormLayout">
           <item row="0" column="0" colspan="2">
            <widget class="QLabel" name="playerScore">
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -3278,10 +3344,25 @@
             <property name="text">
              <string>Score:  xx</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
            </widget>
           </item>
           <item row="1" column="0" colspan="2">
            <widget class="QLabel" name="playerOya">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>125</width>
+              <height>125</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -3292,6 +3373,9 @@
             </property>
             <property name="text">
              <string>Oya</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -3305,8 +3389,8 @@
    <zorder>oyaFrame</zorder>
    <zorder>koikoiFrame</zorder>
    <zorder>titleFrame</zorder>
-   <zorder>gameFrame</zorder>
    <zorder>tallyFrame</zorder>
+   <zorder>gameFrame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -3385,8 +3469,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../data/resources/decks/deck.qrc"/>
   <include location="../logo/icon.qrc"/>
+  <include location="../data/resources/decks/deck.qrc"/>
  </resources>
  <connections/>
 </ui>
