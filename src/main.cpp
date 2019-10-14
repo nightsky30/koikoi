@@ -17,8 +17,12 @@
  * Copyright (C) 2019  nightsky30 @ github
  */
 
+#include "config.h.in"
 #include "koikoi.h"
 #include <QApplication>
+#include <QCommandLineParser>
+#include <QDebug>
+#include <QTranslator>
 
 /*
 * Main Function
@@ -26,6 +30,23 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    QApplication::setApplicationName("Koi-Koi Hanafuda");
+    QApplication::setApplicationDisplayName("Koi-Koi Hanafuda");
+    QApplication::setApplicationVersion(KOIKOI_VERSION);
+    QApplication::setOrganizationName("Koi-Koi Hanafuda"); // for QSettings
+
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+
+    parser.process(app);
+
+    QTranslator translator;
+    bool ret = translator.load(QLocale::system(), QString(), QString(), QString(KOIKOI_DATADIR) + "/translations/");
+    qDebug() << "Translation loaded:" << ret;
+    app.installTranslator(&translator);
+
     KoiKoi window;
     window.show();
 

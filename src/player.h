@@ -42,6 +42,7 @@ private:
     };
     bool m_oya {false};
     bool m_koikoi {false};
+    int m_koikoiNum {0};
     Hand m_playerHand {Hand()};
     Hand m_lightMatch {Hand()};
     Hand m_animalMatch {Hand()};
@@ -63,6 +64,7 @@ public:
     int getYakuSize();
     bool getOya();
     bool getKoikoi();
+    int getKoikoiNum();
     Hand* getHand();
     Hand* getLightMatch();
     Hand* getAnimalMatch();
@@ -77,6 +79,7 @@ public:
     void resetYaku();
     void setOya(bool oya);
     void setKoikoi(bool koikoi);
+    void setKoikoiNum(int koikoiNum);
 
     /*
     * Print Functions

@@ -55,6 +55,11 @@ bool Player::getKoikoi()
     return m_koikoi;
 }
 
+int Player::getKoikoiNum()
+{
+    return m_koikoiNum;
+}
+
 Hand* Player::getHand()
 {
     Hand *playerHand;
@@ -116,6 +121,11 @@ void Player::setOya(bool oya)
 void Player::setKoikoi(bool koikoi)
 {
     m_koikoi = koikoi;
+}
+
+void Player::setKoikoiNum(int koikoiNum)
+{
+    m_koikoiNum = koikoiNum;
 }
 
 void Player::printScore()

@@ -21,7 +21,20 @@
 #define PREFERENCES_H
 
 #include <QDialog>
+//#include <QSettings>
+#include <QDir>
+#include <QVector>
+#include <QLabel>
+#include <QRadioButton>
 #include <QSettings>
+
+namespace Ui {
+
+/*
+* Class Definition, also functions as forward declaration
+*/
+class Preferences;
+}
 
 /*
 * Class Definition, also functions as forward declaration
@@ -34,13 +47,20 @@ private:
     /*
     * Member Initialization List
     */
+    Ui::Preferences *ui;
     QSettings settings;
+    QDir *backResource = new QDir(":/");
+    QDir *deckResource = new QDir(":/");
+    QVector<QLabel*> guiBGLabels {};
+    QVector<QRadioButton*> guiBGRadios {};
+    QVector<QLabel*> guiDeckLabels {};
+    QVector<QRadioButton*> guiDeckRadios {};
 
 public:
     /*
     * Constructors / Destructors
     */
-    Preferences(QWidget* parent = 0);
+    Preferences(QWidget* parent = nullptr);
     ~Preferences();
 };
 

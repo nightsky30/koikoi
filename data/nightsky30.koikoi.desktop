@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=koikoi
+Icon=nightsky30.koikoi
+Type=Application
+
+Name=Koi-Koi Hanafuda
+Comment=Traditional Japanese Card Game
+
+Categories=Games;CardGame;Qt;

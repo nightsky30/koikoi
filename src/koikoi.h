@@ -27,6 +27,7 @@
 #include <QVector>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QSettings>
 
 /*
  * The game consists of these yaku.
@@ -112,6 +113,10 @@ private:
     QVector<QLabel*> guiCPURibbonYaku {};
     QVector<QLabel*> guiCPUPlainYaku {};
 
+    QSettings settings;
+    QPixmap m_bkgnd {};
+    QString m_deckArt {};
+
 public:
     /*
     * Constructors / Destructors
@@ -136,7 +141,7 @@ public:
     void generateOyaCard();
     void deal();
     void startRound();
-    void tallyPoints(); //??  Player currentPlayer, Player nextPlayer
+    void tallyPoints(int playerNum); //??  Player currentPlayer, Player nextPlayer
     void cpuSelectFromHand();
     void cpuSelectFromGameHand();
     void cpuDrawCard();
@@ -162,7 +167,7 @@ public:
     void resetYaku();
     void resetTally();
     void updateYaku();
-    void checkYaku();
+    void checkYaku(int playerNum);
     void connectDeck();
     void connectGameHand(QPushButton *button);
     void connectGameHand();
@@ -173,6 +178,8 @@ public:
     void disconnectGameHand();
     void disconnectPlayerHand(QPushButton *button);
     void disconnectPlayerHand();
+    void paintEvent(QPaintEvent *pe);
+    void loadSettings();
 
 public slots:
     void onNewGameClicked();
@@ -186,6 +193,9 @@ public slots:
     void requestKoiKoi();
     void nextRound();
     void waitABit();
+    void setBG();
+    void setDeck();
+    void setRounds(int numRounds);
 };
 
 #endif // KOIKOI_H
