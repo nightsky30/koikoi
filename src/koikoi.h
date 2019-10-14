@@ -195,6 +195,7 @@ public slots:
     void waitABit();
     void setBG();
     void setDeck();
+    void setRounds(int numRounds);
 };
 
 #endif // KOIKOI_H

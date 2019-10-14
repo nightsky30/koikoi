@@ -44,7 +44,7 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
      */
     backResource->setPath(":/backgrounds");
 
-    ui->gridLayout_2->setContentsMargins(50,50,50,50);
+    ui->bgGridLayout->setContentsMargins(50,50,50,50);
 
     if(backResource->isEmpty() == false)
     {
@@ -76,11 +76,11 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
                     radio->setVisible(true);
                     radio->show();
 
-                    ui->gridLayout_2->addWidget(label, i, j);
-                    ui->gridLayout_2->setAlignment(label, Qt::AlignCenter);
+                    ui->bgGridLayout->addWidget(label, i, j);
+                    ui->bgGridLayout->setAlignment(label, Qt::AlignCenter);
 
-                    ui->gridLayout_2->addWidget(radio, i+1, j);
-                    ui->gridLayout_2->setAlignment(radio, Qt::AlignCenter);
+                    ui->bgGridLayout->addWidget(radio, i+1, j);
+                    ui->bgGridLayout->setAlignment(radio, Qt::AlignCenter);
 
                     guiBGLabels.append(label);
                     guiBGRadios.append(radio);
@@ -132,7 +132,7 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
      */
     deckResource->setPath(":/decks");
 
-    ui->gridLayout->setContentsMargins(50,50,50,50);
+    ui->deckGridLayout->setContentsMargins(50,50,50,50);
 
     if(deckResource->isEmpty() == false)
     {
@@ -164,11 +164,11 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
                     radio->setVisible(true);
                     radio->show();
 
-                    ui->gridLayout->addWidget(label, i, j);
-                    ui->gridLayout->setAlignment(label, Qt::AlignCenter);
+                    ui->deckGridLayout->addWidget(label, i, j);
+                    ui->deckGridLayout->setAlignment(label, Qt::AlignCenter);
 
-                    ui->gridLayout->addWidget(radio, i+1, j);
-                    ui->gridLayout->setAlignment(radio, Qt::AlignCenter);
+                    ui->deckGridLayout->addWidget(radio, i+1, j);
+                    ui->deckGridLayout->setAlignment(radio, Qt::AlignCenter);
 
                     guiDeckLabels.append(label);
                     guiDeckRadios.append(radio);
@@ -213,6 +213,21 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     else
     {
         std::cout << "Problem:  Resources not found." << std::endl;;
+    }
+
+    /*
+     * Misc.
+     */
+    //Connect spinbox and send SIGNALS to the parent's (KoiKoi) SLOT (setRounds())
+    connect(ui->roundsSpinBox, SIGNAL(valueChanged(int)), parent, SLOT(setRounds(int)), Qt::UniqueConnection);
+    if(!settings.isWritable())
+    {
+        //We got issues
+    }
+    else
+    {
+        //Set to saved value
+        ui->roundsSpinBox->setValue(this->settings.value("rounds", "").toInt());
     }
 }
 

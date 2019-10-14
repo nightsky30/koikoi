@@ -41,6 +41,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QSettings>
+#include <QSpinBox>
 
 /*
  * Constructor
@@ -62,11 +63,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
     //Oya Hand
     Hand m_oyaHand {Hand()};
 
-    //Set game variables
-    this->m_rounds = 12;
-    this->m_currentRound = 0;
-    this->m_gameStatus = false;
-
     ui->setupUi(this);
 
     this->setStyleSheet("QLabel"
@@ -75,8 +71,6 @@ KoiKoi::KoiKoi(QWidget *parent) :
                         "border-radius: 10px;"
                         "}");
 
-    m_bkgnd = {};
-    m_deckArt = "";
     //Load settings
     loadSettings();
 
@@ -848,7 +842,7 @@ void KoiKoi::tallyPoints(int playerNum)
 
     //Show Tally Points frame/screen
     showTallyScreen();
-    if(m_currentRound == 12 || m_player1.getScore() >= 60 || m_player2.getScore() >= 60)
+    if(m_currentRound == m_rounds || m_player1.getScore() >= 60 || m_player2.getScore() >= 60)
     {
         //End game
         //Display label that asks to "Play again?"
@@ -2813,6 +2807,55 @@ void KoiKoi::setDeck()
     }
 }
 
+void KoiKoi::setRounds(int numRounds)
+{
+    QObject *senderButton = sender();
+
+    if(senderButton == nullptr)
+    {
+        //Rounds has been set from settings file, just wait
+    }
+    else
+    {
+        if(!settings.isWritable())
+        {
+            //We got issues
+        }
+        else
+        {
+            this->settings.setValue("rounds", numRounds);
+            this->settings.sync();
+            this->settings.status();
+        }
+    }
+
+    /*
+     * Figure out how to go about setting the rounds
+     * Rounds should not be changed while a game is in progress
+     */
+    if(!settings.isWritable())
+    {
+        //We got issues
+    }
+    else
+    {
+        switch (this->settings.value("rounds", "").toInt())
+        {
+        case 6:
+        case 12:
+            this->m_rounds = this->settings.value("rounds", "").toInt();
+            if(m_currentRound > 0)
+            {
+                onQuitGameClicked();
+            }
+            break;
+        default:
+            this->m_rounds = 12;
+            break;
+        }
+    }
+}
+
 /*
  * Used to enforce painting of the custom background pixmap.
  * QPainter and paintEvent had to be used as opposed to using QPalette due
@@ -2859,19 +2902,20 @@ void KoiKoi::loadSettings()
     }
     else
     {
+        //BG
         QString resBGFilename = this->settings.value("background", "").toString();
         if (resBGFilename != nullptr) {
             this->m_bkgnd = QPixmap(resBGFilename);
             setBG();
         }
-        /*
-         * Figure out how to go about setting the deck art
-         * for game deck, oya cards, and CPU hand
-         */
+        //Deck
         QString resDeckFilename = this->settings.value("deck", "").toString();
         if (resDeckFilename != nullptr) {
             this->m_deckArt = resDeckFilename;
             setDeck();
         }
+        //Rounds, had to supply a value to match the slot...
+        //The setRounds() ensures the saved value or a default is loaded
+        setRounds(m_rounds);
     }
 }
