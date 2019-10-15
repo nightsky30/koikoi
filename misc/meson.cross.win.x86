@@ -1,9 +1,10 @@
 [binaries]
-c = '/usr/bin/i586-mingw32msvc-gcc'
-cpp = '/usr/bin/i586-mingw32msvc-g++'
-ar = '/usr/i586-mingw32msvc/bin/ar'
-strip = '/usr/i586-mingw32msvc/bin/strip'
-pkgconfig = '/usr/bin/i586-mingw32msvc-pkg-config'
+#c = '/usr/bin/i686-w64-mingw32-gcc-win32'
+c = '/usr/bin/i686-w64-mingw32-gcc-9.2-win32'
+cpp = '/usr/bin/i686-w64-mingw32-g++-win32'
+ar = '/usr/bin/i686-w64-mingw32-ar'
+strip = '/usr/bin/i686-w64-mingw32-strip'
+pkgconfig = '/usr/bin/i686-w64-mingw32-pkg-config'
 exe_wrapper = 'wine' # A command used to run generated executables.
 
 [host_machine]
