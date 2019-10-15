@@ -12,3 +12,7 @@ system = 'windows'
 cpu_family = 'x86_64'
 cpu = 'i686'
 endian = 'little'
+
+[properties]
+cpp_link_args = ['-static-libgcc', '-static-libstdc++']
+sys_root = 'C:\'
