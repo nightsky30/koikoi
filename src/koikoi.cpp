@@ -600,6 +600,8 @@ void KoiKoi::startRound()
 
             //call cpu/ai functions to facilitate cpu turns
             //At end of cpu turn, make sure stage is set for player...
+            //Testing
+            //waitABit();
             cpuSelectFromHand();
         }
     }
@@ -2042,6 +2044,8 @@ void KoiKoi::selectFromGameHand()
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
+            //Testing
+            //waitABit();
             //Turn is ending
             cpuSelectFromHand();
         }
@@ -2199,6 +2203,8 @@ void KoiKoi::drawCard()
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
+            //Testing
+            //waitABit();
             //Turn is ending
             cpuSelectFromHand();
         }
@@ -2257,6 +2263,7 @@ void KoiKoi::requestKoiKoi()
             m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
             updateKoiKoi();
             showGameScreen();
+            //checkYaku -> showKoiKoiScreen -> yes_button -> requestKoiKoi -> continue on to cpu turn...
             //cpuSelectFromHand();
         }
         else
