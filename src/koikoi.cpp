@@ -1810,10 +1810,23 @@ void KoiKoi::determineOyaPlayer()
     QString buttonName = senderButton->objectName();
 
     int oyaCard = m_oyaHand.getOyaCard();
-    QChar buttonNum = (buttonName.at(buttonName.size()-1));
+    QChar buttonNum {0};
+
+    QRegularExpression regEx("(\\d{2}|\\d{1})");
+    QRegularExpressionMatch match = regEx.match(buttonName);
+    if (match.hasMatch())
+    {
+        //Get card number
+        QString matchedString = match.captured(1);
+        buttonNum = matchedString.toInt();
+    }
+    else
+    {
+        std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+    }
 
     //Compare selected sender object card with predetermined oya
-    if (buttonNum.digitValue() == (int)oyaCard)
+    if (buttonNum == oyaCard)
     {
         //Human has Oya
         m_player1.setOya(true);
@@ -1846,11 +1859,24 @@ void KoiKoi::selectFromHand()
     QObject *senderButton = sender();
     QString buttonName = senderButton->objectName();
 
+    int cardNum {0};
+
+    QRegularExpression regEx("(\\d{2}|\\d{1})");
+    QRegularExpressionMatch match = regEx.match(buttonName);
+    if (match.hasMatch())
+    {
+        //Get card number
+        QString matchedString = match.captured(1);
+        cardNum = matchedString.toInt();
+    }
+    else
+    {
+        std::cout << "There were issues matching regex with the sender button to obtain the button number..." << std::endl;
+    }
+
     //disconnect all playerhand cards
     disconnectPlayerHand();
 
-    //Get card number
-    int cardNum = buttonName.at(buttonName.size()-1).digitValue();
     //Get player card
     Card *currentPlayerCard = playerHand->getCard(cardNum);
 
