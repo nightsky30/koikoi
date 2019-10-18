@@ -447,8 +447,7 @@ void KoiKoi::startGame()
     this->m_player2.setKoikoi(false);
     this->m_player1.setKoikoiNum(0);
     this->m_player2.setKoikoiNum(0);
-    resetYaku();
-    resetTally();
+
     generateOyaCard();
 }
 
@@ -558,7 +557,7 @@ void KoiKoi::startRound()
         this->m_player2.setKoikoi(false);
         this->m_player1.setKoikoiNum(0);
         this->m_player2.setKoikoiNum(0);
-        updateKoiKoi();
+
         resetYaku();
         resetTally();
 
@@ -573,6 +572,7 @@ void KoiKoi::startRound()
         updateYaku();
         updateCards();
         updateScores();
+        updateKoiKoi();
         showGameScreen();
 
         if(m_player1.getOya() == true)
