@@ -42,6 +42,7 @@
 #include <QPainter>
 #include <QSettings>
 #include <QSpinBox>
+#include <QTime>
 
 /*
  * Constructor
@@ -600,8 +601,6 @@ void KoiKoi::startRound()
 
             //call cpu/ai functions to facilitate cpu turns
             //At end of cpu turn, make sure stage is set for player...
-            //Testing
-            //waitABit();
             cpuSelectFromHand();
         }
     }
@@ -2070,8 +2069,6 @@ void KoiKoi::selectFromGameHand()
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
-            //Testing
-            //waitABit();
             //Turn is ending
             cpuSelectFromHand();
         }
@@ -2229,8 +2226,6 @@ void KoiKoi::drawCard()
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
-            //Testing
-            //waitABit();
             //Turn is ending
             cpuSelectFromHand();
         }
@@ -2320,6 +2315,9 @@ void KoiKoi::nextRound()
  */
 void KoiKoi::cpuSelectFromHand()
 {
+    //Pause Delay
+    waitABit();
+
     Hand *cpuHand = m_player2.getHand();
 
     //Get card number, randomly
@@ -2394,6 +2392,9 @@ void KoiKoi::cpuSelectFromHand()
  */
 void KoiKoi::cpuSelectFromGameHand()
 {
+    //Pause Delay
+    waitABit();
+
     /*
      * Could match from deck or cpu hand.
      * Check both.
@@ -2621,6 +2622,9 @@ void KoiKoi::cpuSelectFromGameHand()
 
 void KoiKoi::cpuDrawCard()
 {
+    //Pause Delay
+    waitABit();
+
     //Shows next card for deck
     Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
     CardMonth nextMonth = nextCard->getMonth();
@@ -2729,10 +2733,15 @@ void KoiKoi::cpuRequestKoiKoi()
 
 }
 
+/*
+ * Function used to allow pauses when called.
+ * Used during various stages of CPU turn.
+ */
 void KoiKoi::waitABit()
 {
-    QThread::sleep(1);
-    std::cout << "Waited..." << std::endl;
+    QTime dieTime = QTime::currentTime().addSecs(2);
+        while (QTime::currentTime() < dieTime)
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
 /*
