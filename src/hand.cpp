@@ -84,25 +84,3 @@ void Hand::resetHand()
     this->m_playerHand.resize(0);
     this->m_oyaCard = 0;
 }
-
-void Hand::printHand()
-{
-    int i {0};
-
-    for (i = 0; i < m_numCards; i++)
-    {
-        std::cout << "=========================" << std::endl;
-        std::cout << "Information for card " << (i + 1) << ":" << std::endl;
-        std::cout << "=========================" << std::endl;
-        m_playerHand[i].printMonth();
-        m_playerHand[i].printFlower();
-        m_playerHand[i].printImageStr();
-        m_playerHand[i].printCardType();
-        m_playerHand[i].printCardType2();
-        m_playerHand[i].printPointVal();
-        m_playerHand[i].printPointVal2();
-        m_playerHand[i].printName();
-        m_playerHand[i].printWild();
-        std::cout << "=========================" << std::endl;
-    }
-}

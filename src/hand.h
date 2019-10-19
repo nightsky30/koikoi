@@ -64,11 +64,6 @@ public:
     Card* disCard(int cardNum);
     void removeCard(int cardNum);
     void resetHand();
-
-    /*
-    * Print Functions
-    */
-    void printHand();
 };
 
 #endif

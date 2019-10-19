@@ -80,19 +80,6 @@ public:
     void setOya(bool oya);
     void setKoikoi(bool koikoi);
     void setKoikoiNum(int koikoiNum);
-
-    /*
-    * Print Functions
-    */
-    void printScore();
-    void printYaku();
-    void printOya();
-    void printKoikoi();
-    void printHand();
-    void printLightMatch();
-    void printAnimalMatch();
-    void printRibbonMatch();
-    void printPlainMatch();
 };
 
 #endif

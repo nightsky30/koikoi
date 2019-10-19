@@ -142,20 +142,6 @@ public:
     std::string getName();
     bool getWild();
     std::string determineCardType(CardType cType);
-
-    /*
-    * Print Functions
-    */
-    void printCard();
-    void printMonth();
-    void printFlower();
-    void printImageStr();
-    void printCardType();
-    void printCardType2();
-    void printPointVal();
-    void printPointVal2();
-    void printName();
-    void printWild();
 };
 
 #endif

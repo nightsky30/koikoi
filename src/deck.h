@@ -117,11 +117,6 @@ public:
     void shuffleDeck();
     Card* dealCard();
     void setDeckIcon(std::string iconStr);
-
-    /*
-    * Print Functions
-    */
-    void printDeck();
 };
 
 #endif

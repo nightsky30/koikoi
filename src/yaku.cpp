@@ -53,18 +53,3 @@ std::string Yaku::getDescription() const
 {
     return m_description;
 }
-
-void Yaku::printPointValue()
-{
-    std::cout << "The yaku point value is: " << m_pointValue << std::endl;
-}
-
-void Yaku::printName()
-{
-    std::cout << "The yaku name is: " << m_name << std::endl;
-}
-
-void Yaku::printDescription()
-{
-    std::cout << "The yaku description is: " << m_description << std::endl;
-}

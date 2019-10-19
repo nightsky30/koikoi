@@ -119,24 +119,3 @@ void Deck::setDeckIcon(std::string iconStr)
     m_deckIcon = iconStr;
 }
 
-void Deck::printDeck()
-{
-    int i {0};
-
-    for (i = 0; i < m_numCards; i++)
-    {
-        //Print
-        std::cout << "=========================" << std::endl;
-        std::cout << "Information for card " << (i + 1) << ":" << std::endl;
-        std::cout << "=========================" << std::endl;
-        m_cardDeck[i].printMonth();
-        m_cardDeck[i].printFlower();
-        m_cardDeck[i].printCardType();
-        m_cardDeck[i].printCardType2();
-        m_cardDeck[i].printPointVal();
-        m_cardDeck[i].printPointVal2();
-        m_cardDeck[i].printName();
-        m_cardDeck[i].printWild();
-        std::cout << "=========================" << std::endl;
-    }
-}

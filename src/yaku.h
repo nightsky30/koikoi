@@ -50,14 +50,6 @@ public:
     int getPointValue() const;
     std::string getName() const;
     std::string getDescription() const;
-
-    /*
-    * Print Functions
-    */
-    void printPointValue();
-    void printName();
-    void printDescription();
-
 };
 
 #endif
