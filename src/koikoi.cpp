@@ -2264,9 +2264,11 @@ void KoiKoi::requestKoiKoi()
 {
     //yes or no buttons
     //get sender()
-    QString theSender = sender()->objectName();
+    QString buttonName = sender()->objectName();
 
-    if(theSender.toStdString() == "noButton")
+    QRegularExpression regEx("no");
+    QRegularExpressionMatch match = regEx.match(buttonName);
+    if (match.hasMatch())
     {
         //if no, then round over, tally points
         tallyPoints(1);
@@ -2274,10 +2276,9 @@ void KoiKoi::requestKoiKoi()
     else
     {
         /*
-             * Check for end of round (if player has cards)
-             *
-             * The check might need to be done before requesting koikoi
-             */
+         * Check for end of round (if player has cards)
+         * The check might need to be done before requesting koikoi
+         */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
             m_player1.setKoikoi(true);
@@ -2740,8 +2741,8 @@ void KoiKoi::cpuRequestKoiKoi()
 void KoiKoi::waitABit()
 {
     QTime dieTime = QTime::currentTime().addSecs(2);
-        while (QTime::currentTime() < dieTime)
-            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 
 /*
