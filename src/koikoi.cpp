@@ -436,6 +436,10 @@ void KoiKoi::startGame()
 {
     this->m_currentRound = 0;
     this->m_gameStatus = false;
+
+    this->m_koikoiRequested = false;
+    this->m_koikoiDecided = false;
+
     this->m_gameDeck.resetDeck();
     this->m_gameDeck.shuffleDeck();
     this->m_gameHand.resetHand();
@@ -553,6 +557,9 @@ void KoiKoi::startRound()
         this->m_currentRound = this->m_currentRound + 1;
         this->m_gameStatus = true;
 
+        this->m_koikoiRequested = false;
+        this->m_koikoiDecided = false;
+
         this->m_gameDeck.resetDeck();
         this->m_gameDeck.shuffleDeck();
         this->m_gameHand.resetHand();
@@ -651,9 +658,6 @@ void KoiKoi::tallyPoints(int playerNum)
     //Tally points - Subtotals
     int playerSubTotal {0};
     int cpuSubTotal {0};
-
-    //m_player1.printYaku();
-    //m_player2.printYaku();
 
     if(playerNum == 1)
     {
@@ -784,27 +788,15 @@ void KoiKoi::tallyPoints(int playerNum)
         ui->tally_subtotal_cpu_points->setText(QString("%1").arg(cpuSubTotal));
     }
 
-    //Get koikoi
-    bool currentKoiKoi = currentPlayer->getKoikoi();
-    bool opponentKoiKoi = opponent->getKoikoi();
-
     //Set default koikoi amount
     int currentKoikoiTotal {0};
     int opponentKoikoiTotal {0};
 
-    //If koikoi, get points for each koikoi (1 per koikoi)
-    if(currentKoiKoi == true)
-    {
-        //Get koikoi amount
-        currentKoikoiTotal = currentPlayer->getKoikoiNum();
-    }
+    //Get koikoi amount
+    currentKoikoiTotal = currentPlayer->getKoikoiNum();
 
-    //If koikoi, get points for each koikoi (1 per koikoi)
-    if(opponentKoiKoi == true)
-    {
-        //Get koikoi amount
-        opponentKoikoiTotal = opponent->getKoikoiNum();
-    }
+    //Get koikoi amount
+    opponentKoikoiTotal = opponent->getKoikoiNum();
 
     //Add koikoi amount to subtotal
     //If opponent had koikoi as well, currentPlayer's points from current round are doubled
@@ -812,7 +804,7 @@ void KoiKoi::tallyPoints(int playerNum)
     {
         ui->tally_koikoi_player_points->setText(QString("%1").arg(currentKoikoiTotal));
         ui->tally_koikoi_cpu_points->setText(QString("%1").arg(opponentKoikoiTotal));
-        if(opponentKoiKoi == true)
+        if(opponentKoikoiTotal > 0)
         {
             currentPlayer->setScore(currentPlayer->getScore() + ((playerSubTotal + currentKoikoiTotal) * 2));
             opponent->setScore(opponent->getScore() - ((playerSubTotal + currentKoikoiTotal) * 2));
@@ -831,7 +823,7 @@ void KoiKoi::tallyPoints(int playerNum)
     {
         ui->tally_koikoi_cpu_points->setText(QString("%1").arg(currentKoikoiTotal));
         ui->tally_koikoi_player_points->setText(QString("%1").arg(opponentKoikoiTotal));
-        if(opponentKoiKoi == true)
+        if(opponentKoikoiTotal > 0)
         {
             currentPlayer->setScore(currentPlayer->getScore() + ((cpuSubTotal + currentKoikoiTotal) * 2));
             opponent->setScore(opponent->getScore() - ((cpuSubTotal + currentKoikoiTotal) * 2));
@@ -1618,6 +1610,8 @@ void KoiKoi::checkYaku(int playerNum)
         if(playerNum == 1)
         {
             //Call function to ask if player wants to declare koikoi
+            m_koikoiRequested = true;
+            m_koikoiDecided = false;
             showKoiKoiScreen();
 
             //This is not blocking the CPU from starting turn....causing issues!
@@ -2074,7 +2068,6 @@ void KoiKoi::selectFromGameHand()
          * Check for end of round (if player has cards)
          *
          * THIS SHOULD INCLUDE ALL CHECKS
-         * PLAYERS' POINTS
          * RAMAINING CARDS
          * DECLINED TO DECLARE KOI-KOI
          *
@@ -2083,16 +2076,42 @@ void KoiKoi::selectFromGameHand()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if(m_koikoiRequested == true)
         {
-            //Turn is ending
-            cpuSelectFromHand();
+            while(m_koikoiDecided == false)
+            {
+                //Wait
+                waitABit(1);
+            }
+
+            if(m_player1.getKoikoi() == true)
+            {
+                //Turn is ending
+                m_player1.setKoikoi(false);
+                cpuSelectFromHand();
+            }
+            else
+            {
+                //End round, show tally screen
+                tallyPoints(1);
+            }
+            //Reset for next turn
+            m_koikoiRequested = false;
+            m_koikoiDecided = false;
         }
         else
         {
-            //Player out of cards
-            //End round, show tally screen
-            tallyPoints(1);
+            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+            {
+                //Turn is ending
+                cpuSelectFromHand();
+            }
+            else
+            {
+                //Player out of cards
+                //End round, show tally screen
+                tallyPoints(1);
+            }
         }
     }
     else
@@ -2241,7 +2260,6 @@ void KoiKoi::drawCard()
          * Check for end of round (if player has cards)
          *
          * THIS SHOULD INCLUDE ALL CHECKS
-         * PLAYERS' POINTS
          * RAMAINING CARDS
          * DECLINED TO DECLARE KOI-KOI
          *
@@ -2250,16 +2268,42 @@ void KoiKoi::drawCard()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if(m_koikoiRequested == true)
         {
-            //Turn is ending
-            cpuSelectFromHand();
+            while(m_koikoiDecided == false)
+            {
+                //Wait
+                waitABit(1);
+            }
+
+            if(m_player1.getKoikoi() == true)
+            {
+                //Turn is ending
+                m_player1.setKoikoi(false);
+                cpuSelectFromHand();
+            }
+            else
+            {
+                //End round, show tally screen
+                tallyPoints(1);
+            }
+            //Reset for next turn
+            m_koikoiRequested = false;
+            m_koikoiDecided = false;
         }
         else
         {
-            //Player out of cards
-            //End round, show tally screen
-            tallyPoints(1);
+            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+            {
+                //Turn is ending
+                cpuSelectFromHand();
+            }
+            else
+            {
+                //Player out of cards
+                //End round, show tally screen
+                tallyPoints(1);
+            }
         }
 
         //**********************************************************
@@ -2297,30 +2341,17 @@ void KoiKoi::requestKoiKoi()
     if (match.hasMatch())
     {
         //if no, then round over, tally points
-        tallyPoints(1);
+        m_player1.setKoikoi(false);
     }
     else
     {
-        /*
-         * Check for end of round (if player has cards)
-         * The check might need to be done before requesting koikoi
-         */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
-        {
-            m_player1.setKoikoi(true);
-            m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
-            updateKoiKoi();
-            showGameScreen();
-            //checkYaku -> showKoiKoiScreen -> yes_button -> requestKoiKoi -> continue on to cpu turn...
-            //cpuSelectFromHand();
-        }
-        else
-        {
-            //Player out of cards
-            //End round, show tally screen
-            tallyPoints(1);
-        }
+        m_player1.setKoikoi(true);
+        m_player1.setKoikoiNum(m_player1.getKoikoiNum()+1);
+        updateKoiKoi();
+        showGameScreen();
+        //checkYaku -> showKoiKoiScreen -> yes_button -> requestKoiKoi -> continue on to cpu turn...
     }
+    m_koikoiDecided = true;
 }
 
 /*
@@ -2343,7 +2374,7 @@ void KoiKoi::nextRound()
 void KoiKoi::cpuSelectFromHand()
 {
     //Pause Delay
-    waitABit();
+    waitABit(2);
 
     Hand *cpuHand = m_player2.getHand();
 
@@ -2420,7 +2451,7 @@ void KoiKoi::cpuSelectFromHand()
 void KoiKoi::cpuSelectFromGameHand()
 {
     //Pause Delay
-    waitABit();
+    waitABit(2);
 
     /*
      * Could match from deck or cpu hand.
@@ -2650,7 +2681,7 @@ void KoiKoi::cpuSelectFromGameHand()
 void KoiKoi::cpuDrawCard()
 {
     //Pause Delay
-    waitABit();
+    waitABit(2);
 
     //Shows next card for deck
     Card *nextCard = m_gameDeck.getCard(m_gameDeck.getNumCards()-1);
@@ -2764,9 +2795,9 @@ void KoiKoi::cpuRequestKoiKoi()
  * Function used to allow pauses when called.
  * Used during various stages of CPU turn.
  */
-void KoiKoi::waitABit()
+void KoiKoi::waitABit(int timeUnit)
 {
-    QTime dieTime = QTime::currentTime().addSecs(2);
+    QTime dieTime = QTime::currentTime().addSecs(timeUnit);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }

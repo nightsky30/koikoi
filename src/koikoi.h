@@ -97,7 +97,8 @@ private:
     int m_rounds {12};
     int m_currentRound {0};
     bool m_gameStatus {false};
-    bool m_playerDecided {false};
+    bool m_koikoiRequested {false};
+    bool m_koikoiDecided {false};
     QTimer *timeDelay {};
 
     QVector<QPushButton*> guiPlayerCards {};
@@ -194,7 +195,7 @@ public slots:
     void drawCard();
     void requestKoiKoi();
     void nextRound();
-    void waitABit();
+    void waitABit(int timeUnit);
     void setBG();
     void setDeck();
     void setRounds(int numRounds);
