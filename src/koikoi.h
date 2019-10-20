@@ -97,6 +97,7 @@ private:
     int m_rounds {12};
     int m_currentRound {0};
     bool m_gameStatus {false};
+    bool m_playerDecided {false};
     QTimer *timeDelay {};
 
     QVector<QPushButton*> guiPlayerCards {};

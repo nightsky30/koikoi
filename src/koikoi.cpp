@@ -449,6 +449,10 @@ void KoiKoi::startGame()
     this->m_player1.setKoikoiNum(0);
     this->m_player2.setKoikoiNum(0);
 
+    //Readded
+    resetYaku();
+    resetTally();
+
     generateOyaCard();
 }
 
@@ -1615,6 +1619,8 @@ void KoiKoi::checkYaku(int playerNum)
         {
             //Call function to ask if player wants to declare koikoi
             showKoiKoiScreen();
+
+            //This is not blocking the CPU from starting turn....causing issues!
         }
         else
         {
@@ -2066,6 +2072,16 @@ void KoiKoi::selectFromGameHand()
 
         /*
          * Check for end of round (if player has cards)
+         *
+         * THIS SHOULD INCLUDE ALL CHECKS
+         * PLAYERS' POINTS
+         * RAMAINING CARDS
+         * DECLINED TO DECLARE KOI-KOI
+         *
+         * MUST WAIT IN LOOP OR BLOCK SOMEHOW TO DETERMINE PLAYER DECISION
+         *
+         * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
+         * NO ENDING OUTSIDE THIS SPOT!!!
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
@@ -2223,6 +2239,16 @@ void KoiKoi::drawCard()
 
         /*
          * Check for end of round (if player has cards)
+         *
+         * THIS SHOULD INCLUDE ALL CHECKS
+         * PLAYERS' POINTS
+         * RAMAINING CARDS
+         * DECLINED TO DECLARE KOI-KOI
+         *
+         * MUST WAIT IN LOOP OR BLOCK SOMEHOW TO DETERMINE PLAYER DECISION
+         *
+         * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
+         * NO ENDING OUTSIDE THIS SPOT!!!
          */
         if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
