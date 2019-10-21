@@ -2781,13 +2781,11 @@ void KoiKoi::setBG()
 
     if(senderButton == nullptr)
     {
-        //BG has been set from settings file, just wait
+        //BG has been set from settings file or safe defaults, just wait
     }
     else
     {
         QString buttonName = senderButton->objectName();
-
-        //std::cout << buttonName.toStdString() << std::endl;
 
         //Get card number
         int buttonNum {0};
@@ -2842,7 +2840,7 @@ void KoiKoi::setDeck()
 
     if(senderButton == nullptr)
     {
-        //Deck has been set from settings file, just wait
+        //Deck has been set from settings file or safe defaults, just wait
     }
     else
     {
@@ -2909,7 +2907,7 @@ void KoiKoi::setRounds(int numRounds)
 
     if(senderButton == nullptr)
     {
-        //Rounds has been set from settings file, just wait
+        //Rounds has been set from settings file or safe defaults, just wait
     }
     else
     {
@@ -2992,6 +2990,26 @@ void KoiKoi::paintEvent(QPaintEvent *pe)
 
 void KoiKoi::loadSettings()
 {
+    QString resBGFilename = ":/backgrounds/res-image-from-rawpixel-id-426236.jpg";
+    QString bgButtonName = "bgRadio_0";
+    QString resDeckFilename = ":/decks/Hanafuda_koi-2.svg";
+    QString deckButtonName = "deckRadio_1";
+    int defRounds = 12;
+
+    QFile settingsFile(settings.fileName());
+
+    //Check if settings file exists
+    if(!settingsFile.exists())
+    {
+        this->settings.setValue("background", resBGFilename);
+        this->settings.setValue("bgRadio", bgButtonName);
+        this->settings.setValue("deck", resDeckFilename);
+        this->settings.setValue("deckRadio", deckButtonName);
+        this->settings.setValue("rounds", defRounds);
+        this->settings.sync();
+        this->settings.status();
+    }
+
     if(!settings.isWritable())
     {
         //We got issues
@@ -2999,13 +3017,13 @@ void KoiKoi::loadSettings()
     else
     {
         //BG
-        QString resBGFilename = this->settings.value("background", "").toString();
+        resBGFilename = this->settings.value("background", "").toString();
         if (resBGFilename != nullptr) {
             this->m_bkgnd = QPixmap(resBGFilename);
             setBG();
         }
         //Deck
-        QString resDeckFilename = this->settings.value("deck", "").toString();
+        resDeckFilename = this->settings.value("deck", "").toString();
         if (resDeckFilename != nullptr) {
             this->m_deckArt = resDeckFilename;
             setDeck();
