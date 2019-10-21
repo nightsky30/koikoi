@@ -51,6 +51,9 @@ KoiKoi::KoiKoi(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::KoiKoi)
 {
+    //Seed rng once at start
+    srand(time(nullptr));
+
     //Set up deck
     Deck m_gameDeck {Deck()};
 
@@ -885,30 +888,6 @@ void KoiKoi::tallyPoints(int playerNum)
 }
 
 /*
- * Prints the number of rounds to the console.
- */
-void KoiKoi::printNumRounds()
-{
-    std::cout << "The number of rounds set for the current game are: " << m_rounds << std::endl;
-}
-
-/*
- * Prints the current round to the console.
- */
-void KoiKoi::printCurrentRound()
-{
-    std::cout << "The current round is: " << m_currentRound << std::endl;
-}
-
-/*
- * Prints the current game status to the console.
- */
-void KoiKoi::printGameStatus()
-{
-    std::cout << "The game's current status is: " << m_gameStatus << std::endl;
-}
-
-/*
  * Displays the title screen within the GUI.
  */
 void KoiKoi::showTitleScreen()
@@ -1330,10 +1309,10 @@ void KoiKoi::checkYaku(int playerNum)
     QLabel *aotan_yaku;
     QLabel *akatan_aotan_no_chofuku_yaku;
     QLabel *tanzaku_yaku;
-    QLabel *bake_fuda_yaku;
+    //QLabel *bake_fuda_yaku;
     QLabel *kasu_yaku;
-    QLabel *oya_ken_yaku;
-    QLabel *tsuki_fuda_yaku;
+    //QLabel *oya_ken_yaku;
+    //QLabel *tsuki_fuda_yaku;
 
     if(playerNum == 1)
     {
@@ -1349,10 +1328,10 @@ void KoiKoi::checkYaku(int playerNum)
         aotan_yaku = ui->player_aotan_yaku;
         akatan_aotan_no_chofuku_yaku = ui->player_akatan_aotan_no_chofuku_yaku;
         tanzaku_yaku = ui->player_tanzaku_yaku;
-        bake_fuda_yaku = ui->player_bake_fuda_yaku;
+        //bake_fuda_yaku = ui->player_bake_fuda_yaku;
         kasu_yaku = ui->player_kasu_yaku;
-        oya_ken_yaku = ui->player_oya_ken_yaku;
-        tsuki_fuda_yaku = ui->player_tsuki_fuda_yaku;
+        //oya_ken_yaku = ui->player_oya_ken_yaku;
+        //tsuki_fuda_yaku = ui->player_tsuki_fuda_yaku;
     }
     else
     {
@@ -1368,10 +1347,10 @@ void KoiKoi::checkYaku(int playerNum)
         aotan_yaku = ui->cpu_aotan_yaku;
         akatan_aotan_no_chofuku_yaku = ui->cpu_akatan_aotan_no_chofuku_yaku;
         tanzaku_yaku = ui->cpu_tanzaku_yaku;
-        bake_fuda_yaku = ui->cpu_bake_fuda_yaku;
+        //bake_fuda_yaku = ui->cpu_bake_fuda_yaku;
         kasu_yaku = ui->cpu_kasu_yaku;
-        oya_ken_yaku = ui->cpu_oya_ken_yaku;
-        tsuki_fuda_yaku = ui->cpu_tsuki_fuda_yaku;
+        //oya_ken_yaku = ui->cpu_oya_ken_yaku;
+        //tsuki_fuda_yaku = ui->cpu_tsuki_fuda_yaku;
     }
 
     bool obtainedYaku {false};
@@ -2379,9 +2358,8 @@ void KoiKoi::cpuSelectFromHand()
 
     //Get card number, randomly
     int cardNum {0};
-    srand(time(nullptr));
     //cardNum = ((int)std::rand() % (m_numCards-1));
-    cardNum = ((int)std::rand() % cpuHand->getNumCards());
+    cardNum = (static_cast<int>(std::rand() % cpuHand->getNumCards()));
 
     //Get cpu card
     Card *currentCPUCard = cpuHand->getCard(cardNum);
@@ -2459,7 +2437,6 @@ void KoiKoi::cpuSelectFromGameHand()
 
     //Get random card that was enabled in the game hand
     //since the user can't click stuff the cpu must select somehow
-    bool cardFound {false};
     QVector<int> a {};
 
     //search through gameHand objects
@@ -2469,15 +2446,13 @@ void KoiKoi::cpuSelectFromGameHand()
         {
             //Store numbers of found enabled cards
             a.push_back(i);
-            cardFound = true;
         }
     }
 
     //Get card number randomly from stored selection
     int tempCardNum {0};
     int cardNum {0};
-    srand(time(nullptr));
-    tempCardNum = ((int)std::rand() % a.size());
+    tempCardNum = (static_cast<int>(std::rand() % a.size()));
     cardNum = a[tempCardNum];
 
     //Get game hand card
@@ -2490,9 +2465,6 @@ void KoiKoi::cpuSelectFromGameHand()
      * then there should be an icon of the next card image.
      * Otherwise it should just be the normal deck image
      * indicating the check should be made with the player's hand.
-     *
-     * Perhaps in the future with turn based stuff, pass in
-     * the player, and some sort of turn state variable
      */
     if(m_gameDeck.getDeckIcon() != m_deckArt.toStdString())
     {
@@ -2758,8 +2730,7 @@ void KoiKoi::cpuRequestKoiKoi()
     //Randomly select yes or no for koikoi
     //Get number randomly
     int koikoiDecision {0};
-    srand(time(nullptr));
-    koikoiDecision = ((int)std::rand() % 2);
+    koikoiDecision = (static_cast<int>(std::rand() % 2));
 
     if(koikoiDecision == 0)
     {

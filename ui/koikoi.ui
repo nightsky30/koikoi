@@ -3134,7 +3134,7 @@
        <height>1051</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="infoVerticalLayout">
       <item>
        <layout class="QVBoxLayout" name="cpuVerticalLayout">
         <item>

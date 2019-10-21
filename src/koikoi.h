@@ -62,19 +62,6 @@ namespace Ui {
 */
 class KoiKoi;
 
-//Create deck
-//Shuffle deck
-//Create players
-//Deal deck and create gameboard/hand and players' hands
-//Set scores to 30 each
-//Set rounds to 12
-//Set current round to 0
-//Set game over to false
-//Loop while switching turns
-//Implement each turn
-//Tally points
-//Wait for quit or game over to be true
-
 }
 
 /*
@@ -148,13 +135,6 @@ public:
     void cpuSelectFromGameHand();
     void cpuDrawCard();
     void cpuRequestKoiKoi();
-
-    /*
-    * Print Functions
-    */
-    void printNumRounds();
-    void printCurrentRound();
-    void printGameStatus();
 
     /*
     * GUI Functions
