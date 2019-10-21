@@ -2076,42 +2076,42 @@ void KoiKoi::selectFromGameHand()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if(m_koikoiRequested == true)
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
-            while(m_koikoiDecided == false)
+            if(m_koikoiRequested == true)
             {
-                //Wait
-                waitABit(1);
-            }
+                while(m_koikoiDecided == false)
+                {
+                    //Wait
+                    waitABit(1);
+                }
 
-            if(m_player1.getKoikoi() == true)
-            {
-                //Turn is ending
-                m_player1.setKoikoi(false);
-                cpuSelectFromHand();
+                if(m_player1.getKoikoi() == true)
+                {
+                    //Turn is ending
+                    m_player1.setKoikoi(false);
+                    cpuSelectFromHand();
+                }
+                else
+                {
+                    //End round, show tally screen
+                    tallyPoints(1);
+                }
+                //Reset for next turn
+                m_koikoiRequested = false;
+                m_koikoiDecided = false;
             }
             else
             {
-                //End round, show tally screen
-                tallyPoints(1);
+                //Turn is ending
+                cpuSelectFromHand();
             }
-            //Reset for next turn
-            m_koikoiRequested = false;
-            m_koikoiDecided = false;
         }
         else
         {
-            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
-            {
-                //Turn is ending
-                cpuSelectFromHand();
-            }
-            else
-            {
-                //Player out of cards
-                //End round, show tally screen
-                tallyPoints(1);
-            }
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints(1);
         }
     }
     else
@@ -2268,44 +2268,43 @@ void KoiKoi::drawCard()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if(m_koikoiRequested == true)
+        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
         {
-            while(m_koikoiDecided == false)
+            if(m_koikoiRequested == true)
             {
-                //Wait
-                waitABit(1);
-            }
+                while(m_koikoiDecided == false)
+                {
+                    //Wait
+                    waitABit(1);
+                }
 
-            if(m_player1.getKoikoi() == true)
-            {
-                //Turn is ending
-                m_player1.setKoikoi(false);
-                cpuSelectFromHand();
+                if(m_player1.getKoikoi() == true)
+                {
+                    //Turn is ending
+                    m_player1.setKoikoi(false);
+                    cpuSelectFromHand();
+                }
+                else
+                {
+                    //End round, show tally screen
+                    tallyPoints(1);
+                }
+                //Reset for next turn
+                m_koikoiRequested = false;
+                m_koikoiDecided = false;
             }
             else
             {
-                //End round, show tally screen
-                tallyPoints(1);
+                //Turn is ending
+                cpuSelectFromHand();
             }
-            //Reset for next turn
-            m_koikoiRequested = false;
-            m_koikoiDecided = false;
         }
         else
         {
-            if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
-            {
-                //Turn is ending
-                cpuSelectFromHand();
-            }
-            else
-            {
-                //Player out of cards
-                //End round, show tally screen
-                tallyPoints(1);
-            }
+            //Player out of cards
+            //End round, show tally screen
+            tallyPoints(1);
         }
-
         //**********************************************************
         //allows to click player hand card to call selectFromHand
         //**********************************************************
