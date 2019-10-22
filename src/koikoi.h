@@ -86,6 +86,8 @@ private:
     bool m_gameStatus {false};
     bool m_koikoiRequested {false};
     bool m_koikoiDecided {false};
+    bool m_cpuKoikoiRequested {false};
+    bool m_cpuKoikoiDecided {false};
     QTimer *timeDelay {};
 
     QVector<QPushButton*> guiPlayerCards {};
