@@ -647,15 +647,19 @@ void KoiKoi::tallyPoints(int playerNum)
 
     //Get current player and opponent
     Player *currentPlayer = this->getPlayer(playerNum);
-    Player *opponent;
+    Player *opponent {};
 
     if(playerNum == 1)
     {
         opponent = this->getPlayer(2);
     }
-    else
+    else if(playerNum == 2)
     {
         opponent = this->getPlayer(1);
+    }
+    else
+    {
+        std::cout << "playerNum is something unexpected:  " << playerNum << std::endl;
     }
 
     //Tally points - Subtotals
