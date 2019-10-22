@@ -49,8 +49,7 @@ int Hand::getNumCards()
 Card* Hand::getRandCard()
 {
     int randNum {0};
-    srand(time(NULL));
-    randNum = ((int)std::rand() % (m_numCards-1));
+    randNum = static_cast<int>(std::rand() % m_numCards);
     Card *requestedCard;
     requestedCard = &m_playerHand[randNum];
     return requestedCard;

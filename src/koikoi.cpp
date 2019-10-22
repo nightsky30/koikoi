@@ -2370,7 +2370,6 @@ void KoiKoi::cpuSelectFromHand()
 
     //Get card number, randomly
     int cardNum {0};
-    //cardNum = ((int)std::rand() % (m_numCards-1));
     cardNum = (static_cast<int>(std::rand() % cpuHand->getNumCards()));
 
     //Get cpu card

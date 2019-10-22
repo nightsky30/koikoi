@@ -50,11 +50,11 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     {
         int itemNum {0};
         //Set up background label and radio button defaults in GUI
-        for(unsigned int i{0};i<(backResource->count()*2)-1;i=i+2)
+        for(int i{0};i<(static_cast<int>(backResource->count())*2)-1;i=i+2)
         {
-            for(unsigned int j{0};j<(backResource->count()/5)+1;j++)
+            for(int j{0};j<(static_cast<int>(backResource->count())/5)+1;j++)
             {
-                if(itemNum < backResource->count())
+                if(itemNum < static_cast<int>(backResource->count()))
                 {
                     QString labelName = "bgLabel_" + QString::number(itemNum);
                     QLabel *label = new QLabel(labelName, this);
@@ -138,11 +138,11 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     {
         int itemNum {0};
         //Set up deck label and radio button defaults in GUI
-        for(unsigned int i{0};i<(deckResource->count()*2)-1;i=i+2)
+        for(int i{0};i<(static_cast<int>(deckResource->count())*2)-1;i=i+2)
         {
-            for(unsigned int j{0};j<(deckResource->count()/5)+1;j++)
+            for(int j{0};j<(static_cast<int>(deckResource->count())/5)+1;j++)
             {
-                if(itemNum < deckResource->count())
+                if(itemNum < static_cast<int>(deckResource->count()))
                 {
                     QString labelName = "deckLabel_" + QString::number(itemNum);
                     QLabel *label = new QLabel(labelName, this);
