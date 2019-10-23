@@ -2694,6 +2694,15 @@ void KoiKoi::cpuSelectFromGameHand()
     }
 }
 
+/*
+ * Function for the cpu to determine the cpu's card selection.
+ * It then determines if there are matching cards in the game hand
+ * on the game board.  If there are matches it will enable them and
+ * then allow the cpu to select a matching card from the game board.
+ * If there aren't matches, then it will discard the cpu's selected card.
+ * Then it will allow the next player to start their turn and select a
+ * card from their hand.
+ */
 void KoiKoi::cpuDrawCard()
 {
     //Pause Delay
@@ -2902,6 +2911,9 @@ void KoiKoi::setBG()
     this->repaint();
 }
 
+/*
+ * Allows the setting of a custom deck image from the resource collection.
+ */
 void KoiKoi::setDeck()
 {
     QObject *senderButton = sender();
@@ -2969,6 +2981,9 @@ void KoiKoi::setDeck()
     }
 }
 
+/*
+ * Allows the setting of either 6 or 12 rounds per game.
+ */
 void KoiKoi::setRounds(int numRounds)
 {
     QObject *senderButton = sender();
@@ -3056,6 +3071,11 @@ void KoiKoi::paintEvent(QPaintEvent *pe)
     }
 }
 
+/*
+ * Loads the settings from the app .conf file if it exists.
+ * Otherwise it will use a set of default settings and attempt
+ * to save a new settings file.
+ */
 void KoiKoi::loadSettings()
 {
     QString resBGFilename = ":/backgrounds/res-image-from-rawpixel-id-426236.jpg";
