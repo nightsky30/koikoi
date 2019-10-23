@@ -72,6 +72,7 @@ KoiKoi::KoiKoi(QWidget *parent) :
     this->setStyleSheet("QLabel"
                         "{"
                         "background-color: rgba(42, 42, 42, 191);"
+                        "color: rgba(255, 255, 255, 255);"
                         "border-radius: 10px;"
                         "}");
 
