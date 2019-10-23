@@ -645,11 +645,57 @@ void KoiKoi::startRound()
 
 /*
  * Tally the points for each player at the end of the round.
+ * playerNum cane be either 0, 1, or 2
+ * 0 = Both players ran out of cards
+ * 1 = Player 1, Player called Shobu
+ * 2 = Player 2, CPU called Shobu
  */
 void KoiKoi::tallyPoints(int playerNum)
 {
     //Set round number in UI
     ui->roundLabel->setText(QString(tr("Round:  %1")).arg(m_currentRound));  //Using .arg() with argument substitution to convert/append integer to part of a QString
+
+    //If players out of cards...0
+    //Assign winner based on number of points (most yaku)
+    if(playerNum == 0)
+    {
+        //Compare total points
+        //Player with most points is assigned current player
+        //If both players scored equal points, oya breaks the tie
+        //Tally points as normal
+        int playerTempTotal {0};
+        int cpuTempTotal {0};
+        for (int i {0}; i < m_player1.getYakuSize();i++)
+        {
+            if(m_player1.getYaku(i) == true)
+            {
+                playerTempTotal = playerTempTotal + acceptableYaku[i].getPointValue();
+            }
+        }
+        for (int j {0}; j < m_player2.getYakuSize();j++)
+        {
+            if(m_player2.getYaku(j) == true)
+            {
+                cpuTempTotal = cpuTempTotal + acceptableYaku[j].getPointValue();
+            }
+        }
+        if(playerTempTotal > cpuTempTotal)
+        {
+            playerNum = 1;
+        }
+        else if(cpuTempTotal > playerTempTotal)
+        {
+            playerNum = 2;
+        }
+        else if (m_player1.getOya() == true)
+        {
+            playerNum = 1;
+        }
+        else if (m_player2.getOya() == true)
+        {
+            playerNum = 2;
+        }
+    }
 
     //Get current player and opponent
     Player *currentPlayer = this->getPlayer(playerNum);
@@ -874,17 +920,21 @@ void KoiKoi::tallyPoints(int playerNum)
     {
         //Continue game
         //Set oya for next round
-        if (playerSubTotal >= cpuSubTotal)
+        if (playerSubTotal > cpuSubTotal)
         {
             //Human has Oya
             m_player1.setOya(true);
             m_player2.setOya(false);
         }
-        else
+        else if (cpuSubTotal > playerSubTotal)
         {
             //CPU has Oya
             m_player1.setOya(false);
             m_player2.setOya(true);
+        }
+        else
+        {
+            //Oya remains the same next round
         }
 
         //Hide label that asks to "Play again?"
@@ -2067,7 +2117,7 @@ void KoiKoi::selectFromGameHand()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if((m_player1.getHand()->getNumCards() > 0) || (m_player2.getHand()->getNumCards() > 0))
         {
             if(m_koikoiRequested == true)
             {
@@ -2102,7 +2152,7 @@ void KoiKoi::selectFromGameHand()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints(1);
+            tallyPoints(0);
         }
     }
     else
@@ -2259,7 +2309,7 @@ void KoiKoi::drawCard()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if((m_player1.getHand()->getNumCards() > 0) || (m_player2.getHand()->getNumCards() > 0))
         {
             if(m_koikoiRequested == true)
             {
@@ -2294,7 +2344,7 @@ void KoiKoi::drawCard()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints(1);
+            tallyPoints(0);
         }
         //**********************************************************
         //allows to click player hand card to call selectFromHand
@@ -2568,7 +2618,7 @@ void KoiKoi::cpuSelectFromGameHand()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if((m_player1.getHand()->getNumCards() > 0) || (m_player2.getHand()->getNumCards() > 0))
         {
             if(m_cpuKoikoiRequested == true)
             {
@@ -2601,7 +2651,7 @@ void KoiKoi::cpuSelectFromGameHand()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints(2);
+            tallyPoints(0);
         }
         //**********************************************************
         //allows to click player hand card to call selectFromHand
@@ -2751,7 +2801,7 @@ void KoiKoi::cpuDrawCard()
          * IF THERE ARE NO REASONS TO END ROUND...THEN FINALLY CONTINUE CPU TURN!
          * NO ENDING OUTSIDE THIS SPOT!!!
          */
-        if((m_player1.getHand()->getNumCards() > 0) && (m_player2.getHand()->getNumCards() > 0))
+        if((m_player1.getHand()->getNumCards() > 0) || (m_player2.getHand()->getNumCards() > 0))
         {
             if(m_cpuKoikoiRequested == true)
             {
@@ -2792,7 +2842,7 @@ void KoiKoi::cpuDrawCard()
         {
             //Player out of cards
             //End round, show tally screen
-            tallyPoints(2);
+            tallyPoints(0);
         }
         //**********************************************************
         //allows to click player hand card to call selectFromHand
