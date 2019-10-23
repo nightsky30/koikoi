@@ -38,6 +38,10 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     //Title and Application Icon
     this->setWindowTitle("Koi-Koi Hanafuda - Preferences");
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
+    this->setMinimumSize(QSize(810,847));
+    this->setMaximumSize(QSize(810,847));
+    this->setSizeGripEnabled(false);
+    this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
     /*
      * Backgrounds

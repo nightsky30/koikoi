@@ -41,7 +41,7 @@ public:
     /*
     * Constructors / Destructors
     */
-    About(QWidget* parent = 0);
+    About(QWidget* parent = nullptr);
     ~About();
 
 public slots:
