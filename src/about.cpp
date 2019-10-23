@@ -33,7 +33,7 @@ About::About(QWidget *parent) : QDialog (parent)
     //VBox layout with some labels, link to github, etc
 
     //Title and Application Icon
-    this->setWindowTitle(tr("Koi-Koi Hanafuda - About"));
+    this->setWindowTitle(tr("About"));
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
     this->setMinimumSize(QSize(225, 100));
     this->setMaximumSize(QSize(225, 100));
