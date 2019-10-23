@@ -20,6 +20,8 @@
 #include "config.h.in"
 #include "koikoi.h"
 #include <QApplication>
+#include <QFile>
+#include <QTextStream>
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QTranslator>
@@ -35,6 +37,12 @@ int main(int argc, char *argv[])
     QApplication::setApplicationDisplayName("Koi-Koi Hanafuda");
     QApplication::setApplicationVersion(KOIKOI_VERSION);
     QApplication::setOrganizationName("Koi-Koi Hanafuda"); // for QSettings
+
+//    //Set stylesheet
+//    QFile file(":/dark.qss");
+//    file.open(QFile::ReadOnly | QFile::Text);
+//    QTextStream stream(&file);
+//    app.setStyleSheet(stream.readAll());
 
     QCommandLineParser parser;
     parser.addHelpOption();
