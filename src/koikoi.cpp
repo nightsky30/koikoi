@@ -17,6 +17,7 @@
  * Copyright (C) 2019  nightsky30 @ github
  */
 
+#include "config.h"
 #include "koikoi.h"
 #include "ui_koikoi.h"
 #include "preferences.h"

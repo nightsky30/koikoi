@@ -17,7 +17,7 @@
  * Copyright (C) 2019  nightsky30 @ github
  */
 
-#include "config.h.in"
+#include "config.h"
 #include "koikoi.h"
 #include <QApplication>
 #include <QFile>
