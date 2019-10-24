@@ -29,7 +29,7 @@
     <message>
         <location filename="../../ui/koikoi.ui" line="29"/>
         <location filename="../../ui/koikoi.ui" line="1661"/>
-        <location filename="../../src/koikoi.cpp" line="83"/>
+        <location filename="../../src/koikoi.cpp" line="84"/>
         <source>Koi-Koi Hanafuda</source>
         <translation>Koi-Koi Hanafuda</translation>
     </message>
@@ -383,24 +383,24 @@
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../../src/koikoi.cpp" line="591"/>
+        <location filename="../../src/koikoi.cpp" line="592"/>
         <source>Round: %1 / %2</source>
         <translation>Ronde: %1 / %2</translation>
     </message>
     <message>
-        <location filename="../../src/koikoi.cpp" line="657"/>
+        <location filename="../../src/koikoi.cpp" line="658"/>
         <source>Round:  %1</source>
         <translation>Ronde:  %1</translation>
     </message>
     <message>
-        <location filename="../../src/koikoi.cpp" line="1100"/>
         <location filename="../../src/koikoi.cpp" line="1101"/>
+        <location filename="../../src/koikoi.cpp" line="1102"/>
         <source>Score:  %1</source>
         <translation>Score:  %1</translation>
     </message>
     <message>
-        <location filename="../../src/koikoi.cpp" line="1106"/>
         <location filename="../../src/koikoi.cpp" line="1107"/>
+        <location filename="../../src/koikoi.cpp" line="1108"/>
         <source>Koi-Koi: x%1</source>
         <translation>Koi-Koi: x%1</translation>
     </message>
@@ -432,6 +432,11 @@
         <location filename="../../ui/preferences.ui" line="194"/>
         <source>Backgrounds</source>
         <translation>Fonds</translation>
+    </message>
+    <message>
+        <location filename="../../src/preferences.cpp" line="39"/>
+        <source>Preferences</source>
+        <translation>Préférences</translation>
     </message>
 </context>
 </TS>
