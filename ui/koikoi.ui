@@ -1404,7 +1404,7 @@
           <item row="34" column="0" colspan="3">
            <widget class="QPushButton" name="continueButton">
             <property name="text">
-             <string>Contine</string>
+             <string>Continue</string>
             </property>
            </widget>
           </item>
@@ -3517,8 +3517,8 @@
   </action>
  </widget>
  <resources>
-  <include location="../logo/icon.qrc"/>
   <include location="../data/resources/decks/deck.qrc"/>
+  <include location="../logo/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

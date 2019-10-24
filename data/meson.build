@@ -6,7 +6,7 @@ install_data('nightsky30.koikoi.appdata.xml', install_dir: metadatadir)
 install_data('nightsky30.koikoi.desktop', install_dir : join_paths(get_option('datadir'), 'applications'))
 
 # Translations
-languages = []
+languages = ['fr']
 translationsdir = join_paths(get_option('datadir'), 'koikoi/translations')
 lrelease = find_program(['lrelease-qt5', 'lrelease'])
 
