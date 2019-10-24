@@ -36,7 +36,7 @@ Preferences::Preferences(QWidget *parent) : QDialog (parent),
     ui->setupUi(this);
 
     //Title and Application Icon
-    this->setWindowTitle("Preferences");
+    this->setWindowTitle(tr("Preferences"));
     this->setWindowIcon(QIcon(QString(":/icon/koi-2.svg")));
     this->setMinimumSize(QSize(810,847));
     this->setMaximumSize(QSize(810,847));
