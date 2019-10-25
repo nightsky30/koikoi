@@ -1,4 +1,6 @@
 # Object files
 *.o
 *.obj
+# Compiled Qt linguist file
+*.qm
 
