@@ -13,9 +13,9 @@ Koi-Koi (Japanese: こいこい) is a popular card game in Japan played with Han
 
 Dependency | Packages (Debian/Ubuntu)
 ---------- | --------
-Dev Tools | build-essential
+Dev tools | build-essential
 Qt5 | qt5-default
-lrelease-qt5 or lrelease | qttools5-dev-tools
+lrelease-qt5 / lrelease | qttools5-dev-tools
 [Meson](https://mesonbuild.com/Quick-guide.html) and [Ninja](https://ninja-build.org/) | meson
 
 The following may be done to install dependencies on Debian/Ubuntu:
