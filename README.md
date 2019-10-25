@@ -18,10 +18,17 @@ Qt5 | qt5-default
 lrelease-qt5 or lrelease | qttools5-dev-tools
 [Meson](https://mesonbuild.com/Quick-guide.html) and [Ninja](https://ninja-build.org/) | meson
 
+The following may be done to install dependencies on Debian/Ubuntu:
+```
+sudo apt install git meson build-essential qt5-default qttools5-dev-tools
+```
+
 ### Build Instructions
 
 The following may be done to compile and run:
 ```
+git clone https://github.com/nightsky30/koikoi.git
+cd koikoi
 meson builddir
 ninja -C builddir
 ./builddir/src/koikoi
