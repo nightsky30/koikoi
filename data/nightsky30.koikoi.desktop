@@ -6,4 +6,4 @@ Type=Application
 Name=Koi-Koi Hanafuda
 Comment=Traditional Japanese Card Game
 
-Categories=Games;CardGame;Qt;
+Categories=Game;CardGame;Qt;
