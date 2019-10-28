@@ -3136,26 +3136,28 @@ void KoiKoi::loadSettings()
     QString deckButtonName = "deckRadio_1";
     int defRounds = 12;
 
-    QFile settingsFile(settings.fileName());
-
-    //Check if settings file exists
-    if(!settingsFile.exists())
-    {
-        this->settings.setValue("background", resBGFilename);
-        this->settings.setValue("bgRadio", bgButtonName);
-        this->settings.setValue("deck", resDeckFilename);
-        this->settings.setValue("deckRadio", deckButtonName);
-        this->settings.setValue("rounds", defRounds);
-        this->settings.sync();
-        this->settings.status();
-    }
-
     if(!settings.isWritable())
     {
         //We got issues
     }
     else
     {
+        //Check registry/file for keys
+        //If any key isn't there, set the defaults (first run or corruption)
+        for(int i {0};i < settingKeys.size();i++)
+        {
+            if(!settings.contains(settingKeys.at(i)))
+            {
+                this->settings.setValue("background", resBGFilename);
+                this->settings.setValue("bgRadio", bgButtonName);
+                this->settings.setValue("deck", resDeckFilename);
+                this->settings.setValue("deckRadio", deckButtonName);
+                this->settings.setValue("rounds", defRounds);
+                this->settings.sync();
+                this->settings.status();
+            }
+        }
+
         //BG
         resBGFilename = this->settings.value("background", "").toString();
         if (resBGFilename != nullptr) {

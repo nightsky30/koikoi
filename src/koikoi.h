@@ -55,6 +55,15 @@ const static QVector<Yaku> acceptableYaku
             Yaku(10, "Goko (5 Brights)", "All 5 Bright cards. 10 points.")
 };
 
+const static QVector<QString> settingKeys
+{
+    QString("background"),
+            QString("bgRadio"),
+            QString("deck"),
+            QString("deckRadio"),
+            QString("rounds")
+};
+
 namespace Ui {
 
 /*

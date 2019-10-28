@@ -2,7 +2,7 @@ conf_data = configuration_data()
 conf_data.set('version', koikoi_version)
 conf_data.set('datadir', join_paths(get_option('prefix'), get_option('datadir'), 'koikoi'))
 
-configure_file(input : 'config.h.in',
+configure_file(input : 'config.h',
                output : 'config.h',
                configuration : conf_data)
 
