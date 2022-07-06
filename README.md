@@ -27,7 +27,7 @@ sudo apt install git meson build-essential qt5-default qttools5-dev-tools
 
 The following may be done to compile and run:
 ```
-git clone https://github.com/nightsky30/koikoi.git
+git clone https://www.github.com/nightsky30/koikoi.git
 cd koikoi
 meson builddir
 ninja -C builddir
